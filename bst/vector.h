@@ -4,7 +4,7 @@
 
 #include <bst/config.h>
 #include <bst/assert.h>
-// #include <bst/allocator.h> // Working on allocator concept.
+#include <bst/allocator.h>
 
 
 /* Provide interface without namespace */
@@ -81,7 +81,7 @@
  * \param nsz The new size for the vector.
  * \return Returns one when successful and zero otherwise.
  */
-#define bst_vect_rsz(vect, nsz) bst_dtl_vect_rsz(vect, nsz, realloc)
+#define bst_vect_rsz(vect, nsz) bst_dtl_vect_rsz(vect, nsz, bst_malloc, bst_realloc)
 
 
 /** Assert at the index provided then read the value in the array.
@@ -117,7 +117,7 @@
  * \param vect Reference to the vector.
  * \return Returns the new value pushed on.
  */
-#define bst_vect_push(vect, val) bst_dtl_vect_push(vect, val, realloc)
+#define bst_vect_push(vect, val) bst_dtl_vect_push(vect, val, bst_malloc, bst_realloc)
 
 
 // Working on iterator concept.
@@ -145,13 +145,13 @@
 #define bst_dtl_vect_raw(vect) ((int*)(void*)(vect) - 2)
 #define bst_dtl_vect_cap(vect) (bst_dtl_vect_raw(vect)[0])
 #define bst_dtl_vect_cnt(vect) (bst_dtl_vect_raw(vect)[1])
-#define bst_dtl_vect_push(vect, val, realloc) (\
-    bst_dtl_vect_rsz(vect, (bst_dtl_vect_cnt(vect))+1, realloc),\
+#define bst_dtl_vect_push(vect, val, malloc, realloc) (\
+    bst_dtl_vect_rsz(vect, (bst_dtl_vect_cnt(vect))+1, malloc, realloc),\
     (vect)[(bst_dtl_vect_cnt(vect))-1] = (val)\
 )
 #define bst_dtl_vect_destroy(vect, free) \
     ((vect) ? free(bst_dtl_vect_raw(vect)),*((void**)&(vect))=bst_null,1 : 0)
-#define bst_dtl_vect_rsz(vect, nsz, realloc) ((vect) ?\
+#define bst_dtl_vect_rsz(vect, nsz, malloc, realloc) ((vect) ?\
     (bst_dtl_vect_cap(vect)*2 > (nsz) ?\
         (\
             *((void**)&(vect)) = (void*)((int*)realloc(\

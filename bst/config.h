@@ -21,6 +21,23 @@
 /// \}
 
 
+/* Provide a helper that assist with variadic parameter default values */
+/// \{
+#define BST_X1ARGS1(x, a, ...) a
+#define BST_X1ARGS2(x, a, b, ...) a, b
+#define BST_X1ARGS3(x, a, b, c, ...) a, b, c
+#define BST_X1ARGS4(x, a, b, c, d, ...) a, b, c, d
+#define BST_X1ARGS5(x, a, b, c, d, e, ...) a, b, c, d, e
+#define BST_X1ARGS6(x, a, b, c, d, e, f, ...) a, b, c, d, e, f
+#define BST_ARGS1(a, ...) a
+#define BST_ARGS2(a, b, ...) a, b
+#define BST_ARGS3(a, b, c, ...) a, b, c
+#define BST_ARGS4(a, b, c, d, ...) a, b, c, d
+#define BST_ARGS5(a, b, c, d, e, ...) a, b, c, d, e
+#define BST_ARGS6(a, b, c, d, e, f, ...) a, b, c, d, e, f
+/// \}
+
+
 /* Configure the compiler */
 /// \{
 #if !defined(BST_COMPILER_CONFIG) && !defined(BST_NO_COMPILER_CONFIG) && !defined(BST_NO_CONFIG)
