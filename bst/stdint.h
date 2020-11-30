@@ -936,6 +936,30 @@ int main () {
 #ifdef INT64_MAX
 # define bst_int64_t int64_t
 #endif
+#ifdef INT_FAST8_MAX
+# define bst_int_fast8_t int_fast8_t
+#endif
+#ifdef INT_FAST16_MAX
+# define bst_int_fast16_t int_fast16_t
+#endif
+#ifdef INT_FAST32_MAX
+# define bst_int_fast32_t int_fast32_t
+#endif
+#ifdef INT_FAST64_MAX
+# define bst_int_fast64_t int_fast64_t
+#endif
+#ifdef INT_LEAST8_MAX
+# define bst_int_least8_t int_least8_t
+#endif
+#ifdef INT_LEAST16_MAX
+# define bst_int_least16_t int_least16_t
+#endif
+#ifdef INT_LEAST32_MAX
+# define bst_int_least32_t int_least32_t
+#endif
+#ifdef INT_LEAST64_MAX
+# define bst_int_least64_t int_least64_t
+#endif
 #ifdef INTMAX_MAX
 # define bst_intmax_t intmax_t
 #endif
@@ -953,6 +977,30 @@ int main () {
 #endif
 #ifdef UINT64_MAX
 # define bst_uint64_t uint64_t
+#endif
+#ifdef UINT_FAST8_MAX
+# define bst_uint_fast8_t uint_fast8_t
+#endif
+#ifdef UINT_FAST16_MAX
+# define bst_uint_fast16_t uint_fast16_t
+#endif
+#ifdef UINT_FAST32_MAX
+# define bst_uint_fast32_t uint_fast32_t
+#endif
+#ifdef UINT_FAST64_MAX
+# define bst_uint_fast64_t uint_fast64_t
+#endif
+#ifdef UINT_LEAST8_MAX
+# define bst_uint_least8_t uint_least8_t
+#endif
+#ifdef UINT_LEAST16_MAX
+# define bst_uint_least16_t uint_least16_t
+#endif
+#ifdef UINT_LEAST32_MAX
+# define bst_uint_least32_t uint_least32_t
+#endif
+#ifdef UINT_LEAST64_MAX
+# define bst_uint_least64_t uint_least64_t
 #endif
 #ifdef UINTMAX_MAX
 # define bst_uintmax_t uintmax_t

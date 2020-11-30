@@ -15,10 +15,12 @@
 /// \}
 
 
+/* Pulled from Boost <boost/config/compiler/gcc.hpp> */
 /// \{
 #if !defined(__DARWIN_NO_LONG_LONG)
 # define BST_HAS_LONG_LONG
 #endif
 /// \}
+
 
 #endif // BST__CONFIG__COMPILER__GCC_H

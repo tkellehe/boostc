@@ -18,7 +18,10 @@
 /// \{
 #define bst_alg_find(prefix, obj, iter, end, val) bst_alg_findpred(prefix, iter, end, (BST_JOIN(prefix, _val)(obj, iter) == val))
 #define bst_alg_findpred(prefix, obj, iter, end, pred) (\
-    ({ for(; BST_JOIN(prefix, _neq)(obj, iter, end); BST_JOIN(prefix, _nxt)(obj, iter)) if((pred)) break; }),\
+    ({\
+        for(; BST_JOIN(prefix, _neq)(obj, iter, end); BST_JOIN(prefix, _nxt)(obj, iter))\
+            if((pred)) break;\
+    }),\
     iter\
 )
 /// \}
