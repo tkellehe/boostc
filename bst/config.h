@@ -5,20 +5,42 @@
 #include <bst/config/version.h>
 
 
+/* Default is to provide BST with no namespaces and namespaced */
+/// \{
+#if !defined(BST_NAMESPACE_ONLY) && !defined(BST_NO_NAMESPACE)
+#define BST_NO_NAMESPACE
+#endif
+/// \}
+
+
+/* Provide a helper that joins two symbols */
+/// \{
+#define __BST_JOIN(L, R) L ## R
+#define _BST_JOIN(L, R) __BST_JOIN(L, R)
+#define BST_JOIN(L, R) _BST_JOIN(L, R)
+/// \}
+
+
+/* Configure the compiler */
+/// \{
 #if !defined(BST_COMPILER_CONFIG) && !defined(BST_NO_COMPILER_CONFIG) && !defined(BST_NO_CONFIG)
 # include <bst/config/select_compiler.h>
 #endif
 #ifdef BST_COMPILER_CONFIG
 # include BST_COMPILER_CONFIG
 #endif
+/// \}
 
 
+/* Configure the platform */
+/// \{
 #if !defined(BST_PLATFORM_CONFIG) && !defined(BST_NO_PLATFORM_CONFIG) && !defined(BST_NO_CONFIG)
 # include <bst/config/select_platform.h>
 #endif
 #ifdef BST_PLATFORM_CONFIG
 # include BST_PLATFORM_CONFIG
 #endif
+/// \}
 
 
 /* Ensure macros are defined */
@@ -72,6 +94,18 @@
 #   define BST_HAS_LONG_LONG
 # else
 #   define BST_NO_LONG_LONG
+# endif
+#endif
+/// \}
+
+
+/* Provide a null type */
+/// \{
+#ifndef bst_null
+# ifdef BST_LEAST_CPP11
+#  define bst_null nullptr
+# else
+#  define bst_null 0
 # endif
 #endif
 /// \}

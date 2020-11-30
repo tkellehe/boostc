@@ -12,24 +12,33 @@ extern "C" {
 
 /* Add the ability to get the errno based on what is best for the platform */
 /// \{
-#ifdef BST_WINDOWS
-# define get_errno() GetLastError()
-# define errno GetLastError()
-# define set_errno(x) SetLastError(x)
+#ifdef BST_OSAPI_WINDOWS
+# include <errno.h>
+# define bst_get_errno() GetLastError()
+# define bst_set_errno(x) SetLastError(x)
+# define bst_errno errno
 #elif defined(BST_PLATFORM_IRIX)
 # include <errno.h>
-# define get_errno() oserror()
-# ifdef errno
-#  undef errno
-# endif
-# define errno oserror()
-# define set_errno(x) setoserror(x)
-#elif defined(BST_POSIX)
+# define bst_get_errno() oserror()
+# define bst_set_errno(x) setoserror(x)
+# define bst_errno errno
+#elif defined(BST_OSAPI_POSIX)
 # include <errno.h>
-# define get_errno() errno
-# define set_errno(x) errno = x
+# define bst_get_errno() errno
+# define bst_set_errno(x) errno = x
+# define bst_errno errno
 #else
 # error "Unsupported platform for errno."
+#endif
+/// \}
+
+
+/* Provide without namespace */
+/// \{
+#ifdef BST_NO_NAMESPACE
+# define get_errno bst_get_errno
+# define get_errno bst_get_errno
+# define set_errno bst_set_errno
 #endif
 /// \}
 

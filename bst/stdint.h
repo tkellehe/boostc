@@ -921,4 +921,45 @@ int main () {
   return EXIT_SUCCESS;
 }
 
+
+/* T. Mitchell Kelleher - Provide with namespace */
+/// \{
+#ifdef INT8_MAX
+# define bst_int8_t int8_t
+#endif
+#ifdef INT16_MAX
+# define bst_int16_t int16_t
+#endif
+#ifdef INT32_MAX
+# define bst_int32_t int32_t
+#endif
+#ifdef INT64_MAX
+# define bst_int64_t int64_t
+#endif
+#ifdef INTMAX_MAX
+# define bst_intmax_t intmax_t
+#endif
+#ifdef INTPTR_MAX
+# define bst_intptr_t intptr_t
+#endif
+#ifdef UINT8_MAX
+# define bst_uint8_t uint8_t
+#endif
+#ifdef UINT16_MAX
+# define bst_uint16_t uint16_t
+#endif
+#ifdef UINT32_MAX
+# define bst_uint32_t uint32_t
+#endif
+#ifdef UINT64_MAX
+# define bst_uint64_t uint64_t
+#endif
+#ifdef UINTMAX_MAX
+# define bst_uintmax_t uintmax_t
+#endif
+#ifdef UINTPTR_MAX
+# define bst_uintptr_t uintptr_t
+#endif
+/// \}
+
 #endif
