@@ -59,7 +59,7 @@
  * \param vect Reference to the vector.
  * \return Returns one when successful and zero otherwise.
  */
-#define bst_vect_destroy(vect) bst_dtl_vect_destroy(vect, free)
+#define bst_vect_destroy(vect) bst_dtl_vect_destroy(vect, bst_free, bst_malloc, bst_realloc)
 
 
 /** Gets the number of items that have been added or resized to.
@@ -81,7 +81,7 @@
  * \param nsz The new size for the vector.
  * \return Returns one when successful and zero otherwise.
  */
-#define bst_vect_rsz(vect, nsz) bst_dtl_vect_rsz(vect, nsz, bst_malloc, bst_realloc)
+#define bst_vect_rsz(vect, nsz) bst_dtl_vect_rsz(vect, nsz, bst_free, bst_malloc, bst_realloc)
 
 
 /** Assert at the index provided then read the value in the array.
@@ -117,27 +117,27 @@
  * \param vect Reference to the vector.
  * \return Returns the new value pushed on.
  */
-#define bst_vect_push(vect, val) bst_dtl_vect_push(vect, val, bst_malloc, bst_realloc)
+#define bst_vect_push(vect, val) bst_dtl_vect_push(vect, val, bst_free, bst_malloc, bst_realloc)
 
 
 // Working on iterator concept.
-#define bst_vect_begin(vect) 0
-#define bst_vect_end(vect) bst_vect_cnt(vect)
+#define bst_vect_begin(vect) (vect)
+#define bst_vect_end(vect) ((vect)+bst_vect_cnt(vect))
 
-#define bst_vect_iter_t(T) int
-#define bst_vect_iter_nxt(vect, iter) (++iter)
-#define bst_vect_iter_eq(vect, left, right) (left == right)
-#define bst_vect_iter_neq(vect, left, right) (left != right)
-#define bst_vect_iter_val(vect, iter) vect[iter]
+#define bst_vect_iter_t(bst_vect_t) bst_vect_t
+#define bst_vect_iter_nxt(iter) (++iter)
+#define bst_vect_iter_eq(left, right) (left == right)
+#define bst_vect_iter_neq(left, right) (left != right)
+#define bst_vect_iter_val(iter) *(iter)
 
-#define bst_vect_rbegin(vect) bst_vect_cnt(vect)
-#define bst_vect_rend(vect) 0
+#define bst_vect_rbegin(vect) ((vect)+bst_vect_cnt(vect))
+#define bst_vect_rend(vect) ((vect)+1)
 
-#define bst_vect_riter_t(T) int
-#define bst_vect_riter_nxt(vect, iter) (--iter)
-#define bst_vect_riter_eq(vect, left, right) (left == right)
-#define bst_vect_riter_neq(vect, left, right) (left != right)
-#define bst_vect_riter_val(vect, iter) vect[iter-1]
+#define bst_vect_riter_t(bst_vect_t) bst_vect_t
+#define bst_vect_riter_nxt(iter) (--iter)
+#define bst_vect_riter_eq(left, right) (left == right)
+#define bst_vect_riter_neq(left, right) (left != right)
+#define bst_vect_riter_val(iter) *((iter)-1)
 
 
 /* Detail code */
@@ -145,13 +145,13 @@
 #define bst_dtl_vect_raw(vect) ((int*)(void*)(vect) - 2)
 #define bst_dtl_vect_cap(vect) (bst_dtl_vect_raw(vect)[0])
 #define bst_dtl_vect_cnt(vect) (bst_dtl_vect_raw(vect)[1])
-#define bst_dtl_vect_push(vect, val, malloc, realloc) (\
-    bst_dtl_vect_rsz(vect, (bst_dtl_vect_cnt(vect))+1, malloc, realloc),\
+#define bst_dtl_vect_push(vect, val, free, malloc, realloc) (\
+    bst_dtl_vect_rsz(vect, (bst_dtl_vect_cnt(vect))+1, free, malloc, realloc),\
     (vect)[(bst_dtl_vect_cnt(vect))-1] = (val)\
 )
-#define bst_dtl_vect_destroy(vect, free) \
+#define bst_dtl_vect_destroy(vect, free, malloc, realloc) \
     ((vect) ? free(bst_dtl_vect_raw(vect)),*((void**)&(vect))=bst_null,1 : 0)
-#define bst_dtl_vect_rsz(vect, nsz, malloc, realloc) ((vect) ?\
+#define bst_dtl_vect_rsz(vect, nsz, free, malloc, realloc) ((vect) ?\
     (bst_dtl_vect_cap(vect)*2 > (nsz) ?\
         (\
             *((void**)&(vect)) = (void*)((int*)realloc(\
