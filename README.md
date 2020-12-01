@@ -17,18 +17,18 @@ So, this library is my attempt to make a _C_ version without copying _Boost C++_
  * [stdint](#stdint)
  * [vector](#vector)
 
-## Interface Namespaces
+### Interface Namespaces
 The current interface is to prefix everything with `bst_`.
 Also, to provide an interface without this prefix.
 This may cause problems in your library if you have something with a similar name.
 To avoid this, you can define `BST_NAMESPACE_ONLY` and it will remove the other non-stdc intefaces without the `bst_`.
 
-## Compile Time Requirement
+### Compile Time Requirement
 Currently, the goal is to write all of the library as compile time insertions of the code.
 This allows more flexibility and makes it closer to _Boost C++_.
 Another benfit is that you do not need to build this library.
 
-## Insertion Code Bloat
+### Insertion Code Bloat
 Since most interfaces are inlined code, this can cause binaries to be quite large.
 A simple solution is to instantiate your own function calling the inlining _bst_ functions.
 Then the compiler will treat it as a function and potentially reducing the size of binaries.
