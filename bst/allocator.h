@@ -42,6 +42,8 @@ extern "C" {
 #define alloc_nofree bst_alloc_nofree
 #define alloc_nomalloc bst_alloc_nomalloc
 #define alloc_norealloc bst_alloc_norealloc
+
+#define alloc_stdlib bst_alloc_stdlib
 #endif
 /// \}
 
@@ -54,7 +56,7 @@ extern "C" {
 /// \}
 
 
-/* Pack arguments provided into a single ppack maintaining the standard order where defaults are stdlib */
+/* Pack arguments provided into a single ppack maintaining the standard order where defaults are no-ops */
 /// \{
 #define bst_alloc_pack_fmr(f, m, r) bst_ppack((f), (m), (r))
 #define bst_alloc_pack_mfr(m, f, r) bst_ppack((f), (m), (r))
@@ -63,23 +65,24 @@ extern "C" {
 #define bst_alloc_pack_rfm(r, f, m) bst_ppack((f), (m), (r))
 #define bst_alloc_pack_frm(f, r, m) bst_ppack((f), (m), (r))
 
-#define bst_alloc_pack_mr(m, r) bst_ppack((bst_free), (m), (r))
-#define bst_alloc_pack_fr(f, r) bst_ppack((f), (bst_malloc), (r))
-#define bst_alloc_pack_rf(r, f) bst_ppack((f), (bst_malloc), (r))
-#define bst_alloc_pack_mf(m, f) bst_ppack((f), (m), (bst_realloc))
-#define bst_alloc_pack_fm(f, m) bst_ppack((f), (m), (bst_realloc))
-#define bst_alloc_pack_rm(r, m) bst_ppack((bst_free), (m), (r))
+#define bst_alloc_pack_mr(m, r) bst_ppack((bst_alloc_nofree), (m), (r))
+#define bst_alloc_pack_fr(f, r) bst_ppack((f), (bst_alloc_nomalloc), (r))
+#define bst_alloc_pack_rf(r, f) bst_ppack((f), (bst_alloc_nomalloc), (r))
+#define bst_alloc_pack_mf(m, f) bst_ppack((f), (m), (bst_alloc_norealloc))
+#define bst_alloc_pack_fm(f, m) bst_ppack((f), (m), (bst_alloc_norealloc))
+#define bst_alloc_pack_rm(r, m) bst_ppack((bst_alloc_nofree), (m), (r))
 
-#define bst_alloc_pack_m(m) bst_ppack((bst_free), (m), (bst_realloc))
-#define bst_alloc_pack_f(f) bst_ppack((f), (bst_malloc), (bst_realloc))
-#define bst_alloc_pack_r(r) bst_ppack((bst_free), (bst_malloc), (r))
+#define bst_alloc_pack_m(m) bst_ppack((bst_alloc_nofree), (m), (bst_alloc_norealloc))
+#define bst_alloc_pack_f(f) bst_ppack((f), (bst_alloc_nomalloc), (bst_realloc))
+#define bst_alloc_pack_r(r) bst_ppack((bst_alloc_nofree), (bst_alloc_nomalloc), (r))
+
+/* Packs assuming everything is provided in the std order */
+#define bst_alloc_pack(...) bst_ppack(BST_X1ARGS3(0, ##__VA_ARGS__, (bst_alloc_nofree), (bst_alloc_nomalloc), (bst_alloc_norealloc)))
 /// \}
 
 
-/** Packs the stdlib calls
- * \return Returns a ppack of the stdlib calls.
- */
-#define bst_alloc_pack() bst_ppack((bst_free), (bst_malloc), (bst_realloc))
+/* Packs the stdlib calls */
+#define bst_alloc_stdlib bst_ppack((bst_free), (bst_malloc), (bst_realloc))
 
 
 /* Default do-nothing memory management functions */
