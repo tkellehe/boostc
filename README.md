@@ -41,7 +41,7 @@ This allows for the code desired for allocators to be inlined into the functions
 #define mk_array(T, N, ...) \
     mk_array_dtl_pkd(\
         /* Build up the ppack to be decompressed. */\
-        bst_ppack_prepend(\
+        ppack_prepend(\
             /* Select the default argument if nothing is provided. */\
             BST_X1ARGS1(0, ##__VA_ARGS__, stdlib), T, N\
         )\
@@ -49,7 +49,7 @@ This allows for the code desired for allocators to be inlined into the functions
 
 #define rm_array_dtl(array, free, malloc, realloc, ...) free((void*)(array))
 #define rm_array_dtl_pkd(pkd) rm_array_dtl pkd
-#define rm_array(array, ...) rm_array_dtl_pkd(bst_ppack_prepend(BST_X1ARGS1(0, ##__VA_ARGS__, stdlib), array))
+#define rm_array(array, ...) rm_array_dtl_pkd(ppack_prepend(BST_X1ARGS1(0, ##__VA_ARGS__, stdlib), array))
 
 int _pos = 0;
 char _memory[1024] = {0,};
@@ -69,6 +69,7 @@ int main()
     {
         // Use the user defined memory management calls.
         int* array = mk_array(int, 10, myalloc);
+        // This evaluates to a do-nothing statement.
         rm_array(array, myalloc);
     }
     return 0;
