@@ -36,7 +36,7 @@ Then the compiler will treat it as a function and potentially reducing the size 
 # allocator
 Provides compile time decisions for creating allocators.
 The allocator paradigm is that only the functions `free`, `malloc`, and `realloc` are needed.
-Each they are then [parameter packed](#ppack) into a single symbol that can be passed to types that require an allocator.
+Each are then [parameter packed](#ppack) into a single symbol that can be passed to types that require an allocator.
 This allows for the code desired for allocators to be inlined into the functions that use them.
 
 ```c
