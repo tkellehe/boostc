@@ -38,6 +38,10 @@ extern "C" {
 #define alloc_pack bst_alloc_pack
 
 #define alloc_unpack bst_alloc_unpack
+
+#define alloc_nofree bst_alloc_nofree
+#define alloc_nomalloc bst_alloc_nomalloc
+#define alloc_norealloc bst_alloc_norealloc
 #endif
 /// \}
 
@@ -76,6 +80,14 @@ extern "C" {
  * \return Returns a ppack of the stdlib calls.
  */
 #define bst_alloc_pack() bst_ppack((bst_free), (bst_malloc), (bst_realloc))
+
+
+/* Default do-nothing memory management functions */
+/// \{
+#define bst_alloc_nofree(...) ((void)0)
+#define bst_alloc_nomalloc(...) 0
+#define bst_alloc_norealloc(...) 0
+/// \}
 
 
 #ifdef __cplusplus
