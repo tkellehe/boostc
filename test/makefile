@@ -1,12 +1,6 @@
-ifndef BST_BUILD
-	BST_BUILD := ./.build
-endif
-ifndef BST_BIN
-	BST_BIN := ./bin
-endif
-ifndef BST_CC
-	BST_CC := gcc
-endif
+BST_BUILD ?= ./.build
+BST_BIN ?= ./bin
+BST_CC ?= gcc
 
 # https://stackoverflow.com/a/12959694/5407843
 # Make does not offer a recursive wildcard function, so here's one:
