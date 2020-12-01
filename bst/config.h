@@ -69,16 +69,6 @@
 /// \}
 
 
-/* Provide a helper that allows for parameter packing and unpacking */
-/// \{
-#define BST_PPACK(...) (__VA_ARGS__)
-/* Usage: BST_PUNPACK pkd */
-#define BST_PUNPACK(...) __VA_ARGS__
-#define BST_PPACK_APPEND(pkd, a, ...) (BST_PUNPACK pkd, a, ##__VA_ARGS__)
-#define BST_PPACK_PREPEND(pkd, a, ...) (a, ##__VA_ARGS__, BST_PUNPACK pkd)
-/// \}
-
-
 /* Configure the compiler */
 /// \{
 #if !defined(BST_COMPILER_CONFIG) && !defined(BST_NO_COMPILER_CONFIG) && !defined(BST_NO_CONFIG)

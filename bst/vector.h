@@ -5,6 +5,7 @@
 #include <bst/config.h>
 #include <bst/allocator.h>
 #include <bst/assert.h>
+#include <bst/ppack.h>
 
 
 /* Provide interface without namespace */
@@ -45,7 +46,7 @@
 /** Declares the vector type.
  * \param T The type of the vector.
  */
-#define bst_vect_t(T) (T)*
+#define bst_vect_t(T) T*
 
 
 /** Initializes the vector structure.
@@ -59,7 +60,7 @@
  * \param vect Reference to the vector.
  * \return Returns one when successful and zero otherwise.
  */
-#define bst_vect_destroy(vect, ...) bst_dtl_vect_destroy(BST_ARGS4 BST_PPACK_PREPEND(BST_XARGS1(0,##__VA_ARGS__,bst_alloc_pack()), vect))
+#define bst_vect_destroy(vect, ...) bst_dtl_vect_destroy_pkd(bst_ppack_prepend(BST_X1ARGS1(0, ##__VA_ARGS__, bst_alloc_pack()), vect))
 
 
 /** Gets the number of items that have been added or resized to.
@@ -81,7 +82,7 @@
  * \param nsz The new size for the vector.
  * \return Returns one when successful and zero otherwise.
  */
-#define bst_vect_rsz(vect, nsz) bst_dtl_vect_rsz(vect, nsz, bst_free, bst_malloc, bst_realloc)
+#define bst_vect_rsz(vect, nsz, ...) bst_dtl_vect_rsz_pkd(bst_ppack_prepend(BST_X1ARGS1(0, ##__VA_ARGS__, bst_alloc_pack()), vect, nsz))
 
 
 /** Assert at the index provided then read the value in the array.
@@ -117,7 +118,7 @@
  * \param vect Reference to the vector.
  * \return Returns the new value pushed on.
  */
-#define bst_vect_push(vect, val) bst_dtl_vect_push(vect, val, bst_free, bst_malloc, bst_realloc)
+#define bst_vect_push(vect, val, ...) bst_dtl_vect_push_pkd(bst_ppack_prepend(BST_X1ARGS1(0, ##__VA_ARGS__, bst_alloc_pack()), vect, val))
 
 
 // Working on iterator concept.
@@ -145,13 +146,18 @@
 #define bst_dtl_vect_raw(vect) ((int*)(void*)(vect) - 2)
 #define bst_dtl_vect_cap(vect) (bst_dtl_vect_raw(vect)[0])
 #define bst_dtl_vect_cnt(vect) (bst_dtl_vect_raw(vect)[1])
-#define bst_dtl_vect_push(vect, val, free, malloc, realloc) (\
+#define bst_dtl_vect_push_pkd(pkd) bst_dtl_vect_push pkd
+#define bst_dtl_vect_push(vect, val, free, malloc, realloc, ...) \
+(\
     bst_dtl_vect_rsz(vect, (bst_dtl_vect_cnt(vect))+1, free, malloc, realloc),\
     (vect)[(bst_dtl_vect_cnt(vect))-1] = (val)\
 )
-#define bst_dtl_vect_destroy(vect, free, malloc, realloc) \
+#define bst_dtl_vect_destroy_pkd(pkd) bst_dtl_vect_destroy pkd
+#define bst_dtl_vect_destroy(vect, free, malloc, realloc, ...) \
     ((vect) ? free(bst_dtl_vect_raw(vect)),*((void**)&(vect))=bst_null,1 : 0)
-#define bst_dtl_vect_rsz(vect, nsz, free, malloc, realloc) ((vect) ?\
+#define bst_dtl_vect_rsz_pkd(pkd) bst_dtl_vect_rsz pkd
+#define bst_dtl_vect_rsz(vect, nsz, free, malloc, realloc, ...) \
+((vect) ?\
     (bst_dtl_vect_cap(vect)*2 > (nsz) ?\
         (\
             *((void**)&(vect)) = (void*)((int*)realloc(\
