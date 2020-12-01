@@ -6,6 +6,7 @@
 #include <bst/allocator.h>
 #include <bst/assert.h>
 #include <bst/ppack.h>
+#include <bst/stdint.h>
 
 
 /* Provide interface without namespace */
@@ -70,14 +71,14 @@
  * \param vect Reference to the vector.
  * \return Returns the number of items.
  */
-#define bst_vect_cnt(vect) ((vect) ? bst_dtl_vect_cnt(vect) : 0)
+#define bst_vect_cnt(vect) ((vect) ? (int)bst_dtl_vect_cnt(vect) : 0)
 
 
 /** Gets the capacity that the vector has been allocated for.
  * \param vect Reference to the vector.
  * \return Returns the capacity for the vector.
  */
-#define bst_vect_cap(vect) ((vect) ? bst_dtl_vect_cap(vect) : 0)
+#define bst_vect_cap(vect) ((vect) ? (int)bst_dtl_vect_cap(vect) : 0)
 
 
 /** Resizes the vector to be able to hold the new size.
@@ -156,71 +157,100 @@
 
 /* Detail code */
 /// \{
-#define bst_dtl_vect_raw(vect) ((int*)(void*)(vect) - 2)
+// The type intptr_t is used because the memory may need to be word aligned.
+// This does assume that intptr_t causes the memory to be word aligned.
+#define bst_dtl_vect_raw(vect) ((intptr_t*)(void*)(vect) - 2)
 #define bst_dtl_vect_cap(vect) (bst_dtl_vect_raw(vect)[0])
 #define bst_dtl_vect_cnt(vect) (bst_dtl_vect_raw(vect)[1])
 #define bst_dtl_vect_push_pkd(pkd) bst_dtl_vect_push pkd
 #define bst_dtl_vect_push(vect, val, free, malloc, realloc, ...) \
-(\
-    bst_dtl_vect_rsz(vect, (bst_vect_cnt(vect))+1, free, malloc, realloc),\
-    (vect)[(bst_dtl_vect_cnt(vect))-1] = (val)\
+/* Check to see if the vector has anything allocated yet. */\
+((vect) ?\
+    (bst_dtl_vect_cap(vect) < (bst_dtl_vect_cnt(vect)+1) ?\
+        (\
+            *((void**)&(vect)) = (void*)((intptr_t*)realloc(\
+                bst_dtl_vect_raw(vect),\
+                sizeof(*(vect))*(bst_dtl_vect_cap(vect)*2) + 2*sizeof(intptr_t)\
+            ) + 2),\
+            bst_dtl_vect_cap(vect) *= 2,\
+            (vect[bst_dtl_vect_cnt(vect)++] = val)\
+        )\
+    :\
+        (vect[bst_dtl_vect_cnt(vect)++] = val)\
+    )\
+:\
+    (\
+        *((void**)&(vect)) = (void*)((intptr_t*)malloc(sizeof(*(vect))*4 + 2*sizeof(intptr_t)) + 2),\
+        bst_dtl_vect_cnt(vect) = (intptr_t)(1),\
+        bst_dtl_vect_cap(vect) = (intptr_t)(4),\
+        (vect[0] = val)\
+    )\
 )
 #define bst_dtl_vect_destroy_pkd(pkd) bst_dtl_vect_destroy pkd
 #define bst_dtl_vect_destroy(vect, free, malloc, realloc, ...) \
     ((vect) ? free(bst_dtl_vect_raw(vect)),*((void**)&(vect))=bst_null,1 : 0)
 #define bst_dtl_vect_rsz_pkd(pkd) bst_dtl_vect_rsz pkd
 #define bst_dtl_vect_rsz(vect, nsz, free, malloc, realloc, ...) \
+/* Check to see if the vector has anything allocated yet. */\
 ((vect) ?\
-    (bst_dtl_vect_cap(vect)*2 > (nsz) ?\
-        (\
-            *((void**)&(vect)) = (void*)((int*)realloc(\
-                bst_dtl_vect_raw(vect),\
-                sizeof(*(vect))*(bst_dtl_vect_cap(vect)*2) + 2*sizeof(int)\
-            ) + 2),\
-            bst_dtl_vect_cnt(vect) = (int)(nsz),\
-            bst_dtl_vect_cap(vect) = (bst_dtl_vect_cap(vect)*2),\
-            (int)((vect) != 0)\
+    /* Check to see if the new size already fits. */\
+    (bst_dtl_vect_cap(vect) < (nsz) ?\
+        /* Since it does not fit, check to see if twice the current size will hold the new size. */\
+        (bst_dtl_vect_cap(vect)*2 > (nsz) ?\
+            (\
+                *((void**)&(vect)) = (void*)((intptr_t*)realloc(\
+                    bst_dtl_vect_raw(vect),\
+                    sizeof(*(vect))*(bst_dtl_vect_cap(vect)*2) + 2*sizeof(intptr_t)\
+                ) + 2),\
+                bst_dtl_vect_cnt(vect) = (intptr_t)(nsz),\
+                bst_dtl_vect_cap(vect) = (bst_dtl_vect_cap(vect)*2),\
+                (int)((vect) != bst_null)\
+            )\
+        :\
+            (\
+                *((void**)&(vect)) = (void*)((intptr_t*)realloc(\
+                    bst_dtl_vect_raw(vect),\
+                    sizeof(*(vect))*(nsz) + 2*sizeof(intptr_t)\
+                ) + 2),\
+                bst_dtl_vect_cnt(vect) = (intptr_t)(nsz),\
+                bst_dtl_vect_cap(vect) = bst_dtl_vect_cnt(vect),\
+                (int)((vect) != bst_null)\
+            )\
         )\
     :\
-        (\
-            *((void**)&(vect)) = (void*)((int*)realloc(\
-                bst_dtl_vect_raw(vect),\
-                sizeof(*(vect))*(nsz) + 2*sizeof(int)\
-            ) + 2),\
-            bst_dtl_vect_cnt(vect) = (int)(nsz),\
-            bst_dtl_vect_cap(vect) = (int)(nsz),\
-            (int)((vect) != 0)\
-        )\
+        (bst_dtl_vect_cnt(vect) = (intptr_t)(nsz), 1)\
     )\
 :\
     (\
-        *((void**)&(vect)) = (void*)((int*)malloc(sizeof(*(vect))*(nsz) + 2*sizeof(int)) + 2),\
-        bst_dtl_vect_cnt(vect) = (int)(nsz),\
-        bst_dtl_vect_cap(vect) = (int)(nsz),\
-        (int)((vect) != 0)\
+        *((void**)&(vect)) = (void*)((intptr_t*)malloc(sizeof(*(vect))*(nsz) + 2*sizeof(intptr_t)) + 2),\
+        bst_dtl_vect_cnt(vect) = (intptr_t)(nsz),\
+        bst_dtl_vect_cap(vect) = bst_dtl_vect_cnt(vect),\
+        (int)((vect) != bst_null)\
     )\
 )
 #define bst_dtl_vect_rsv_pkd(pkd) bst_dtl_vect_rsv pkd
 #define bst_dtl_vect_rsv(vect, ncap, free, malloc, realloc, ...) \
+/* Check to see if the vector has anything allocated yet. */\
 ((vect) ?\
+    /* Check to see if the new capacity already fits. */\
     (bst_dtl_vect_cap(vect) < (ncap) ?\
         (\
-            *((void**)&(vect)) = (void*)((int*)realloc(\
+            *((void**)&(vect)) = (void*)((intptr_t*)realloc(\
                 bst_dtl_vect_raw(vect),\
-                sizeof(*(vect))*(ncap) + 2*sizeof(int)\
+                sizeof(*(vect))*(ncap) + 2*sizeof(intptr_t)\
             ) + 2),\
-            bst_dtl_vect_cap(vect) = (int)(ncap),\
-            (int)((vect) != 0)\
+            bst_dtl_vect_cap(vect) = (intptr_t)(ncap),\
+            (int)((vect) != bst_null)\
         )\
     :\
-        0\
+        1\
     )\
 :\
     (\
-        *((void**)&(vect)) = (void*)((int*)malloc(sizeof(*(vect))*(ncap) + 2*sizeof(int)) + 2),\
+        *((void**)&(vect)) = (void*)((intptr_t*)malloc(sizeof(*(vect))*(ncap) + 2*sizeof(intptr_t)) + 2),\
         bst_dtl_vect_cnt(vect) = 0,\
-        bst_dtl_vect_cap(vect) = (int)(ncap),\
-        (int)((vect) != 0)\
+        bst_dtl_vect_cap(vect) = (intptr_t)(ncap),\
+        (int)((vect) != bst_null)\
     )\
 )
 /// \}
