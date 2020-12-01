@@ -28,11 +28,14 @@ all: $(TESTS)
 
 print-%: ; @echo $* = $($*)
 
-# TODO: Finish the generic makefile.
 $(BST_BUILD)/%.o: ./%.c
-	mkdir -p `dirname $@`
+	@echo "Compiling: $?"
+	@mkdir -p `dirname $@`
 	$(BST_CC) $(FLAGS) -c $? -o $@
+	@echo
 
 $(BST_BIN)/%: $(BST_BUILD)/%/main.o
-	mkdir -p `dirname $@`
+	@echo "Building Test: $@"
+	@mkdir -p `dirname $@`
 	$(BST_CC) $(LFLAGS) $? -o $@
+	@echo
