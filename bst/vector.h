@@ -84,7 +84,7 @@
 /** Resizes the vector to be able to hold the new size.
  * \param vect Reference to the vector.
  * \param nsz The new size for the vector.
- * \return Returns one when successful and zero otherwise.
+ * \return Returns the new size.
  */
 #define bst_vect_rsz(vect, nsz, ...) bst_dtl_vect_rsz_pkd(bst_ppack_prepend(BST_X1ARGS1(0, ##__VA_ARGS__, bst_alloc_stdlib), vect, nsz))
 
@@ -92,7 +92,7 @@
 /** Reserves the requested capacity for the vector by only reserving more.
  * \param vect Reference to the vector.
  * \param ncap The new capacity for the vector.
- * \return Returns one when successful and zero otherwise.
+ * \return Returns the new capacity.
  */
 #define bst_vect_rsv(vect, ncap, ...) bst_dtl_vect_rsv_pkd(bst_ppack_prepend(BST_X1ARGS1(0, ##__VA_ARGS__, bst_alloc_stdlib), vect, ncap))
 
@@ -202,9 +202,8 @@
                     bst_dtl_vect_raw(vect),\
                     sizeof(*(vect))*(bst_dtl_vect_cap(vect)*2) + 2*sizeof(intptr_t)\
                 ) + 2),\
-                bst_dtl_vect_cnt(vect) = (intptr_t)(nsz),\
                 bst_dtl_vect_cap(vect) = (bst_dtl_vect_cap(vect)*2),\
-                (int)((vect) != bst_null)\
+                (bst_dtl_vect_cnt(vect) = (intptr_t)(nsz))\
             )\
         :\
             (\
@@ -212,20 +211,18 @@
                     bst_dtl_vect_raw(vect),\
                     sizeof(*(vect))*(nsz) + 2*sizeof(intptr_t)\
                 ) + 2),\
-                bst_dtl_vect_cnt(vect) = (intptr_t)(nsz),\
-                bst_dtl_vect_cap(vect) = bst_dtl_vect_cnt(vect),\
-                (int)((vect) != bst_null)\
+                bst_dtl_vect_cap(vect) = (intptr_t)(nsz),\
+                (bst_dtl_vect_cnt(vect) = bst_dtl_vect_cap(vect))\
             )\
         )\
     :\
-        (bst_dtl_vect_cnt(vect) = (intptr_t)(nsz), 1)\
+        (bst_dtl_vect_cnt(vect) = (intptr_t)(nsz))\
     )\
 :\
     (\
         *((void**)&(vect)) = (void*)((intptr_t*)malloc(sizeof(*(vect))*(nsz) + 2*sizeof(intptr_t)) + 2),\
-        bst_dtl_vect_cnt(vect) = (intptr_t)(nsz),\
-        bst_dtl_vect_cap(vect) = bst_dtl_vect_cnt(vect),\
-        (int)((vect) != bst_null)\
+        bst_dtl_vect_cap(vect) = (intptr_t)(nsz),\
+        (bst_dtl_vect_cnt(vect) = bst_dtl_vect_cap(vect))\
     )\
 )
 #define bst_dtl_vect_rsv_pkd(pkd) bst_dtl_vect_rsv pkd
@@ -239,18 +236,16 @@
                 bst_dtl_vect_raw(vect),\
                 sizeof(*(vect))*(ncap) + 2*sizeof(intptr_t)\
             ) + 2),\
-            bst_dtl_vect_cap(vect) = (intptr_t)(ncap),\
-            (int)((vect) != bst_null)\
+            (bst_dtl_vect_cap(vect) = (intptr_t)(ncap))\
         )\
     :\
-        1\
+        (intptr_t)(ncap)\
     )\
 :\
     (\
         *((void**)&(vect)) = (void*)((intptr_t*)malloc(sizeof(*(vect))*(ncap) + 2*sizeof(intptr_t)) + 2),\
         bst_dtl_vect_cnt(vect) = 0,\
-        bst_dtl_vect_cap(vect) = (intptr_t)(ncap),\
-        (int)((vect) != bst_null)\
+        (bst_dtl_vect_cap(vect) = (intptr_t)(ncap))\
     )\
 )
 /// \}
