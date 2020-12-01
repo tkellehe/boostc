@@ -60,7 +60,7 @@
  * \param vect Reference to the vector.
  * \return Returns one when successful and zero otherwise.
  */
-#define bst_vect_destroy(vect, ...) bst_dtl_vect_destroy_pkd(bst_ppack_prepend(BST_X1ARGS1(0, ##__VA_ARGS__, bst_alloc_pack()), vect))
+#define bst_vect_destroy(vect, ...) bst_dtl_vect_destroy_pkd(bst_ppack_prepend(BST_X1ARGS1(0, ##__VA_ARGS__, bst_alloc_stdlib), vect))
 
 
 /** Gets the number of items that have been added or resized to.
@@ -82,7 +82,7 @@
  * \param nsz The new size for the vector.
  * \return Returns one when successful and zero otherwise.
  */
-#define bst_vect_rsz(vect, nsz, ...) bst_dtl_vect_rsz_pkd(bst_ppack_prepend(BST_X1ARGS1(0, ##__VA_ARGS__, bst_alloc_pack()), vect, nsz))
+#define bst_vect_rsz(vect, nsz, ...) bst_dtl_vect_rsz_pkd(bst_ppack_prepend(BST_X1ARGS1(0, ##__VA_ARGS__, bst_alloc_stdlib), vect, nsz))
 
 
 /** Assert at the index provided then read the value in the array.
@@ -118,7 +118,7 @@
  * \param vect Reference to the vector.
  * \return Returns the new value pushed on.
  */
-#define bst_vect_push(vect, val, ...) bst_dtl_vect_push_pkd(bst_ppack_prepend(BST_X1ARGS1(0, ##__VA_ARGS__, bst_alloc_pack()), vect, val))
+#define bst_vect_push(vect, val, ...) bst_dtl_vect_push_pkd(bst_ppack_prepend(BST_X1ARGS1(0, ##__VA_ARGS__, bst_alloc_stdlib), vect, val))
 
 
 // Working on iterator concept.
