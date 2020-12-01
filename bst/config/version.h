@@ -2,6 +2,11 @@
 #define BST__CONFIG__VERSION_H
 
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 /* Determine the C++ standard version provided by the compiler */
 /// \{
 #if defined(__cplusplus)
@@ -42,6 +47,11 @@
 # endif
 #endif
 /// \}
+
+
+#ifdef __cplusplus
+}
+#endif
 
 
 #endif // BST__CONFIG__VERSION_H
