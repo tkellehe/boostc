@@ -2,6 +2,9 @@
 #define BST__PPACK_H
 
 
+#include <bst/config.h>
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
