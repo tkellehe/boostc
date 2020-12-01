@@ -85,8 +85,8 @@ extern "C" {
 /* Default do-nothing memory management functions */
 /// \{
 #define bst_alloc_nofree(...) ((void)0)
-#define bst_alloc_nomalloc(...) 0
-#define bst_alloc_norealloc(...) 0
+#define bst_alloc_nomalloc(...) ((void*)0)
+#define bst_alloc_norealloc(...) ((void*)0)
 /// \}
 
 
