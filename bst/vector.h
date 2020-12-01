@@ -85,6 +85,14 @@
 #define bst_vect_rsz(vect, nsz, ...) bst_dtl_vect_rsz_pkd(bst_ppack_prepend(BST_X1ARGS1(0, ##__VA_ARGS__, bst_alloc_stdlib), vect, nsz))
 
 
+/** Reserves the requested capacity for the vector by only reserving more.
+ * \param vect Reference to the vector.
+ * \param ncap The new capacity for the vector.
+ * \return Returns one when successful and zero otherwise.
+ */
+#define bst_vect_rsv(vect, nsz, ...) bst_dtl_vect_rsv_pkd(bst_ppack_prepend(BST_X1ARGS1(0, ##__VA_ARGS__, bst_alloc_stdlib), vect, ncap))
+
+
 /** Assert at the index provided then read the value in the array.
  * \param vect Reference to the vector.
  * \param i The index to access.
@@ -184,6 +192,29 @@
         *((void**)&(vect)) = (void*)((int*)malloc(sizeof(*(vect))*(nsz) + 2*sizeof(int)) + 2),\
         bst_dtl_vect_cnt(vect) = (int)(nsz),\
         bst_dtl_vect_cap(vect) = (int)(nsz),\
+        (int)((vect) != 0)\
+    )\
+)
+#define bst_dtl_vect_rsv_pkd(pkd) bst_dtl_vect_rsv pkd
+#define bst_dtl_vect_rsv(vect, ncap, free, malloc, realloc, ...) \
+((vect) ?\
+    (bst_dtl_vect_cap(vect) < (ncap) ?\
+        (\
+            *((void**)&(vect)) = (void*)((int*)realloc(\
+                bst_dtl_vect_raw(vect),\
+                sizeof(*(vect))*(ncap) + 2*sizeof(int)\
+            ) + 2),\
+            bst_dtl_vect_cap(vect) = (int)(ncap),\
+            (int)((vect) != 0)\
+        )\
+    :\
+        0\
+    )\
+:\
+    (\
+        *((void**)&(vect)) = (void*)((int*)malloc(sizeof(*(vect))*(ncap) + 2*sizeof(int)) + 2),\
+        bst_dtl_vect_cnt(vect) = 0,\
+        bst_dtl_vect_cap(vect) = (int)(ncap),\
         (int)((vect) != 0)\
     )\
 )
