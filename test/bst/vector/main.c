@@ -10,6 +10,12 @@ int main()
     vect_int_t v;
     vect_int_iter_t iter;
     vect_int_riter_t riter;
+
+    typedef struct { int x; int y; } s_t;
+    typedef vect_t(s_t) vect_s_t;
+    typedef vect_iter_t(s_t) vect_iter_s_t;
+    vect_s_t u;
+
     int x = 3;
     vect_init(v);
     vect_rsv(v, 100);
@@ -57,6 +63,24 @@ int main()
     }
 
     vect_destroy(v, alloc_stdlib);
+
+    vect_init(u);
+    {
+        s_t t = {1, 2};
+        vect_push(u, t);
+    }
+    {
+        s_t t = {3, 4};
+        vect_push(u, t);
+    }
+
+    for(x = 0; x < vect_cnt(u); ++x)
+    {
+        printf("u[%i] = {.x=%i, .y=%i}\n", x, u[x].x, u[x].y);
+    }
+
+    vect_destroy(u);
+
     printf("passed\n");
     return 0;
 }
