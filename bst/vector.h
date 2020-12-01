@@ -59,7 +59,7 @@
  * \param vect Reference to the vector.
  * \return Returns one when successful and zero otherwise.
  */
-#define bst_vect_destroy(vect) bst_dtl_vect_destroy(vect, bst_free, bst_malloc, bst_realloc)
+#define bst_vect_destroy(vect, ...) bst_dtl_vect_destroy(BST_ARGS4 BST_PPACK_PREPEND(BST_XARGS1(0,##__VA_ARGS__,bst_alloc_pack()), vect))
 
 
 /** Gets the number of items that have been added or resized to.
