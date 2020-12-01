@@ -161,6 +161,7 @@ Provides compile time decisions to create a _C++_ like vector in _C_.
 int main()
 {
     // It is recommended to do as `typedef vector_t(int) myvect_t` because there is no guarantee that `vector_t(int) == vector_t(int)`.
+    // This problem is more relavant when the underlying structure is a more complex data structure.
     vector_t(int) vect;
     
     vect_init(vect);
