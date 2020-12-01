@@ -17,6 +17,7 @@
 #define vect_cnt bst_vect_cnt
 #define vect_cap bst_vect_cap
 #define vect_rsz bst_vect_rsz
+#define vect_rsv bst_vect_rsv
 #define vect_empty bst_vect_empty
 #define vect_front bst_vect_front
 #define vect_back bst_vect_back
@@ -30,6 +31,7 @@
 #define vect_iter_eq bst_vect_iter_eq
 #define vect_iter_neq bst_vect_iter_neq
 #define vect_iter_val bst_vect_iter_val
+#define vect_iter_set bst_vect_iter_set
 
 #define vect_rbegin bst_vect_rbegin
 #define vect_rend bst_vect_rend
@@ -39,6 +41,7 @@
 #define vect_riter_eq bst_vect_riter_eq
 #define vect_riter_neq bst_vect_riter_neq
 #define vect_riter_val bst_vect_riter_val
+#define vect_riter_set bst_vect_riter_set
 #endif
 /// \}
 
@@ -90,7 +93,7 @@
  * \param ncap The new capacity for the vector.
  * \return Returns one when successful and zero otherwise.
  */
-#define bst_vect_rsv(vect, nsz, ...) bst_dtl_vect_rsv_pkd(bst_ppack_prepend(BST_X1ARGS1(0, ##__VA_ARGS__, bst_alloc_stdlib), vect, ncap))
+#define bst_vect_rsv(vect, ncap, ...) bst_dtl_vect_rsv_pkd(bst_ppack_prepend(BST_X1ARGS1(0, ##__VA_ARGS__, bst_alloc_stdlib), vect, ncap))
 
 
 /** Assert at the index provided then read the value in the array.
@@ -138,6 +141,7 @@
 #define bst_vect_iter_eq(left, right) (left == right)
 #define bst_vect_iter_neq(left, right) (left != right)
 #define bst_vect_iter_val(iter) *(iter)
+#define bst_vect_iter_set(iter, val) (*(iter) = val)
 
 #define bst_vect_rbegin(vect) ((vect)+bst_vect_cnt(vect))
 #define bst_vect_rend(vect) ((vect)+1)
@@ -147,6 +151,7 @@
 #define bst_vect_riter_eq(left, right) (left == right)
 #define bst_vect_riter_neq(left, right) (left != right)
 #define bst_vect_riter_val(iter) *((iter)-1)
+#define bst_vect_riter_set(iter, val) (*((iter)-1) = val)
 
 
 /* Detail code */
@@ -157,7 +162,7 @@
 #define bst_dtl_vect_push_pkd(pkd) bst_dtl_vect_push pkd
 #define bst_dtl_vect_push(vect, val, free, malloc, realloc, ...) \
 (\
-    bst_dtl_vect_rsz(vect, (bst_dtl_vect_cnt(vect))+1, free, malloc, realloc),\
+    bst_dtl_vect_rsz(vect, (bst_vect_cnt(vect))+1, free, malloc, realloc),\
     (vect)[(bst_dtl_vect_cnt(vect))-1] = (val)\
 )
 #define bst_dtl_vect_destroy_pkd(pkd) bst_dtl_vect_destroy pkd
