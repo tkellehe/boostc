@@ -53,7 +53,7 @@ This allows for the code desired for allocators to be inlined into the functions
 
 int _pos = 0;
 char _memory[1024] = {0,};
-void* mymalloc(int size) { int pos = _pos; _pos += size; return (void*)(_memory + pos); }
+void *mymalloc(int size) { int pos = _pos; _pos += size; return (void*)(_memory + pos); }
 
 // The allocator interface provides calls to be able to ensure that the std order is always packed correctly.
 // Also, the default free and realloc calls are set to do-nothings.
@@ -63,12 +63,12 @@ int main()
 {
     {
         // Use the stdlib memory management calls.
-        int* array = mk_array(int, 10);
+        int *array = mk_array(int, 10);
         rm_array(array);
     }
     {
         // Use the user defined memory management calls.
-        int* array = mk_array(int, 10, myalloc);
+        int *array = mk_array(int, 10, myalloc);
         // This evaluates to a do-nothing statement.
         rm_array(array, myalloc);
     }
