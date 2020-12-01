@@ -3,8 +3,8 @@
 
 
 #include <bst/config.h>
-#include <bst/assert.h>
 #include <bst/allocator.h>
+#include <bst/assert.h>
 
 
 /* Provide interface without namespace */
