@@ -210,8 +210,13 @@ int main()
         ppack_call(ppack_argI(mypkdf, ppack_size(params)), params)
     );
 
+    // Can detect if is a ppack or not.
+    printf("is mypkd ppack? %s\n", ppack_is(mypkd, "yes", "no"));
+    printf("is int ppack? %s\n", ppack_is(int, "yes", "no"));
+
     return 0;
 }
+
 ```
 
 # stdint
@@ -235,13 +240,7 @@ int main()
 {
     // Note: It is recommended to do as typedef because there is no guarantee that the types will be the same.
     //       This problem is more relavant when the underlying structure is a more complex data structure.
-    //       Also, it is recommended to define a macro of the template for similar reasons.
-
-    // Define a macro of the template type.
-    #define vect_tmplt_int_t vect_tmplt_t(int)
-
-    // Declare a vector by accessing the type from the template.
-    vect_t(vect_tmplt_int_t) vect;
+    vect_t(int) vect;
     
     vect_init(vect);
     // Default is to use stdlib allocator.
