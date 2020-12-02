@@ -17,25 +17,25 @@ extern "C" {
 /* Provide without namespace */
 /// \{
 #ifdef BST_NO_NAMESPACE
-#define alloc_pack_fmr bst_alloc_pack_fmr
-#define alloc_pack_mfr bst_alloc_pack_mfr
-#define alloc_pack_mrf bst_alloc_pack_mrf
-#define alloc_pack_rmf bst_alloc_pack_rmf
-#define alloc_pack_rfm bst_alloc_pack_rfm
-#define alloc_pack_frm bst_alloc_pack_frm
+#define alloc_ppack_fmr bst_alloc_ppack_fmr
+#define alloc_ppack_mfr bst_alloc_ppack_mfr
+#define alloc_ppack_mrf bst_alloc_ppack_mrf
+#define alloc_ppack_rmf bst_alloc_ppack_rmf
+#define alloc_ppack_rfm bst_alloc_ppack_rfm
+#define alloc_ppack_frm bst_alloc_ppack_frm
 
-#define alloc_pack_mr bst_alloc_pack_mr
-#define alloc_pack_fr bst_alloc_pack_fr
-#define alloc_pack_rf bst_alloc_pack_rf
-#define alloc_pack_mf bst_alloc_pack_mf
-#define alloc_pack_fm bst_alloc_pack_fm
-#define alloc_pack_rm bst_alloc_pack_rm
+#define alloc_ppack_mr bst_alloc_ppack_mr
+#define alloc_ppack_fr bst_alloc_ppack_fr
+#define alloc_ppack_rf bst_alloc_ppack_rf
+#define alloc_ppack_mf bst_alloc_ppack_mf
+#define alloc_ppack_fm bst_alloc_ppack_fm
+#define alloc_ppack_rm bst_alloc_ppack_rm
 
-#define alloc_pack_m bst_alloc_pack_m
-#define alloc_pack_f bst_alloc_pack_f
-#define alloc_pack_r bst_alloc_pack_r
+#define alloc_ppack_m bst_alloc_ppack_m
+#define alloc_ppack_f bst_alloc_ppack_f
+#define alloc_ppack_r bst_alloc_ppack_r
 
-#define alloc_pack bst_alloc_pack
+#define alloc_ppack bst_alloc_ppack
 
 #define alloc_unpack bst_alloc_unpack
 
@@ -58,26 +58,26 @@ extern "C" {
 
 /* Pack arguments provided into a single ppack maintaining the standard order where defaults are no-ops */
 /// \{
-#define bst_alloc_pack_fmr(f, m, r) bst_ppack(f, m, r)
-#define bst_alloc_pack_mfr(m, f, r) bst_ppack(f, m, r)
-#define bst_alloc_pack_mrf(m, r, f) bst_ppack(f, m, r)
-#define bst_alloc_pack_rmf(r, m, f) bst_ppack(f, m, r)
-#define bst_alloc_pack_rfm(r, f, m) bst_ppack(f, m, r)
-#define bst_alloc_pack_frm(f, r, m) bst_ppack(f, m, r)
+#define bst_alloc_ppack_fmr(f, m, r) bst_ppack(f, m, r)
+#define bst_alloc_ppack_mfr(m, f, r) bst_ppack(f, m, r)
+#define bst_alloc_ppack_mrf(m, r, f) bst_ppack(f, m, r)
+#define bst_alloc_ppack_rmf(r, m, f) bst_ppack(f, m, r)
+#define bst_alloc_ppack_rfm(r, f, m) bst_ppack(f, m, r)
+#define bst_alloc_ppack_frm(f, r, m) bst_ppack(f, m, r)
 
-#define bst_alloc_pack_mr(m, r) bst_ppack(bst_alloc_nofree, m, r)
-#define bst_alloc_pack_fr(f, r) bst_ppack(f, bst_alloc_nomalloc, r)
-#define bst_alloc_pack_rf(r, f) bst_ppack(f, bst_alloc_nomalloc, r)
-#define bst_alloc_pack_mf(m, f) bst_ppack(f, m, bst_alloc_norealloc)
-#define bst_alloc_pack_fm(f, m) bst_ppack(f, m, bst_alloc_norealloc)
-#define bst_alloc_pack_rm(r, m) bst_ppack(bst_alloc_nofree, m, r)
+#define bst_alloc_ppack_mr(m, r) bst_ppack(bst_alloc_nofree, m, r)
+#define bst_alloc_ppack_fr(f, r) bst_ppack(f, bst_alloc_nomalloc, r)
+#define bst_alloc_ppack_rf(r, f) bst_ppack(f, bst_alloc_nomalloc, r)
+#define bst_alloc_ppack_mf(m, f) bst_ppack(f, m, bst_alloc_norealloc)
+#define bst_alloc_ppack_fm(f, m) bst_ppack(f, m, bst_alloc_norealloc)
+#define bst_alloc_ppack_rm(r, m) bst_ppack(bst_alloc_nofree, m, r)
 
-#define bst_alloc_pack_m(m) bst_ppack(bst_alloc_nofree, m, bst_alloc_norealloc)
-#define bst_alloc_pack_f(f) bst_ppack(f, bst_alloc_nomalloc, bst_realloc)
-#define bst_alloc_pack_r(r) bst_ppack(bst_alloc_nofree, bst_alloc_nomalloc, r)
+#define bst_alloc_ppack_m(m) bst_ppack(bst_alloc_nofree, m, bst_alloc_norealloc)
+#define bst_alloc_ppack_f(f) bst_ppack(f, bst_alloc_nomalloc, bst_realloc)
+#define bst_alloc_ppack_r(r) bst_ppack(bst_alloc_nofree, bst_alloc_nomalloc, r)
 
 /* Packs assuming everything is provided in the std order */
-#define bst_alloc_pack(...) bst_ppack(BST_X1ARGS3(0, ##__VA_ARGS__, bst_alloc_nofree, bst_alloc_nomalloc, bst_alloc_norealloc))
+#define bst_alloc_ppack(f, m, r, ...) bst_ppack(f, m, r)
 /// \}
 
 

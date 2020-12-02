@@ -69,7 +69,7 @@ void *mymalloc(int size) { int pos = _pos; _pos += size; return (void*)(_memory 
 
 // The allocator interface provides calls to be able to ensure that the std order is always packed correctly.
 // Also, the default free and realloc calls are set to do-nothings.
-#define myalloc alloc_pack_m(mymalloc)
+#define myalloc alloc_ppack_m(mymalloc)
 
 int main()
 {
