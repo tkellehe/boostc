@@ -8,6 +8,7 @@
 
 
 #include <bst/config.h>
+#include <bst/iterator.h>
 
 
 /* Provide interface with no namespace */
@@ -21,10 +22,10 @@
 
 /* Uses the BST iterator interface to interact with unordered content */
 /// \{
-#define bst_alg_find(prefix, iter, end, val) bst_alg_findpred(prefix, iter, end, (BST_JOIN(prefix, _val)(iter) == val))
-#define bst_alg_findpred(prefix, iter, end, pred) (\
+#define bst_alg_find(iters, iter, end, val) bst_alg_findpred(iters, iter, end, (bst_iter_val(iters)(iter) == val))
+#define bst_alg_findpred(iters, iter, end, pred) (\
     ({\
-        for(; BST_JOIN(prefix, _neq)(iter, end); BST_JOIN(prefix, _nxt)(iter))\
+        for(; !(bst_iter_eq(iters)(iter, end)); bst_iter_nxt(iters)(iter))\
             if((pred)) break;\
     }),\
     iter\
