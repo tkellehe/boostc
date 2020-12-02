@@ -1,46 +1,88 @@
-#include <bst/allocator.h>
+#ifndef BST__ALLOCATOR_H
+#define BST__ALLOCATOR_H
 
-// A helper is provided to reference the ppack of the stdlib calls.
-#define stdlib alloc_stdlib
 
-// The actual implemenation of the mk_array function. Need the variadic portion to make the other parts easier.
-#define mk_array_dtl(T, N, free, malloc, realloc, ...) (T*)malloc(sizeof(T) * N)
-// Unpacks the parameters to call the actual implementation.
-#define mk_array_dtl_pkd(pkd) mk_array_dtl pkd
-// Optional allocator operation where default uses stdlib.
-#define mk_array(T, N, ...) \
-    mk_array_dtl_pkd(\
-        /* Build up the ppack to be decompressed. */\
-        ppack_prepend(\
-            /* Select the default argument if nothing is provided. */\
-            BST_X1ARGS1(0, ##__VA_ARGS__, stdlib), T, N\
-        )\
+#include <bst/config.h>
+#include <bst/ppack.h>
+
+
+#include <stdlib.h>
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
+/* Provide without namespace */
+/// \{
+#ifdef BST_NO_NAMESPACE
+#define alloc_ppack_free bst_alloc_ppack_free
+#define alloc_ppack_malloc bst_alloc_ppack_malloc
+#define alloc_ppack_realloc bst_alloc_ppack_realloc
+
+#define alloc_ppack bst_alloc_ppack
+
+#define alloc_free bst_alloc_free
+#define alloc_malloc bst_alloc_malloc
+#define alloc_realloc bst_alloc_realloc
+
+#define alloc_nofree bst_alloc_nofree
+#define alloc_nomalloc bst_alloc_nomalloc
+#define alloc_norealloc bst_alloc_norealloc
+
+#define alloc_stdlib bst_alloc_stdlib
+#define alloc_defaults bst_alloc_defaults
+#endif
+/// \}
+
+
+/* Provide the stdlib calls with the namespace */
+/// \{
+#define bst_free free
+#define bst_malloc malloc
+#define bst_realloc realloc
+/// \}
+
+
+/* Pack arguments provided into a single ppack maintaining the standard order where defaults are no-ops */
+/// \{
+#define bst_alloc_ppack_free(f) bst_ppack(f, bst_alloc_nomalloc, bst_realloc)
+#define bst_alloc_ppack_malloc(m) bst_ppack(bst_alloc_nofree, m, bst_alloc_norealloc)
+#define bst_alloc_ppack_realloc(r) bst_ppack(bst_alloc_nofree, bst_alloc_nomalloc, r)
+
+/* Packs assuming everything is provided in the std order */
+#define bst_alloc_ppack(...) \
+    bst_ppack_defaults(\
+        bst_ppack(__VA_ARGS__),\
+        bst_alloc_defaults\
     )
 
-#define rm_array_dtl(array, free, malloc, realloc, ...) free((void*)(array))
-#define rm_array_dtl_pkd(pkd) rm_array_dtl pkd
-#define rm_array(array, ...) rm_array_dtl_pkd(ppack_prepend(BST_X1ARGS1(0, ##__VA_ARGS__, stdlib), array))
+#define bst_alloc_free(pkd) bst_ppack_argI(pkd, 0)
+#define bst_alloc_malloc(pkd) bst_ppack_argI(pkd, 1)
+#define bst_alloc_realloc(pkd) bst_ppack_argI(pkd, 2)
+/// \}
 
-int _pos = 0;
-char _memory[1024] = {0,};
-void *mymalloc(int size) { int pos = _pos; _pos += size; return (void*)(_memory + pos); }
 
-// The allocator interface provides calls to be able to ensure that the std order is always packed correctly.
-// Also, the default free and realloc calls are set to do-nothings.
-#define myalloc alloc_ppack_malloc(mymalloc)
+/* Packs the stdlib calls */
+#define bst_alloc_stdlib bst_ppack(bst_free, bst_malloc, bst_realloc)
 
-int main()
-{
-    {
-        // Use the stdlib memory management calls.
-        int *array = mk_array(int, 10);
-        rm_array(array);
-    }
-    {
-        // Use the user defined memory management calls.
-        int *array = mk_array(int, 10, myalloc);
-        // This evaluates to a do-nothing statement.
-        rm_array(array, myalloc);
-    }
-    return 0;
+
+/* Packs the default do-nothings */
+#define bst_alloc_defaults bst_ppack(bst_alloc_nofree, bst_alloc_nomalloc, bst_alloc_norealloc)
+
+
+/* Default do-nothing memory management functions */
+/// \{
+#define bst_alloc_nofree(...) ((void)0)
+#define bst_alloc_nomalloc(...) ((void*)bst_null)
+#define bst_alloc_norealloc(...) ((void*)bst_null)
+/// \}
+
+
+#ifdef __cplusplus
 }
+#endif
+
+
+#endif // BST__ALLOCATOR_H
