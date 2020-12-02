@@ -43,7 +43,7 @@ extern "C" {
 #define ppack_falsey bst_ppack_falsey
 
 #define ppack_if bst_ppack_if
-// #define ppack_is bst_ppack_is
+#define ppack_is bst_ppack_is
 #endif
 /// \}
 
@@ -76,7 +76,8 @@ extern "C" {
 
 #define bst_ppack_if(pkd, _t, _f) BST_JOIN(bst_dtl_ppack_if, bst_dtl_ppack_if(pkd))(_t, _f)
 
-// #define bst_ppack_is(pkd, _t, _f) // Need this to make optional template parameter...
+// If it is a ppack, then it will call the function else will just be some random symbol.
+#define bst_ppack_is(pkd, _t, _f) BST_JOIN(bst_dtl_ppack_is, bst_ppack_size(bst_ppack(0, bst_dtl_ppack_is_expand pkd)))(_t, _f)
 /// \}
 
 
@@ -86,6 +87,10 @@ extern "C" {
 #define bst_dtl_ppack_if_eval(...) bst_dtl_ppack_grab(0, ##__VA_ARGS__, bst_dtl_ppack_if_ones())
 #define bst_dtl_ppack_if0(_t, _f) _f
 #define bst_dtl_ppack_if1(_t, _f) _t
+
+#define bst_dtl_ppack_is2(_t, _f) _f
+#define bst_dtl_ppack_is3(_t, _f) _t
+#define bst_dtl_ppack_is_expand(...) 0, 0
 
 // The algorithm for counting the arguments comes back as one if nothing is provided.
 // Therein by adding one to the ppack that is being sized, we just reduce all of the values by one.
