@@ -14,9 +14,7 @@ int main()
     vect_int_riter_t riter;
 
     typedef struct { int x; int y; } s_t;
-    #define tmplt_s_t vect_tmplt_t(s_t, alloc_stdlib)
-    typedef vect_t(tmplt_s_t) vect_s_t;
-    typedef vect_iter_t(tmplt_s_t) vect_iter_s_t;
+    typedef vect_t(s_t) vect_s_t;
     vect_s_t u;
 
     int x = 3;
