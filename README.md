@@ -245,8 +245,7 @@ int main()
     vect_init(vect);
     // Default is to use stdlib allocator.
     vect_push(vect, 11);
-    // Can explicitly provide the template type to ensure using the same allocator and types.
-    vect_push(vect, 12, vect_tmplt_int_t);
+    vect_push(vect, 12);
     
     // Can use basic array operator on the data.
     vect[0] += 10;
@@ -257,8 +256,7 @@ int main()
         for(i = 0; i < vect_cnt(vect); ++i) printf("%i\n", vect[i]);
     }
     
-    // It is optional for all vector functions to provide the template argument if using the defaults.
-    vect_destroy(vect, vect_tmplt_int_t);
+    vect_destroy(vect);
     
     return 0;
 }
