@@ -54,5 +54,23 @@ int main()
     printf("dmypkd[3] = %c\n", ppack_argI(dmypkd, 3));
     printf("dmypkd size = %i\n", ppack_size(dmypkd));
 
+    // Can create if-statements and check if has minimum size.
+    printf("mypkd %s\n", ppack_if(ppack_ltrim(mypkd, 4), "size < 5", "size > 4"));
+    printf("mypkd %s\n", ppack_if(ppack_ltrim(mypkd, 2), "size < 3", "size > 2"));
+
+    // Define symbols in a ppack to be called.
+    #define myf0() a
+    #define myf1(a) a
+    #define myf2(a, b) a + b
+    #define mypkdf ppack(myf0, myf1, myf2)
+
+    #define params ppack(100, 101)
+
+    printf(
+        "invoke %s = %i\n",
+        BST_TOSTRING(ppack_argI(mypkdf, ppack_size(params))),
+        ppack_call(ppack_argI(mypkdf, ppack_size(params)), params)
+    );
+
     return 0;
 }
