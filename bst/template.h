@@ -27,6 +27,8 @@ extern "C" {
 #define tmplt_info bst_tmplt_info
 #define tmplt_iter bst_tmplt_iter
 #define tmplt_alloc bst_tmplt_alloc
+
+#define tmplt_defaults bst_tmplt_defaults
 #endif
 /// \}
 
@@ -38,18 +40,21 @@ extern "C" {
  * alloc: The bst allocator calls as a ppack for the type.
  */
 /// \{
-#define bst_tmplt_ppack(type, info, iter, alloc, ...) bst_ppack(type, info, iter, alloc)
+#define bst_tmplt_ppack(...) \
+    bst_ppack_defaults(\
+        bst_ppack(__VA_ARGS__),\
+        bst_tmplt_defaults\
+    )
 
-#define bst_tmplt_type(pkd) bst_dtl_tmplt_type pkd
-#define bst_tmplt_info(pkd) bst_dtl_tmplt_info pkd
-#define bst_tmplt_iter(pkd) bst_dtl_tmplt_iter pkd
-#define bst_tmplt_alloc(pkd) bst_dtl_tmplt_alloc pkd
-
-#define bst_dtl_tmplt_type(type, info, iter, alloc, ...) type
-#define bst_dtl_tmplt_info(type, info, iter, alloc, ...) info
-#define bst_dtl_tmplt_iter(type, info, iter, alloc, ...) iter
-#define bst_dtl_tmplt_alloc(type, info, iter, alloc, ...) alloc
+#define bst_tmplt_type(pkd) bst_ppack_argI(pkd, 0)
+#define bst_tmplt_info(pkd) bst_ppack_argI(pkd, 1)
+#define bst_tmplt_iter(pkd) bst_ppack_argI(pkd, 2)
+#define bst_tmplt_alloc(pkd) bst_ppack_argI(pkd, 3)
 /// \}
+
+
+/* Packs the defaults */
+#define bst_tmplt_defaults bst_ppack(int, (), bst_iter_defaults, bst_alloc_defaults)
 
 
 #ifdef __cplusplus

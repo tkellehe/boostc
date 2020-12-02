@@ -37,11 +37,16 @@ extern "C" {
 
 #define alloc_ppack bst_alloc_ppack
 
+#define alloc_free bst_alloc_free
+#define alloc_malloc bst_alloc_malloc
+#define alloc_realloc bst_alloc_realloc
+
 #define alloc_nofree bst_alloc_nofree
 #define alloc_nomalloc bst_alloc_nomalloc
 #define alloc_norealloc bst_alloc_norealloc
 
 #define alloc_stdlib bst_alloc_stdlib
+#define alloc_defaults bst_alloc_defaults
 #endif
 /// \}
 
@@ -74,15 +79,25 @@ extern "C" {
 #define bst_alloc_ppack_f(f) bst_ppack(f, bst_alloc_nomalloc, bst_realloc)
 #define bst_alloc_ppack_r(r) bst_ppack(bst_alloc_nofree, bst_alloc_nomalloc, r)
 
-// This can be changed to default args using select Nth param.
-// Should even be able to make a helper.
 /* Packs assuming everything is provided in the std order */
-#define bst_alloc_ppack(f, m, r, ...) bst_ppack(f, m, r)
+#define bst_alloc_ppack(...) \
+    bst_ppack_defaults(\
+        bst_ppack(__VA_ARGS__),\
+        bst_alloc_defaults\
+    )
+
+#define bst_alloc_free(pkd) bst_ppack_argI(pkd, 0)
+#define bst_alloc_malloc(pkd) bst_ppack_argI(pkd, 1)
+#define bst_alloc_realloc(pkd) bst_ppack_argI(pkd, 2)
 /// \}
 
 
 /* Packs the stdlib calls */
 #define bst_alloc_stdlib bst_ppack(bst_free, bst_malloc, bst_realloc)
+
+
+/* Packs the default do-nothings */
+#define bst_alloc_defaults bst_ppack(bst_alloc_nofree, bst_alloc_nomalloc, bst_alloc_norealloc)
 
 
 /* Default do-nothing memory management functions */
