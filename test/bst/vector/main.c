@@ -4,16 +4,19 @@
 
 int main()
 {
-    typedef vect_t(int) vect_int_t;
-    typedef vect_iter_t(vect_int_t) vect_int_iter_t;
-    typedef vect_riter_t(vect_int_t) vect_int_riter_t;
+    #define tmplt vect_tmplt_t(int)
+    typedef vect_t(tmplt) vect_int_t;
+    typedef vect_iter_t(tmplt) vect_int_iter_t;
+    typedef vect_riter_t(tmplt) vect_int_riter_t;
+
     vect_int_t v;
     vect_int_iter_t iter;
     vect_int_riter_t riter;
 
     typedef struct { int x; int y; } s_t;
-    typedef vect_t(s_t) vect_s_t;
-    typedef vect_iter_t(s_t) vect_iter_s_t;
+    #define tmplt_s_t vect_tmplt_t(s_t, alloc_stdlib)
+    typedef vect_t(tmplt_s_t) vect_s_t;
+    typedef vect_iter_t(tmplt_s_t) vect_iter_s_t;
     vect_s_t u;
 
     int x = 3;
@@ -27,14 +30,15 @@ int main()
     vect_push(v, 5);
 
     iter = vect_begin(v);
-    alg_find(vect_iter, iter, vect_end(v), x);
+
+    alg_find(tmplt_iter(tmplt), iter, vect_end(v), x);
     if(iter != vect_end(v))
     {
         printf("%i\n", vect_iter_val(iter));
     }
 
     riter = vect_rbegin(v);
-    alg_find(vect_riter, riter, vect_rend(v), x);
+    alg_find(tmplt_riter(tmplt), riter, vect_rend(v), x);
     if(riter != vect_rend(v))
     {
         printf("%i\n", vect_riter_val(riter));
@@ -44,14 +48,14 @@ int main()
     vect_riter_set(riter, 100);
 
     iter = vect_begin(v);
-    alg_find(vect_iter, iter, vect_end(v), x);
+    alg_find(tmplt_iter(tmplt), iter, vect_end(v), x);
     if(iter == vect_end(v))
     {
         printf("not found\n");
     }
 
     riter = vect_rbegin(v);
-    alg_find(vect_riter, riter, vect_rend(v), x);
+    alg_find(tmplt_riter(tmplt), riter, vect_rend(v), x);
     if(riter == vect_rend(v))
     {
         printf("not found\n");
@@ -62,7 +66,7 @@ int main()
         printf("v[%i] = %i\n", x, v[x]);
     }
 
-    vect_destroy(v, alloc_stdlib);
+    vect_destroy(v);
 
     vect_init(u);
     {
@@ -80,7 +84,5 @@ int main()
     }
 
     vect_destroy(u);
-
-    printf("passed\n");
     return 0;
 }
