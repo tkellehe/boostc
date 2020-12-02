@@ -69,7 +69,7 @@ void *mymalloc(int size) { int pos = _pos; _pos += size; return (void*)(_memory 
 
 // The allocator interface provides calls to be able to ensure that the std order is always packed correctly.
 // Also, the default free and realloc calls are set to do-nothings.
-#define myalloc alloc_ppack_m(mymalloc)
+#define myalloc alloc_ppack_malloc(mymalloc)
 
 int main()
 {
@@ -192,6 +192,24 @@ int main()
     printf("dmypkd[3] = %c\n", ppack_argI(dmypkd, 3));
     printf("dmypkd size = %i\n", ppack_size(dmypkd));
 
+    // Can create if-statements and check if has minimum size.
+    printf("mypkd %s\n", ppack_if(ppack_ltrim(mypkd, 4), "size < 5", "size > 4"));
+    printf("mypkd %s\n", ppack_if(ppack_ltrim(mypkd, 2), "size < 3", "size > 2"));
+
+    // Define symbols in a ppack to be called.
+    #define myf0() a
+    #define myf1(a) a
+    #define myf2(a, b) a + b
+    #define mypkdf ppack(myf0, myf1, myf2)
+
+    #define params ppack(100, 101)
+
+    printf(
+        "invoke %s = %i\n",
+        BST_TOSTRING(ppack_argI(mypkdf, ppack_size(params))),
+        ppack_call(ppack_argI(mypkdf, ppack_size(params)), params)
+    );
+
     return 0;
 }
 ```
@@ -206,7 +224,7 @@ I have created my own variant prior to finding this one, but `pstdint.h` provide
 ```
 
 # vector
-Provides compile time decisions to create a _C++_ like vector in _C_.
+Provides compile time decisions to create a _C++_ like vector in _C_. Uses the [template](#template) interface.
 
 ```c
 #include <bst/allocator.h>
@@ -215,24 +233,21 @@ Provides compile time decisions to create a _C++_ like vector in _C_.
 
 int main()
 {
-    // It is recommended to do as `typedef vector_t(int) myvect_t` because there is no guarantee that `vector_t(int) == vector_t(int)`.
-    // This problem is more relavant when the underlying structure is a more complex data structure.
-    vect_t(int) vect;
+    // Note: It is recommended to do as typedef because there is no guarantee that the types will be the same.
+    //       This problem is more relavant when the underlying structure is a more complex data structure.
+    //       Also, it is recommended to define a macro of the template for similar reasons.
+
+    // Define a macro of the template type.
+    #define vect_tmplt_int_t vect_tmplt_t(int)
+
+    // Declare a vector by accessing the type from the template.
+    vect_t(vect_tmplt_int_t) vect;
     
     vect_init(vect);
     // Default is to use stdlib allocator.
     vect_push(vect, 11);
-    vect_push(vect, 12);
-    vect_destroy(vect);
-    
-    // Can specify own allocator and create macro.
-    #define vect_int_push(vect, val) vect_push(vect, val, alloc_stdlib)
-    
-    // Initialize call is not needed since the destroy leaves the vector in a good state.
-    // Just have it as good practice.
-    vect_init(vect);
-    vect_int_push(vect, 101);
-    vect_int_push(vect, 102);
+    // Can explicitly provide the template type to ensure using the same allocator and types.
+    vect_push(vect, 12, vect_tmplt_int_t);
     
     // Can use basic array operator on the data.
     vect[0] += 10;
@@ -243,8 +258,8 @@ int main()
         for(i = 0; i < vect_cnt(vect); ++i) printf("%i\n", vect[i]);
     }
     
-    // Make sure that all calls that can take an allocator have the same allocator.
-    vect_destroy(vect, alloc_stdlib);
+    // It is optional for all vector functions to provide the template argument if using the defaults.
+    vect_destroy(vect, vect_tmplt_int_t);
     
     return 0;
 }
