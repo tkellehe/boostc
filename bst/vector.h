@@ -60,9 +60,9 @@
 
 
 /** Declares the vector type.
- * \param tmplt The template type of the vector.
+ * \param tmplt The template type of the vector or the type of the vector.
  */
-#define bst_vect_t(tmplt) bst_tmplt_type(tmplt)
+#define bst_vect_t(tmplt) bst_ppack_is(tmplt, bst_tmplt_type(tmplt), tmplt*)
 
 
 /** Initializes the vector structure.
