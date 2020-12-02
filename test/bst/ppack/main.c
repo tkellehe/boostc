@@ -72,5 +72,9 @@ int main()
         ppack_call(ppack_argI(mypkdf, ppack_size(params)), params)
     );
 
+    // Can detect if is a ppack or not.
+    printf("is mypkd ppack? %s\n", ppack_is(mypkd, "yes", "no"));
+    printf("is int ppack? %s\n", ppack_is(int, "yes", "no"));
+
     return 0;
 }
