@@ -10,6 +10,7 @@
 #include <bst/config.h>
 #include <bst/ppack.h>
 #include <bst/allocator.h>
+#include <bst/iterator.h>
 
 
 #ifdef __cplusplus
@@ -20,26 +21,34 @@ extern "C" {
 /* Provide without namespace */
 /// \{
 #ifdef BST_NO_NAMESPACE
-#define tcc_ppack bst_tcc_ppack
+#define tmplt_ppack bst_tmplt_ppack
 
-#define tcc_info bst_tcc_info
-#define tcc_type bst_tcc_type
-#define tcc_alloc bst_tcc_alloc
+#define tmplt_type bst_tmplt_type
+#define tmplt_info bst_tmplt_info
+#define tmplt_iter bst_tmplt_iter
+#define tmplt_alloc bst_tmplt_alloc
 #endif
 /// \}
 
 
-/* Provide operations on bst template types */
+/** Provide operations on bst template types.
+ * type: The actual type for the template.
+ * info: A ppack of the information about the type.
+ * iter: The bst iterator calls as a ppack for the type.
+ * alloc: The bst allocator calls as a ppack for the type.
+ */
 /// \{
-#define bst_tcc_ppack(info, type, alloc, ...) bst_ppack(info, type, alloc)
+#define bst_tmplt_ppack(type, info, iter, alloc, ...) bst_ppack(type, info, iter, alloc)
 
-#define bst_tcc_info(pkd) bst_dtl_tcc_info pkd
-#define bst_tcc_type(pkd) bst_dtl_tcc_info pkd
-#define bst_tcc_alloc(pkd) bst_dtl_tcc_info pkd
+#define bst_tmplt_type(pkd) bst_dtl_tmplt_type pkd
+#define bst_tmplt_info(pkd) bst_dtl_tmplt_info pkd
+#define bst_tmplt_iter(pkd) bst_dtl_tmplt_iter pkd
+#define bst_tmplt_alloc(pkd) bst_dtl_tmplt_alloc pkd
 
-#define bst_dtl_tcc_info(info, type, alloc, ...) info
-#define bst_dtl_tcc_type(info, type, alloc, ...) type
-#define bst_dtl_tcc_alloc(info, type, alloc, ...) alloc
+#define bst_dtl_tmplt_type(type, info, iter, alloc, ...) type
+#define bst_dtl_tmplt_info(type, info, iter, alloc, ...) info
+#define bst_dtl_tmplt_iter(type, info, iter, alloc, ...) iter
+#define bst_dtl_tmplt_alloc(type, info, iter, alloc, ...) alloc
 /// \}
 
 

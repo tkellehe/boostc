@@ -37,8 +37,6 @@ extern "C" {
 
 #define alloc_ppack bst_alloc_ppack
 
-#define alloc_unpack bst_alloc_unpack
-
 #define alloc_nofree bst_alloc_nofree
 #define alloc_nomalloc bst_alloc_nomalloc
 #define alloc_norealloc bst_alloc_norealloc
@@ -76,6 +74,8 @@ extern "C" {
 #define bst_alloc_ppack_f(f) bst_ppack(f, bst_alloc_nomalloc, bst_realloc)
 #define bst_alloc_ppack_r(r) bst_ppack(bst_alloc_nofree, bst_alloc_nomalloc, r)
 
+// This can be changed to default args using select Nth param.
+// Should even be able to make a helper.
 /* Packs assuming everything is provided in the std order */
 #define bst_alloc_ppack(f, m, r, ...) bst_ppack(f, m, r)
 /// \}
@@ -88,8 +88,8 @@ extern "C" {
 /* Default do-nothing memory management functions */
 /// \{
 #define bst_alloc_nofree(...) ((void)0)
-#define bst_alloc_nomalloc(...) ((void*)0)
-#define bst_alloc_norealloc(...) ((void*)0)
+#define bst_alloc_nomalloc(...) ((void*)bst_null)
+#define bst_alloc_norealloc(...) ((void*)bst_null)
 /// \}
 
 
