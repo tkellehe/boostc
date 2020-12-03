@@ -1,4 +1,5 @@
 #include <bst/allocator.h>
+#include <stdio.h>
 
 // A helper is provided to reference the ppack of the stdlib calls.
 #define stdlib alloc_stdlib
@@ -23,14 +24,30 @@ void *mymalloc(int size) { int pos = _pos; _pos += size; return (void*)(_memory 
 
 int main()
 {
+    int i;
     {
         // Use the stdlib memory management calls.
         int *array = mk_array(int, 10);
+
+        // Do something with the array.
+        for(i = 0; i < 10; ++i)
+        {
+            array[0] = i;
+        }
+
+        // Calls the stdlib free to deallocate.
         rm_array(array);
     }
     {
         // Use the user defined memory management calls.
         int *array = mk_array(int, 10, myalloc);
+
+        // Do something with the array.
+        for(i = 0; i < 10; ++i)
+        {
+            array[0] = i;
+        }
+
         // This evaluates to a do-nothing statement.
         rm_array(array, myalloc);
     }
