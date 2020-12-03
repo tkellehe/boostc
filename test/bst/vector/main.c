@@ -20,7 +20,7 @@ int main()
     int x = 3;
     vect_init(v);
     vect_rsv(v, 100);
-    vect_push(v, 1);
+    vect_push(tmplt, v, 1);
     vect_push(v, 2);
     vect_push(v, x);
     vect_push(v, 4);
