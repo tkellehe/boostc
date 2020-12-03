@@ -40,7 +40,7 @@ extern "C" {
 
 
 #define ppack_truthy bst_ppack_truthy
-#define ppack_falsey bst_ppack_falsey
+#define ppack_falsy bst_ppack_falsy
 
 #define ppack_if bst_ppack_if
 #define ppack_is bst_ppack_is
@@ -72,7 +72,7 @@ extern "C" {
     bst_ppack_concat(pkd, bst_ppack_ltrim(defaults, bst_ppack_size(pkd)))
 
 #define bst_ppack_truthy(...) (0)
-#define bst_ppack_falsey(...) ()
+#define bst_ppack_falsy(...) ()
 
 #define bst_ppack_if(pkd, _t, _f) BST_JOIN(bst_dtl_ppack_if, bst_dtl_ppack_if(pkd))(_t, _f)
 
