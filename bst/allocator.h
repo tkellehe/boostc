@@ -27,6 +27,10 @@ extern "C" {
 #define alloc_malloc bst_alloc_malloc
 #define alloc_realloc bst_alloc_realloc
 
+#define alloc_set_free bst_alloc_set_free
+#define alloc_set_malloc bst_alloc_set_malloc
+#define alloc_set_realloc bst_alloc_set_realloc
+
 #define alloc_stdlib bst_alloc_stdlib
 #define alloc_defaults bst_alloc_defaults
 
@@ -60,9 +64,13 @@ extern "C" {
         bst_alloc_defaults\
     )
 
-#define bst_alloc_free(pkd) bst_ppack_argI(pkd, 0)
-#define bst_alloc_malloc(pkd) bst_ppack_argI(pkd, 1)
-#define bst_alloc_realloc(pkd) bst_ppack_argI(pkd, 2)
+#define bst_alloc_free(pkd) bst_ppack_getI(pkd, 0)
+#define bst_alloc_malloc(pkd) bst_ppack_getI(pkd, 1)
+#define bst_alloc_realloc(pkd) bst_ppack_getI(pkd, 2)
+
+#define bst_alloc_set_free(pkd) bst_ppack_setI(pkd, 0, free)
+#define bst_alloc_set_malloc(pkd) bst_ppack_setI(pkd, 1, malloc)
+#define bst_alloc_set_realloc(pkd) bst_ppack_setI(pkd, 2, realloc)
 /// \}
 
 
