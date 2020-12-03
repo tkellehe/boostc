@@ -21,7 +21,7 @@
 #define vect_t bst_vect_t
 #define vect_init bst_vect_init
 #define vect_destroy bst_vect_destroy
-#define vect_cnt bst_vect_cnt
+#define vect_len bst_vect_len
 #define vect_cap bst_vect_cap
 #define vect_rsz bst_vect_rsz
 #define vect_rsv bst_vect_rsv
@@ -56,13 +56,13 @@
  * \param T The type of the data in the vector.
  * \param alloc An optional argument which is the allocator for the template type.
  */
-#define bst_vect_tmplt_t(T, ...) bst_tmplt_ppack(T*, (T), bst_dtl_vect_iter_defaults(T), bst_dtl_vect_riter_defaults(T), BST_X1ARGS1(0, ##__VA_ARGS__, bst_alloc_stdlib))
+#define bst_vect_tmplt_t(T, ...) bst_tmplt_ppack(T*, (T), bst_dtl_vect_iter_defaults(T), bst_dtl_vect_riter_defaults(T), bst_ppack_defargs(bst_ppack(__VA_ARGS__), bst_ppack(bst_alloc_stdlib)))
 
 
 /** Declares the vector type.
  * \param tmplt The template type of the vector or the type of the vector.
  */
-#define bst_vect_t(tmplt) bst_ppack_is(tmplt, bst_tmplt_type(tmplt), tmplt*)
+#define bst_vect_t(tmplt) bst_tmplt_isa(tmplt, bst_tmplt_type(tmplt), tmplt*)
 
 
 /** Initializes the vector structure.
@@ -76,14 +76,14 @@
  * \param vect Reference to the vector.
  * \return Returns one when successful and zero otherwise.
  */
-#define bst_vect_destroy(vect, ...) bst_dtl_vect_destroy(vect, BST_X1ARGS1(0, ##__VA_ARGS__, bst_tmplt_ppack_alloc(bst_alloc_stdlib)))
+#define bst_vect_destroy(vect, ...) bst_dtl_vect_destroy(vect, bst_dtl_vect_default_stdlib_tmplt(__VA_ARGS__))
 
 
 /** Gets the number of items that have been added or resized to.
  * \param vect Reference to the vector.
  * \return Returns the number of items.
  */
-#define bst_vect_cnt(vect, ...) ((vect) ? (int)bst_dtl_vect_cnt(vect) : 0)
+#define bst_vect_len(vect, ...) ((vect) ? (int)bst_dtl_vect_len(vect) : 0)
 
 
 /** Gets the capacity that the vector has been allocated for.
@@ -98,7 +98,7 @@
  * \param nsz The new size for the vector.
  * \return Returns the new size.
  */
-#define bst_vect_rsz(vect, nsz, ...) bst_dtl_vect_rsz(vect, nsz, BST_X1ARGS1(0, ##__VA_ARGS__, bst_tmplt_ppack_alloc(bst_alloc_stdlib)))
+#define bst_vect_rsz(vect, nsz, ...) bst_dtl_vect_rsz(vect, nsz, bst_dtl_vect_default_stdlib_tmplt(__VA_ARGS__))
 
 
 /** Reserves the requested capacity for the vector by only reserving more.
@@ -106,7 +106,7 @@
  * \param ncap The new capacity for the vector.
  * \return Returns the new capacity.
  */
-#define bst_vect_rsv(vect, ncap, ...) bst_dtl_vect_rsv(vect, ncap, BST_X1ARGS1(0, ##__VA_ARGS__, bst_tmplt_ppack_alloc(bst_alloc_stdlib)))
+#define bst_vect_rsv(vect, ncap, ...) bst_dtl_vect_rsv(vect, ncap, bst_dtl_vect_default_stdlib_tmplt(__VA_ARGS__))
 
 
 /** Assert at the index provided then read the value in the array.
@@ -114,14 +114,14 @@
  * \param i The index to access.
  * \return Returns the value at the index.
  */
-#define bst_vect_at(vect, i, ...) (bst_assert((i) < bst_vect_cnt(vect)), vect[i])
+#define bst_vect_at(vect, i, ...) (bst_assert((i) < bst_vect_len(vect)), vect[i])
 
 
 /** Checks to see if the vector is empty.
  * \param vect Reference to the vector.
  * \return Returns one if empty and zero otherwise.
  */
-#define bst_vect_empty(vect, ...) (bst_vect_cnt(vect) == 0)
+#define bst_vect_empty(vect, ...) (bst_vect_len(vect) == 0)
 
 
 /** Get the front value of the vector.
@@ -135,7 +135,7 @@
  * \param vect Reference to the vector.
  * \return Returns the value at the last index.
  */
-#define bst_vect_back(vect, ...) (vect)[bst_dtl_vect_cnt(vect)-1]
+#define bst_vect_back(vect, ...) (vect)[bst_dtl_vect_len(vect)-1]
 
 
 /** Pushes a single value onto the back of the vector and resizes if needed.
@@ -143,29 +143,29 @@
  * \param val The value to push on.
  * \return Returns the new value pushed on.
  */
-#define bst_vect_push(vect, val, ...) bst_dtl_vect_push(vect, val, BST_X1ARGS1(0, ##__VA_ARGS__, bst_tmplt_ppack_alloc(bst_alloc_stdlib)))
+#define bst_vect_push(vect, val, ...) bst_dtl_vect_push(vect, val, bst_dtl_vect_default_stdlib_tmplt(__VA_ARGS__))
 
 
 #define bst_vect_begin(vect, ...) (vect)
-#define bst_vect_end(vect, ...) ((vect)+bst_vect_cnt(vect))
+#define bst_vect_end(vect, ...) ((vect)+bst_vect_len(vect))
 
 
-#define bst_vect_rbegin(vect, ...) ((vect)+bst_vect_cnt(vect))
+#define bst_vect_rbegin(vect, ...) ((vect)+bst_vect_len(vect))
 #define bst_vect_rend(vect, ...) ((vect)+1)
 
 
 #define bst_vect_iter_t(tmplt) bst_iter_t(bst_tmplt_iter(tmplt))
-#define bst_vect_iter_nxt(iter, ...) bst_iter_nxt(bst_tmplt_iter(BST_X1ARGS1(0, ##__VA_ARGS__, bst_tmplt_ppack_iter(bst_iter_ppack_nxt(bst_dtl_vect_iter_nxt)))))(iter)
-#define bst_vect_iter_eq(left, right, ...) bst_iter_eq(bst_tmplt_iter(BST_X1ARGS1(0, ##__VA_ARGS__, bst_tmplt_ppack_iter(bst_iter_ppack_eq(bst_dtl_vect_iter_eq)))))(left, right)
-#define bst_vect_iter_val(iter, ...) bst_iter_val(bst_tmplt_iter(BST_X1ARGS1(0, ##__VA_ARGS__, bst_tmplt_ppack_iter(bst_iter_ppack_val(bst_dtl_vect_iter_val)))))(iter)
-#define bst_vect_iter_set(iter, val, ...) bst_iter_set(bst_tmplt_iter(BST_X1ARGS1(0, ##__VA_ARGS__, bst_tmplt_ppack_iter(bst_iter_ppack_set(bst_dtl_vect_iter_set)))))(iter, val)
+#define bst_vect_iter_nxt(iter, ...) bst_iter_nxt(bst_tmplt_iter(bst_ppack_defargs(bst_ppack(__VA_ARGS__), bst_ppack(bst_tmplt_ppack_iter(bst_iter_ppack_nxt(bst_dtl_vect_iter_nxt))))))(iter)
+#define bst_vect_iter_eq(left, right, ...) bst_iter_eq(bst_tmplt_iter(bst_ppack_defargs(bst_ppack(__VA_ARGS__), bst_ppack(bst_tmplt_ppack_iter(bst_iter_ppack_eq(bst_dtl_vect_iter_eq))))))(left, right)
+#define bst_vect_iter_val(iter, ...) bst_iter_val(bst_tmplt_iter(bst_ppack_defargs(bst_ppack(__VA_ARGS__), bst_ppack(bst_tmplt_ppack_iter(bst_iter_ppack_val(bst_dtl_vect_iter_val))))))(iter)
+#define bst_vect_iter_set(iter, val, ...) bst_iter_set(bst_tmplt_iter(bst_ppack_defargs(bst_ppack(__VA_ARGS__), bst_ppack(bst_tmplt_ppack_iter(bst_iter_ppack_set(bst_dtl_vect_iter_set))))))(iter, val)
 
 
 #define bst_vect_riter_t(tmplt) bst_iter_t(bst_tmplt_riter(tmplt))
-#define bst_vect_riter_nxt(riter, ...) bst_iter_nxt(bst_tmplt_riter(BST_X1ARGS1(0, ##__VA_ARGS__, bst_tmplt_ppack_riter(bst_iter_ppack_nxt(bst_dtl_vect_riter_nxt)))))(riter)
-#define bst_vect_riter_eq(left, right, ...) bst_iter_eq(bst_tmplt_riter(BST_X1ARGS1(0, ##__VA_ARGS__, bst_tmplt_ppack_riter(bst_iter_ppack_eq(bst_dtl_vect_riter_eq)))))(left, right)
-#define bst_vect_riter_val(riter, ...) bst_iter_val(bst_tmplt_riter(BST_X1ARGS1(0, ##__VA_ARGS__, bst_tmplt_ppack_riter(bst_iter_ppack_val(bst_dtl_vect_riter_val)))))(riter)
-#define bst_vect_riter_set(riter, val, ...) bst_iter_set(bst_tmplt_riter(BST_X1ARGS1(0, ##__VA_ARGS__, bst_tmplt_ppack_riter(bst_iter_ppack_set(bst_dtl_vect_riter_set)))))(riter, val)
+#define bst_vect_riter_nxt(riter, ...) bst_iter_nxt(bst_tmplt_riter(bst_ppack_defargs(bst_ppack(__VA_ARGS__), bst_ppack(bst_tmplt_ppack_riter(bst_iter_ppack_nxt(bst_dtl_vect_riter_nxt))))))(riter)
+#define bst_vect_riter_eq(left, right, ...) bst_iter_eq(bst_tmplt_riter(bst_ppack_defargs(bst_ppack(__VA_ARGS__), bst_ppack(bst_tmplt_ppack_riter(bst_iter_ppack_eq(bst_dtl_vect_riter_eq))))))(left, right)
+#define bst_vect_riter_val(riter, ...) bst_iter_val(bst_tmplt_riter(bst_ppack_defargs(bst_ppack(__VA_ARGS__), bst_ppack(bst_tmplt_ppack_riter(bst_iter_ppack_val(bst_dtl_vect_riter_val))))))(riter)
+#define bst_vect_riter_set(riter, val, ...) bst_iter_set(bst_tmplt_riter(bst_ppack_defargs(bst_ppack(__VA_ARGS__), bst_ppack(bst_tmplt_ppack_riter(bst_iter_ppack_set(bst_dtl_vect_riter_set))))))(riter, val)
 
 
 /* Packs the iterator defaults */
@@ -192,30 +192,32 @@
 
 /* Detail code */
 /// \{
+#define bst_dtl_vect_default_stdlib_tmplt(...) bst_ppack_defargs(bst_ppack(__VA_ARGS__), bst_ppack(bst_tmplt_ppack_alloc(bst_alloc_stdlib)))
+
 // The type intptr_t is used because the memory may need to be word aligned.
 // This does assume that intptr_t causes the memory to be word aligned.
 #define bst_dtl_vect_raw(vect) ((intptr_t*)(void*)(vect) - 2)
 #define bst_dtl_vect_cap(vect) (bst_dtl_vect_raw(vect)[0])
-#define bst_dtl_vect_cnt(vect) (bst_dtl_vect_raw(vect)[1])
+#define bst_dtl_vect_len(vect) (bst_dtl_vect_raw(vect)[1])
 #define bst_dtl_vect_push(vect, val, tmplt) \
 /* Check to see if the vector has anything allocated yet. */\
 ((vect) ?\
-    (bst_dtl_vect_cap(vect) < (bst_dtl_vect_cnt(vect)+1) ?\
+    (bst_dtl_vect_cap(vect) < (bst_dtl_vect_len(vect)+1) ?\
         (\
             *((void**)&(vect)) = (void*)((intptr_t*)bst_alloc_realloc(bst_tmplt_alloc(tmplt))(\
                 bst_dtl_vect_raw(vect),\
                 sizeof(*(vect))*(bst_dtl_vect_cap(vect)*2) + 2*sizeof(intptr_t)\
             ) + 2),\
             bst_dtl_vect_cap(vect) *= 2,\
-            (vect[bst_dtl_vect_cnt(vect)++] = val)\
+            (vect[bst_dtl_vect_len(vect)++] = val)\
         )\
     :\
-        (vect[bst_dtl_vect_cnt(vect)++] = val)\
+        (vect[bst_dtl_vect_len(vect)++] = val)\
     )\
 :\
     (\
         *((void**)&(vect)) = (void*)((intptr_t*)bst_alloc_malloc(bst_tmplt_alloc(tmplt))(sizeof(*(vect))*4 + 2*sizeof(intptr_t)) + 2),\
-        bst_dtl_vect_cnt(vect) = (intptr_t)(1),\
+        bst_dtl_vect_len(vect) = (intptr_t)(1),\
         bst_dtl_vect_cap(vect) = (intptr_t)(4),\
         (vect[0] = val)\
     )\
@@ -235,7 +237,7 @@
                     sizeof(*(vect))*(bst_dtl_vect_cap(vect)*2) + 2*sizeof(intptr_t)\
                 ) + 2),\
                 bst_dtl_vect_cap(vect) = (bst_dtl_vect_cap(vect)*2),\
-                (bst_dtl_vect_cnt(vect) = (intptr_t)(nsz))\
+                (bst_dtl_vect_len(vect) = (intptr_t)(nsz))\
             )\
         :\
             (\
@@ -244,17 +246,17 @@
                     sizeof(*(vect))*(nsz) + 2*sizeof(intptr_t)\
                 ) + 2),\
                 bst_dtl_vect_cap(vect) = (intptr_t)(nsz),\
-                (bst_dtl_vect_cnt(vect) = bst_dtl_vect_cap(vect))\
+                (bst_dtl_vect_len(vect) = bst_dtl_vect_cap(vect))\
             )\
         )\
     :\
-        (bst_dtl_vect_cnt(vect) = (intptr_t)(nsz))\
+        (bst_dtl_vect_len(vect) = (intptr_t)(nsz))\
     )\
 :\
     (\
         *((void**)&(vect)) = (void*)((intptr_t*)bst_alloc_malloc(bst_tmplt_alloc(tmplt))(sizeof(*(vect))*(nsz) + 2*sizeof(intptr_t)) + 2),\
         bst_dtl_vect_cap(vect) = (intptr_t)(nsz),\
-        (bst_dtl_vect_cnt(vect) = bst_dtl_vect_cap(vect))\
+        (bst_dtl_vect_len(vect) = bst_dtl_vect_cap(vect))\
     )\
 )
 #define bst_dtl_vect_rsv(vect, ncap, tmplt) \
@@ -275,7 +277,7 @@
 :\
     (\
         *((void**)&(vect)) = (void*)((intptr_t*)bst_alloc_malloc(bst_tmplt_alloc(tmplt))(sizeof(*(vect))*(ncap) + 2*sizeof(intptr_t)) + 2),\
-        bst_dtl_vect_cnt(vect) = 0,\
+        bst_dtl_vect_len(vect) = 0,\
         (bst_dtl_vect_cap(vect) = (intptr_t)(ncap))\
     )\
 )

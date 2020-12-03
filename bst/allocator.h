@@ -27,12 +27,14 @@ extern "C" {
 #define alloc_malloc bst_alloc_malloc
 #define alloc_realloc bst_alloc_realloc
 
+#define alloc_stdlib bst_alloc_stdlib
+#define alloc_defaults bst_alloc_defaults
+
 #define alloc_nofree bst_alloc_nofree
 #define alloc_nomalloc bst_alloc_nomalloc
 #define alloc_norealloc bst_alloc_norealloc
 
-#define alloc_stdlib bst_alloc_stdlib
-#define alloc_defaults bst_alloc_defaults
+#define alloc_isa bst_alloc_isa
 #endif
 /// \}
 
@@ -78,6 +80,10 @@ extern "C" {
 #define bst_alloc_nomalloc(...) ((void*)bst_null)
 #define bst_alloc_norealloc(...) ((void*)bst_null)
 /// \}
+
+
+/* Detect if provided a ppack that could be an allocator */
+#define bst_alloc_isa(pkd, _t, _f) bst_ppack_isa(pkd, bst_ppack_hasN(pkd, 3, _t, _f), _f)
 
 
 #ifdef __cplusplus

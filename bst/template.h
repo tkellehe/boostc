@@ -30,6 +30,8 @@ extern "C" {
 #define tmplt_alloc bst_tmplt_alloc
 
 #define tmplt_defaults bst_tmplt_defaults
+
+#define tmplt_isa bst_tmplt_isa
 #endif
 /// \}
 
@@ -64,6 +66,26 @@ extern "C" {
 
 /* Packs the defaults */
 #define bst_tmplt_defaults bst_ppack(int, (0), bst_iter_defaults, bst_iter_defaults, bst_alloc_defaults)
+
+
+/* Detect if provided a ppack that could be a template */
+#define bst_tmplt_isa(pkd, _t, _f) \
+    bst_ppack_isa(pkd,\
+        bst_ppack_hasN(pkd, 5,\
+            bst_iter_isa(bst_tmplt_iter(pkd),\
+                bst_iter_isa(bst_tmplt_riter(pkd),\
+                    bst_alloc_isa(bst_tmplt_alloc(pkd),\
+                        bst_ppack_isa(bst_tmplt_info(pkd), _t, _f),\
+                        _f\
+                    ),\
+                    _f\
+                ),\
+                _f\
+            ),\
+            _f\
+        ),\
+        _f\
+    )
 
 
 #ifdef __cplusplus

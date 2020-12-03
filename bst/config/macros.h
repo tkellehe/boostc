@@ -27,32 +27,6 @@ extern "C" {
 /// \}
 
 
-/* Provide a helper that assist with variadic parameter default values */
-/// \{
-#define BST_ARGS1(_0, ...) _0
-#define BST_ARGS2(_0, ...) _0, BST_ARGS1(__VA_ARGS__)
-#define BST_ARGS3(_0, ...) _0, BST_ARGS2(__VA_ARGS__)
-#define BST_ARGS4(_0, ...) _0, BST_ARGS3(__VA_ARGS__)
-#define BST_ARGS5(_0, ...) _0, BST_ARGS4(__VA_ARGS__)
-#define BST_ARGS6(_0, ...) _0, BST_ARGS5(__VA_ARGS__)
-#define BST_ARGS7(_0, ...) _0, BST_ARGS6(__VA_ARGS__)
-#define BST_ARGS8(_0, ...) _0, BST_ARGS7(__VA_ARGS__)
-#define BST_ARGS9(_0, ...) _0, BST_ARGS8(__VA_ARGS__)
-#define BST_ARGS10(_0, ...) _0, BST_ARGS9(__VA_ARGS__)
-
-#define BST_X1ARGS1(_0, ...) BST_ARGS1(__VA_ARGS__)
-#define BST_X1ARGS2(_0, ...) BST_ARGS2(__VA_ARGS__)
-#define BST_X1ARGS3(_0, ...) BST_ARGS3(__VA_ARGS__)
-#define BST_X1ARGS4(_0, ...) BST_ARGS4(__VA_ARGS__)
-#define BST_X1ARGS5(_0, ...) BST_ARGS5(__VA_ARGS__)
-#define BST_X1ARGS6(_0, ...) BST_ARGS6(__VA_ARGS__)
-#define BST_X1ARGS7(_0, ...) BST_ARGS7(__VA_ARGS__)
-#define BST_X1ARGS8(_0, ...) BST_ARGS8(__VA_ARGS__)
-#define BST_X1ARGS9(_0, ...) BST_ARGS9(__VA_ARGS__)
-#define BST_X1ARGS10(_0, ...) BST_ARGS10(__VA_ARGS__)
-/// \}
-
-
 #ifdef __cplusplus
 }
 #endif

@@ -33,6 +33,8 @@ extern "C" {
 #define iter_noeq bst_iter_noeq
 #define iter_noval bst_iter_noval
 #define iter_noset bst_iter_noset
+
+#define iter_isa bst_iter_isa
 #endif
 /// \}
 
@@ -72,6 +74,10 @@ extern "C" {
 #define bst_iter_noval(...) ((void)0)
 #define bst_iter_noset(...) ((void)0)
 /// \}
+
+
+/* Detect if provided a ppack that could be an iterator */
+#define bst_iter_isa(pkd, _t, _f) bst_ppack_isa(pkd, bst_ppack_hasN(pkd, 5, _t, _f), _f)
 
 
 #ifdef __cplusplus

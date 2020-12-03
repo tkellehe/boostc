@@ -59,7 +59,7 @@ int main()
         printf("not found\n");
     }
 
-    for(x = 0; x < vect_cnt(v); ++x)
+    for(x = 0; x < vect_len(v); ++x)
     {
         printf("v[%i] = %i\n", x, v[x]);
     }
@@ -76,7 +76,7 @@ int main()
         vect_push(u, t);
     }
 
-    for(x = 0; x < vect_cnt(u); ++x)
+    for(x = 0; x < vect_len(u); ++x)
     {
         printf("u[%i] = {.x=%i, .y=%i}\n", x, u[x].x, u[x].y);
     }

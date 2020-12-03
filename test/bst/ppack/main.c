@@ -6,7 +6,7 @@
 // This unpacks the ppack provided.
 #define myprints_pkd(pkd) myprints5 pkd
 // Takes in an optional list of integers and prepends a value.
-#define myprints(...) myprints_pkd(ppack_prepend(ppack(BST_X1ARGS4(0, ##__VA_ARGS__, 1, 2, 3, 4)), 0))
+#define myprints(...) myprints_pkd(ppack_prepend(ppack_defaults(ppack(__VA_ARGS__), ppack(1, 2, 3, 4)), 0))
 
 int main()
 {
@@ -54,9 +54,16 @@ int main()
     printf("dmypkd[3] = %c\n", ppack_argI(dmypkd, 3));
     printf("dmypkd size = %i\n", ppack_size(dmypkd));
 
+    // Can unpack directly as default arguments.
+    printf("%c %c %c %c\n", ppack_defargs(rtmypkd, ('x', 'y', 'e', 'f')));
+    printf("%c %c %c %c\n", ppack_defargs(ppack(), ('x', 'y', 'e', 'f')));
+
     // Can create if-statements and check if has minimum size.
-    printf("mypkd %s\n", ppack_if(ppack_ltrim(mypkd, 4), "size < 5", "size > 4"));
-    printf("mypkd %s\n", ppack_if(ppack_ltrim(mypkd, 2), "size < 3", "size > 2"));
+    printf("mypkd %s\n", ppack_hasLT(mypkd, 5, "size < 5", "size >= 5"));
+    printf("mypkd %s\n", ppack_if(ppack_ltrim(mypkd, 4), "size > 4", "size < 5"));
+    printf("mypkd %s\n", ppack_if(ppack_ltrim(mypkd, 0), "size > 3", "size < 4"));
+    printf("mypkd %s\n", ppack_hasN(mypkd, 4, "size == 4", "size != 4"));
+    printf("mypkd %s\n", ppack_hasN(mypkd, 40, "size == 40", "size != 40"));
 
     // Define symbols in a ppack to be called.
     #define myf0() a
@@ -73,8 +80,8 @@ int main()
     );
 
     // Can detect if is a ppack or not.
-    printf("is mypkd ppack? %s\n", ppack_is(mypkd, "yes", "no"));
-    printf("is int ppack? %s\n", ppack_is(int, "yes", "no"));
+    printf("is mypkd ppack? %s\n", ppack_isa(mypkd, "yes", "no"));
+    printf("is int ppack? %s\n", ppack_isa(int, "yes", "no"));
 
     return 0;
 }
