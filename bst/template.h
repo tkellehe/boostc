@@ -29,6 +29,12 @@ extern "C" {
 #define tmplt_riter bst_tmplt_riter
 #define tmplt_alloc bst_tmplt_alloc
 
+#define tmplt_set_type bst_tmplt_set_type
+#define tmplt_set_info bst_tmplt_set_info
+#define tmplt_set_iter bst_tmplt_set_iter
+#define tmplt_set_riter bst_tmplt_set_riter
+#define tmplt_set_alloc bst_tmplt_set_alloc
+
 #define tmplt_defaults bst_tmplt_defaults
 
 #define tmplt_isa bst_tmplt_isa
@@ -56,11 +62,17 @@ extern "C" {
         bst_tmplt_defaults\
     )
 
-#define bst_tmplt_type(pkd) bst_ppack_argI(pkd, 0)
-#define bst_tmplt_info(pkd) bst_ppack_argI(pkd, 1)
-#define bst_tmplt_iter(pkd) bst_ppack_argI(pkd, 2)
-#define bst_tmplt_riter(pkd) bst_ppack_argI(pkd, 3)
-#define bst_tmplt_alloc(pkd) bst_ppack_argI(pkd, 4)
+#define bst_tmplt_type(pkd) bst_ppack_getI(pkd, 0)
+#define bst_tmplt_info(pkd) bst_ppack_getI(pkd, 1)
+#define bst_tmplt_iter(pkd) bst_ppack_getI(pkd, 2)
+#define bst_tmplt_riter(pkd) bst_ppack_getI(pkd, 3)
+#define bst_tmplt_alloc(pkd) bst_ppack_getI(pkd, 4)
+
+#define bst_tmplt_set_type(pkd, type) bst_ppack_setI(pkd, 0, type)
+#define bst_tmplt_set_info(pkd, info) bst_ppack_setI(pkd, 1, info)
+#define bst_tmplt_set_iter(pkd, iter) bst_ppack_setI(pkd, 2, iter)
+#define bst_tmplt_set_riter(pkd, riter) bst_ppack_setI(pkd, 3, riter)
+#define bst_tmplt_set_alloc(pkd, alloc) bst_ppack_setI(pkd, 4, alloc)
 /// \}
 
 
