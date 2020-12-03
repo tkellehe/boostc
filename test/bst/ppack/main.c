@@ -23,35 +23,42 @@ int main()
     printf("mypkd size = %i\n", ppack_size(mypkd));
 
     // Can get constant access to ppacks.
-    printf("mypkd[0] = %c\n", ppack_argI(mypkd, 0));
-    printf("mypkd[1] = %c\n", ppack_argI(mypkd, 1));
-    printf("mypkd[2] = %c\n", ppack_argI(mypkd, 2));
-    printf("mypkd[3] = %c\n", ppack_argI(mypkd, 3));
+    printf("mypkd[0] = %c\n", ppack_getI(mypkd, 0));
+    printf("mypkd[1] = %c\n", ppack_getI(mypkd, 1));
+    printf("mypkd[2] = %c\n", ppack_getI(mypkd, 2));
+    printf("mypkd[3] = %c\n", ppack_getI(mypkd, 3));
+
+    // Can set constant access to ppacks.
+    #define smypkd ppack_setI(mypkd, 1, 'x')
+    printf("smypkd[0] = %c\n", ppack_getI(smypkd, 0));
+    printf("smypkd[1] = %c\n", ppack_getI(smypkd, 1));
+    printf("smypkd[2] = %c\n", ppack_getI(smypkd, 2));
+    printf("smypkd[3] = %c\n", ppack_getI(smypkd, 3));
 
     // Can get reverse ppacks.
     #define rmypkd ppack_reverse(mypkd)
-    printf("rmypkd[0] = %c\n", ppack_argI(rmypkd, 0));
-    printf("rmypkd[1] = %c\n", ppack_argI(rmypkd, 1));
-    printf("rmypkd[2] = %c\n", ppack_argI(rmypkd, 2));
-    printf("rmypkd[3] = %c\n", ppack_argI(rmypkd, 3));
+    printf("rmypkd[0] = %c\n", ppack_getI(rmypkd, 0));
+    printf("rmypkd[1] = %c\n", ppack_getI(rmypkd, 1));
+    printf("rmypkd[2] = %c\n", ppack_getI(rmypkd, 2));
+    printf("rmypkd[3] = %c\n", ppack_getI(rmypkd, 3));
     printf("rmypkd size = %i\n", ppack_size(rmypkd));
 
     // Can get trim ppacks.
     #define ltmypkd ppack_ltrim(mypkd, 2)
-    printf("ltmypkd[0] = %c\n", ppack_argI(ltmypkd, 0));
-    printf("ltmypkd[1] = %c\n", ppack_argI(ltmypkd, 1));
+    printf("ltmypkd[0] = %c\n", ppack_getI(ltmypkd, 0));
+    printf("ltmypkd[1] = %c\n", ppack_getI(ltmypkd, 1));
     printf("ltmypkd size = %i\n", ppack_size(ltmypkd));
     #define rtmypkd ppack_rtrim(mypkd, 2)
-    printf("rtmypkd[0] = %c\n", ppack_argI(rtmypkd, 0));
-    printf("rtmypkd[1] = %c\n", ppack_argI(rtmypkd, 1));
+    printf("rtmypkd[0] = %c\n", ppack_getI(rtmypkd, 0));
+    printf("rtmypkd[1] = %c\n", ppack_getI(rtmypkd, 1));
     printf("rtmypkd size = %i\n", ppack_size(rtmypkd));
     
     // Can fill with default values by position.
     #define dmypkd ppack_defaults(rtmypkd, ('x', 'y', 'e', 'f'))
-    printf("dmypkd[0] = %c\n", ppack_argI(dmypkd, 0));
-    printf("dmypkd[1] = %c\n", ppack_argI(dmypkd, 1));
-    printf("dmypkd[2] = %c\n", ppack_argI(dmypkd, 2));
-    printf("dmypkd[3] = %c\n", ppack_argI(dmypkd, 3));
+    printf("dmypkd[0] = %c\n", ppack_getI(dmypkd, 0));
+    printf("dmypkd[1] = %c\n", ppack_getI(dmypkd, 1));
+    printf("dmypkd[2] = %c\n", ppack_getI(dmypkd, 2));
+    printf("dmypkd[3] = %c\n", ppack_getI(dmypkd, 3));
     printf("dmypkd size = %i\n", ppack_size(dmypkd));
 
     // Can unpack directly as default arguments.
@@ -75,8 +82,8 @@ int main()
 
     printf(
         "invoke %s = %i\n",
-        BST_TOSTRING(ppack_argI(mypkdf, ppack_size(params))),
-        ppack_call(ppack_argI(mypkdf, ppack_size(params)), params)
+        BST_TOSTRING(ppack_getI(mypkdf, ppack_size(params))),
+        ppack_call(ppack_getI(mypkdf, ppack_size(params)), params)
     );
 
     // Can detect if is a ppack or not.
