@@ -80,9 +80,8 @@
 
 /** Initializes the vector structure.
  * \param vect Reference to the vector.
- * \return Returns one when successful and zero otherwise.
  */
-#define bst_vect_init(vect, ...) (*((void**)&(bst_tmplt_isa(vect, bst_ppack_getI(bst_ppack(__VA_ARGS__), 0), vect))) = bst_null, 1)
+#define bst_vect_init(vect, ...) (*((void**)&(bst_tmplt_isa(vect, bst_ppack_getI(bst_ppack(__VA_ARGS__), 0), vect))) = bst_null)
 
 
 /** Destroys and frees any memory allocated for the vector.
