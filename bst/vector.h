@@ -13,6 +13,13 @@
 #include <bst/stdint.h>
 #include <bst/template.h>
 
+// This will need to be updated.
+#ifdef __cplusplus
+#include <cstring>
+#else
+#include <string.h>
+#endif
+
 
 /* Provide interface without namespace */
 /// \{
@@ -213,6 +220,11 @@
         bst_iter_set(bst_tmplt_iter(iter))(val, bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
         bst_dtl_vect_iter_set(iter, val)\
     )
+#define bst_vect_iter_swap(left, right, ...) \
+    bst_tmplt_isa(left,\
+        bst_iter_swap(bst_tmplt_iter(left))(right, bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
+        bst_dtl_vect_iter_swap(left, right)\
+    )
 
 
 #define bst_vect_riter_t(tmplt) bst_iter_t(bst_tmplt_riter(tmplt))
@@ -236,9 +248,14 @@
         bst_iter_set(bst_tmplt_riter(iter))(val, bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
         bst_dtl_vect_riter_set(iter, val)\
     )
+#define bst_vect_riter_swap(left, right, ...) \
+    bst_tmplt_isa(left,\
+        bst_iter_swap(bst_tmplt_riter(left))(right, bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
+        bst_dtl_vect_riter_swap(left, right)\
+    )
 
 /* Packs the iterator defaults */
-#define bst_dtl_vect_iter_defaults(T) bst_ppack(bst_dtl_vect_iter_t(T), bst_dtl_vect_iter_nxt, bst_dtl_vect_iter_eq, bst_dtl_vect_iter_val, bst_dtl_vect_iter_set)
+#define bst_dtl_vect_iter_defaults(T) bst_ppack(bst_dtl_vect_iter_t(T), bst_dtl_vect_iter_nxt, bst_dtl_vect_iter_eq, bst_dtl_vect_iter_val, bst_dtl_vect_iter_set, bst_dtl_vect_iter_swap)
 
 
 #define bst_dtl_vect_iter_t(T) T*
@@ -246,10 +263,17 @@
 #define bst_dtl_vect_iter_eq(left, right) (left == right)
 #define bst_dtl_vect_iter_val(iter) *(iter)
 #define bst_dtl_vect_iter_set(iter, val) (*(iter) = val)
+#define bst_dtl_vect_iter_swap(left, right) \
+    ({\
+        char __bst_dtl_swap[sizeof(*(left))];\
+        memcpy((void*)__bst_dtl_swap, (void*)(left), sizeof(*(left)));\
+        memcpy((void*)(left), (void*)(right), sizeof(*(left)));\
+        memcpy((void*)(right), (void*)__bst_dtl_swap, sizeof(*(left)));\
+    })
 
 
 /* Packs the iterator defaults */
-#define bst_dtl_vect_riter_defaults(T) bst_ppack(bst_dtl_vect_riter_t(T), bst_dtl_vect_riter_nxt, bst_dtl_vect_riter_eq, bst_dtl_vect_riter_val, bst_dtl_vect_riter_set)
+#define bst_dtl_vect_riter_defaults(T) bst_ppack(bst_dtl_vect_riter_t(T), bst_dtl_vect_riter_nxt, bst_dtl_vect_riter_eq, bst_dtl_vect_riter_val, bst_dtl_vect_riter_set, bst_dtl_vect_riter_swap)
 
 
 #define bst_dtl_vect_riter_t(T) T*
@@ -257,6 +281,13 @@
 #define bst_dtl_vect_riter_eq(left, right) (left == right)
 #define bst_dtl_vect_riter_val(riter) *((riter)-1)
 #define bst_dtl_vect_riter_set(riter, val) (*((riter)-1) = val)
+#define bst_dtl_vect_riter_swap(left, right) \
+    ({\
+        char __bst_dtl_swap[sizeof(*(left))];\
+        memcpy((void*)__bst_dtl_swap, (void*)(left), sizeof(*(left)));\
+        memcpy((void*)(left), (void*)(right), sizeof(*(left)));\
+        memcpy((void*)(right), (void*)__bst_dtl_swap, sizeof(*(left)));\
+    })
 
 
 /* Detail code */
