@@ -21,11 +21,17 @@ extern "C" {
 #define iter_ppack_set bst_iter_ppack_set
 
 #define iter_ppack bst_iter_ppack
+
 #define iter_t bst_iter_t
 #define iter_nxt bst_iter_nxt
 #define iter_eq bst_iter_eq
 #define iter_val bst_iter_val
-#define iter_set bst_iter_set
+
+#define iter_set_t bst_iter_set_t
+#define iter_set_nxt bst_iter_set_nxt
+#define iter_set_eq bst_iter_set_eq
+#define iter_set_val bst_iter_set_val
+#define iter_set_set bst_iter_set_set
 
 #define iter_defaults bst_iter_defaults
 #define iter_no_t bst_iter_no_t
@@ -54,11 +60,17 @@ extern "C" {
         bst_iter_defaults\
     )
 
-#define bst_iter_t(pkd) bst_ppack_argI(pkd, 0)
-#define bst_iter_nxt(pkd) bst_ppack_argI(pkd, 1)
-#define bst_iter_eq(pkd) bst_ppack_argI(pkd, 2)
-#define bst_iter_val(pkd) bst_ppack_argI(pkd, 3)
-#define bst_iter_set(pkd) bst_ppack_argI(pkd, 4)
+#define bst_iter_t(pkd) bst_ppack_getI(pkd, 0)
+#define bst_iter_nxt(pkd) bst_ppack_getI(pkd, 1)
+#define bst_iter_eq(pkd) bst_ppack_getI(pkd, 2)
+#define bst_iter_val(pkd) bst_ppack_getI(pkd, 3)
+#define bst_iter_set(pkd) bst_ppack_getI(pkd, 4)
+
+#define bst_iter_set_t(pkd, t) bst_ppack_setI(pkd, 0, t)
+#define bst_iter_set_nxt(pkd, nxt) bst_ppack_setI(pkd, 1, nxt)
+#define bst_iter_set_eq(pkd, eq) bst_ppack_setI(pkd, 2, eq)
+#define bst_iter_set_val(pkd, val) bst_ppack_setI(pkd, 3, val)
+#define bst_iter_set_set(pkd, set) bst_ppack_setI(pkd, 4, set)
 /// \}
 
 
