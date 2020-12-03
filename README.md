@@ -250,6 +250,7 @@ This allows for more complex structures with a simpler interface.
 ```c
 #include <bst/algorithm/find.h>
 #include <bst/vector.h>
+#include <stdio.h>
 
 int main()
 {
@@ -268,9 +269,9 @@ int main()
 
     vect_push(vect_tmplt_int_t, vect, 1);
     vect_push(vect_tmplt_int_t, vect, 2);
-    vect_push(vect_tmplt_int_t, vect, 3);
+    vect_push(vect_tmplt_int_t, vect, -1);
     vect_push(vect_tmplt_int_t, vect, 4);
-    vect_push(vect_tmplt_int_t, vect, 3);
+    vect_push(vect_tmplt_int_t, vect, -1);
 
     // We can now do iterators since we have the template.
     {
@@ -278,12 +279,12 @@ int main()
         vect_iter_t(vect_tmplt_int_t) iter = vect_begin(vect_tmplt_int_t, vect);
 
         // Get the iterator ppack from the template to then search.
-        alg_find(tmplt_iter(vect_tmplt_int_t), iter, vect_end(vect_tmplt_int_t, vect), 3);
+        alg_find(tmplt_iter(vect_tmplt_int_t), iter, vect_end(vect_tmplt_int_t, vect), -1);
 
         // If we find it, then we can change the value.
         if(iter != vect_end(vect_tmplt_int_t, vect))
         {
-            vect_iter_set(vect_tmplt_int_t, iter, -1);
+            vect_iter_set(vect_tmplt_int_t, iter, 3);
         }
     }
 
@@ -291,12 +292,22 @@ int main()
     {
         vect_riter_t(vect_tmplt_int_t) riter = vect_rbegin(vect_tmplt_int_t, vect);
 
-        alg_find(tmplt_riter(vect_tmplt_int_t), riter, vect_rend(vect_tmplt_int_t, vect), 3);
+        alg_find(tmplt_riter(vect_tmplt_int_t), riter, vect_rend(vect_tmplt_int_t, vect), -1);
 
         if(riter != vect_rend(vect_tmplt_int_t, vect))
         {
-            vect_iter_set(vect_tmplt_int_t, riter, -2);
+            vect_riter_set(vect_tmplt_int_t, riter, 5);
         }
+    }
+
+    // We can use iterators to loop over the contents.
+    {
+        // Get the iterator type from the template.
+        vect_iter_t(vect_tmplt_int_t) iter;
+        
+        // For the vector, the template is not actually needed for most calls.
+        for(iter = vect_begin(vect); iter != vect_end(vect); vect_iter_nxt(iter))
+            printf("*iter = %i\n", vect_iter_val(iter));
     }
 
     vect_destroy(vect_tmplt_int_t, vect);
