@@ -13,8 +13,10 @@ So, this library is my attempt to make a _C_ version without copying _Boost C++_
  * [assert](#assert)
  * [config](#config)
  * [errno](#errno)
+ * [iterator](#iterator)
  * [ppack](#ppack)
  * [stdint](#stdint)
+ * [template](#template)
  * [vector](#vector)
 
 ### Interface Namespaces
@@ -121,6 +123,13 @@ int main()
 }
 ```
 
+# iterator
+Provides compile time decisions to create parameter packs for iterators similar to that of [allocators](#allocator).
+
+```c
+#include <bst/iterator.h>
+```
+
 # ppack
 Provides compile time decisions to create _parameter packed_ macros.
 Parameter packing is the idea of taking parameters and describing them as a single compile time symbol.
@@ -153,35 +162,42 @@ int main()
     printf("mypkd size = %i\n", ppack_size(mypkd));
 
     // Can get constant access to ppacks.
-    printf("mypkd[0] = %c\n", ppack_argI(mypkd, 0));
-    printf("mypkd[1] = %c\n", ppack_argI(mypkd, 1));
-    printf("mypkd[2] = %c\n", ppack_argI(mypkd, 2));
-    printf("mypkd[3] = %c\n", ppack_argI(mypkd, 3));
+    printf("mypkd[0] = %c\n", ppack_getI(mypkd, 0));
+    printf("mypkd[1] = %c\n", ppack_getI(mypkd, 1));
+    printf("mypkd[2] = %c\n", ppack_getI(mypkd, 2));
+    printf("mypkd[3] = %c\n", ppack_getI(mypkd, 3));
+
+    // Can set constant access to ppacks.
+    #define smypkd ppack_setI(mypkd, 1, 'x')
+    printf("smypkd[0] = %c\n", ppack_getI(smypkd, 0));
+    printf("smypkd[1] = %c\n", ppack_getI(smypkd, 1));
+    printf("smypkd[2] = %c\n", ppack_getI(smypkd, 2));
+    printf("smypkd[3] = %c\n", ppack_getI(smypkd, 3));
 
     // Can get reverse ppacks.
     #define rmypkd ppack_reverse(mypkd)
-    printf("rmypkd[0] = %c\n", ppack_argI(rmypkd, 0));
-    printf("rmypkd[1] = %c\n", ppack_argI(rmypkd, 1));
-    printf("rmypkd[2] = %c\n", ppack_argI(rmypkd, 2));
-    printf("rmypkd[3] = %c\n", ppack_argI(rmypkd, 3));
+    printf("rmypkd[0] = %c\n", ppack_getI(rmypkd, 0));
+    printf("rmypkd[1] = %c\n", ppack_getI(rmypkd, 1));
+    printf("rmypkd[2] = %c\n", ppack_getI(rmypkd, 2));
+    printf("rmypkd[3] = %c\n", ppack_getI(rmypkd, 3));
     printf("rmypkd size = %i\n", ppack_size(rmypkd));
 
     // Can get trim ppacks.
     #define ltmypkd ppack_ltrim(mypkd, 2)
-    printf("ltmypkd[0] = %c\n", ppack_argI(ltmypkd, 0));
-    printf("ltmypkd[1] = %c\n", ppack_argI(ltmypkd, 1));
+    printf("ltmypkd[0] = %c\n", ppack_getI(ltmypkd, 0));
+    printf("ltmypkd[1] = %c\n", ppack_getI(ltmypkd, 1));
     printf("ltmypkd size = %i\n", ppack_size(ltmypkd));
     #define rtmypkd ppack_rtrim(mypkd, 2)
-    printf("rtmypkd[0] = %c\n", ppack_argI(rtmypkd, 0));
-    printf("rtmypkd[1] = %c\n", ppack_argI(rtmypkd, 1));
+    printf("rtmypkd[0] = %c\n", ppack_getI(rtmypkd, 0));
+    printf("rtmypkd[1] = %c\n", ppack_getI(rtmypkd, 1));
     printf("rtmypkd size = %i\n", ppack_size(rtmypkd));
     
     // Can fill with default values by position.
     #define dmypkd ppack_defaults(rtmypkd, ('x', 'y', 'e', 'f'))
-    printf("dmypkd[0] = %c\n", ppack_argI(dmypkd, 0));
-    printf("dmypkd[1] = %c\n", ppack_argI(dmypkd, 1));
-    printf("dmypkd[2] = %c\n", ppack_argI(dmypkd, 2));
-    printf("dmypkd[3] = %c\n", ppack_argI(dmypkd, 3));
+    printf("dmypkd[0] = %c\n", ppack_getI(dmypkd, 0));
+    printf("dmypkd[1] = %c\n", ppack_getI(dmypkd, 1));
+    printf("dmypkd[2] = %c\n", ppack_getI(dmypkd, 2));
+    printf("dmypkd[3] = %c\n", ppack_getI(dmypkd, 3));
     printf("dmypkd size = %i\n", ppack_size(dmypkd));
 
     // Can unpack directly as default arguments.
@@ -205,8 +221,8 @@ int main()
 
     printf(
         "invoke %s = %i\n",
-        BST_TOSTRING(ppack_argI(mypkdf, ppack_size(params))),
-        ppack_call(ppack_argI(mypkdf, ppack_size(params)), params)
+        BST_TOSTRING(ppack_getI(mypkdf, ppack_size(params))),
+        ppack_call(ppack_getI(mypkdf, ppack_size(params)), params)
     );
 
     // Can detect if is a ppack or not.
@@ -226,11 +242,71 @@ I have created my own variant prior to finding this one, but `pstdint.h` provide
 #include <bst/stdint.h>
 ```
 
+# template
+Provides compile time decisions to create _C++_ like std template structures.
+It is a parameter pack of a standard order such that the type, type info, iterator calls, reverse iterator calls, and allocator calls can be accessed.
+This allows for more complex structures with a simpler interface.
+
+```c
+#include <bst/algorithm/find.h>
+#include <bst/vector.h>
+
+int main()
+{
+    // This creates a ppack in the form of a template that contains compile time information about the vector type.
+    // The default is already the stdlib for the allocator, but can specify your own.
+    #define vect_tmplt_int_t vect_tmplt_t(int, alloc_stdlib)
+
+    // Get the vector type out of the template and use a typedef for good practice.
+    typedef vect_t(vect_tmplt_int_t) vect_int_t;
+
+    // Can use the type just like `vect_t(int)` works.
+    vect_int_t vect;
+
+    // All the same functions can be used in the normal vector, just provide the template first to not use the default template.
+    vect_init(vect_tmplt_int_t, vect);
+
+    vect_push(vect_tmplt_int_t, vect, 1);
+    vect_push(vect_tmplt_int_t, vect, 2);
+    vect_push(vect_tmplt_int_t, vect, 3);
+    vect_push(vect_tmplt_int_t, vect, 4);
+    vect_push(vect_tmplt_int_t, vect, 3);
+
+    // We can now do iterators since we have the template.
+    {
+        // Get the iterator type from the template.
+        vect_iter_t(vect_tmplt_int_t) iter = vect_begin(vect_tmplt_int_t, vect);
+
+        // Get the iterator ppack from the template to then search.
+        alg_find(tmplt_iter(vect_tmplt_int_t), iter, vect_end(vect_tmplt_int_t, vect), 3);
+
+        // If we find it, then we can change the value.
+        if(iter != vect_end(vect_tmplt_int_t, vect))
+        {
+            vect_iter_set(vect_tmplt_int_t, iter, -1);
+        }
+    }
+
+    // We can even do reverse iterators since we have the template.
+    {
+        vect_riter_t(vect_tmplt_int_t) riter = vect_rbegin(vect_tmplt_int_t, vect);
+
+        alg_find(tmplt_riter(vect_tmplt_int_t), riter, vect_rend(vect_tmplt_int_t, vect), 3);
+
+        if(riter != vect_rend(vect_tmplt_int_t, vect))
+        {
+            vect_iter_set(vect_tmplt_int_t, riter, -2);
+        }
+    }
+
+    vect_destroy(vect_tmplt_int_t, vect);
+}
+```
+
 # vector
 Provides compile time decisions to create a _C++_ like vector in _C_. Uses the [template](#template) interface.
 
 ```c
-#include <bst/allocator.h>
 #include <bst/vector.h>
 #include <stdio.h>
 
