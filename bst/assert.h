@@ -10,7 +10,11 @@
 #include <bst/config.h>
 
 
-#include <assert.h>
+#ifdef __cplusplus
+# include <cassert>
+#else
+# include <assert.h>
+#endif
 
 
 /* Add namespaced version */

@@ -292,9 +292,9 @@
 
 /* Detail code */
 /// \{
-// The type intptr_t is used because the memory may need to be word aligned.
-// This does assume that intptr_t causes the memory to be word aligned.
-#define bst_dtl_vect_raw(vect) ((intptr_t*)(void*)(vect) - 2)
+// The type bst_intptr_t is used because the memory may need to be word aligned.
+// This does assume that bst_intptr_t causes the memory to be word aligned.
+#define bst_dtl_vect_raw(vect) ((bst_intptr_t*)(void*)(vect) - 2)
 #define bst_dtl_vect_cap(vect) (bst_dtl_vect_raw(vect)[0])
 #define bst_dtl_vect_len(vect) (bst_dtl_vect_raw(vect)[1])
 #define bst_dtl_vect_push(vect, val, tmplt) \
@@ -302,9 +302,9 @@
 ((vect) ?\
     (bst_dtl_vect_cap(vect) < (bst_dtl_vect_len(vect)+1) ?\
         (\
-            *((void**)&(vect)) = (void*)((intptr_t*)bst_alloc_realloc(bst_tmplt_alloc(tmplt))(\
+            *((void**)&(vect)) = (void*)((bst_intptr_t*)bst_alloc_realloc(bst_tmplt_alloc(tmplt))(\
                 bst_dtl_vect_raw(vect),\
-                sizeof(*(vect))*(bst_dtl_vect_cap(vect)*2) + 2*sizeof(intptr_t)\
+                sizeof(*(vect))*(bst_dtl_vect_cap(vect)*2) + 2*sizeof(bst_intptr_t)\
             ) + 2),\
             bst_dtl_vect_cap(vect) *= 2,\
             (vect[bst_dtl_vect_len(vect)++] = val)\
@@ -314,9 +314,9 @@
     )\
 :\
     (\
-        *((void**)&(vect)) = (void*)((intptr_t*)bst_alloc_malloc(bst_tmplt_alloc(tmplt))(sizeof(*(vect))*4 + 2*sizeof(intptr_t)) + 2),\
-        bst_dtl_vect_len(vect) = (intptr_t)(1),\
-        bst_dtl_vect_cap(vect) = (intptr_t)(4),\
+        *((void**)&(vect)) = (void*)((bst_intptr_t*)bst_alloc_malloc(bst_tmplt_alloc(tmplt))(sizeof(*(vect))*4 + 2*sizeof(bst_intptr_t)) + 2),\
+        bst_dtl_vect_len(vect) = (bst_intptr_t)(1),\
+        bst_dtl_vect_cap(vect) = (bst_intptr_t)(4),\
         (vect[0] = val)\
     )\
 )
@@ -330,30 +330,30 @@
         /* Since it does not fit, check to see if twice the current size will hold the new size. */\
         (bst_dtl_vect_cap(vect)*2 > (nsz) ?\
             (\
-                *((void**)&(vect)) = (void*)((intptr_t*)bst_alloc_realloc(bst_tmplt_alloc(tmplt))(\
+                *((void**)&(vect)) = (void*)((bst_intptr_t*)bst_alloc_realloc(bst_tmplt_alloc(tmplt))(\
                     bst_dtl_vect_raw(vect),\
-                    sizeof(*(vect))*(bst_dtl_vect_cap(vect)*2) + 2*sizeof(intptr_t)\
+                    sizeof(*(vect))*(bst_dtl_vect_cap(vect)*2) + 2*sizeof(bst_intptr_t)\
                 ) + 2),\
                 bst_dtl_vect_cap(vect) = (bst_dtl_vect_cap(vect)*2),\
-                (bst_dtl_vect_len(vect) = (intptr_t)(nsz))\
+                (bst_dtl_vect_len(vect) = (bst_intptr_t)(nsz))\
             )\
         :\
             (\
-                *((void**)&(vect)) = (void*)((intptr_t*)bst_alloc_realloc(bst_tmplt_alloc(tmplt))(\
+                *((void**)&(vect)) = (void*)((bst_intptr_t*)bst_alloc_realloc(bst_tmplt_alloc(tmplt))(\
                     bst_dtl_vect_raw(vect),\
-                    sizeof(*(vect))*(nsz) + 2*sizeof(intptr_t)\
+                    sizeof(*(vect))*(nsz) + 2*sizeof(bst_intptr_t)\
                 ) + 2),\
-                bst_dtl_vect_cap(vect) = (intptr_t)(nsz),\
+                bst_dtl_vect_cap(vect) = (bst_intptr_t)(nsz),\
                 (bst_dtl_vect_len(vect) = bst_dtl_vect_cap(vect))\
             )\
         )\
     :\
-        (bst_dtl_vect_len(vect) = (intptr_t)(nsz))\
+        (bst_dtl_vect_len(vect) = (bst_intptr_t)(nsz))\
     )\
 :\
     (\
-        *((void**)&(vect)) = (void*)((intptr_t*)bst_alloc_malloc(bst_tmplt_alloc(tmplt))(sizeof(*(vect))*(nsz) + 2*sizeof(intptr_t)) + 2),\
-        bst_dtl_vect_cap(vect) = (intptr_t)(nsz),\
+        *((void**)&(vect)) = (void*)((bst_intptr_t*)bst_alloc_malloc(bst_tmplt_alloc(tmplt))(sizeof(*(vect))*(nsz) + 2*sizeof(bst_intptr_t)) + 2),\
+        bst_dtl_vect_cap(vect) = (bst_intptr_t)(nsz),\
         (bst_dtl_vect_len(vect) = bst_dtl_vect_cap(vect))\
     )\
 )
@@ -363,20 +363,20 @@
     /* Check to see if the new capacity already fits. */\
     (bst_dtl_vect_cap(vect) < (ncap) ?\
         (\
-            *((void**)&(vect)) = (void*)((intptr_t*)bst_alloc_realloc(bst_tmplt_alloc(tmplt))(\
+            *((void**)&(vect)) = (void*)((bst_intptr_t*)bst_alloc_realloc(bst_tmplt_alloc(tmplt))(\
                 bst_dtl_vect_raw(vect),\
-                sizeof(*(vect))*(ncap) + 2*sizeof(intptr_t)\
+                sizeof(*(vect))*(ncap) + 2*sizeof(bst_intptr_t)\
             ) + 2),\
-            (bst_dtl_vect_cap(vect) = (intptr_t)(ncap))\
+            (bst_dtl_vect_cap(vect) = (bst_intptr_t)(ncap))\
         )\
     :\
-        (intptr_t)(ncap)\
+        (bst_intptr_t)(ncap)\
     )\
 :\
     (\
-        *((void**)&(vect)) = (void*)((intptr_t*)bst_alloc_malloc(bst_tmplt_alloc(tmplt))(sizeof(*(vect))*(ncap) + 2*sizeof(intptr_t)) + 2),\
+        *((void**)&(vect)) = (void*)((bst_intptr_t*)bst_alloc_malloc(bst_tmplt_alloc(tmplt))(sizeof(*(vect))*(ncap) + 2*sizeof(bst_intptr_t)) + 2),\
         bst_dtl_vect_len(vect) = 0,\
-        (bst_dtl_vect_cap(vect) = (intptr_t)(ncap))\
+        (bst_dtl_vect_cap(vect) = (bst_intptr_t)(ncap))\
     )\
 )
 #define bst_dtl_vect_at(vect, i, ...) (bst_assert((i) < bst_vect_len(vect)), (vect)[(i)])

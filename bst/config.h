@@ -81,7 +81,7 @@
 #  define BST_INTPTR_NBITS 32
 # elif defined(BST_COMPILER_INTEL)
 // If made it this far, it typically is a 32 bit system.
-# define BST_INTPTR_NBITS 32
+#  define BST_INTPTR_NBITS 32
 # else
 #  error "Could not determine BST_INTPTR_NBITS."
 # endif
@@ -89,7 +89,11 @@
 
 
 #if !defined(BST_HAS_LONG_LONG) && !defined(BST_NO_LONG_LONG) && !defined(BST_MSVC) && !defined(__BORLANDC__)
-# include <limits.h>
+# ifdef __cplusplus
+#  include <climits>
+# else
+#  include <limits.h>
+# endif
 # if (defined(ULLONG_MAX) || defined(ULONG_LONG_MAX) || defined(ULONGLONG_MAX))
 #   define BST_HAS_LONG_LONG
 # else

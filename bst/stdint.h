@@ -743,22 +743,26 @@ typedef uint_least32_t uint_fast32_t;
 # define STDINT_H_UINTPTR_T_DEFINED
 #endif
 
+/* BEGIN -- T. Mitchell Kelleher -- BEGIN */
 #ifndef STDINT_H_UINTPTR_T_DEFINED
-# if defined (__alpha__) || defined (__ia64__) || defined (__x86_64__) || defined (_WIN64) || defined (__ppc64__)
-#  define stdint_intptr_bits 64
-# elif defined (__WATCOMC__) || defined (__TURBOC__)
-#  if defined(__TINY__) || defined(__SMALL__) || defined(__MEDIUM__)
-#    define stdint_intptr_bits 16
-#  else
-#    define stdint_intptr_bits 32
-#  endif
-# elif defined (__i386__) || defined (_WIN32) || defined (WIN32) || defined (__ppc64__)
-#  define stdint_intptr_bits 32
-# elif defined (__INTEL_COMPILER)
-/* TODO -- what did Intel do about x86-64? */
-# else
-/* #error "This platform might not be supported yet" */
-# endif
+# define stdint_intptr_bits BST_INTPTR_NBITS
+// #ifndef STDINT_H_UINTPTR_T_DEFINED
+// # if defined (__alpha__) || defined (__ia64__) || defined (__x86_64__) || defined (_WIN64) || defined (__ppc64__)
+// #  define stdint_intptr_bits 64
+// # elif defined (__WATCOMC__) || defined (__TURBOC__)
+// #  if defined(__TINY__) || defined(__SMALL__) || defined(__MEDIUM__)
+// #    define stdint_intptr_bits 16
+// #  else
+// #    define stdint_intptr_bits 32
+// #  endif
+// # elif defined (__i386__) || defined (_WIN32) || defined (WIN32) || defined (__ppc64__)
+// #  define stdint_intptr_bits 32
+// # elif defined (__INTEL_COMPILER)
+// /* TODO -- what did Intel do about x86-64? */
+// # else
+// /* #error "This platform might not be supported yet" */
+// # endif
+/* END -- T. Mitchell Kelleher -- END */
 
 # ifdef stdint_intptr_bits
 #  define stdint_intptr_glue3_i(a,b,c)  a##b##c
@@ -921,93 +925,93 @@ int main () {
   return EXIT_SUCCESS;
 }
 
+#endif
+
 
 /* T. Mitchell Kelleher - Provide with namespace */
 /// \{
-#ifdef INT8_MAX
+#if defined(INT8_MAX) && !defined(bst_int8_t)
 # define bst_int8_t int8_t
 #endif
-#ifdef INT16_MAX
+#if defined(INT16_MAX) && !defined(bst_int16_t)
 # define bst_int16_t int16_t
 #endif
-#ifdef INT32_MAX
+#if defined(INT32_MAX) && !defined(bst_int32_t)
 # define bst_int32_t int32_t
 #endif
-#ifdef INT64_MAX
+#if defined(INT64_MAX) && !defined(bst_int64_t)
 # define bst_int64_t int64_t
 #endif
-#ifdef INT_FAST8_MAX
+#if defined(INT_FAST8_MAX) && !defined(bst_int_fast8_t)
 # define bst_int_fast8_t int_fast8_t
 #endif
-#ifdef INT_FAST16_MAX
+#if defined(INT_FAST16_MAX) && !defined(bst_int_fast16_t)
 # define bst_int_fast16_t int_fast16_t
 #endif
-#ifdef INT_FAST32_MAX
+#if defined(INT_FAST32_MAX) && !defined(bst_int_fast32_t)
 # define bst_int_fast32_t int_fast32_t
 #endif
-#ifdef INT_FAST64_MAX
+#if defined(INT_FAST64_MAX) && !defined(bst_int_fast64_t)
 # define bst_int_fast64_t int_fast64_t
 #endif
-#ifdef INT_LEAST8_MAX
+#if defined(INT_LEAST8_MAX) && !defined(bst_int_least8_t)
 # define bst_int_least8_t int_least8_t
 #endif
-#ifdef INT_LEAST16_MAX
+#if defined(INT_LEAST16_MAX) && !defined(bst_int_least16_t)
 # define bst_int_least16_t int_least16_t
 #endif
-#ifdef INT_LEAST32_MAX
+#if defined(INT_LEAST32_MAX) && !defined(bst_int_least32_t)
 # define bst_int_least32_t int_least32_t
 #endif
-#ifdef INT_LEAST64_MAX
+#if defined(INT_LEAST64_MAX) && !defined(bst_int_least64_t)
 # define bst_int_least64_t int_least64_t
 #endif
-#ifdef INTMAX_MAX
+#if defined(INTMAX_MAX) && !defined(bst_intmax_t)
 # define bst_intmax_t intmax_t
 #endif
-#ifdef INTPTR_MAX
+#if defined(INTPTR_MAX) && !defined(bst_intptr_t)
 # define bst_intptr_t intptr_t
 #endif
-#ifdef UINT8_MAX
+#if defined(UINT8_MAX) && !defined(bst_uint8_t)
 # define bst_uint8_t uint8_t
 #endif
-#ifdef UINT16_MAX
+#if defined(UINT16_MAX) && !defined(bst_uint16_t)
 # define bst_uint16_t uint16_t
 #endif
-#ifdef UINT32_MAX
+#if defined(UINT32_MAX) && !defined(bst_uint32_t)
 # define bst_uint32_t uint32_t
 #endif
-#ifdef UINT64_MAX
+#if defined(UINT64_MAX) && !defined(bst_uint64_t)
 # define bst_uint64_t uint64_t
 #endif
-#ifdef UINT_FAST8_MAX
+#if defined(UINT_FAST8_MAX) && !defined(bst_uint_fast8_t)
 # define bst_uint_fast8_t uint_fast8_t
 #endif
-#ifdef UINT_FAST16_MAX
+#if defined(UINT_FAST16_MAX) && !defined(bst_uint_fast16_t)
 # define bst_uint_fast16_t uint_fast16_t
 #endif
-#ifdef UINT_FAST32_MAX
+#if defined(UINT_FAST32_MAX) && !defined(bst_uint_fast32_t)
 # define bst_uint_fast32_t uint_fast32_t
 #endif
-#ifdef UINT_FAST64_MAX
+#if defined(UINT_FAST64_MAX) && !defined(bst_uint_fast64_t)
 # define bst_uint_fast64_t uint_fast64_t
 #endif
-#ifdef UINT_LEAST8_MAX
+#if defined(UINT_LEAST8_MAX) && !defined(bst_uint_least8_t)
 # define bst_uint_least8_t uint_least8_t
 #endif
-#ifdef UINT_LEAST16_MAX
+#if defined(UINT_LEAST16_MAX) && !defined(bst_uint_least16_t)
 # define bst_uint_least16_t uint_least16_t
 #endif
-#ifdef UINT_LEAST32_MAX
+#if defined(UINT_LEAST32_MAX) && !defined(bst_uint_least32_t)
 # define bst_uint_least32_t uint_least32_t
 #endif
-#ifdef UINT_LEAST64_MAX
+#if defined(UINT_LEAST64_MAX) && !defined(bst_uint_least64_t)
 # define bst_uint_least64_t uint_least64_t
 #endif
-#ifdef UINTMAX_MAX
+#if defined(UINTMAX_MAX) && !defined(bst_uintmax_t)
 # define bst_uintmax_t uintmax_t
 #endif
-#ifdef UINTPTR_MAX
+#if defined(UINTPTR_MAX) && !defined(bst_uintptr_t)
 # define bst_uintptr_t uintptr_t
 #endif
 /// \}
-
-#endif
