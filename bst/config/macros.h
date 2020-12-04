@@ -14,8 +14,15 @@ extern "C" {
 
 /* Provide a helper that joins two symbols */
 /// \{
-#define BST_DTL_JOIN(L, R) L ## R
-#define BST_JOIN(L, R) BST_DTL_JOIN(L, R)
+#define BST_DTL_JOIN2(L, R) L ## R
+#define BST_JOIN2(L, R) BST_DTL_JOIN2(L, R)
+/// \}
+
+
+/* Provide a helper that joins three symbols */
+/// \{
+#define BST_DTL_JOIN3(X, Y, Z) X ## Y ## Z
+#define BST_JOIN3(X, Y, Z) BST_DTL_JOIN3(X, Y, Z)
 /// \}
 
 

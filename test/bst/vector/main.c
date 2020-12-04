@@ -4,6 +4,7 @@
 
 int main()
 {
+    #define bst_vect_int bst_dtl_vect_tmplt_t(int)
     #define tmplt vect_tmplt_t(int)
     typedef vect_t(tmplt) vect_int_t;
     typedef vect_iter_t(tmplt) vect_int_iter_t;

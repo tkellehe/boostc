@@ -91,13 +91,13 @@ extern "C" {
 
 #define bst_ppack_size(pkd) bst_ppack_call(bst_dtl_ppack_size, pkd)
 
-#define bst_ppack_reverse(pkd) bst_ppack(bst_ppack_call(BST_JOIN(bst_dtl_ppack_reverse, bst_ppack_size(pkd)), pkd))
+#define bst_ppack_reverse(pkd) bst_ppack(bst_ppack_call(BST_JOIN2(bst_dtl_ppack_reverse, bst_ppack_size(pkd)), pkd))
 
-#define bst_ppack_getI(pkd, I) bst_ppack_call(BST_JOIN(bst_dtl_ppack_get, I), pkd)
+#define bst_ppack_getI(pkd, I) bst_ppack_call(BST_JOIN2(bst_dtl_ppack_get, I), pkd)
 
-#define bst_ppack_ltrim(pkd, N) bst_ppack(bst_ppack_call(BST_JOIN(bst_dtl_ppack_ltrim, N), pkd))
+#define bst_ppack_ltrim(pkd, N) bst_ppack(bst_ppack_call(BST_JOIN2(bst_dtl_ppack_ltrim, N), pkd))
 #define bst_ppack_rtrim(pkd, N) bst_ppack_reverse(bst_ppack_ltrim(bst_ppack_reverse(pkd), N))
-#define bst_ppack_collect(pkd, N) bst_ppack(bst_ppack_call(BST_JOIN(bst_dtl_ppack_collect, N), pkd))
+#define bst_ppack_collect(pkd, N) bst_ppack(bst_ppack_call(BST_JOIN2(bst_dtl_ppack_collect, N), pkd))
 
 #define bst_ppack_defaults(pkd, defaults) \
     bst_ppack_empty(pkd,\
@@ -110,10 +110,10 @@ extern "C" {
 #define bst_ppack_truthy(...) (0)
 #define bst_ppack_falsy(...) ()
 
-#define bst_ppack_if(pkd, _t, _f) BST_JOIN(bst_dtl_ppack_if, bst_dtl_ppack_if(pkd))(_t, _f)
+#define bst_ppack_if(pkd, _t, _f) BST_JOIN2(bst_dtl_ppack_if, bst_dtl_ppack_if(pkd))(_t, _f)
 
 // If it is a ppack, then it will call the function else will just be some random symbol.
-#define bst_ppack_isa(pkd, _t, _f) BST_JOIN(bst_dtl_ppack_isa, bst_ppack_size(bst_ppack(0, bst_dtl_ppack_isa_expand pkd)))(_t, _f)
+#define bst_ppack_isa(pkd, _t, _f) BST_JOIN2(bst_dtl_ppack_isa, bst_ppack_size(bst_ppack(0, bst_dtl_ppack_isa_expand pkd)))(_t, _f)
 
 #define bst_ppack_empty(pkd, _t, _f) bst_ppack_hasN(pkd, 0, _t, _f)
 #define bst_ppack_hasGT(pkd, N, _t, _f) bst_ppack_if(bst_ppack_ltrim(pkd, N), _t, _f)
@@ -577,7 +577,7 @@ extern "C" {
 #define bst_dtl_ppack_collect99(_0, ...) _0, bst_dtl_ppack_collect98(__VA_ARGS__)
 #define bst_dtl_ppack_collect100(_0, ...) _0, bst_dtl_ppack_collect99(__VA_ARGS__)
 
-#define bst_dtl_ppack_const_add1(N) BST_JOIN(bst_dtl_ppack_const_add1_, N)
+#define bst_dtl_ppack_const_add1(N) BST_JOIN2(bst_dtl_ppack_const_add1_, N)
 #define bst_dtl_ppack_const_add1_0 1
 #define bst_dtl_ppack_const_add1_1 2
 #define bst_dtl_ppack_const_add1_2 3
@@ -680,7 +680,7 @@ extern "C" {
 #define bst_dtl_ppack_const_add1_99 100
 #define bst_dtl_ppack_const_add1_100 101
 
-#define bst_dtl_ppack_const_sub1(N) BST_JOIN(bst_dtl_ppack_const_sub1_, N)
+#define bst_dtl_ppack_const_sub1(N) BST_JOIN2(bst_dtl_ppack_const_sub1_, N)
 #define bst_dtl_ppack_const_sub1_1 0
 #define bst_dtl_ppack_const_sub1_2 1
 #define bst_dtl_ppack_const_sub1_3 2
