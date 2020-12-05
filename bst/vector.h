@@ -57,7 +57,24 @@
  * \param T The type of the data in the vector.
  * \param alloc An optional argument which is the allocator for the template type.
  */
-#define bst_vect_tmplt_t(T, ...) bst_dtl_vect_tmplt_t(T, __VA_ARGS__)
+/// \{
+#ifdef BST_NO_NAMESPACE
+# define bst_vect_tmplt_t(T, ...) \
+    bst_tmplt_isa(bst_vect_tmplt_ ## T,\
+        bst_vect_tmplt_ ## T,\
+        bst_tmplt_isa(vect_tmplt_ ## T,\
+            vect_tmplt_ ## T,\
+            bst_dtl_vect_tmplt_t(T, __VA_ARGS__)\
+        )\
+    )
+#else
+# define bst_vect_tmplt_t(T, ...)  \
+    bst_tmplt_isa(bst_vect_tmplt_ ## T,\
+        bst_vect_tmplt_ ## T,\
+        bst_dtl_vect_tmplt_t(T, __VA_ARGS__)\
+    )
+#endif
+/// \}
 
 
 /** Declares the vector type.

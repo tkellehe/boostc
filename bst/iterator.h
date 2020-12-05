@@ -47,12 +47,12 @@
 
 /* Pack arguments provided into a single ctuple maintaining the standard order where defaults are no-ops */
 /// \{
-#define bst_iter_ctuple_t(t) bst_ctuple(t, bst_iter_nonxt, bst_iter_noeq, bst_iter_noval, bst_iter_noset, bst_iter_noswap)
-#define bst_iter_ctuple_nxt(nxt) bst_ctuple(bst_iter_no_t, nxt, bst_iter_noeq, bst_iter_noval, bst_iter_noset, bst_iter_noswap)
-#define bst_iter_ctuple_eq(eq) bst_ctuple(bst_iter_no_t, bst_iter_nonxt, eq, bst_iter_noval, bst_iter_noset, bst_iter_noswap)
-#define bst_iter_ctuple_val(val) bst_ctuple(bst_iter_no_t, bst_iter_nonxt, bst_iter_noeq, val, bst_iter_noset, bst_iter_noswap)
-#define bst_iter_ctuple_set(set) bst_ctuple(bst_iter_no_t, bst_iter_nonxt, bst_iter_noeq, bst_iter_noval, set, bst_iter_noswap)
-#define bst_iter_ctuple_swap(swap) bst_ctuple(bst_iter_no_t, bst_iter_nonxt, bst_iter_noeq, bst_iter_noval, bst_iter_noset, swap)
+#define bst_iter_ctuple_t(t) bst_iter_set_t(bst_iter_defaults, t)
+#define bst_iter_ctuple_nxt(nxt) bst_iter_set_nxt(bst_iter_defaults, nxt)
+#define bst_iter_ctuple_eq(eq) bst_iter_set_eq(bst_iter_defaults, eq)
+#define bst_iter_ctuple_val(val) bst_iter_set_val(bst_iter_defaults, val)
+#define bst_iter_ctuple_set(set) bst_iter_set_set(bst_iter_defaults, set)
+#define bst_iter_ctuple_swap(swap) bst_iter_set_swap(bst_iter_defaults, swap)
 
 /* Packs assuming everything is provided in the std order */
 #define bst_iter_ctuple(...) \

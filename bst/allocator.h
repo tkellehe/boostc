@@ -48,9 +48,9 @@
 
 /* Pack arguments provided into a single ctuple maintaining the standard order where defaults are no-ops */
 /// \{
-#define bst_alloc_ctuple_free(f) bst_ctuple(f, bst_alloc_nomalloc, bst_realloc)
-#define bst_alloc_ctuple_malloc(m) bst_ctuple(bst_alloc_nofree, m, bst_alloc_norealloc)
-#define bst_alloc_ctuple_realloc(r) bst_ctuple(bst_alloc_nofree, bst_alloc_nomalloc, r)
+#define bst_alloc_ctuple_free(f) bst_alloc_set_free(bst_alloc_defaults, free)
+#define bst_alloc_ctuple_malloc(m) bst_alloc_set_malloc(bst_alloc_defaults, malloc)
+#define bst_alloc_ctuple_realloc(r) bst_alloc_set_realloc(bst_alloc_defaults, realloc)
 
 /* Packs assuming everything is provided in the std order */
 #define bst_alloc_ctuple(...) \
@@ -63,9 +63,9 @@
 #define bst_alloc_malloc(tpl) bst_ctuple_getI(tpl, 1)
 #define bst_alloc_realloc(tpl) bst_ctuple_getI(tpl, 2)
 
-#define bst_alloc_set_free(tpl) bst_ctuple_setI(tpl, 0, free)
-#define bst_alloc_set_malloc(tpl) bst_ctuple_setI(tpl, 1, malloc)
-#define bst_alloc_set_realloc(tpl) bst_ctuple_setI(tpl, 2, realloc)
+#define bst_alloc_set_free(tpl, free) bst_ctuple_setI(tpl, 0, free)
+#define bst_alloc_set_malloc(tpl, malloc) bst_ctuple_setI(tpl, 1, malloc)
+#define bst_alloc_set_realloc(tpl, realloc) bst_ctuple_setI(tpl, 2, realloc)
 /// \}
 
 

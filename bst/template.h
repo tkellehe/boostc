@@ -16,6 +16,15 @@
 /* Provide without namespace */
 /// \{
 #ifdef BST_NO_NAMESPACE
+#define tmplt_ctuple_type bst_tmplt_ctuple_type
+#define tmplt_ctuple_info bst_tmplt_ctuple_info
+#define tmplt_ctuple_fns bst_tmplt_ctuple_fns
+#define tmplt_ctuple_iter bst_tmplt_ctuple_iter
+#define tmplt_ctuple_riter bst_tmplt_ctuple_riter
+#define tmplt_ctuple_alloc bst_tmplt_ctuple_alloc
+
+#define tmplt_ctuple_fn bst_tmplt_ctuple_fn
+
 #define tmplt_ctuple bst_tmplt_ctuple
 
 #define tmplt_type bst_tmplt_type
@@ -50,13 +59,14 @@
  * alloc: The bst allocator calls as a ctuple for the type.
  */
 /// \{
-#define bst_tmplt_ctuple_type(type) bst_ctuple(type, (0), (bst_dtl_tmplt_fn_default), bst_iter_defaults, bst_iter_defaults, bst_alloc_defaults)
-#define bst_tmplt_ctuple_info(info) bst_ctuple(int, info, (bst_dtl_tmplt_fn_default), bst_iter_defaults, bst_iter_defaults, bst_alloc_defaults)
-#define bst_tmplt_ctuple_fns(fns) bst_ctuple(int, (0), fns, bst_iter_defaults, bst_iter_defaults, bst_alloc_defaults)
-#define bst_tmplt_ctuple_iter(iter) bst_ctuple(int, (0), (bst_dtl_tmplt_fn_default), iter, bst_iter_defaults, bst_alloc_defaults)
-#define bst_tmplt_ctuple_riter(riter) bst_ctuple(int, (0), (bst_dtl_tmplt_fn_default), bst_iter_defaults, riter, bst_alloc_defaults)
-#define bst_tmplt_ctuple_alloc(alloc) bst_ctuple(int, (0), (bst_dtl_tmplt_fn_default), bst_iter_defaults, bst_iter_defaults, alloc)
+#define bst_tmplt_ctuple_type(type) bst_tmplt_set_type(bst_tmplt_defaults, type)
+#define bst_tmplt_ctuple_info(info) bst_tmplt_set_info(bst_tmplt_defaults, info)
+#define bst_tmplt_ctuple_fns(fns) bst_tmplt_set_fns(bst_tmplt_defaults, fns)
+#define bst_tmplt_ctuple_iter(iter) bst_tmplt_set_iter(bst_tmplt_defaults, iter)
+#define bst_tmplt_ctuple_riter(riter) bst_tmplt_set_riter(bst_tmplt_defaults, riter)
+#define bst_tmplt_ctuple_alloc(alloc) bst_tmplt_set_alloc(bst_tmplt_defaults, alloc)
 
+#define bst_tmplt_ctuple_fn(fn) bst_tmplt_ctuple_fns(bst_ctuple(fn))
 
 #define bst_tmplt_ctuple(...) \
     bst_tmplt_isa(bst_dtl_tmplt_ctuple(__VA_ARGS__), bst_dtl_tmplt_ctuple(__VA_ARGS__), BST_TMPLT_NOT_CREATED_ERROR)

@@ -1,6 +1,8 @@
 # bst
 A [**B**oo**st** _C++_](https://github.com/boostorg) like library for C.
+A library like [**B**oo**st** _C++_](https://github.com/boostorg), but for C.
 Provides compile time decisions similar to templating in a simple API.
+Also has polyfills for C standards.
 
 ## Why Make This?
 I had began to write my own variation of _Boost C++_ to get better at _C++_.
