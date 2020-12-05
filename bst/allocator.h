@@ -3,7 +3,7 @@
 
 
 #include <bst/config.h>
-#include <bst/ppack.h>
+#include <bst/ctuple.h>
 
 
 #include <stdlib.h>
@@ -12,11 +12,11 @@
 /* Provide without namespace */
 /// \{
 #ifdef BST_NO_NAMESPACE
-#define alloc_ppack_free bst_alloc_ppack_free
-#define alloc_ppack_malloc bst_alloc_ppack_malloc
-#define alloc_ppack_realloc bst_alloc_ppack_realloc
+#define alloc_ctuple_free bst_alloc_ctuple_free
+#define alloc_ctuple_malloc bst_alloc_ctuple_malloc
+#define alloc_ctuple_realloc bst_alloc_ctuple_realloc
 
-#define alloc_ppack bst_alloc_ppack
+#define alloc_ctuple bst_alloc_ctuple
 
 #define alloc_free bst_alloc_free
 #define alloc_malloc bst_alloc_malloc
@@ -46,35 +46,35 @@
 /// \}
 
 
-/* Pack arguments provided into a single ppack maintaining the standard order where defaults are no-ops */
+/* Pack arguments provided into a single ctuple maintaining the standard order where defaults are no-ops */
 /// \{
-#define bst_alloc_ppack_free(f) bst_ppack(f, bst_alloc_nomalloc, bst_realloc)
-#define bst_alloc_ppack_malloc(m) bst_ppack(bst_alloc_nofree, m, bst_alloc_norealloc)
-#define bst_alloc_ppack_realloc(r) bst_ppack(bst_alloc_nofree, bst_alloc_nomalloc, r)
+#define bst_alloc_ctuple_free(f) bst_ctuple(f, bst_alloc_nomalloc, bst_realloc)
+#define bst_alloc_ctuple_malloc(m) bst_ctuple(bst_alloc_nofree, m, bst_alloc_norealloc)
+#define bst_alloc_ctuple_realloc(r) bst_ctuple(bst_alloc_nofree, bst_alloc_nomalloc, r)
 
 /* Packs assuming everything is provided in the std order */
-#define bst_alloc_ppack(...) \
-    bst_ppack_defaults(\
-        bst_ppack(__VA_ARGS__),\
+#define bst_alloc_ctuple(...) \
+    bst_ctuple_defaults(\
+        bst_ctuple(__VA_ARGS__),\
         bst_alloc_defaults\
     )
 
-#define bst_alloc_free(pkd) bst_ppack_getI(pkd, 0)
-#define bst_alloc_malloc(pkd) bst_ppack_getI(pkd, 1)
-#define bst_alloc_realloc(pkd) bst_ppack_getI(pkd, 2)
+#define bst_alloc_free(tpl) bst_ctuple_getI(tpl, 0)
+#define bst_alloc_malloc(tpl) bst_ctuple_getI(tpl, 1)
+#define bst_alloc_realloc(tpl) bst_ctuple_getI(tpl, 2)
 
-#define bst_alloc_set_free(pkd) bst_ppack_setI(pkd, 0, free)
-#define bst_alloc_set_malloc(pkd) bst_ppack_setI(pkd, 1, malloc)
-#define bst_alloc_set_realloc(pkd) bst_ppack_setI(pkd, 2, realloc)
+#define bst_alloc_set_free(tpl) bst_ctuple_setI(tpl, 0, free)
+#define bst_alloc_set_malloc(tpl) bst_ctuple_setI(tpl, 1, malloc)
+#define bst_alloc_set_realloc(tpl) bst_ctuple_setI(tpl, 2, realloc)
 /// \}
 
 
 /* Packs the stdlib calls */
-#define bst_alloc_stdlib bst_ppack(bst_free, bst_malloc, bst_realloc)
+#define bst_alloc_stdlib bst_ctuple(bst_free, bst_malloc, bst_realloc)
 
 
 /* Packs the default do-nothings */
-#define bst_alloc_defaults bst_ppack(bst_alloc_nofree, bst_alloc_nomalloc, bst_alloc_norealloc)
+#define bst_alloc_defaults bst_ctuple(bst_alloc_nofree, bst_alloc_nomalloc, bst_alloc_norealloc)
 
 
 /* Default do-nothing memory management functions */
@@ -85,8 +85,8 @@
 /// \}
 
 
-/* Detect if provided a ppack that could be an allocator */
-#define bst_alloc_isa(pkd, _t, _f) bst_ppack_isa(pkd, bst_ppack_hasN(pkd, 3, _t, _f), _f)
+/* Detect if provided a ctuple that could be an allocator */
+#define bst_alloc_isa(tpl, _t, _f) bst_ctuple_isa(tpl, bst_ctuple_hasN(tpl, 3, _t, _f), _f)
 
 
 #endif // BST__ALLOCATOR_H

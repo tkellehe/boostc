@@ -14,7 +14,7 @@ So, this library is my attempt to make a _C_ version without copying _Boost C++_
  * [config](#config)
  * [errno](#errno)
  * [iterator](#iterator)
- * [ppack](#ppack)
+ * [ctuple](#ctuple)
  * [stdint](#stdint)
  * [template](#template)
  * [vector](#vector)
@@ -38,13 +38,13 @@ Then the compiler will treat it as a function and potentially reducing the size 
 # allocator
 Provides compile time decisions for creating allocators.
 The allocator paradigm is that only the functions `free`, `malloc`, and `realloc` are needed.
-Each are then [parameter packed](#ppack) into a single symbol that can be passed to types that require an allocator.
+Each are then packed into a [ctuple](#ctuple) that can be passed to types that require an allocator.
 This allows for the code desired for allocators to be inlined into the functions that use them.
 
 ```c
 #include <bst/allocator.h>
 
-// A helper is provided to reference the ppack of the stdlib calls.
+// A helper is provided to reference the ctuple of the stdlib calls.
 #define stdlib alloc_stdlib
 
 // The actual implemenation of the mk_array function. Need the variadic portion to make the other parts easier.
@@ -52,10 +52,10 @@ This allows for the code desired for allocators to be inlined into the functions
 // Optional allocator operation where default uses stdlib.
 #define mk_array(T, N, ...) \
     /* Select the default argument if nothing is provided. */\
-    mk_array_dtl(T, N, ppack_defargs(ppack(__VA_ARGS__), ppack(stdlib)))
+    mk_array_dtl(T, N, ctuple_defargs(ctuple(__VA_ARGS__), ctuple(stdlib)))
 
 #define rm_array_dtl(array, alloc, ...) alloc_free(alloc)((void*)(array))
-#define rm_array(array, ...) rm_array_dtl(array, ppack_defargs(ppack(__VA_ARGS__), ppack(stdlib)))
+#define rm_array(array, ...) rm_array_dtl(array, ctuple_defargs(ctuple(__VA_ARGS__), ctuple(stdlib)))
 
 int _pos = 0;
 char _memory[1024] = {0,};
@@ -63,7 +63,7 @@ void *mymalloc(int size) { int pos = _pos; _pos += size; return (void*)(_memory 
 
 // The allocator interface provides calls to be able to ensure that the std order is always packed correctly.
 // Also, the default free and realloc calls are set to do-nothings.
-#define myalloc alloc_ppack_malloc(mymalloc)
+#define myalloc alloc_ctuple_malloc(mymalloc)
 
 int main()
 {
@@ -124,28 +124,28 @@ int main()
 ```
 
 # iterator
-Provides compile time decisions to create parameter packs for iterators similar to that of [allocators](#allocator).
+Provides compile time decisions to create [ctuples](#ctuple) for iterators similar to that of [allocators](#allocator).
 
 ```c
 #include <bst/iterator.h>
 ```
 
-# ppack
-Provides compile time decisions to create _parameter packed_ macros.
-Parameter packing is the idea of taking parameters and describing them as a single compile time symbol.
+# ctuple
+Provides compile time decisions to create ctuple macros.
+The ctuples work by taking parameters and describing them as a single compile time symbol.
 This is done by placing parantheses around the parameters (ie `(1, 'a', var)`).
-Then using macros to apply operations to these parameter packs.
+Then using macros to apply operations to these ctuples.
 
 ```c
-#include <bst/ppack.h>
+#include <bst/ctuple.h>
 #include <stdio.h>
 
 // The actual final call made.
 #define myprints5(a, b, c, d, e, ...) printf("%i %i %i %i %i\n", a, b, c, d, e)
-// This unpacks the ppack provided.
-#define myprints_pkd(pkd) myprints5 pkd
+// This unpacks the ctuple provided.
+#define myprints_tpl(tpl) myprints5 tpl
 // Takes in an optional list of integers and prepends a value.
-#define myprints(...) myprints_pkd(ppack_prepend(ppack_defaults(ppack(__VA_ARGS__), ppack(1, 2, 3, 4)), 0))
+#define myprints(...) myprints_tpl(ctuple_prepend(ctuple_defaults(ctuple(__VA_ARGS__), ctuple(1, 2, 3, 4)), 0))
 
 int main()
 {
@@ -156,78 +156,78 @@ int main()
     myprints(4, 3, 2, 1);
     myprints(5, 4, 3, 2, 1);
 
-    #define mypkd ppack('a', 'b', 'c', 'd')
+    #define mytpl ctuple('a', 'b', 'c', 'd')
 
-    // Can get sizes of ppacks.
-    printf("mypkd size = %i\n", ppack_size(mypkd));
+    // Can get sizes of ctuples.
+    printf("mytpl size = %i\n", ctuple_size(mytpl));
 
-    // Can get constant access to ppacks.
-    printf("mypkd[0] = %c\n", ppack_getI(mypkd, 0));
-    printf("mypkd[1] = %c\n", ppack_getI(mypkd, 1));
-    printf("mypkd[2] = %c\n", ppack_getI(mypkd, 2));
-    printf("mypkd[3] = %c\n", ppack_getI(mypkd, 3));
+    // Can get constant access to ctuples.
+    printf("mytpl[0] = %c\n", ctuple_getI(mytpl, 0));
+    printf("mytpl[1] = %c\n", ctuple_getI(mytpl, 1));
+    printf("mytpl[2] = %c\n", ctuple_getI(mytpl, 2));
+    printf("mytpl[3] = %c\n", ctuple_getI(mytpl, 3));
 
-    // Can set constant access to ppacks.
-    #define smypkd ppack_setI(mypkd, 1, 'x')
-    printf("smypkd[0] = %c\n", ppack_getI(smypkd, 0));
-    printf("smypkd[1] = %c\n", ppack_getI(smypkd, 1));
-    printf("smypkd[2] = %c\n", ppack_getI(smypkd, 2));
-    printf("smypkd[3] = %c\n", ppack_getI(smypkd, 3));
+    // Can set constant access to ctuples.
+    #define smytpl ctuple_setI(mytpl, 1, 'x')
+    printf("smytpl[0] = %c\n", ctuple_getI(smytpl, 0));
+    printf("smytpl[1] = %c\n", ctuple_getI(smytpl, 1));
+    printf("smytpl[2] = %c\n", ctuple_getI(smytpl, 2));
+    printf("smytpl[3] = %c\n", ctuple_getI(smytpl, 3));
 
-    // Can get reverse ppacks.
-    #define rmypkd ppack_reverse(mypkd)
-    printf("rmypkd[0] = %c\n", ppack_getI(rmypkd, 0));
-    printf("rmypkd[1] = %c\n", ppack_getI(rmypkd, 1));
-    printf("rmypkd[2] = %c\n", ppack_getI(rmypkd, 2));
-    printf("rmypkd[3] = %c\n", ppack_getI(rmypkd, 3));
-    printf("rmypkd size = %i\n", ppack_size(rmypkd));
+    // Can get reverse ctuples.
+    #define rmytpl ctuple_reverse(mytpl)
+    printf("rmytpl[0] = %c\n", ctuple_getI(rmytpl, 0));
+    printf("rmytpl[1] = %c\n", ctuple_getI(rmytpl, 1));
+    printf("rmytpl[2] = %c\n", ctuple_getI(rmytpl, 2));
+    printf("rmytpl[3] = %c\n", ctuple_getI(rmytpl, 3));
+    printf("rmytpl size = %i\n", ctuple_size(rmytpl));
 
-    // Can get trim ppacks.
-    #define ltmypkd ppack_ltrim(mypkd, 2)
-    printf("ltmypkd[0] = %c\n", ppack_getI(ltmypkd, 0));
-    printf("ltmypkd[1] = %c\n", ppack_getI(ltmypkd, 1));
-    printf("ltmypkd size = %i\n", ppack_size(ltmypkd));
-    #define rtmypkd ppack_rtrim(mypkd, 2)
-    printf("rtmypkd[0] = %c\n", ppack_getI(rtmypkd, 0));
-    printf("rtmypkd[1] = %c\n", ppack_getI(rtmypkd, 1));
-    printf("rtmypkd size = %i\n", ppack_size(rtmypkd));
+    // Can get trim ctuples.
+    #define ltmytpl ctuple_ltrim(mytpl, 2)
+    printf("ltmytpl[0] = %c\n", ctuple_getI(ltmytpl, 0));
+    printf("ltmytpl[1] = %c\n", ctuple_getI(ltmytpl, 1));
+    printf("ltmytpl size = %i\n", ctuple_size(ltmytpl));
+    #define rtmytpl ctuple_rtrim(mytpl, 2)
+    printf("rtmytpl[0] = %c\n", ctuple_getI(rtmytpl, 0));
+    printf("rtmytpl[1] = %c\n", ctuple_getI(rtmytpl, 1));
+    printf("rtmytpl size = %i\n", ctuple_size(rtmytpl));
     
     // Can fill with default values by position.
-    #define dmypkd ppack_defaults(rtmypkd, ('x', 'y', 'e', 'f'))
-    printf("dmypkd[0] = %c\n", ppack_getI(dmypkd, 0));
-    printf("dmypkd[1] = %c\n", ppack_getI(dmypkd, 1));
-    printf("dmypkd[2] = %c\n", ppack_getI(dmypkd, 2));
-    printf("dmypkd[3] = %c\n", ppack_getI(dmypkd, 3));
-    printf("dmypkd size = %i\n", ppack_size(dmypkd));
+    #define dmytpl ctuple_defaults(rtmytpl, ('x', 'y', 'e', 'f'))
+    printf("dmytpl[0] = %c\n", ctuple_getI(dmytpl, 0));
+    printf("dmytpl[1] = %c\n", ctuple_getI(dmytpl, 1));
+    printf("dmytpl[2] = %c\n", ctuple_getI(dmytpl, 2));
+    printf("dmytpl[3] = %c\n", ctuple_getI(dmytpl, 3));
+    printf("dmytpl size = %i\n", ctuple_size(dmytpl));
 
     // Can unpack directly as default arguments.
-    printf("%c %c %c %c\n", ppack_defargs(rtmypkd, ('x', 'y', 'e', 'f')));
-    printf("%c %c %c %c\n", ppack_defargs(ppack(), ('x', 'y', 'e', 'f')));
+    printf("%c %c %c %c\n", ctuple_defargs(rtmytpl, ('x', 'y', 'e', 'f')));
+    printf("%c %c %c %c\n", ctuple_defargs(ctuple(), ('x', 'y', 'e', 'f')));
 
     // Can create if-statements and check if has minimum size.
-    printf("mypkd %s\n", ppack_hasLT(mypkd, 5, "size < 5", "size >= 5"));
-    printf("mypkd %s\n", ppack_if(ppack_ltrim(mypkd, 4), "size > 4", "size < 5"));
-    printf("mypkd %s\n", ppack_if(ppack_ltrim(mypkd, 0), "size > 3", "size < 4"));
-    printf("mypkd %s\n", ppack_hasN(mypkd, 4, "size == 4", "size != 4"));
-    printf("mypkd %s\n", ppack_hasN(mypkd, 40, "size == 40", "size != 40"));
+    printf("mytpl %s\n", ctuple_hasLT(mytpl, 5, "size < 5", "size >= 5"));
+    printf("mytpl %s\n", ctuple_if(ctuple_ltrim(mytpl, 4), "size > 4", "size < 5"));
+    printf("mytpl %s\n", ctuple_if(ctuple_ltrim(mytpl, 0), "size > 3", "size < 4"));
+    printf("mytpl %s\n", ctuple_hasN(mytpl, 4, "size == 4", "size != 4"));
+    printf("mytpl %s\n", ctuple_hasN(mytpl, 40, "size == 40", "size != 40"));
 
-    // Define symbols in a ppack to be called.
+    // Define symbols in a ctuple to be called.
     #define myf0() a
     #define myf1(a) a
     #define myf2(a, b) a + b
-    #define mypkdf ppack(myf0, myf1, myf2)
+    #define mytplf ctuple(myf0, myf1, myf2)
 
-    #define params ppack(100, 101)
+    #define params ctuple(100, 101)
 
     printf(
         "invoke %s = %i\n",
-        BST_TOSTRING(ppack_getI(mypkdf, ppack_size(params))),
-        ppack_call(ppack_getI(mypkdf, ppack_size(params)), params)
+        BST_TOSTRING(ctuple_getI(mytplf, ctuple_size(params))),
+        ctuple_call(ctuple_getI(mytplf, ctuple_size(params)), params)
     );
 
-    // Can detect if is a ppack or not.
-    printf("is mypkd ppack? %s\n", ppack_isa(mypkd, "yes", "no"));
-    printf("is int ppack? %s\n", ppack_isa(int, "yes", "no"));
+    // Can detect if is a ctuple or not.
+    printf("is mytpl ctuple? %s\n", ctuple_isa(mytpl, "yes", "no"));
+    printf("is int ctuple? %s\n", ctuple_isa(int, "yes", "no"));
 
     return 0;
 }
@@ -244,7 +244,7 @@ I have created my own variant prior to finding this one, but `pstdint.h` provide
 
 # template
 Provides compile time decisions to create _C++_ like std template structures.
-It is a parameter pack of a standard order such that the type, type info, iterator calls, reverse iterator calls, and allocator calls can be accessed.
+It is a ctuples of a standard order such that the type, type info, iterator calls, reverse iterator calls, and allocator calls can be accessed.
 This allows for more complex structures with a simpler interface.
 
 ```c
@@ -254,7 +254,7 @@ This allows for more complex structures with a simpler interface.
 
 int main()
 {
-    // This creates a ppack in the form of a template that contains compile time information about the vector type.
+    // This creates a ctuple in the form of a template that contains compile time information about the vector type.
     // The default is already the stdlib for the allocator, but can specify your own.
     #define vect_tmplt_int_t vect_tmplt_t(int, alloc_stdlib)
 
@@ -278,7 +278,7 @@ int main()
         // Get the iterator type from the template.
         vect_iter_t(vect_tmplt_int_t) iter = vect_begin(vect_tmplt_int_t, vect);
 
-        // Get the iterator ppack from the template to then search.
+        // Get the iterator ctuple from the template to then search.
         alg_find(tmplt_iter(vect_tmplt_int_t), iter, vect_end(vect_tmplt_int_t, vect), -1);
 
         // If we find it, then we can change the value.

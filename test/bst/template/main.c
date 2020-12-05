@@ -14,7 +14,7 @@
 // {
 //     return x * y;
 // }
-// #define fooT_short tmplt_ppack(fooT_short)
+// #define fooT_short tmplt_ctuple(fooT_short)
 
 int main()
 {

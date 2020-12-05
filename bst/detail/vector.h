@@ -8,7 +8,7 @@
 
 
 /* Packs the iterator defaults */
-#define bst_dtl_vect_iter_defaults(T) bst_ppack(bst_dtl_vect_iter_t(T), bst_dtl_vect_iter_nxt, bst_dtl_vect_iter_eq, bst_dtl_vect_iter_val, bst_dtl_vect_iter_set, bst_dtl_vect_iter_swap)
+#define bst_dtl_vect_iter_defaults(T) bst_ctuple(bst_dtl_vect_iter_t(T), bst_dtl_vect_iter_nxt, bst_dtl_vect_iter_eq, bst_dtl_vect_iter_val, bst_dtl_vect_iter_set, bst_dtl_vect_iter_swap)
 
 
 #define bst_dtl_vect_iter_t(T) T*
@@ -26,7 +26,7 @@
 
 
 /* Packs the iterator defaults */
-#define bst_dtl_vect_riter_defaults(T) bst_ppack(bst_dtl_vect_riter_t(T), bst_dtl_vect_riter_nxt, bst_dtl_vect_riter_eq, bst_dtl_vect_riter_val, bst_dtl_vect_riter_set, bst_dtl_vect_riter_swap)
+#define bst_dtl_vect_riter_defaults(T) bst_ctuple(bst_dtl_vect_riter_t(T), bst_dtl_vect_riter_nxt, bst_dtl_vect_riter_eq, bst_dtl_vect_riter_val, bst_dtl_vect_riter_set, bst_dtl_vect_riter_swap)
 
 
 #define bst_dtl_vect_riter_t(T) T*
@@ -46,16 +46,16 @@
 /* Detail code */
 /// \{
 #define bst_dtl_vect_tmplt_t(T, ...) \
-    bst_tmplt_ppack(\
+    bst_tmplt_ctuple(\
         T*,\
         (T),\
         bst_dtl_vect_default_fns,\
         bst_dtl_vect_iter_defaults(T),\
         bst_dtl_vect_riter_defaults(T),\
-        bst_ppack_empty(bst_ppack(__VA_ARGS__),\
+        bst_ctuple_empty(bst_ctuple(__VA_ARGS__),\
             bst_alloc_stdlib,\
-            bst_alloc_isa(bst_ppack_getI(bst_ppack(__VA_ARGS__), 0),\
-                bst_ppack_getI(bst_ppack(__VA_ARGS__), 0),\
+            bst_alloc_isa(bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0),\
+                bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0),\
                 bst_alloc_stdlib\
             )\
         )\
@@ -63,7 +63,7 @@
 
 // Preparing for potential specialization concept.
 #define bst_dtl_vect_default_fns \
-    bst_ppack(\
+    bst_ctuple(\
         bst_dtl_vect_init,\
         bst_dtl_vect_destroy,\
         bst_dtl_vect_len,\
@@ -174,21 +174,21 @@
 #define bst_dtl_vect_rbegin(tmplt, vect) ((vect)+bst_vect_len(vect))
 #define bst_dtl_vect_rend(tmplt, vect) ((vect)+1)
 
-#define bst_dtl_vect_get_init(tmplt) bst_ppack_getI(bst_tmplt_fns(tmplt), 0)
-#define bst_dtl_vect_get_destroy(tmplt) bst_ppack_getI(bst_tmplt_fns(tmplt), 1)
-#define bst_dtl_vect_get_len(tmplt) bst_ppack_getI(bst_tmplt_fns(tmplt), 2)
-#define bst_dtl_vect_get_cap(tmplt) bst_ppack_getI(bst_tmplt_fns(tmplt), 3)
-#define bst_dtl_vect_get_rsz(tmplt) bst_ppack_getI(bst_tmplt_fns(tmplt), 4)
-#define bst_dtl_vect_get_rsv(tmplt) bst_ppack_getI(bst_tmplt_fns(tmplt), 5)
-#define bst_dtl_vect_get_at(tmplt) bst_ppack_getI(bst_tmplt_fns(tmplt), 6)
-#define bst_dtl_vect_get_empty(tmplt) bst_ppack_getI(bst_tmplt_fns(tmplt), 7)
-#define bst_dtl_vect_get_front(tmplt) bst_ppack_getI(bst_tmplt_fns(tmplt), 8)
-#define bst_dtl_vect_get_back(tmplt) bst_ppack_getI(bst_tmplt_fns(tmplt), 9)
-#define bst_dtl_vect_get_push(tmplt) bst_ppack_getI(bst_tmplt_fns(tmplt), 10)
-#define bst_dtl_vect_get_begin(tmplt) bst_ppack_getI(bst_tmplt_fns(tmplt), 11)
-#define bst_dtl_vect_get_end(tmplt) bst_ppack_getI(bst_tmplt_fns(tmplt), 12)
-#define bst_dtl_vect_get_rbegin(tmplt) bst_ppack_getI(bst_tmplt_fns(tmplt), 13)
-#define bst_dtl_vect_get_rend(tmplt) bst_ppack_getI(bst_tmplt_fns(tmplt), 14)
+#define bst_dtl_vect_get_init(tmplt) bst_ctuple_getI(bst_tmplt_fns(tmplt), 0)
+#define bst_dtl_vect_get_destroy(tmplt) bst_ctuple_getI(bst_tmplt_fns(tmplt), 1)
+#define bst_dtl_vect_get_len(tmplt) bst_ctuple_getI(bst_tmplt_fns(tmplt), 2)
+#define bst_dtl_vect_get_cap(tmplt) bst_ctuple_getI(bst_tmplt_fns(tmplt), 3)
+#define bst_dtl_vect_get_rsz(tmplt) bst_ctuple_getI(bst_tmplt_fns(tmplt), 4)
+#define bst_dtl_vect_get_rsv(tmplt) bst_ctuple_getI(bst_tmplt_fns(tmplt), 5)
+#define bst_dtl_vect_get_at(tmplt) bst_ctuple_getI(bst_tmplt_fns(tmplt), 6)
+#define bst_dtl_vect_get_empty(tmplt) bst_ctuple_getI(bst_tmplt_fns(tmplt), 7)
+#define bst_dtl_vect_get_front(tmplt) bst_ctuple_getI(bst_tmplt_fns(tmplt), 8)
+#define bst_dtl_vect_get_back(tmplt) bst_ctuple_getI(bst_tmplt_fns(tmplt), 9)
+#define bst_dtl_vect_get_push(tmplt) bst_ctuple_getI(bst_tmplt_fns(tmplt), 10)
+#define bst_dtl_vect_get_begin(tmplt) bst_ctuple_getI(bst_tmplt_fns(tmplt), 11)
+#define bst_dtl_vect_get_end(tmplt) bst_ctuple_getI(bst_tmplt_fns(tmplt), 12)
+#define bst_dtl_vect_get_rbegin(tmplt) bst_ctuple_getI(bst_tmplt_fns(tmplt), 13)
+#define bst_dtl_vect_get_rend(tmplt) bst_ctuple_getI(bst_tmplt_fns(tmplt), 14)
 
 
 // The type bst_intptr_t is used because the memory may need to be word aligned.

@@ -9,7 +9,7 @@
 
 #include <bst/config.h>
 #include <bst/assert.h>
-#include <bst/ppack.h>
+#include <bst/ctuple.h>
 #include <bst/stdint.h>
 #include <bst/string.h>
 #include <bst/template.h>
@@ -71,8 +71,8 @@
  */
 #define bst_vect_init(vect, ...) \
     bst_tmplt_isa(vect,\
-        bst_dtl_vect_get_init(vect)(vect, bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
-        bst_dtl_vect_init(bst_tmplt_ppack_alloc(bst_alloc_stdlib), vect)\
+        bst_dtl_vect_get_init(vect)(vect, bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0)),\
+        bst_dtl_vect_init(bst_tmplt_ctuple_alloc(bst_alloc_stdlib), vect)\
     )
 
 
@@ -82,8 +82,8 @@
  */
 #define bst_vect_destroy(vect, ...) \
     bst_tmplt_isa(vect,\
-        bst_dtl_vect_get_destroy(vect)(vect, bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
-        bst_dtl_vect_destroy(bst_tmplt_ppack_alloc(bst_alloc_stdlib), vect)\
+        bst_dtl_vect_get_destroy(vect)(vect, bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0)),\
+        bst_dtl_vect_destroy(bst_tmplt_ctuple_alloc(bst_alloc_stdlib), vect)\
     )
 
 
@@ -93,8 +93,8 @@
  */
 #define bst_vect_len(vect, ...) \
     bst_tmplt_isa(vect,\
-        bst_dtl_vect_get_len(vect)(vect, bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
-        bst_dtl_vect_len(bst_tmplt_ppack_alloc(bst_alloc_stdlib), vect)\
+        bst_dtl_vect_get_len(vect)(vect, bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0)),\
+        bst_dtl_vect_len(bst_tmplt_ctuple_alloc(bst_alloc_stdlib), vect)\
     )
 
 
@@ -104,8 +104,8 @@
  */
 #define bst_vect_cap(vect, ...) \
     bst_tmplt_isa(vect,\
-        bst_dtl_vect_get_cap(vect)(vect, bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
-        bst_dtl_vect_cap(bst_tmplt_ppack_alloc(bst_alloc_stdlib), vect)\
+        bst_dtl_vect_get_cap(vect)(vect, bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0)),\
+        bst_dtl_vect_cap(bst_tmplt_ctuple_alloc(bst_alloc_stdlib), vect)\
     )
 
 
@@ -116,8 +116,8 @@
  */
 #define bst_vect_rsz(vect, nsz, ...) \
     bst_tmplt_isa(vect,\
-        bst_dtl_vect_get_rsz(vect)(vect, nsz, bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
-        bst_dtl_vect_rsz(bst_tmplt_ppack_alloc(bst_alloc_stdlib), vect, nsz)\
+        bst_dtl_vect_get_rsz(vect)(vect, nsz, bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0)),\
+        bst_dtl_vect_rsz(bst_tmplt_ctuple_alloc(bst_alloc_stdlib), vect, nsz)\
     )
 
 
@@ -128,8 +128,8 @@
  */
 #define bst_vect_rsv(vect, ncap, ...) \
     bst_tmplt_isa(vect,\
-        bst_dtl_vect_get_rsv(vect)(vect, ncap, bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
-        bst_dtl_vect_rsv(bst_tmplt_ppack_alloc(bst_alloc_stdlib), vect, ncap)\
+        bst_dtl_vect_get_rsv(vect)(vect, ncap, bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0)),\
+        bst_dtl_vect_rsv(bst_tmplt_ctuple_alloc(bst_alloc_stdlib), vect, ncap)\
     )
 
 
@@ -140,8 +140,8 @@
  */
 #define bst_vect_at(vect, i, ...) \
     bst_tmplt_isa(vect,\
-        bst_dtl_vect_get_at(vect)(vect, i, bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
-        bst_dtl_vect_at(bst_tmplt_ppack_alloc(bst_alloc_stdlib), vect, i)\
+        bst_dtl_vect_get_at(vect)(vect, i, bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0)),\
+        bst_dtl_vect_at(bst_tmplt_ctuple_alloc(bst_alloc_stdlib), vect, i)\
     )
 
 
@@ -151,8 +151,8 @@
  */
 #define bst_vect_empty(vect, ...) \
     bst_tmplt_isa(vect,\
-        bst_dtl_vect_get_empty(vect)(vect, bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
-        bst_dtl_vect_empty(bst_tmplt_ppack_alloc(bst_alloc_stdlib), vect)\
+        bst_dtl_vect_get_empty(vect)(vect, bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0)),\
+        bst_dtl_vect_empty(bst_tmplt_ctuple_alloc(bst_alloc_stdlib), vect)\
     )
 
 
@@ -162,8 +162,8 @@
  */
 #define bst_vect_front(vect, ...) \
     bst_tmplt_isa(vect,\
-        bst_dtl_vect_get_front(vect)(vect, bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
-        bst_dtl_vect_front(bst_tmplt_ppack_alloc(bst_alloc_stdlib), vect)\
+        bst_dtl_vect_get_front(vect)(vect, bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0)),\
+        bst_dtl_vect_front(bst_tmplt_ctuple_alloc(bst_alloc_stdlib), vect)\
     )
 
 
@@ -173,8 +173,8 @@
  */
 #define bst_vect_back(vect, ...) \
     bst_tmplt_isa(vect,\
-        bst_dtl_vect_get_back(vect)(vect, bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
-        bst_dtl_vect_back(bst_tmplt_ppack_alloc(bst_alloc_stdlib), vect)\
+        bst_dtl_vect_get_back(vect)(vect, bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0)),\
+        bst_dtl_vect_back(bst_tmplt_ctuple_alloc(bst_alloc_stdlib), vect)\
     )
 
 
@@ -185,59 +185,59 @@
  */
 #define bst_vect_push(vect, val, ...) \
     bst_tmplt_isa(vect,\
-        bst_dtl_vect_get_push(vect)(vect, val, bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
-        bst_dtl_vect_push(bst_tmplt_ppack_alloc(bst_alloc_stdlib), vect, val)\
+        bst_dtl_vect_get_push(vect)(vect, val, bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0)),\
+        bst_dtl_vect_push(bst_tmplt_ctuple_alloc(bst_alloc_stdlib), vect, val)\
     )
 
 
 #define bst_vect_begin(vect, ...) \
     bst_tmplt_isa(vect,\
-        bst_dtl_vect_get_begin(vect)(vect, bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
-        bst_dtl_vect_begin(bst_tmplt_ppack_alloc(bst_alloc_stdlib), vect)\
+        bst_dtl_vect_get_begin(vect)(vect, bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0)),\
+        bst_dtl_vect_begin(bst_tmplt_ctuple_alloc(bst_alloc_stdlib), vect)\
     )
 #define bst_vect_end(vect, ...) \
     bst_tmplt_isa(vect,\
-        bst_dtl_vect_get_end(vect)(vect, bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
-        bst_dtl_vect_end(bst_tmplt_ppack_alloc(bst_alloc_stdlib), vect)\
+        bst_dtl_vect_get_end(vect)(vect, bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0)),\
+        bst_dtl_vect_end(bst_tmplt_ctuple_alloc(bst_alloc_stdlib), vect)\
     )
 
 
 #define bst_vect_rbegin(vect, ...) \
     bst_tmplt_isa(vect,\
-        bst_dtl_vect_get_rbegin(vect)(vect, bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
-        bst_dtl_vect_rbegin(bst_tmplt_ppack_alloc(bst_alloc_stdlib), vect)\
+        bst_dtl_vect_get_rbegin(vect)(vect, bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0)),\
+        bst_dtl_vect_rbegin(bst_tmplt_ctuple_alloc(bst_alloc_stdlib), vect)\
     )
 #define bst_vect_rend(vect, ...) \
     bst_tmplt_isa(vect,\
-        bst_dtl_vect_get_rend(vect)(vect, bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
-        bst_dtl_vect_rend(bst_tmplt_ppack_alloc(bst_alloc_stdlib), vect)\
+        bst_dtl_vect_get_rend(vect)(vect, bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0)),\
+        bst_dtl_vect_rend(bst_tmplt_ctuple_alloc(bst_alloc_stdlib), vect)\
     )
 
 
 #define bst_vect_iter_t(tmplt) bst_iter_t(bst_tmplt_iter(tmplt))
 #define bst_vect_iter_nxt(iter, ...) \
     bst_tmplt_isa(iter,\
-        bst_iter_nxt(bst_tmplt_iter(iter))(bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
+        bst_iter_nxt(bst_tmplt_iter(iter))(bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0)),\
         bst_dtl_vect_iter_nxt(iter)\
     )
 #define bst_vect_iter_eq(left, right, ...) \
     bst_tmplt_isa(left,\
-        bst_iter_eq(bst_tmplt_iter(left))(right, bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
+        bst_iter_eq(bst_tmplt_iter(left))(right, bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0)),\
         bst_dtl_vect_iter_eq(left, right)\
     )
 #define bst_vect_iter_val(iter, ...) \
     bst_tmplt_isa(iter,\
-        bst_iter_val(bst_tmplt_iter(iter))(bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
+        bst_iter_val(bst_tmplt_iter(iter))(bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0)),\
         bst_dtl_vect_iter_val(iter)\
     )
 #define bst_vect_iter_set(iter, val, ...) \
     bst_tmplt_isa(iter,\
-        bst_iter_set(bst_tmplt_iter(iter))(val, bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
+        bst_iter_set(bst_tmplt_iter(iter))(val, bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0)),\
         bst_dtl_vect_iter_set(iter, val)\
     )
 #define bst_vect_iter_swap(left, right, ...) \
     bst_tmplt_isa(left,\
-        bst_iter_swap(bst_tmplt_iter(left))(right, bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
+        bst_iter_swap(bst_tmplt_iter(left))(right, bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0)),\
         bst_dtl_vect_iter_swap(left, right)\
     )
 
@@ -245,27 +245,27 @@
 #define bst_vect_riter_t(tmplt) bst_iter_t(bst_tmplt_riter(tmplt))
 #define bst_vect_riter_nxt(iter, ...) \
     bst_tmplt_isa(iter,\
-        bst_iter_nxt(bst_tmplt_riter(iter))(bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
+        bst_iter_nxt(bst_tmplt_riter(iter))(bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0)),\
         bst_dtl_vect_riter_nxt(iter)\
     )
 #define bst_vect_riter_eq(left, right, ...) \
     bst_tmplt_isa(left,\
-        bst_iter_eq(bst_tmplt_riter(left))(right, bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
+        bst_iter_eq(bst_tmplt_riter(left))(right, bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0)),\
         bst_dtl_vect_riter_eq(left, right)\
     )
 #define bst_vect_riter_val(iter, ...) \
     bst_tmplt_isa(iter,\
-        bst_iter_val(bst_tmplt_riter(iter))(bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
+        bst_iter_val(bst_tmplt_riter(iter))(bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0)),\
         bst_dtl_vect_riter_val(iter)\
     )
 #define bst_vect_riter_set(iter, val, ...) \
     bst_tmplt_isa(iter,\
-        bst_iter_set(bst_tmplt_riter(iter))(val, bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
+        bst_iter_set(bst_tmplt_riter(iter))(val, bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0)),\
         bst_dtl_vect_riter_set(iter, val)\
     )
 #define bst_vect_riter_swap(left, right, ...) \
     bst_tmplt_isa(left,\
-        bst_iter_swap(bst_tmplt_riter(left))(right, bst_ppack_getI(bst_ppack(__VA_ARGS__), 0)),\
+        bst_iter_swap(bst_tmplt_riter(left))(right, bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0)),\
         bst_dtl_vect_riter_swap(left, right)\
     )
 
