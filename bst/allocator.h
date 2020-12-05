@@ -9,11 +9,6 @@
 #include <stdlib.h>
 
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-
 /* Provide without namespace */
 /// \{
 #ifdef BST_NO_NAMESPACE
@@ -92,11 +87,6 @@ extern "C" {
 
 /* Detect if provided a ppack that could be an allocator */
 #define bst_alloc_isa(pkd, _t, _f) bst_ppack_isa(pkd, bst_ppack_hasN(pkd, 3, _t, _f), _f)
-
-
-#ifdef __cplusplus
-}
-#endif
 
 
 #endif // BST__ALLOCATOR_H

@@ -1,5 +1,5 @@
 # bst
- Boost C++ like library for C.
+ __B__oo__st__ C++ like library for C.
 
 ## Why Make This?
 I had began to write my own variation of _Boost C++_ to get better at _C++_.

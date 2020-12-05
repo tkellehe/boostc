@@ -7,11 +7,6 @@
 #define BST__CONFIG__MACROS_H
 
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-
 /* Provide a helper that joins two symbols */
 /// \{
 #define BST_DTL_JOIN2(L, R) L ## R
@@ -32,11 +27,6 @@ extern "C" {
 #define BST_DTL_TOSTRING(X) BST_DTL_DTL_TOSTRING(X)
 #define BST_TOSTRING(X) BST_DTL_TOSTRING(X)
 /// \}
-
-
-#ifdef __cplusplus
-}
-#endif
 
 
 #endif // BST__CONFIG__MACROS_H

@@ -7,18 +7,13 @@
 #define BST__CONFIG__VERSION_H
 
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-
 /* Determine the C++ standard version provided by the compiler */
 /// \{
 #if defined(__cplusplus)
 # if __cplusplus >= 199711L
 #  define BST_LEAST_CPP98
 # else
-#error "Compiler does not support at least C++98 features."
+#  error "Compiler does not support at least C++98 features."
 # endif
 # if __cplusplus >= 201103L
 #  define BST_LEAST_CPP11
@@ -42,7 +37,7 @@ extern "C" {
 # if __STDC_VERSION__ >= 199901L
 #  define BST_LEAST_C99
 # else
-#error "Compiler does not support at least C99 features."
+#  error "Compiler does not support at least C99 features."
 # endif
 # if __STDC_VERSION__ >= 201112L
 #  define BST_LEAST_C11
@@ -52,11 +47,6 @@ extern "C" {
 # endif
 #endif
 /// \}
-
-
-#ifdef __cplusplus
-}
-#endif
 
 
 #endif // BST__CONFIG__VERSION_H

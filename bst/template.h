@@ -13,11 +13,6 @@
 #include <bst/iterator.h>
 
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-
 /* Provide without namespace */
 /// \{
 #ifdef BST_NO_NAMESPACE
@@ -112,11 +107,6 @@ extern "C" {
         ),\
         _f\
     )
-
-
-#ifdef __cplusplus
-}
-#endif
 
 
 #endif // BST__TEMPLATE_H

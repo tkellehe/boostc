@@ -90,5 +90,8 @@ int main()
     printf("is mypkd ppack? %s\n", ppack_isa(mypkd, "yes", "no"));
     printf("is int ppack? %s\n", ppack_isa(int, "yes", "no"));
 
+    // Force ppacks to resolve and print as a string even if they have symbols.
+    printf("dmypkd tostring = %s\n", ppack_tostring(dmypkd));
+
     return 0;
 }

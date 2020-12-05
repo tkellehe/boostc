@@ -6,11 +6,6 @@
 #include <bst/ppack.h>
 
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-
 /* Provide without namespace */
 /// \{
 #ifdef BST_NO_NAMESPACE
@@ -99,11 +94,6 @@ extern "C" {
 
 /* Detect if provided a ppack that could be an iterator */
 #define bst_iter_isa(pkd, _t, _f) bst_ppack_isa(pkd, bst_ppack_hasN(pkd, 6, _t, _f), _f)
-
-
-#ifdef __cplusplus
-}
-#endif
 
 
 #endif // BST__ITERATOR_H

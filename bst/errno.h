@@ -10,11 +10,6 @@
 #include <bst/config.h>
 
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-
 /* Add the ability to get the errno based on what is best for the platform */
 /// \{
 #ifdef BST_OSAPI_WINDOWS
@@ -362,11 +357,6 @@ extern "C" {
 # define EMLINK 9979
 #endif
 /// \}
-
-
-#ifdef __cplusplus
-}
-#endif
 
 
 #endif // BST__ERRNO_H
