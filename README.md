@@ -1,5 +1,4 @@
 # bst
-A [**B**oo**st** _C++_](https://github.com/boostorg) like library for C.
 A library like [**B**oo**st** _C++_](https://github.com/boostorg), but for C.
 Provides compile time decisions similar to templating in a simple API.
 Also has polyfills for C standards.
@@ -10,6 +9,10 @@ I was able to write a lot of parts that competed well with Boost, but overall us
 Therein, I began to wonder if I could take this and get it into a _C_ library.
 
 So, this library is my attempt to make a _C_ version without copying _Boost C++_ directly for my own learning experience.
+
+The name comes from taking _Object Oriented_ out of _Boost C++_.
+At least that is what I say now.
+It really is just an abbreviation of _Boost_, by removing the vowels...
 
 # Components
  * [allocator](#allocator)
@@ -26,12 +29,12 @@ So, this library is my attempt to make a _C_ version without copying _Boost C++_
 The current interface is to prefix everything with `bst_`.
 Also, to provide an interface without this prefix.
 This may cause problems in your library if you have something with a similar name.
-To avoid this, you can define `BST_NAMESPACE_ONLY` and it will remove the other non-stdc intefaces without the `bst_`.
+To avoid this, you can define `BST_NAMESPACE_ONLY` and it will remove the other non-stdc interfaces without the `bst_`.
 
 ### Compile Time Requirement
 Currently, the goal is to write all of the library as compile time insertions of the code.
 This allows more flexibility and makes it closer to _Boost C++_.
-Another benfit is that you do not need to build this library.
+Another benefit is that you do not need to build this library.
 
 ### Insertion Code Bloat
 Since most interfaces are inlined code, this can cause binaries to be quite large.
@@ -136,7 +139,7 @@ Provides compile time decisions to create [ctuples](#ctuple) for iterators simil
 # ctuple
 Provides compile time decisions to create ctuple macros.
 The ctuples work by taking parameters and describing them as a single compile time symbol.
-This is done by placing parantheses around the parameters (ie `(1, 'a', var)`).
+This is done by placing parentheses around the parameters (ie `(1, 'a', var)`).
 Then using macros to apply operations to these ctuples.
 
 ```c
