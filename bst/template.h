@@ -85,8 +85,8 @@
 
 
 /* Packs the defaults */
-#define bst_dtl_tmplt_fn_default(...) ((void)0)
-#define bst_tmplt_defaults bst_ppack(int, (0), (bst_dtl_tmplt_fn_default), bst_iter_defaults, bst_iter_defaults, bst_alloc_defaults)
+#define bst_tmplt_fn_default(...) ((void)0)
+#define bst_tmplt_defaults bst_ppack(int, (0), (bst_tmplt_fn_default), bst_iter_defaults, bst_iter_defaults, bst_alloc_defaults)
 
 
 /* Detect if provided a ppack that could be a template */
