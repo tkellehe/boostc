@@ -91,7 +91,7 @@
 
 #define bst_ctuple_reverse(tpl) bst_ctuple(bst_ctuple_call(BST_JOIN2(bst_dtl_ctuple_reverse, bst_ctuple_size(tpl)), tpl))
 
-#define bst_ctuple_getI(tpl, I) bst_ctuple_call(BST_JOIN2(bst_dtl_ctuple_get, I), tpl)
+#define bst_ctuple_getI(tpl, I) bst_ctuple_hasGT(tpl, I, bst_ctuple_call(BST_JOIN2(bst_dtl_ctuple_get, I), tpl), BST_CTUPLE_OUT_OF_BOUNDS)
 
 #define bst_ctuple_ltrim(tpl, N) bst_ctuple(bst_ctuple_call(BST_JOIN2(bst_dtl_ctuple_ltrim, N), tpl))
 #define bst_ctuple_rtrim(tpl, N) bst_ctuple_reverse(bst_ctuple_ltrim(bst_ctuple_reverse(tpl), N))
