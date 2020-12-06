@@ -60,16 +60,23 @@
  */
 /// \{
 #define bst_tmplt_ctuple_type(type) bst_tmplt_set_type(bst_tmplt_defaults, type)
-#define bst_tmplt_ctuple_info(info) bst_tmplt_set_info(bst_tmplt_defaults, info)
-#define bst_tmplt_ctuple_fns(fns) bst_tmplt_set_fns(bst_tmplt_defaults, fns)
-#define bst_tmplt_ctuple_iter(iter) bst_tmplt_set_iter(bst_tmplt_defaults, iter)
-#define bst_tmplt_ctuple_riter(riter) bst_tmplt_set_riter(bst_tmplt_defaults, riter)
-#define bst_tmplt_ctuple_alloc(alloc) bst_tmplt_set_alloc(bst_tmplt_defaults, alloc)
+#define bst_tmplt_ctuple_info(info) bst_ctuple_isa(info, bst_tmplt_set_info(bst_tmplt_defaults, info), BST_TMPLT_NOT_CREATED_ERROR)
+#define bst_tmplt_ctuple_fns(fns) bst_ctuple_isa(fns, bst_tmplt_set_fns(bst_tmplt_defaults, fns), BST_TMPLT_NOT_CREATED_ERROR)
+#define bst_tmplt_ctuple_iter(iter) bst_iter_isa(iter, bst_tmplt_set_iter(bst_tmplt_defaults, iter), BST_TMPLT_NOT_CREATED_ERROR)
+#define bst_tmplt_ctuple_riter(riter) bst_iter_isa(riter, bst_tmplt_set_riter(bst_tmplt_defaults, riter), BST_TMPLT_NOT_CREATED_ERROR)
+#define bst_tmplt_ctuple_alloc(alloc) bst_alloc_isa(alloc, bst_tmplt_set_alloc(bst_tmplt_defaults, alloc), BST_TMPLT_NOT_CREATED_ERROR)
 
 #define bst_tmplt_ctuple_fn(fn) bst_tmplt_ctuple_fns(bst_ctuple(fn))
 
 #define bst_tmplt_ctuple(...) \
-    bst_tmplt_isa(bst_dtl_tmplt_ctuple(__VA_ARGS__), bst_dtl_tmplt_ctuple(__VA_ARGS__), BST_TMPLT_NOT_CREATED_ERROR)
+    bst_tmplt_isa(\
+        /* Check to see if this is a valid ctuple. */\
+        bst_dtl_tmplt_ctuple(__VA_ARGS__),\
+        /* If it is one then use it. */\
+        bst_dtl_tmplt_ctuple(__VA_ARGS__),\
+        /* The parameters provided to produce a template ctuple could not create a valid one. */\
+        BST_TMPLT_NOT_CREATED_ERROR\
+    )
 #define bst_dtl_tmplt_ctuple(...) \
     bst_ctuple_defaults(\
         bst_ctuple(__VA_ARGS__),\
