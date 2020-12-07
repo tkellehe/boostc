@@ -10,7 +10,7 @@ ALL_MAINC := $(call rwildcard,./,*main.c)
 OBJS := $(ALL_MAINC:./%.c=$(BST_BUILD)/%.o)
 TESTS := $(ALL_MAINC:./%/main.c=$(BST_BIN)/%)
 
-FLAGS := -O6 -Wall -Werror -I../
+FLAGS := -O6 -Wall -Werror -pedantic -I../
 LFLAGS := -O6
 
 .PHONY: all

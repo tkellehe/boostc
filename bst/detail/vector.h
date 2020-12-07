@@ -17,12 +17,12 @@
 #define bst_dtl_vect_iter_val(iter) *(iter)
 #define bst_dtl_vect_iter_set(iter, val) (*(iter) = val)
 #define bst_dtl_vect_iter_swap(left, right) \
-    ({\
+    {\
         char __bst_dtl_swap[sizeof(*(left))];\
         memcpy((void*)__bst_dtl_swap, (void*)(left), sizeof(*(left)));\
         memcpy((void*)(left), (void*)(right), sizeof(*(left)));\
         memcpy((void*)(right), (void*)__bst_dtl_swap, sizeof(*(left)));\
-    })
+    }
 
 
 /* Packs the iterator defaults */
@@ -35,12 +35,12 @@
 #define bst_dtl_vect_riter_val(riter) *((riter)-1)
 #define bst_dtl_vect_riter_set(riter, val) (*((riter)-1) = val)
 #define bst_dtl_vect_riter_swap(left, right) \
-    ({\
+    {\
         char __bst_dtl_swap[sizeof(*(left))];\
         memcpy((void*)__bst_dtl_swap, (void*)(left), sizeof(*(left)));\
         memcpy((void*)(left), (void*)(right), sizeof(*(left)));\
         memcpy((void*)(right), (void*)__bst_dtl_swap, sizeof(*(left)));\
-    })
+    }
 
 
 /* Detail code */

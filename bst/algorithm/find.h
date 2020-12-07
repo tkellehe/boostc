@@ -24,10 +24,10 @@
 /// \{
 #define bst_alg_find(iters, iter, end, val) bst_alg_findpred(iters, iter, end, (bst_iter_val(iters)(iter) == val))
 #define bst_alg_findpred(iters, iter, end, pred) \
-    ({\
+    {\
         for(; !(bst_iter_eq(iters)(iter, end)); bst_iter_nxt(iters)(iter))\
             if((pred)) break;\
-    })
+    }
 /// \}
 
 
