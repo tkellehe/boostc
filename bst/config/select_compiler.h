@@ -13,6 +13,9 @@
 # if defined(_GCCXML)
 #  define BST_COMPILER_GCCXML
 #  define BST_COMPILER_CONFIG "bst/config/compiler/gccxml.h"
+# elif defined(__clang__)
+#  define BST_COMPILER_CLANG
+#  define BST_COMPILER_CONFIG "bst/config/compiler/clang.h"
 # elif defined(__GNUC__) && !defined(__ibmxl__)
 #  define BST_COMPILER_GCC
 #  define BST_COMPILER_CONFIG "bst/config/compiler/gcc.h"
@@ -28,9 +31,6 @@
 # elif defined(_MSC_VER)
 #  define BST_COMPILER_VISUALC
 #  define BST_COMPILER_CONFIG "bst/config/compiler/visualc.h"
-# elif defined(__clang__)
-#  define BST_COMPILER_CLANG
-#  define BST_COMPILER_CONFIG "bst/config/compiler/clang.h"
 # elif defined(__EMSCRIPTEN__)
 #  define BST_COMPILER_EMSCRIPTEN
 #  define BST_COMPILER_CONFIG "bst/config/compiler/emscripten.h"

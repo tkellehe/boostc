@@ -35,6 +35,19 @@ $(BST_BIN)/gcc/%: $(TEST_DIR)/%/main.c
 	@echo
 
 #-------------------------------------------------------------------------------------------------------------
+BST_CLANG_TESTS := $(ALL_MAINC:$(TEST_DIR)/%/main.c=$(BST_BIN)/clang/%)
+BST_CLANG_FLAGS ?= -O3 -Wall -Werror -pedantic -I $(PROJECT_DIR)
+BST_CLANG ?= clang
+
+clang: $(BST_CLANG_TESTS)
+
+$(BST_BIN)/clang/%: $(TEST_DIR)/%/main.c
+	@echo "(CLANG) Building Test: $@"
+	@mkdir -p `dirname $@`
+	$(BST_CLANG) $(BST_CLANG_FLAGS) $? -o $@
+	@echo
+
+#-------------------------------------------------------------------------------------------------------------
 BST_VS14_TESTS := $(ALL_MAINC:$(TEST_DIR)/%/main.c=$(BST_BIN)/vs14/%)
 BST_VS14_FLAGS ?= /Ox /I $(call winpaths,$(PROJECT_DIR))
 BST_VS14 ?= $(PROJECT_DIR)/scripts/msvc.bash run_vs14 cl
