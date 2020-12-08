@@ -108,7 +108,7 @@
 #define bst_ctuple_truthy(...) (0)
 #define bst_ctuple_falsy(...) ()
 
-#define bst_ctuple_if(tpl, _t, _f) BST_JOIN2(bst_dtl_ctuple_if, bst_dtl_ctuple_if(tpl))(_t, _f)
+#define bst_ctuple_if(tpl, _t, _f) bst_dtl_ctuple_if(tpl)(_t, _f)
 
 // If it is a ctuple, then it will call the function else will just be some random symbol.
 #define bst_ctuple_isa(tpl, _t, _f) BST_JOIN2(bst_dtl_ctuple_isa, bst_ctuple_size(bst_ctuple(0, bst_dtl_ctuple_isa_expand tpl)))(_t, _f)

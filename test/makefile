@@ -35,16 +35,16 @@ $(BST_BIN)/gcc/%: $(TEST_DIR)/%/main.c
 	@echo
 
 #-------------------------------------------------------------------------------------------------------------
-BST_VC14_TESTS := $(ALL_MAINC:$(TEST_DIR)/%/main.c=$(BST_BIN)/vc14/%)
-BST_VC14_FLAGS ?= /Ox /I $(call winpaths,$(PROJECT_DIR))
-BST_VC14 ?= $(PROJECT_DIR)/scripts/msvc.bash run_vs14 cl
+BST_VS14_TESTS := $(ALL_MAINC:$(TEST_DIR)/%/main.c=$(BST_BIN)/vs14/%)
+BST_VS14_FLAGS ?= /Ox /I $(call winpaths,$(PROJECT_DIR))
+BST_VS14 ?= $(PROJECT_DIR)/scripts/msvc.bash run_vs14 cl
 
-vc14: $(BST_VC14_TESTS)
+vs14: $(BST_VS14_TESTS)
 
-$(BST_BIN)/vc14/%: $(TEST_DIR)/%/main.c
-	@echo "(VC14) Building Test: $@"
+$(BST_BIN)/vs14/%: $(TEST_DIR)/%/main.c
+	@echo "(VS14) Building Test: $@"
 	@mkdir -p `dirname $@`
-	$(BST_VC14) $(BST_VC14_FLAGS) /o $(call winpaths,$@) $(call winpaths,$?)
+	$(BST_VS14) $(BST_VS14_FLAGS) /o $(call winpaths,$@) $(call winpaths,$?)
 	@echo
 
 #-------------------------------------------------------------------------------------------------------------

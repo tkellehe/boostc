@@ -10,12 +10,12 @@
 
 int main()
 {
-    myprints();
-    myprints(1);
-    myprints(2, 1);
-    myprints(3, 2, 1);
-    myprints(4, 3, 2, 1);
-    myprints(5, 4, 3, 2, 1);
+    // myprints();
+    // myprints(1);
+    // myprints(2, 1);
+    // myprints(3, 2, 1);
+    // myprints(4, 3, 2, 1);
+    // myprints(5, 4, 3, 2, 1);
 
     #define mytpl ctuple('a', 'b', 'c', 'd')
 

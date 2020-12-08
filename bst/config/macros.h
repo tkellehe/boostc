@@ -14,13 +14,6 @@
 /// \}
 
 
-/* Provide a helper that joins three symbols */
-/// \{
-#define BST_DTL_JOIN3(X, Y, Z) X ## Y ## Z
-#define BST_JOIN3(X, Y, Z) BST_DTL_JOIN3(X, Y, Z)
-/// \}
-
-
 /* Provide a helper that converts symbols to strings */
 /// \{
 #define BST_DTL_DTL_TOSTRING(X) #X
