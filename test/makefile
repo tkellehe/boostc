@@ -1,55 +1,50 @@
-BST_BUILD ?= ./.build
-BST_BIN ?= ./bin
+# Current directory for project.
+TEST_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+PROJECT_DIR := $(abspath $(TEST_DIR)/..)
+# Remove the last slash.
+TEST_DIR := $(PROJECT_DIR)/test
+
+# Convert paths to windows.
+# winpaths=$(subst /,\,$1)
+winpaths=$(shell cygpath -w $1)
 
 # https://stackoverflow.com/a/12959694/5407843
 # Make does not offer a recursive wildcard function, so here's one:
 rwildcard=$(wildcard $1$2) $(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2))
 
-ALL_MAINC := $(call rwildcard,./,*main.c)
+# Get all of the main files.
+ALL_MAINC := $(call rwildcard,$(TEST_DIR)/,*main.c)
+
+# Check to see if the bin directory has been specified.
+BST_BIN ?= $(TEST_DIR)/bin
 
 clean:
-	@rm -rf $(BST_BIN) $(BST_BUILD)
+	@rm -rf $(BST_BIN)
 
 #-------------------------------------------------------------------------------------------------------------
-GCC_OBJS := $(ALL_MAINC:./%.c=$(BST_BUILD)/gcc/%.o)
-GCC_TESTS := $(ALL_MAINC:./%/main.c=$(BST_BIN)/gcc/%)
-GCC_FLAGS := -O6 -Wall -Werror -pedantic -I../
-GCC_BIN_FLAGS := -O6
-GCC ?= gcc
+BST_GCC_TESTS := $(ALL_MAINC:$(TEST_DIR)/%/main.c=$(BST_BIN)/gcc/%)
+BST_GCC_FLAGS ?= -O6 -Wall -Werror -pedantic -I $(PROJECT_DIR)
+BST_GCC ?= gcc
 
-gcc: $(GCC_TESTS)
+gcc: $(BST_GCC_TESTS)
 
-$(BST_BUILD)/gcc/%.o: ./%.c
-	@echo "(GCC) Compiling: $?"
-	@mkdir -p `dirname $@`
-	$(GCC) $(GCC_FLAGS) -c $? -o $@
-	@echo
-
-$(BST_BIN)/gcc/%: $(BST_BUILD)/gcc/%/main.o
+$(BST_BIN)/gcc/%: $(TEST_DIR)/%/main.c
 	@echo "(GCC) Building Test: $@"
 	@mkdir -p `dirname $@`
-	$(GCC) $(GCC_BIN_FLAGS) $? -o $@
+	$(BST_GCC) $(BST_GCC_FLAGS) $? -o $@
 	@echo
 
 #-------------------------------------------------------------------------------------------------------------
-VC14_OBJS := $(ALL_MAINC:./%.c=$(BST_BUILD)/vc14/%.o)
-VC14_TESTS := $(ALL_MAINC:./%/main.c=$(BST_BIN)/vc14/%)
-VC14_FLAGS := /Ox
-VC14_BIN_FLAGS := /Ox
-VC14 ?= run_vs14 cl
+BST_VC14_TESTS := $(ALL_MAINC:$(TEST_DIR)/%/main.c=$(BST_BIN)/vc14/%)
+BST_VC14_FLAGS ?= /Ox /I $(call winpaths,$(PROJECT_DIR))
+BST_VC14 ?= $(PROJECT_DIR)/scripts/msvc.bash run_vs14 cl
 
-vc14: $(VC14_TESTS)
+vc14: $(BST_VC14_TESTS)
 
-$(BST_BUILD)/vc14/%.o: ./%.c
-	@echo "(VC14) Compiling: $?"
-	@mkdir -p `dirname $@`
-	$(VC14) $(VC14_FLAGS) -c $? -o $@
-	@echo
-
-$(BST_BIN)/vc14/%: $(BST_BUILD)/vc14/%/main.o
+$(BST_BIN)/vc14/%: $(TEST_DIR)/%/main.c
 	@echo "(VC14) Building Test: $@"
 	@mkdir -p `dirname $@`
-	$(VC14) $(VC14_BIN_FLAGS) $? -o $@
+	$(BST_VC14) $(BST_VC14_FLAGS) /o $(call winpaths,$@) $(call winpaths,$?)
 	@echo
 
 #-------------------------------------------------------------------------------------------------------------
