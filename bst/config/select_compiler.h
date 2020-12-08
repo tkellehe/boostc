@@ -16,6 +16,9 @@
 # elif defined(__GNUC__) && !defined(__ibmxl__)
 #  define BST_COMPILER_GCC
 #  define BST_COMPILER_CONFIG "bst/config/compiler/gcc.h"
+# elif defined(__TINYC__)
+#  define BST_COMPILER_TCC
+#  define BST_COMPILER_CONFIG "bst/config/compiler/tcc.h"
 # elif defined(_CRAYC)
 #  define BST_COMPILER_CRAY
 #  define BST_COMPILER_CONFIG "bst/config/compiler/cray.h"
