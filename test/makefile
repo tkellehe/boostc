@@ -15,7 +15,7 @@ GCC_OBJS := $(ALL_MAINC:./%.c=$(BST_BUILD)/gcc/%.o)
 GCC_TESTS := $(ALL_MAINC:./%/main.c=$(BST_BIN)/gcc/%)
 GCC_FLAGS := -O6 -Wall -Werror -pedantic -I../
 GCC_BIN_FLAGS := -O6
-GCC := gcc
+GCC ?= gcc
 
 gcc: $(GCC_TESTS)
 
@@ -34,8 +34,9 @@ $(BST_BIN)/gcc/%: $(BST_BUILD)/gcc/%/main.o
 #-------------------------------------------------------------------------------------------------------------
 VC14_OBJS := $(ALL_MAINC:./%.c=$(BST_BUILD)/vc14/%.o)
 VC14_TESTS := $(ALL_MAINC:./%/main.c=$(BST_BIN)/vc14/%)
-VC14_FLAGS := /Ox -Wall -Werror -pedantic -I../
+VC14_FLAGS := /Ox
 VC14_BIN_FLAGS := /Ox
+VC14 ?= run_vs14 cl
 
 vc14: $(VC14_TESTS)
 
