@@ -52,7 +52,7 @@
         bst_dtl_vect_default_fns,\
         bst_dtl_vect_iter_defaults(T),\
         bst_dtl_vect_riter_defaults(T),\
-        bst_ctuple_empty(bst_ctuple(__VA_ARGS__),\
+        bst_ctuple_ifempty(bst_ctuple(__VA_ARGS__),\
             bst_alloc_stdlib,\
             bst_alloc_isa(bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0),\
                 bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0),\
