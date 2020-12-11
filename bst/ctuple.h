@@ -54,7 +54,6 @@
 
 /* Provide a helper that allows for parameter packing and unpacking */
 /// \{
-#define bst_ctuple_empty() (((((0)))))
 #define bst_ctuple(...) (__VA_ARGS__)
 #define bst_ctuple_expand(...) __VA_ARGS__
 
