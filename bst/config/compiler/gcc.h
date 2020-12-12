@@ -28,4 +28,10 @@
 /// \}
 
 
+/* Indicate that null concat with __VA_ARGS__ works */
+/// \{
+#define BST_HAS_VA_ARGS_PASTE
+/// \}
+
+
 #endif // BST__CONFIG__COMPILER__GCC_H

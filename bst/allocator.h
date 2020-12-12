@@ -16,8 +16,6 @@
 #define alloc_ctuple_malloc bst_alloc_ctuple_malloc
 #define alloc_ctuple_realloc bst_alloc_ctuple_realloc
 
-#define alloc_ctuple bst_alloc_ctuple
-
 #define alloc_free bst_alloc_free
 #define alloc_malloc bst_alloc_malloc
 #define alloc_realloc bst_alloc_realloc
@@ -51,13 +49,6 @@
 #define bst_alloc_ctuple_free(f) bst_alloc_set_free(bst_alloc_defaults, free)
 #define bst_alloc_ctuple_malloc(m) bst_alloc_set_malloc(bst_alloc_defaults, malloc)
 #define bst_alloc_ctuple_realloc(r) bst_alloc_set_realloc(bst_alloc_defaults, realloc)
-
-/* Packs assuming everything is provided in the std order */
-#define bst_alloc_ctuple(...) \
-    bst_ctuple_defaults(\
-        bst_ctuple(__VA_ARGS__),\
-        bst_alloc_defaults\
-    )
 
 #define bst_alloc_free(tpl) bst_ctuple_getI(tpl, 0)
 #define bst_alloc_malloc(tpl) bst_ctuple_getI(tpl, 1)

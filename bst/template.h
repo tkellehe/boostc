@@ -25,8 +25,6 @@
 
 #define tmplt_ctuple_fn bst_tmplt_ctuple_fn
 
-#define tmplt_ctuple bst_tmplt_ctuple
-
 #define tmplt_type bst_tmplt_type
 #define tmplt_info bst_tmplt_info
 #define tmplt_fns bst_tmplt_fns
@@ -68,15 +66,6 @@
 
 #define bst_tmplt_ctuple_fn(fn) bst_tmplt_ctuple_fns(bst_ctuple(fn))
 
-#define bst_tmplt_ctuple(...) \
-    bst_tmplt_isa(\
-        /* Check to see if this is a valid ctuple. */\
-        bst_dtl_tmplt_ctuple(__VA_ARGS__),\
-        /* If it is one then use it. */\
-        bst_dtl_tmplt_ctuple(__VA_ARGS__),\
-        /* The parameters provided to produce a template ctuple could not create a valid one. */\
-        BST_TMPLT_NOT_CREATED_ERROR\
-    )
 #define bst_dtl_tmplt_ctuple(...) \
     bst_ctuple_defaults(\
         bst_ctuple(__VA_ARGS__),\

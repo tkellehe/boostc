@@ -10,27 +10,33 @@
 #include <bst/config.h>
 
 
-/* Details for parameter packing */
+/* Details for ctuples */
 /// \{
+#if defined(BST_HAS_VA_ARGS_PASTE)
+# define BST_CTUPLE_SIZE0
+#endif
+
 #define bst_dtl_ctuple_append(tpl, ...) (bst_ctuple_expand tpl, __VA_ARGS__)
 #define bst_dtl_ctuple_prepend(tpl, ...) (__VA_ARGS__, bst_ctuple_expand tpl)
-#define bst_dtl_ctuple_defargs(tpl) bst_ctuple_expand tpl
 
-// TODO: Remove the extra value added to the numbers and get rid of the GNU '##' by forcing ctuples to have a NULL starting element.
-#define bst_dtl_ctuple_if(tpl) bst_dtl_ctuple_if_eval tpl
-#define bst_dtl_ctuple_if_eval(...) bst_dtl_ctuple_expand_ifs(bst_dtl_ctuple_args_augmenter(0, ##__VA_ARGS__))
-#define bst_dtl_ctuple_if0(_t, _f) _f
-#define bst_dtl_ctuple_if1(_t, _f) _t
 
+#define bst_dtl_ctuple_isa(tpl, _t, _f) BST_JOIN2(bst_dtl_ctuple_isa, BST_ARGCNT(0, bst_dtl_ctuple_isa_expand tpl))(_t, _f)
 #define bst_dtl_ctuple_isa2(_t, _f) _f
 #define bst_dtl_ctuple_isa3(_t, _f) _t
 #define bst_dtl_ctuple_isa_expand(...) 0, 0
 
-#define bst_dtl_ctuple_size(...)  bst_dtl_ctuple_expand_sizes(bst_dtl_ctuple_args_augmenter(0, ##__VA_ARGS__))
 
-#define bst_dtl_ctuple_args_augmenter(...) unused, __VA_ARGS__
-#define bst_dtl_ctuple_expand(x) x
-#define bst_dtl_ctuple_expand_sizes(...) bst_dtl_ctuple_expand(BST_GET_ARG103(__VA_ARGS__,\
+#define bst_dtl_ctuple_ifarg0empty(tpl, _t, _f) BST_EXPAND(bst_dtl_ctuple_ifarg0empty_(_t, _f, bst_dtl_ctuple_detect_empty_arg0(tpl)))
+#define bst_dtl_ctuple_ifarg0empty_(_t, _f, ...) BST_EXPAND(BST_IFEQ(BST_ARGCNT(__VA_ARGS__), 2, _t, _f))
+#define L 0, 0
+#define bst_dtl_ctuple_detect_empty_arg0(tpl) BST_EXPAND(bst_dtl_ctuple_detect_empty_arg0_(bst_ctuple_expand tpl))
+#define bst_dtl_ctuple_detect_empty_arg0_(...) BST_EXPAND(bst_dtl_ctuple_detect_empty_arg0__(__VA_ARGS__))
+#define bst_dtl_ctuple_detect_empty_arg0__(A,...) L ## A
+
+
+#if defined(BST_CTUPLE_SIZE0)
+# define bst_dtl_ctuple_size(...)  bst_dtl_ctuple_expand_sizes(BST_AUGMENTED(0, ##__VA_ARGS__))
+# define bst_dtl_ctuple_expand_sizes(...) BST_EXPAND(BST_GET_ARG103(__VA_ARGS__,\
     99, 98, 97, 96, 95, 94, 93, 92, 91, 90,\
     89, 88, 87, 86, 85, 84, 83, 82, 81, 80,\
     79, 78, 77, 76, 75, 74, 73, 72, 71, 70,\
@@ -42,19 +48,7 @@
     19, 18, 17, 16, 15, 14, 13, 12, 11, 10,\
     9, 8, 7, 6, 5, 4, 3, 2, 1, 0,\
     0))
-
-#define bst_dtl_ctuple_expand_ifs(...) bst_dtl_ctuple_expand(BST_GET_ARG103(__VA_ARGS__,\
-        bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, \
-        bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, \
-        bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, \
-        bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, \
-        bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, \
-        bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, \
-        bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, \
-        bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, \
-        bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, \
-        bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if1, bst_dtl_ctuple_if0,\
-        bst_dtl_ctuple_if0))
+#endif
 
 
 #define bst_dtl_ctuple_reverse0()
@@ -364,213 +358,6 @@
 #define bst_dtl_ctuple_collect98(_0, ...) _0, bst_dtl_ctuple_collect97(__VA_ARGS__)
 #define bst_dtl_ctuple_collect99(_0, ...) _0, bst_dtl_ctuple_collect98(__VA_ARGS__)
 #define bst_dtl_ctuple_collect100(_0, ...) _0, bst_dtl_ctuple_collect99(__VA_ARGS__)
-
-
-#define bst_dtl_ctuple_const_add1(N) BST_JOIN2(bst_dtl_ctuple_const_add1_, N)
-#define bst_dtl_ctuple_const_add1_0 1
-#define bst_dtl_ctuple_const_add1_1 2
-#define bst_dtl_ctuple_const_add1_2 3
-#define bst_dtl_ctuple_const_add1_3 4
-#define bst_dtl_ctuple_const_add1_4 5
-#define bst_dtl_ctuple_const_add1_5 6
-#define bst_dtl_ctuple_const_add1_6 7
-#define bst_dtl_ctuple_const_add1_7 8
-#define bst_dtl_ctuple_const_add1_8 9
-#define bst_dtl_ctuple_const_add1_9 10
-#define bst_dtl_ctuple_const_add1_10 11
-#define bst_dtl_ctuple_const_add1_11 12
-#define bst_dtl_ctuple_const_add1_12 13
-#define bst_dtl_ctuple_const_add1_13 14
-#define bst_dtl_ctuple_const_add1_14 15
-#define bst_dtl_ctuple_const_add1_15 16
-#define bst_dtl_ctuple_const_add1_16 17
-#define bst_dtl_ctuple_const_add1_17 18
-#define bst_dtl_ctuple_const_add1_18 19
-#define bst_dtl_ctuple_const_add1_19 20
-#define bst_dtl_ctuple_const_add1_20 21
-#define bst_dtl_ctuple_const_add1_21 22
-#define bst_dtl_ctuple_const_add1_22 23
-#define bst_dtl_ctuple_const_add1_23 24
-#define bst_dtl_ctuple_const_add1_24 25
-#define bst_dtl_ctuple_const_add1_25 26
-#define bst_dtl_ctuple_const_add1_26 27
-#define bst_dtl_ctuple_const_add1_27 28
-#define bst_dtl_ctuple_const_add1_28 29
-#define bst_dtl_ctuple_const_add1_29 30
-#define bst_dtl_ctuple_const_add1_30 31
-#define bst_dtl_ctuple_const_add1_31 32
-#define bst_dtl_ctuple_const_add1_32 33
-#define bst_dtl_ctuple_const_add1_33 34
-#define bst_dtl_ctuple_const_add1_34 35
-#define bst_dtl_ctuple_const_add1_35 36
-#define bst_dtl_ctuple_const_add1_36 37
-#define bst_dtl_ctuple_const_add1_37 38
-#define bst_dtl_ctuple_const_add1_38 39
-#define bst_dtl_ctuple_const_add1_39 40
-#define bst_dtl_ctuple_const_add1_40 41
-#define bst_dtl_ctuple_const_add1_41 42
-#define bst_dtl_ctuple_const_add1_42 43
-#define bst_dtl_ctuple_const_add1_43 44
-#define bst_dtl_ctuple_const_add1_44 45
-#define bst_dtl_ctuple_const_add1_45 46
-#define bst_dtl_ctuple_const_add1_46 47
-#define bst_dtl_ctuple_const_add1_47 48
-#define bst_dtl_ctuple_const_add1_48 49
-#define bst_dtl_ctuple_const_add1_49 50
-#define bst_dtl_ctuple_const_add1_50 51
-#define bst_dtl_ctuple_const_add1_51 52
-#define bst_dtl_ctuple_const_add1_52 53
-#define bst_dtl_ctuple_const_add1_53 54
-#define bst_dtl_ctuple_const_add1_54 55
-#define bst_dtl_ctuple_const_add1_55 56
-#define bst_dtl_ctuple_const_add1_56 57
-#define bst_dtl_ctuple_const_add1_57 58
-#define bst_dtl_ctuple_const_add1_58 59
-#define bst_dtl_ctuple_const_add1_59 60
-#define bst_dtl_ctuple_const_add1_60 61
-#define bst_dtl_ctuple_const_add1_61 62
-#define bst_dtl_ctuple_const_add1_62 63
-#define bst_dtl_ctuple_const_add1_63 64
-#define bst_dtl_ctuple_const_add1_64 65
-#define bst_dtl_ctuple_const_add1_65 66
-#define bst_dtl_ctuple_const_add1_66 67
-#define bst_dtl_ctuple_const_add1_67 68
-#define bst_dtl_ctuple_const_add1_68 69
-#define bst_dtl_ctuple_const_add1_69 70
-#define bst_dtl_ctuple_const_add1_70 71
-#define bst_dtl_ctuple_const_add1_71 72
-#define bst_dtl_ctuple_const_add1_72 73
-#define bst_dtl_ctuple_const_add1_73 74
-#define bst_dtl_ctuple_const_add1_74 75
-#define bst_dtl_ctuple_const_add1_75 76
-#define bst_dtl_ctuple_const_add1_76 77
-#define bst_dtl_ctuple_const_add1_77 78
-#define bst_dtl_ctuple_const_add1_78 79
-#define bst_dtl_ctuple_const_add1_79 80
-#define bst_dtl_ctuple_const_add1_80 81
-#define bst_dtl_ctuple_const_add1_81 82
-#define bst_dtl_ctuple_const_add1_82 83
-#define bst_dtl_ctuple_const_add1_83 84
-#define bst_dtl_ctuple_const_add1_84 85
-#define bst_dtl_ctuple_const_add1_85 86
-#define bst_dtl_ctuple_const_add1_86 87
-#define bst_dtl_ctuple_const_add1_87 88
-#define bst_dtl_ctuple_const_add1_88 89
-#define bst_dtl_ctuple_const_add1_89 90
-#define bst_dtl_ctuple_const_add1_90 91
-#define bst_dtl_ctuple_const_add1_91 92
-#define bst_dtl_ctuple_const_add1_92 93
-#define bst_dtl_ctuple_const_add1_93 94
-#define bst_dtl_ctuple_const_add1_94 95
-#define bst_dtl_ctuple_const_add1_95 96
-#define bst_dtl_ctuple_const_add1_96 97
-#define bst_dtl_ctuple_const_add1_97 98
-#define bst_dtl_ctuple_const_add1_98 99
-#define bst_dtl_ctuple_const_add1_99 100
-#define bst_dtl_ctuple_const_add1_100 101
-
-#define bst_dtl_ctuple_const_sub1(N) BST_JOIN2(bst_dtl_ctuple_const_sub1_, N)
-#define bst_dtl_ctuple_const_sub1_1 0
-#define bst_dtl_ctuple_const_sub1_2 1
-#define bst_dtl_ctuple_const_sub1_3 2
-#define bst_dtl_ctuple_const_sub1_4 3
-#define bst_dtl_ctuple_const_sub1_5 4
-#define bst_dtl_ctuple_const_sub1_6 5
-#define bst_dtl_ctuple_const_sub1_7 6
-#define bst_dtl_ctuple_const_sub1_8 7
-#define bst_dtl_ctuple_const_sub1_9 8
-#define bst_dtl_ctuple_const_sub1_10 9
-#define bst_dtl_ctuple_const_sub1_11 10
-#define bst_dtl_ctuple_const_sub1_12 11
-#define bst_dtl_ctuple_const_sub1_13 12
-#define bst_dtl_ctuple_const_sub1_14 13
-#define bst_dtl_ctuple_const_sub1_15 14
-#define bst_dtl_ctuple_const_sub1_16 15
-#define bst_dtl_ctuple_const_sub1_17 16
-#define bst_dtl_ctuple_const_sub1_18 17
-#define bst_dtl_ctuple_const_sub1_19 18
-#define bst_dtl_ctuple_const_sub1_20 19
-#define bst_dtl_ctuple_const_sub1_21 20
-#define bst_dtl_ctuple_const_sub1_22 21
-#define bst_dtl_ctuple_const_sub1_23 22
-#define bst_dtl_ctuple_const_sub1_24 23
-#define bst_dtl_ctuple_const_sub1_25 24
-#define bst_dtl_ctuple_const_sub1_26 25
-#define bst_dtl_ctuple_const_sub1_27 26
-#define bst_dtl_ctuple_const_sub1_28 27
-#define bst_dtl_ctuple_const_sub1_29 28
-#define bst_dtl_ctuple_const_sub1_30 29
-#define bst_dtl_ctuple_const_sub1_31 30
-#define bst_dtl_ctuple_const_sub1_32 31
-#define bst_dtl_ctuple_const_sub1_33 32
-#define bst_dtl_ctuple_const_sub1_34 33
-#define bst_dtl_ctuple_const_sub1_35 34
-#define bst_dtl_ctuple_const_sub1_36 35
-#define bst_dtl_ctuple_const_sub1_37 36
-#define bst_dtl_ctuple_const_sub1_38 37
-#define bst_dtl_ctuple_const_sub1_39 38
-#define bst_dtl_ctuple_const_sub1_40 39
-#define bst_dtl_ctuple_const_sub1_41 40
-#define bst_dtl_ctuple_const_sub1_42 41
-#define bst_dtl_ctuple_const_sub1_43 42
-#define bst_dtl_ctuple_const_sub1_44 43
-#define bst_dtl_ctuple_const_sub1_45 44
-#define bst_dtl_ctuple_const_sub1_46 45
-#define bst_dtl_ctuple_const_sub1_47 46
-#define bst_dtl_ctuple_const_sub1_48 47
-#define bst_dtl_ctuple_const_sub1_49 48
-#define bst_dtl_ctuple_const_sub1_50 49
-#define bst_dtl_ctuple_const_sub1_51 50
-#define bst_dtl_ctuple_const_sub1_52 51
-#define bst_dtl_ctuple_const_sub1_53 52
-#define bst_dtl_ctuple_const_sub1_54 53
-#define bst_dtl_ctuple_const_sub1_55 54
-#define bst_dtl_ctuple_const_sub1_56 55
-#define bst_dtl_ctuple_const_sub1_57 56
-#define bst_dtl_ctuple_const_sub1_58 57
-#define bst_dtl_ctuple_const_sub1_59 58
-#define bst_dtl_ctuple_const_sub1_60 59
-#define bst_dtl_ctuple_const_sub1_61 60
-#define bst_dtl_ctuple_const_sub1_62 61
-#define bst_dtl_ctuple_const_sub1_63 62
-#define bst_dtl_ctuple_const_sub1_64 63
-#define bst_dtl_ctuple_const_sub1_65 64
-#define bst_dtl_ctuple_const_sub1_66 65
-#define bst_dtl_ctuple_const_sub1_67 66
-#define bst_dtl_ctuple_const_sub1_68 67
-#define bst_dtl_ctuple_const_sub1_69 68
-#define bst_dtl_ctuple_const_sub1_70 69
-#define bst_dtl_ctuple_const_sub1_71 70
-#define bst_dtl_ctuple_const_sub1_72 71
-#define bst_dtl_ctuple_const_sub1_73 72
-#define bst_dtl_ctuple_const_sub1_74 73
-#define bst_dtl_ctuple_const_sub1_75 74
-#define bst_dtl_ctuple_const_sub1_76 75
-#define bst_dtl_ctuple_const_sub1_77 76
-#define bst_dtl_ctuple_const_sub1_78 77
-#define bst_dtl_ctuple_const_sub1_79 78
-#define bst_dtl_ctuple_const_sub1_80 79
-#define bst_dtl_ctuple_const_sub1_81 80
-#define bst_dtl_ctuple_const_sub1_82 81
-#define bst_dtl_ctuple_const_sub1_83 82
-#define bst_dtl_ctuple_const_sub1_84 83
-#define bst_dtl_ctuple_const_sub1_85 84
-#define bst_dtl_ctuple_const_sub1_86 85
-#define bst_dtl_ctuple_const_sub1_87 86
-#define bst_dtl_ctuple_const_sub1_88 87
-#define bst_dtl_ctuple_const_sub1_89 88
-#define bst_dtl_ctuple_const_sub1_90 89
-#define bst_dtl_ctuple_const_sub1_91 90
-#define bst_dtl_ctuple_const_sub1_92 91
-#define bst_dtl_ctuple_const_sub1_93 92
-#define bst_dtl_ctuple_const_sub1_94 93
-#define bst_dtl_ctuple_const_sub1_95 94
-#define bst_dtl_ctuple_const_sub1_96 95
-#define bst_dtl_ctuple_const_sub1_97 96
-#define bst_dtl_ctuple_const_sub1_98 97
-#define bst_dtl_ctuple_const_sub1_99 98
-#define bst_dtl_ctuple_const_sub1_100 99
-#define bst_dtl_ctuple_const_sub1_101 100
 /// \}
 
 

@@ -100,6 +100,11 @@
 #   define BST_NO_LONG_LONG
 # endif
 #endif
+
+
+#if !defined(BST_HAS_VA_ARGS_PASTE) && !defined(BST_NO_VA_ARGS_PASTE)
+# define BST_NO_VA_ARGS_PASTE
+#endif
 /// \}
 
 

@@ -16,8 +16,6 @@
 #define iter_ctuple_set bst_iter_ctuple_set
 #define iter_ctuple_swap bst_iter_ctuple_swap
 
-#define iter_ctuple bst_iter_ctuple
-
 #define iter_t bst_iter_t
 #define iter_nxt bst_iter_nxt
 #define iter_eq bst_iter_eq
@@ -53,13 +51,6 @@
 #define bst_iter_ctuple_val(val) bst_iter_set_val(bst_iter_defaults, val)
 #define bst_iter_ctuple_set(set) bst_iter_set_set(bst_iter_defaults, set)
 #define bst_iter_ctuple_swap(swap) bst_iter_set_swap(bst_iter_defaults, swap)
-
-/* Packs assuming everything is provided in the std order */
-#define bst_iter_ctuple(...) \
-    bst_ctuple_defaults(\
-        bst_ctuple(__VA_ARGS__),\
-        bst_iter_defaults\
-    )
 
 #define bst_iter_t(tpl) bst_ctuple_getI(tpl, 0)
 #define bst_iter_nxt(tpl) bst_ctuple_getI(tpl, 1)

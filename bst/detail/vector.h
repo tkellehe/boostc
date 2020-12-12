@@ -46,7 +46,7 @@
 /* Detail code */
 /// \{
 #define bst_dtl_vect_tmplt_t(T, ...) \
-    bst_tmplt_ctuple(\
+    bst_ctuple(\
         T*,\
         (T),\
         bst_dtl_vect_default_fns,\
@@ -56,7 +56,7 @@
             bst_alloc_stdlib,\
             bst_alloc_isa(bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0),\
                 bst_ctuple_getI(bst_ctuple(__VA_ARGS__), 0),\
-                bst_alloc_stdlib\
+                BST_VECT_BAD_ALLOC_PROVIDED\
             )\
         )\
     )
