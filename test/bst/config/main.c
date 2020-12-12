@@ -87,12 +87,12 @@ int main()
     BST_IF_ARG0_EMPTY(('1','2'), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
     printf("BST_IF_ARG0_EMPTY((\"1\",\"2\"))\n");
     BST_IF_ARG0_EMPTY(("1","2"), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
-    // printf("BST_IF_ARG0_EMPTY(((\"1\"),\"2\"))\n");
-    // BST_IF_ARG0_EMPTY((("1"),"2"), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
-    // printf("BST_IF_ARG0_EMPTY(((),\"2\"))\n");
-    // BST_IF_ARG0_EMPTY(((),"2"), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
-    // printf("BST_IF_ARG0_EMPTY((((),),\"2\",,))\n");
-    // BST_IF_ARG0_EMPTY((((),),"2",,), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
+    printf("BST_IF_ARG0_EMPTY(((\"1\"),\"2\"))\n");
+    BST_IF_ARG0_EMPTY((("1"),"2"), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
+    printf("BST_IF_ARG0_EMPTY(((),\"2\"))\n");
+    BST_IF_ARG0_EMPTY(((),"2"), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
+    printf("BST_IF_ARG0_EMPTY((((),),\"2\",,))\n");
+    BST_IF_ARG0_EMPTY((((),),"2",,), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
     #define ARG0_EMPTY_TEST() 0,0
     printf("BST_IF_ARG0_EMPTY((ARG0_EMPTY_TEST))\n");
     BST_IF_ARG0_EMPTY(ARG0_EMPTY_TEST, (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
