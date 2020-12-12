@@ -120,4 +120,34 @@
 /// \}
 
 
+
+/* Provide a way to detect if-empty character is first */
+/// \{
+#ifndef BST_UNPACK
+# define BST_UNPACK(...) __VA_ARGS__
+#endif
+#ifndef BST_IF_ARG0_EMPTY
+# ifdef BST_HAS_VA_ARGS_PASTE
+#  define BST_IF_ARG0_EMPTY(tpl, _t, _f) BST_EXPAND(BST_IFEQ(BST_DTL_IF_ARG0_EMPTY1(tpl), BST_DTL_IF_ARG0_EMPTY2(tpl), _f, _t))
+#  define BST_DTL_IF_ARG0_EMPTY1(tpl) BST_EXPAND(BST_DTL_IF_ARG0_EMPTY1_ tpl)
+#  define BST_DTL_IF_ARG0_EMPTY1_(...) BST_DTL_IF_ARG0_EMPTY1__(__VA_ARGS__)
+#  define BST_DTL_IF_ARG0_EMPTY1__(A, ...) BST_DTL_IF_ARG0_EMPTY1___(A)
+#  define BST_DTL_IF_ARG0_EMPTY1___(...) BST_ARGCNT(0, __VA_ARGS__)
+#  define BST_DTL_IF_ARG0_EMPTY2(tpl) BST_EXPAND(BST_DTL_IF_ARG0_EMPTY2_ tpl)
+#  define BST_DTL_IF_ARG0_EMPTY2_(...) BST_DTL_IF_ARG0_EMPTY2__(__VA_ARGS__)
+#  define BST_DTL_IF_ARG0_EMPTY2__(A, ...) BST_DTL_IF_ARG0_EMPTY2___(A)
+#  define BST_DTL_IF_ARG0_EMPTY2___(...) BST_ARGCNT(0, ##__VA_ARGS__)
+# else
+#  define BST_IF_ARG0_EMPTY(tpl, _t, _f) BST_EXPAND(BST_DTL_IF_ARG0_EMPTY(_t, _f, BST_DTL_IF_ARG0_EMPTY_DETECT(tpl)))
+// Need to add detection for () being the first element.
+#  define BST_DTL_IF_ARG0_EMPTY(_t, _f, ...) BST_EXPAND(BST_IFEQ(BST_ARGCNT(__VA_ARGS__), 2, _t, _f))
+#  define L 0, 0
+#  define BST_DTL_IF_ARG0_EMPTY_DETECT(tpl) BST_EXPAND(BST_DTL_IF_ARG0_EMPTY_DETECT_(BST_UNPACK tpl, unused))
+#  define BST_DTL_IF_ARG0_EMPTY_DETECT_(...) BST_EXPAND(BST_DTL_IF_ARG0_EMPTY_DETECT__(__VA_ARGS__))
+#  define BST_DTL_IF_ARG0_EMPTY_DETECT__(A,...) L ## A
+# endif
+#endif
+/// \}
+
+
 #endif // BST__CONFIG_H
