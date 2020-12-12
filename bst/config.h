@@ -126,6 +126,12 @@
 #ifndef BST_UNPACK
 # define BST_UNPACK(...) __VA_ARGS__
 #endif
+#ifndef BST_ISA_TUPLE
+# define BST_ISA_TUPLE(tpl, _t, _f) BST_JOIN2(BST_DTL_ISA_TUPLE, BST_ARGCNT(0, BST_DTL_ISA_TUPLE_EXPAND tpl))(_t, _f)
+# define BST_DTL_ISA_TUPLE2(_t, _f) _f
+# define BST_DTL_ISA_TUPLE3(_t, _f) _t
+# define BST_DTL_ISA_TUPLE_EXPAND(...) 0, 0
+#endif
 #ifndef BST_IF_ARG0_EMPTY
 # ifdef BST_HAS_VA_ARGS_PASTE
 #  define BST_IF_ARG0_EMPTY(tpl, _t, _f) BST_EXPAND(BST_IFEQ(BST_DTL_IF_ARG0_EMPTY1(tpl), BST_DTL_IF_ARG0_EMPTY2(tpl), _f, _t))
@@ -140,11 +146,13 @@
 # else
 #  define BST_IF_ARG0_EMPTY(tpl, _t, _f) BST_EXPAND(BST_DTL_IF_ARG0_EMPTY(_t, _f, BST_DTL_IF_ARG0_EMPTY_DETECT(tpl)))
 // Need to add detection for () being the first element.
-#  define BST_DTL_IF_ARG0_EMPTY(_t, _f, ...) BST_EXPAND(BST_IFEQ(BST_ARGCNT(__VA_ARGS__), 2, _t, _f))
+#  define BST_DTL_IF_ARG0_EMPTY(_t, _f, ...) BST_ARGCNT(__VA_ARGS__)
+// #  define BST_DTL_IF_ARG0_EMPTY(_t, _f, ...) BST_EXPAND(BST_IFEQ(BST_ARGCNT(__VA_ARGS__), 3, _t, _f))
+#  define BST_DTL_IF_ARG0_EMPTY_PREFIX 0, 0
 #  define L 0, 0
 #  define BST_DTL_IF_ARG0_EMPTY_DETECT(tpl) BST_EXPAND(BST_DTL_IF_ARG0_EMPTY_DETECT_(BST_UNPACK tpl, unused))
 #  define BST_DTL_IF_ARG0_EMPTY_DETECT_(...) BST_EXPAND(BST_DTL_IF_ARG0_EMPTY_DETECT__(__VA_ARGS__))
-#  define BST_DTL_IF_ARG0_EMPTY_DETECT__(A,...) L ## A
+#  define BST_DTL_IF_ARG0_EMPTY_DETECT__(A,...) L ## A BST_DTL_IF_ARG0_EMPTY_PREFIX
 # endif
 #endif
 /// \}
