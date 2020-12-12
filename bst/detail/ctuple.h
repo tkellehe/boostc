@@ -36,7 +36,7 @@
 
 #if defined(BST_CTUPLE_SIZE0)
 # define bst_dtl_ctuple_size(...)  bst_dtl_ctuple_expand_sizes(BST_AUGMENTED(0, ##__VA_ARGS__))
-# define bst_dtl_ctuple_expand_sizes(...) BST_EXPAND(BST_GET_ARG103(__VA_ARGS__,\
+# define bst_dtl_ctuple_expand_sizes(...) BST_EXPAND(BST_GET_ARG101(__VA_ARGS__,\
     99, 98, 97, 96, 95, 94, 93, 92, 91, 90,\
     89, 88, 87, 86, 85, 84, 83, 82, 81, 80,\
     79, 78, 77, 76, 75, 74, 73, 72, 71, 70,\
