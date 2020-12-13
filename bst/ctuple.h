@@ -15,26 +15,27 @@
 /// \{
 #ifdef BST_NO_NAMESPACE
 #define ctuple bst_ctuple
-#define unctuple bst_ctuple_expand
+#define ctuple_expand bst_ctuple_expand
+#define ctuple_empty bst_ctuple_empty
+#define ctuple_call bst_ctuple_call
+
+#define ctuple_isa bst_ctuple_isa
+
+#define ctuple_size bst_ctuple_size
+
+#define ctuple_getI bst_ctuple_getI
 
 #define ctuple_concat bst_ctuple_concat
 #define ctuple_append bst_ctuple_append
 #define ctuple_prepend bst_ctuple_prepend
 
-#define ctuple_call bst_ctuple_call
-
-#define ctuple_size bst_ctuple_size
-
 #define ctuple_reverse bst_ctuple_reverse
-
-#define ctuple_getI bst_ctuple_getI
 
 #define ctuple_ltrim bst_ctuple_ltrim
 #define ctuple_rtrim bst_ctuple_rtrim
 #define ctuple_collect bst_ctuple_collect
 
 #define ctuple_if bst_ctuple_if
-#define ctuple_isa bst_ctuple_isa
 #define ctuple_ifempty bst_ctuple_ifempty
 #define ctuple_hasGT bst_ctuple_hasGT
 #define ctuple_hasLTE bst_ctuple_hasLTE
@@ -53,6 +54,14 @@
 /// \{
 #define bst_ctuple(...) (__VA_ARGS__)
 #define bst_ctuple_expand(...) __VA_ARGS__
+#define bst_ctuple_empty() ()
+#define bst_ctuple_call(F, tpl) BST_EXPAND(F tpl)
+
+#define bst_ctuple_isa(tpl, _t, _f) BST_ISA_TUPLE(tpl, _t, _f)
+
+#define bst_ctuple_size(tpl) bst_ctuple_isa(tpl, BST_IF_ARG0_EMPTY(tpl, BST_IFEQ(BST_ARGCNT tpl, 1, 0, BST_ARGCNT tpl), BST_ARGCNT tpl), 0)
+
+#define bst_ctuple_getI(tpl, I) bst_ctuple_hasGT(tpl, I, bst_ctuple_call(BST_JOIN2(BST_GET_ARG, I), tpl), BST_CTUPLE_OUT_OF_BOUNDS)
 
 /*
 #define bst_ctuple_concat(ltpl, rtpl) \
@@ -84,26 +93,13 @@
 #define bst_ctuple_append(tpl, ...) bst_dtl_ctuple_append(tpl, __VA_ARGS__)
 #define bst_ctuple_prepend(tpl, ...) bst_dtl_ctuple_prepend(tpl, __VA_ARGS__)
 
-#define bst_ctuple_call(F, tpl) F tpl
-
-#if defined(BST_CTUPLE_SIZE0)
-# define bst_ctuple_size(tpl) bst_ctuple_call(bst_dtl_ctuple_size, tpl)
-#else
-# define bst_ctuple_size(tpl) bst_ctuple_ifempty(tpl, 0, bst_ctuple_call(BST_ARGCNT, tpl))
-#endif
-
 #define bst_ctuple_reverse(tpl) bst_ctuple(bst_ctuple_call(BST_JOIN2(bst_dtl_ctuple_reverse, bst_ctuple_size(tpl)), tpl))
-
-#define bst_ctuple_getI(tpl, I) bst_ctuple_hasGT(tpl, I, bst_ctuple_call(BST_JOIN2(BST_GET_ARG, I), tpl), BST_CTUPLE_OUT_OF_BOUNDS)
 
 #define bst_ctuple_ltrim(tpl, N) bst_ctuple(bst_ctuple_call(BST_JOIN2(bst_dtl_ctuple_ltrim, N), tpl))
 #define bst_ctuple_rtrim(tpl, N) bst_ctuple_reverse(bst_ctuple_ltrim(bst_ctuple_reverse(tpl), N))
 #define bst_ctuple_collect(tpl, N) bst_ctuple(bst_ctuple_call(BST_JOIN2(bst_dtl_ctuple_collect, N), tpl))
 
 #define bst_ctuple_if(tpl, _t, _f) bst_ctuple_ifempty(tpl, _f, _t)
-
-// If it is a ctuple, then it will call the function else will just be some random symbol.
-#define bst_ctuple_isa(tpl, _t, _f) BST_EXPAND(bst_dtl_ctuple_isa(tpl, _t, _f))
 
 #if defined(BST_CTUPLE_SIZE0)
 # define bst_ctuple_ifempty(tpl, _t, _f) bst_ctuple_hasN(tpl, 0, _t, _f)

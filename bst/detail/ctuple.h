@@ -12,43 +12,8 @@
 
 /* Details for ctuples */
 /// \{
-#if defined(BST_HAS_VA_ARGS_PASTE)
-# define BST_CTUPLE_SIZE0
-#endif
-
 #define bst_dtl_ctuple_append(tpl, ...) (bst_ctuple_expand tpl, __VA_ARGS__)
 #define bst_dtl_ctuple_prepend(tpl, ...) (__VA_ARGS__, bst_ctuple_expand tpl)
-
-
-#define bst_dtl_ctuple_isa(tpl, _t, _f) BST_JOIN2(bst_dtl_ctuple_isa, BST_ARGCNT(0, bst_dtl_ctuple_isa_expand tpl))(_t, _f)
-#define bst_dtl_ctuple_isa2(_t, _f) _f
-#define bst_dtl_ctuple_isa3(_t, _f) _t
-#define bst_dtl_ctuple_isa_expand(...) 0, 0
-
-
-#define bst_dtl_ctuple_ifarg0empty(tpl, _t, _f) BST_EXPAND(bst_dtl_ctuple_ifarg0empty_(_t, _f, bst_dtl_ctuple_detect_empty_arg0(tpl)))
-#define bst_dtl_ctuple_ifarg0empty_(_t, _f, ...) BST_EXPAND(BST_IFEQ(BST_ARGCNT(__VA_ARGS__), 2, _t, _f))
-#define L 0, 0
-#define bst_dtl_ctuple_detect_empty_arg0(tpl) BST_EXPAND(bst_dtl_ctuple_detect_empty_arg0_(bst_ctuple_expand tpl))
-#define bst_dtl_ctuple_detect_empty_arg0_(...) BST_EXPAND(bst_dtl_ctuple_detect_empty_arg0__(__VA_ARGS__))
-#define bst_dtl_ctuple_detect_empty_arg0__(A,...) L ## A
-
-
-#if defined(BST_CTUPLE_SIZE0)
-# define bst_dtl_ctuple_size(...)  bst_dtl_ctuple_expand_sizes(BST_AUGMENTED(0, ##__VA_ARGS__))
-# define bst_dtl_ctuple_expand_sizes(...) BST_EXPAND(BST_GET_ARG101(__VA_ARGS__,\
-    99, 98, 97, 96, 95, 94, 93, 92, 91, 90,\
-    89, 88, 87, 86, 85, 84, 83, 82, 81, 80,\
-    79, 78, 77, 76, 75, 74, 73, 72, 71, 70,\
-    69, 68, 67, 66, 65, 64, 63, 62, 61, 60,\
-    59, 58, 57, 56, 55, 54, 53, 52, 51, 50,\
-    49, 48, 47, 46, 45, 44, 43, 42, 41, 40,\
-    39, 38, 37, 36, 35, 34, 33, 32, 31, 30,\
-    29, 28, 27, 26, 25, 24, 23, 22, 21, 20,\
-    19, 18, 17, 16, 15, 14, 13, 12, 11, 10,\
-    9, 8, 7, 6, 5, 4, 3, 2, 1, 0,\
-    0))
-#endif
 
 
 #define bst_dtl_ctuple_reverse0()
