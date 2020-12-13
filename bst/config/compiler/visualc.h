@@ -34,4 +34,10 @@
 /// \}
 
 
+/* Indicate visualc allows pasting symbols to strings */
+/// \{
+#define BST_HAS_STRING_PASTE
+/// \}
+
+
 #endif // BST__CONFIG__COMPILER__VISUALC_H

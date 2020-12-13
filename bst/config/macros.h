@@ -37,7 +37,7 @@
 
 /* Provide a helper that call macro with variadic parameters provided after */
 /// \{
-#define BST_CALL(F, ...) F(__VA_ARGS__)
+#define BST_CALL(F, ...) BST_EXPAND(F(__VA_ARGS__))
 /// \}
 
 

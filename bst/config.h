@@ -105,6 +105,11 @@
 #if !defined(BST_HAS_VA_ARGS_PASTE) && !defined(BST_NO_VA_ARGS_PASTE)
 # define BST_NO_VA_ARGS_PASTE
 #endif
+
+
+#if !defined(BST_HAS_STRING_PASTE) && !defined(BST_NO_STRING_PASTE)
+# define BST_NO_STRING_PASTE
+#endif
 /// \}
 
 
@@ -157,16 +162,23 @@
 #  define BST_DTL_IF_ARG0_EMPTY2___(...) BST_ARGCNT(0, ##__VA_ARGS__)
 # else
 #  define BST_IF_ARG0_EMPTY(tpl, _t, _f) BST_EXPAND(BST_DTL_IF_ARG0_EMPTY(_t, _f, BST_DTL_IF_ARG0_EMPTY_DETECT(tpl)))
-// Need to add detection for () being the first element.
-// #  define BST_DTL_IF_ARG0_EMPTY(_t, _f, ...) BST_ARGCNT(__VA_ARGS__)
 #  define BST_DTL_IF_ARG0_EMPTY(_t, _f, tpl) BST_EXPAND(BST_IFEQ(BST_ARGCNT tpl, 2, _t, _f))
-#  define L 0, 0
 #  define BST_DTL_IF_ARG0_EMPTY_DETECT(tpl) BST_EXPAND(BST_DTL_IF_ARG0_EMPTY_DETECT1(unused, BST_UNPACK tpl, unused))
 #  define BST_DTL_IF_ARG0_EMPTY_DETECT1(U,...) BST_EXPAND(BST_DTL_IF_ARG0_EMPTY_DETECT2(__VA_ARGS__))
-// #  define BST_DTL_IF_ARG0_EMPTY_DETECT2(A,...) L ## A
 #  define BST_DTL_IF_ARG0_EMPTY_DETECT2(A,...) (BST_CALL(BST_DTL_IF_ARG0_EMPTY_DETECT3(A, unused), A, unused))
-#  define BST_DTL_IF_ARG0_EMPTY_DETECT3(A, U) BST_ISA_TUPLE(A, BST_EXPAND, BST_DTL_IF_ARG0_EMPTY_DETECT4)
-#  define BST_DTL_IF_ARG0_EMPTY_DETECT4(A, U) L ## A
+#  define BST_DTL_IF_ARG0_EMPTY_DETECT3(A, U) BST_ISA_TUPLE(A, BST_DTL_IF_ARG0_EMPTY_DETECT4, BST_DTL_IF_ARG0_EMPTY_DETECT5)
+#  define BST_DTL_IF_ARG0_EMPTY_DETECT4(A, U) A
+#  define BST_DTL_IF_ARG0_EMPTY_DETECT5(A, U) BST_DTL_IF_ARG0_EMPTY_DETECT6(A, U) ()
+
+// If does not have symbol string pasting, then we need to potentially mess up string literals.
+#  ifdef BST_HAS_STRING_PASTE
+#   define BST_DTL_IF_ARG0_EMPTY_PREFIX() 0, 0
+#   define BST_DTL_IF_ARG0_EMPTY_DETECT6(A, U) BST_DTL_IF_ARG0_EMPTY_PREFIX ## A
+#  else
+#   define L() 0, 0
+#   define BST_DTL_IF_ARG0_EMPTY_DETECT6(A, U) L ## A
+#  endif
+
 # endif
 #endif
 /// \}
