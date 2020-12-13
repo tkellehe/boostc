@@ -18,6 +18,8 @@ ALL_MAINC := $(call rwildcard,$(TEST_DIR)/,*main.c)
 # Check to see if the bin directory has been specified.
 BST_BIN ?= $(TEST_DIR)/bin
 
+all: gcc clang vs14
+
 clean:
 	@rm -rf $(BST_BIN)
 
