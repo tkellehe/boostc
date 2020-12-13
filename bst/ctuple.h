@@ -139,6 +139,7 @@
 #endif
 /// \}
 
+
 /** Selects the `_t` statement if the ctuple is truthy and the `_f` otherwise. */
 /// \{
 #ifndef bst_ctuple_if
@@ -194,6 +195,7 @@
 #endif
 /// \}
 
+
 /** Gets the size of the ctuple and properly handles empty ctuples. */
 /// \{
 #ifndef bst_ctuple_size
@@ -201,7 +203,8 @@
 #endif
 /// \}
 
-/**  */
+
+/** Gets the Ith item in a ctuple then resolves to that value and will not compile if out-of-bounds. */
 /// \{
 #ifndef bst_ctuple_getI
 # define bst_ctuple_getI(tpl, I) \
