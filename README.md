@@ -10,13 +10,13 @@ Therein, I began to wonder if I could take this and get it into a _C_ library.
 
 So, this library is my attempt to make a _C_ version without copying _Boost C++_ directly for my own learning experience.
 
-The name comes from taking _Object Oriented_ out of _Boost C++_.
+The name comes from taking _**O**bject **O**riented_ out of _B**oo**st C++_.
 At least that is what I say now.
 It really is just an abbreviation of _Boost_, by removing the vowels...
 
 ### Interface Namespaces
 The current interface is to prefix everything with `bst_`.
-Also, to provide an interface without this prefix.
+Also, the library provides an interface without this prefix.
 This may cause problems in your library if you have something with a similar name.
 To avoid this, you can define `BST_NAMESPACE_ONLY` and it will remove the other non-stdc interfaces without the `bst_`.
 
@@ -27,7 +27,7 @@ Another benefit is that you do not need to build this library.
 
 ### Insertion Code Bloat
 Since most interfaces are inlined code, this can cause binaries to be quite large.
-A simple solution is to instantiate your own function calling the inlining _bst_ functions.
+A simple solution is to instantiate your own function to wrap the _bst_ functions.
 Then the compiler will treat it as a function and potentially reducing the size of binaries.
 
 # vector
