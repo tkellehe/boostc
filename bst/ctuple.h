@@ -116,7 +116,7 @@
 /// \}
 
 
-/** Expands a ctuple if called `bst_ctuple_expand tpl`. */
+/** Expands to an empty ctuple. */
 /// \{
 #ifndef bst_ctuple_empty
 # define bst_ctuple_empty() ()
