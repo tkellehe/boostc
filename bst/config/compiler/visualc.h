@@ -40,8 +40,4 @@
 /// \}
 
 
-// #pragma comment(lib, "user32.lib")
-// #pragma comment(lib, "Coredll.lib")
-
-
 #endif // BST__CONFIG__COMPILER__VISUALC_H

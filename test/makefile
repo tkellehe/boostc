@@ -51,7 +51,7 @@ $(BST_BIN)/clang/%: $(TEST_DIR)/%/main.c
 
 #-------------------------------------------------------------------------------------------------------------
 BST_VS14_TESTS := $(ALL_MAINC:$(TEST_DIR)/%/main.c=$(BST_BIN)/vs14/%)
-BST_VS14_FLAGS ?= /Ox /I $(call winpaths,$(PROJECT_DIR))
+BST_VS14_FLAGS ?= /Ox /W4 /I $(call winpaths,$(PROJECT_DIR)) /link Kernel32.lib User32.lib
 BST_VS14 ?= $(PROJECT_DIR)/scripts/msvc.bash run_vs14 cl
 
 vs14: $(BST_VS14_TESTS)
@@ -59,7 +59,8 @@ vs14: $(BST_VS14_TESTS)
 $(BST_BIN)/vs14/%: $(TEST_DIR)/%/main.c
 	@echo "(VS14) Building Test: $@"
 	@mkdir -p `dirname $@`
-	$(BST_VS14) $(BST_VS14_FLAGS) /o $(call winpaths,$@) $(call winpaths,$?)
+	$(BST_VS14) $(call winpaths,$?) $(BST_VS14_FLAGS) /out:$(call winpaths,$@)
+	rm -f *.obj
 	@echo
 
 #-------------------------------------------------------------------------------------------------------------
