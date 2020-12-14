@@ -17,12 +17,15 @@
 # ifndef ctuple
 #  define ctuple bst_ctuple
 # endif
+
 # ifndef ctuple_expand
 #  define ctuple_expand bst_ctuple_expand
 # endif
+
 # ifndef ctuple_empty
 #  define ctuple_empty bst_ctuple_empty
 # endif
+
 # ifndef ctuple_call
 #  define ctuple_call bst_ctuple_call
 # endif
@@ -34,21 +37,27 @@
 # ifndef ctuple_if
 #  define ctuple_if bst_ctuple_if
 # endif
+
 # ifndef ctuple_ifempty
 #  define ctuple_ifempty bst_ctuple_ifempty
 # endif
+
 # ifndef ctuple_hasGT
 #  define ctuple_hasGT bst_ctuple_hasGT
 # endif
+
 # ifndef ctuple_hasLTE
 #  define ctuple_hasLTE bst_ctuple_hasLTE
 # endif
+
 # ifndef ctuple_hasN
 #  define ctuple_hasN bst_ctuple_hasN
 # endif
+
 # ifndef ctuple_hasLT
 #  define ctuple_hasLT bst_ctuple_hasLT
 # endif
+
 # ifndef ctuple_hasGTE
 #  define ctuple_hasGTE bst_ctuple_hasGTE
 # endif
@@ -61,28 +70,32 @@
 #  define ctuple_getI bst_ctuple_getI
 # endif
 
-# ifndef ctuple_concat
-#  define ctuple_concat bst_ctuple_concat
-# endif
 # ifndef ctuple_append
 #  define ctuple_append bst_ctuple_append
 # endif
+
 # ifndef ctuple_prepend
 #  define ctuple_prepend bst_ctuple_prepend
+# endif
+
+# ifndef ctuple_concat
+#  define ctuple_concat bst_ctuple_concat
 # endif
 
 # ifndef ctuple_reverse
 #  define ctuple_reverse bst_ctuple_reverse
 # endif
 
+# ifndef ctuple_collect
+#  define ctuple_collect bst_ctuple_collect
+# endif
+
 # ifndef ctuple_ltrim
 #  define ctuple_ltrim bst_ctuple_ltrim
 # endif
+
 # ifndef ctuple_rtrim
 #  define ctuple_rtrim bst_ctuple_rtrim
-# endif
-# ifndef ctuple_collect
-#  define ctuple_collect bst_ctuple_collect
 # endif
 
 # ifndef ctuple_setI
@@ -215,18 +228,11 @@
 #endif
 /// \}
 
-/* Provide a helper that allows for parameter packing and unpacking */
+
+/** Creates a new ctuple with the list of items added to the back. */
 /// \{
-/*
-#define bst_ctuple_concat(ltpl, rtpl) \
-    bst_ctuple_ifempty(ltpl,\
-        rtpl,\
-        bst_ctuple_ifempty(rtpl,\
-            ltpl,\
-            bst_ctuple_call(bst_dtl_ctuple_append, bst_dtl_ctuple_prepend(rtpl, ltpl))\
-        )\
-    )
-#define bst_ctuple_append(tpl, ...) \
+#ifndef bst_ctuple_append
+# define bst_ctuple_append(tpl, ...) \
     bst_ctuple_ifempty(tpl,\
         bst_ctuple(__VA_ARGS__),\
         bst_ctuple_ifempty(bst_ctuple(__VA_ARGS__),\
@@ -234,7 +240,14 @@
             bst_dtl_ctuple_append(tpl, __VA_ARGS__)\
         )\
     )
-#define bst_ctuple_prepend(tpl, ...) \
+#endif
+/// \}
+
+
+/** Creates a new ctuple with the list of items added to the front. */
+/// \{
+#ifndef bst_ctuple_prepend
+# define bst_ctuple_prepend(tpl, ...) \
     bst_ctuple_ifempty(tpl,\
         bst_ctuple(__VA_ARGS__),\
         bst_ctuple_ifempty(bst_ctuple(__VA_ARGS__),\
@@ -242,16 +255,76 @@
             bst_dtl_ctuple_prepend(tpl, __VA_ARGS__)\
         )\
     )
-*/
-#define bst_ctuple_concat(ltpl, rtpl) bst_ctuple_call(bst_dtl_ctuple_append, bst_dtl_ctuple_prepend(rtpl, ltpl))
-#define bst_ctuple_append(tpl, ...) bst_dtl_ctuple_append(tpl, __VA_ARGS__)
-#define bst_ctuple_prepend(tpl, ...) bst_dtl_ctuple_prepend(tpl, __VA_ARGS__)
+#endif
+/// \}
 
-#define bst_ctuple_reverse(tpl) bst_ctuple(bst_ctuple_call(BST_JOIN2(bst_dtl_ctuple_reverse, bst_ctuple_size(tpl)), tpl))
 
-#define bst_ctuple_ltrim(tpl, N) bst_ctuple(bst_ctuple_call(BST_JOIN2(bst_dtl_ctuple_ltrim, N), tpl))
-#define bst_ctuple_rtrim(tpl, N) bst_ctuple_reverse(bst_ctuple_ltrim(bst_ctuple_reverse(tpl), N))
-#define bst_ctuple_collect(tpl, N) bst_ctuple(bst_ctuple_call(BST_JOIN2(bst_dtl_ctuple_collect, N), tpl))
+/** Creates a new ctuple by concatenating the two ctuples provided. */
+/// \{
+#ifndef bst_ctuple_concat
+# define bst_ctuple_concat(ltpl, rtpl) \
+    bst_ctuple_ifempty(ltpl,\
+        rtpl,\
+        bst_ctuple_ifempty(rtpl,\
+            ltpl,\
+            bst_ctuple_call(bst_dtl_ctuple_append, bst_dtl_ctuple_prepend(rtpl, ltpl))\
+        )\
+    )
+#endif
+/// \}
+
+
+/** Creates a new ctuple in reverse. */
+/// \{
+#ifndef bst_ctuple_reverse
+# define bst_ctuple_reverse(tpl) bst_ctuple(bst_ctuple_call(BST_JOIN2(bst_dtl_ctuple_reverse, bst_ctuple_size(tpl)), tpl))
+#endif
+/// \}
+
+
+/** Creates a new ctuple and collects the first N cells. */
+/// \{
+#ifndef bst_ctuple_collect
+# define bst_ctuple_collect(tpl, N) \
+    bst_ctuple_hasGTE(tpl, N,\
+        (BST_CALL(BST_JOIN2(bst_dtl_ctuple_collect, N), bst_dtl_ctuple_collect_augmented(tpl))),\
+        BST_CTUPLE_OUT_OF_BOUNDS\
+    )
+#endif
+
+
+/** Creates a new ctuple by removing the first N items. */
+/// \{
+#ifndef bst_ctuple_ltrim
+# define bst_ctuple_ltrim(tpl, N) \
+    BST_IFEQ(N, 0,\
+        tpl,\
+        bst_ctuple_hasLTE(tpl, N,\
+            bst_ctuple_empty(),\
+            bst_ctuple(bst_ctuple_call(BST_JOIN2(bst_dtl_ctuple_ltrim, N), tpl))\
+        )\
+    )
+#endif
+/// \}
+
+
+/** Creates a new ctuple by removing the last N items. */
+/// \{
+#ifndef bst_ctuple_rtrim
+# define bst_ctuple_rtrim(tpl, N) \
+    BST_IFEQ(N, 0,\
+        tpl,\
+        bst_ctuple_hasLTE(tpl, N,\
+            bst_ctuple_empty(),\
+            bst_ctuple_reverse(bst_ctuple_ltrim(bst_ctuple_reverse(tpl), N))\
+        )\
+    )
+#endif
+/// \}
+
+
+/* Provide a helper that allows for parameter packing and unpacking */
+/// \{
 
 #define bst_ctuple_setI(tpl, I, val) \
     bst_ctuple_hasN(tpl, BST_CONST_ADD1(I),\
