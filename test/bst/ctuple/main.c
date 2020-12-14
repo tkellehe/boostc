@@ -245,7 +245,6 @@ int main()
     printf("bst_ctuple_setI(%s, 3) -> bst_ctuple_getI(%s, 7)\n", bst_ctuple_tostring(tpl4), bst_ctuple_tostring(tpl12));
     BST_IFEQ(bst_ctuple_getI(tpl12, 7), 11, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
 
-
     //--------------------------------------------------------------------------------------------------------
     printf("-----------------------------\n");
     printf("     pass     |     fail     \n");
