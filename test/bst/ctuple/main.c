@@ -225,6 +225,28 @@ int main()
     BST_IFEQ(bst_ctuple_getI(tpl11, 4), 14, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
 
     //--------------------------------------------------------------------------------------------------------
+    #define tpl12 bst_ctuple_setI(tpl4, 2, 5)
+    printf("bst_ctuple_setI(%s, 3)\n", bst_ctuple_tostring(tpl4));
+    bst_ctuple_hasN(tpl12, 8, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("bst_ctuple_setI(%s, 3) -> bst_ctuple_getI(%s, 0)\n", bst_ctuple_tostring(tpl4), bst_ctuple_tostring(tpl12));
+    BST_IFEQ(bst_ctuple_getI(tpl12, 0), 18, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("bst_ctuple_setI(%s, 3) -> bst_ctuple_getI(%s, 1)\n", bst_ctuple_tostring(tpl4), bst_ctuple_tostring(tpl12));
+    BST_IFEQ(bst_ctuple_getI(tpl12, 1), 17, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("bst_ctuple_setI(%s, 3) -> bst_ctuple_getI(%s, 2)\n", bst_ctuple_tostring(tpl4), bst_ctuple_tostring(tpl12));
+    BST_IFEQ(bst_ctuple_getI(tpl12, 2), 5, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("bst_ctuple_setI(%s, 3) -> bst_ctuple_getI(%s, 3)\n", bst_ctuple_tostring(tpl4), bst_ctuple_tostring(tpl12));
+    BST_IFEQ(bst_ctuple_getI(tpl12, 3), 15, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("bst_ctuple_setI(%s, 3) -> bst_ctuple_getI(%s, 4)\n", bst_ctuple_tostring(tpl4), bst_ctuple_tostring(tpl12));
+    BST_IFEQ(bst_ctuple_getI(tpl12, 4), 14, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("bst_ctuple_setI(%s, 3) -> bst_ctuple_getI(%s, 5)\n", bst_ctuple_tostring(tpl4), bst_ctuple_tostring(tpl12));
+    BST_IFEQ(bst_ctuple_getI(tpl12, 5), 13, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("bst_ctuple_setI(%s, 3) -> bst_ctuple_getI(%s, 6)\n", bst_ctuple_tostring(tpl4), bst_ctuple_tostring(tpl12));
+    BST_IFEQ(bst_ctuple_getI(tpl12, 6), 12, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("bst_ctuple_setI(%s, 3) -> bst_ctuple_getI(%s, 7)\n", bst_ctuple_tostring(tpl4), bst_ctuple_tostring(tpl12));
+    BST_IFEQ(bst_ctuple_getI(tpl12, 7), 11, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+
+
+    //--------------------------------------------------------------------------------------------------------
     printf("-----------------------------\n");
     printf("     pass     |     fail     \n");
     printf("     %04i     |     %04i     \n", num_pass, num_fail);

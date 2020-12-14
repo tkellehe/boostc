@@ -323,15 +323,7 @@
 /// \}
 
 
-/* Provide a helper that allows for parameter packing and unpacking */
+/** Creates a new ctuple and sets the value at the provided location. */
 /// \{
-
-#define bst_ctuple_setI(tpl, I, val) \
-    bst_ctuple_hasN(tpl, BST_CONST_ADD1(I),\
-        bst_ctuple_hasN(tpl, 1,\
-            bst_ctuple(val),\
-            bst_ctuple_append(bst_ctuple_collect(tpl, I), val)\
-        ),\
-        bst_ctuple_concat(bst_ctuple_append(bst_ctuple_collect(tpl, I), val), bst_ctuple_ltrim(tpl, BST_CONST_ADD1(I)))\
-    )
+#define bst_ctuple_setI(tpl, I, val) bst_ctuple_concat(bst_ctuple_append(bst_ctuple_collect(tpl, I), val), bst_ctuple_ltrim(tpl, BST_CONST_ADD1(I)))
 /// \}
