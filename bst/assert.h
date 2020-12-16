@@ -3,10 +3,6 @@
 //  Distributed under the Boost Software License, Version 1.0. (See
 //  accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
-#ifndef BST__ASSERT_H
-#define BST__ASSERT_H
-
-
 #include <bst/config.h>
 
 
@@ -17,10 +13,9 @@
 #endif
 
 
-/* Add namespaced version */
+/* Add namespaced version. */
 /// \{
-#define bst_assert assert
+#ifndef bst_assert
+# define bst_assert assert
+#endif
 /// \}
-
-
-#endif // BST__ASSERT_H

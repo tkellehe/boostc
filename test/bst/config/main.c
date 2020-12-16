@@ -1,4 +1,5 @@
 #include <bst/config.h>
+#include <bst/stdlib.h>
 #include <stdio.h>
 
 int main()
@@ -103,5 +104,5 @@ int main()
     printf("     %04i     |     %04i     \n", num_pass, num_fail);
     printf("-----------------------------\n");
 
-    return num_fail ? -1 : 0;
+    return num_fail ? bst_exit_failure : bst_exit_success;
 }

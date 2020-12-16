@@ -10,7 +10,7 @@
 #include <bst/config.h>
 
 
-/* Details for ctuples */
+/* Details for ctuples. */
 /// \{
 #define bst_dtl_ctuple_append(tpl, ...) (bst_ctuple_expand tpl, __VA_ARGS__)
 #define bst_dtl_ctuple_prepend(tpl, ...) (__VA_ARGS__, bst_ctuple_expand tpl)

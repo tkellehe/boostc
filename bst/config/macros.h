@@ -7,14 +7,14 @@
 #define BST__CONFIG__MACROS_H
 
 
-/* Provide a helper that joins two symbols */
+/* Provide a helper that joins two symbols. */
 /// \{
 #define BST_DTL_JOIN2(L, R) L ## R
 #define BST_JOIN2(L, R) BST_DTL_JOIN2(L, R)
 /// \}
 
 
-/* Provide a helper that converts symbols to strings */
+/* Provide a helper that converts symbols to strings. */
 /// \{
 #define BST_DTL_TOSTRING_(X) #X
 #define BST_DTL_TOSTRING(X) BST_DTL_TOSTRING_(X)
@@ -22,26 +22,26 @@
 /// \}
 
 
-/* Provide a helper that expands symbols at that macro call level */
+/* Provide a helper that expands symbols at that macro call level. */
 /// \{
 #define BST_EXPAND(X) X
 /// \}
 
 
-/* Provide a helper that expands with extra variable that allows evaluation for more complex macros */
+/* Provide a helper that expands with extra variable that allows evaluation for more complex macros. */
 /// \{
 #define BST_AUGMENTED(...) unused, __VA_ARGS__
 #define BST_RAUGMENTED(...) __VA_ARGS__, unused
 /// \}
 
 
-/* Provide a helper that call macro with variadic parameters provided after */
+/* Provide a helper that call macro with variadic parameters provided after. */
 /// \{
 #define BST_CALL(F, ...) BST_EXPAND(F(__VA_ARGS__))
 /// \}
 
 
-/* Provide a helper that counts variadic arguments but zero counts as empty character which is one */
+/* Provide a helper that counts variadic arguments but zero counts as empty character which is one. */
 /// \{
 #define BST_ARGCNT(...)  BST_DTL_ARGCNT_EXPAND(BST_AUGMENTED(__VA_ARGS__))
 
@@ -59,7 +59,7 @@
 /// \}
 
 
-/* Provide a helper that selects between two symbols if two constants are the same */
+/* Provide a helper that selects between two symbols if two constants are the same. */
 /// \{
 #define BST_IFEQ(X, Y, T, F) BST_EXPAND(BST_DTL_IFEQ_EVAL(BST_AUGMENTED(X, Y, T, F)))
 #define BST_DTL_IFEQ_EVAL(...) BST_EXPAND(BST_DTL_IFEQ_EVAL_(__VA_ARGS__))
@@ -177,7 +177,7 @@
 /// \}
 
 
-/* Provide a helper that selects between two symbols if two constants are less than */
+/* Provide a helper that selects between two symbols if two constants are less than. */
 /// \{
 #define BST_IFLT(X, Y, T, F) BST_EXPAND(BST_DTL_IFLT_EVAL(BST_AUGMENTED(X, Y, T, F)))
 #define BST_DTL_IFLT_EVAL(...) BST_EXPAND(BST_DTL_IFLT_EVAL_(__VA_ARGS__))
@@ -295,7 +295,7 @@
 /// \}
 
 
-/* Provide a helper that selects between two symbols if two constants are less than */
+/* Provide a helper that selects between two symbols if two constants are less than. */
 /// \{
 #define BST_IFGT(X, Y, T, F) BST_EXPAND(BST_DTL_IFGT_EVAL(BST_AUGMENTED(X, Y, T, F)))
 #define BST_DTL_IFGT_EVAL(...) BST_EXPAND(BST_DTL_IFGT_EVAL_(__VA_ARGS__))
@@ -413,7 +413,7 @@
 /// \}
 
 
-/* Provide a helper that gets Nth argument */
+/* Provide a helper that gets Nth argument. */
 /// \{
 #define BST_DTL_GET_ARGN_(N,...) N
 #define BST_DTL_GET_ARGN(...) BST_EXPAND(BST_DTL_GET_ARGN_(__VA_ARGS__))
@@ -522,7 +522,7 @@
 /// \}
 
 
-/* Provides a helper for adding one for a constant */
+/* Provides a helper for adding one for a constant. */
 /// \{
 #define BST_CONST_ADD1(N) BST_JOIN2(BST_DTL_CONST_ADD1_, N)
 #define BST_DTL_CONST_ADD1_0 1
@@ -629,7 +629,7 @@
 /// \}
 
 
-/* Provides a helper for subtracting one for a constant */
+/* Provides a helper for subtracting one for a constant. */
 /// \{
 #define BST_CONST_SUB1(N) BST_JOIN2(BST_DTL_CONST_SUB1_, N)
 #define BST_DTL_CONST_SUB1_1 0

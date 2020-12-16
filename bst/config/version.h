@@ -7,7 +7,7 @@
 #define BST__CONFIG__VERSION_H
 
 
-/* Determine the C++ standard version provided by the compiler */
+/* Determine the C++ standard version provided by the compiler. */
 /// \{
 #if defined(__cplusplus)
 # if __cplusplus >= 199711L
@@ -31,7 +31,7 @@
 /// \}
 
 
-/* Determine the C standard version provided by the compiler */
+/* Determine the C standard version provided by the compiler. */
 /// \{
 #if !defined(__cplusplus) && defined(__STDC_VERSION__)
 # if __STDC_VERSION__ >= 199409L

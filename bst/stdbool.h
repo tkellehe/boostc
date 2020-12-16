@@ -3,10 +3,6 @@
 //  Distributed under the Boost Software License, Version 1.0. (See
 //  accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
-#ifndef BST__STDBOOL_H
-#define BST__STDBOOL_H
-
-
 #include <bst/config.h>
 
 
@@ -19,7 +15,7 @@
 #endif
 
 
-/* Make sure that the symbols are provided */
+/* Make sure that the symbols are provided. */
 /// \{
 #ifdef __cplusplus
 # if !(defined(__bool_true_false_are_defined) && __bool_true_false_are_defined == 1)
@@ -51,13 +47,21 @@
 /// \}
 
 
-/* Add namespaced version */
+/* Add namespaced version. */
 /// \{
-#define bst_Bool _Bool
-#define bst_bool bool
-#define bst_true true
-#define bst_false false
+#ifndef bst_Bool
+# define bst_Bool _Bool
+#endif
+
+#ifndef bst_bool
+# define bst_bool bool
+#endif
+
+#ifndef bst_true
+# define bst_true true
+#endif
+
+#ifndef bst_false
+# define bst_false false
+#endif
 /// \}
-
-
-#endif // BST__STDBOOL_H

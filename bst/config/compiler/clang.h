@@ -7,13 +7,13 @@
 #define BST__CONFIG__COMPILER__CLANG_H
 
 
-/* Provide a way to detect the version of CLANG */
+/* Provide a way to detect the version of CLANG. */
 /// \{
 #define BST_CLANG_VER __clang_version__
 /// \}
 
 
-/* Add branch predictors */
+/* Add branch predictors. */
 /// \{
 #if defined(__has_builtin)
 # if __has_builtin(__builtin_expect)
@@ -24,7 +24,7 @@
 /// \}
 
 
-/* Pulled from Boost <boost/config/compiler/clang.hpp> */
+/* Pulled from Boost <boost/config/compiler/clang.hpp>. */
 /// \{
 #define BST_HAS_LONG_LONG
 /// \}

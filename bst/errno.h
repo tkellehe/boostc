@@ -3,47 +3,69 @@
 //  Distributed under the Boost Software License, Version 1.0. (See
 //  accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
-#ifndef BST__ERRNO_H
-#define BST__ERRNO_H
-
-
 #include <bst/config.h>
 
 
-/* Add the ability to get the errno based on what is best for the platform */
+/* Add the ability to get the errno based on what is best for the platform. */
 /// \{
 #ifdef BST_OSAPI_WINDOWS
 # include <errno.h>
-# define bst_get_errno() GetLastError()
-# define bst_set_errno(x) SetLastError(x)
-# define bst_errno errno
+# ifndef bst_get_errno
+#  define bst_get_errno() GetLastError()
+# endif
+# ifndef bst_set_errno
+#  define bst_set_errno(x) SetLastError(x)
+# endif
+# ifndef bst_errno
+#  define bst_errno errno
+# endif
 #elif defined(BST_PLATFORM_IRIX)
 # include <errno.h>
-# define bst_get_errno() oserror()
-# define bst_set_errno(x) setoserror(x)
-# define bst_errno errno
+# ifndef bst_get_errno
+#  define bst_get_errno() oserror()
+# endif
+# ifndef bst_set_errno
+#  define bst_set_errno(x) setoserror(x)
+# endif
+# ifndef bst_errno
+#  define bst_errno errno
+# endif
 #elif defined(BST_OSAPI_POSIX)
 # include <errno.h>
-# define bst_get_errno() errno
-# define bst_set_errno(x) errno = x
-# define bst_errno errno
+# ifndef bst_get_errno
+#  define bst_get_errno() errno
+# endif
+# ifndef bst_set_errno
+#  define bst_set_errno(x) errno = x
+# endif
+# ifndef bst_errno
+#  define bst_errno errno
+# endif
 #else
 # error "Unsupported platform for errno."
 #endif
 /// \}
 
 
-/* Provide without namespace */
+/* Provide without namespace. */
 /// \{
 #ifdef BST_NO_NAMESPACE
-# define get_errno bst_get_errno
-# define get_errno bst_get_errno
-# define set_errno bst_set_errno
+# ifndef get_errno
+#  define get_errno bst_get_errno
+# endif
+
+# ifndef get_errno
+#  define get_errno bst_get_errno
+# endif
+
+# ifndef set_errno
+#  define set_errno bst_set_errno
+# endif
 #endif
 /// \}
 
 
-/* Add potentially missing errno values */
+/* Add potentially missing errno values. */
 /// \{
 #ifndef EAFNOSUPPORT
 # define EAFNOSUPPORT 9901
@@ -357,6 +379,3 @@
 # define EMLINK 9979
 #endif
 /// \}
-
-
-#endif // BST__ERRNO_H

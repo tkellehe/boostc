@@ -6,37 +6,37 @@ int main()
     int num_pass = 0;
     int num_fail = 0;
 
-    int error;
+    // int error;
 
-    //--------------------------------------------------------------------------------------------------------
-    error = ETIME;
-    printf("bst_set_errno & bst_get_errno\n");
-    bst_set_errno(error);
-    if(bst_get_errno() == error)
-    {
-        ++num_pass;
-        printf("    passed\n");
-    }
-    else
-    {
-        ++num_fail;
-        printf("    failed\n");
-    }
+    // //--------------------------------------------------------------------------------------------------------
+    // error = ETIME;
+    // printf("bst_set_errno & bst_get_errno\n");
+    // bst_set_errno(error);
+    // if(bst_get_errno() == error)
+    // {
+    //     ++num_pass;
+    //     printf("    passed\n");
+    // }
+    // else
+    // {
+    //     ++num_fail;
+    //     printf("    failed\n");
+    // }
 
-    //--------------------------------------------------------------------------------------------------------
-    error = EPROTO;
-    printf("errno\n");
-    errno = error;
-    if((int)errno == error)
-    {
-        ++num_pass;
-        printf("    passed\n");
-    }
-    else
-    {
-        ++num_fail;
-        printf("    failed\n");
-    }
+    // //--------------------------------------------------------------------------------------------------------
+    // error = EPROTO;
+    // printf("errno\n");
+    // errno = error;
+    // if((int)errno == error)
+    // {
+    //     ++num_pass;
+    //     printf("    passed\n");
+    // }
+    // else
+    // {
+    //     ++num_fail;
+    //     printf("    failed\n");
+    // }
 
     //--------------------------------------------------------------------------------------------------------
     printf("-----------------------------\n");

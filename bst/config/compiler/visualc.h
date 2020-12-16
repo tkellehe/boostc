@@ -7,7 +7,7 @@
 #define BST__CONFIG__COMPILER__VISUALC_H
 
 
-/* Provide a way to detect the version of VISUALC */
+/* Provide a way to detect the version of VISUALC. */
 /// \{
 #if _MSC_FULL_VER > 100000000
 # define BST_VISUALC_VER _MSC_FULL_VER
@@ -17,14 +17,14 @@
 /// \}
 
 
-/* Add branch predictors */
+/* Add branch predictors. */
 /// \{
 #define BST_LIKELY(x) __builtin_expect(x, 1)
 #define BST_UNLIKELY(x) __builtin_expect(x, 0)
 /// \}
 
 
-/* Pulled from Boost <boost/config/compiler/visualc.hpp> */
+/* Pulled from Boost <boost/config/compiler/visualc.hpp>. */
 /// \{
 #if defined(_MSC_EXTENSIONS) || (_MSC_VER >= 1400)
 # define BOOST_HAS_LONG_LONG
@@ -34,9 +34,16 @@
 /// \}
 
 
-/* Indicate visualc allows pasting symbols to strings */
+/* Indicate visualc allows pasting symbols to strings. */
 /// \{
 #define BST_HAS_STRING_PASTE
+/// \}
+
+
+/* Make sure that the main libraries are linked in. */
+/// \{
+#pragma comment(lib, "user32.lib")
+#pragma comment(lib, "kernel32.lib")
 /// \}
 
 

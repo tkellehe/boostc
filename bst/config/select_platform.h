@@ -7,7 +7,7 @@
 #define BST__CONFIG__SELECT_PLATFORM_H
 
 
-/* Determine the Platform type */
+/* Determine the Platform type. */
 /// \{
 #ifndef BST_PLATFORM_CONFIG
 # if defined(_WIN32) || defined(__WIN32__) || defined(WIN32)

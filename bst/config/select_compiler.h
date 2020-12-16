@@ -7,7 +7,7 @@
 #define BST__CONFIG__SELECT_COMPILER_H
 
 
-/* Determine the compiler */
+/* Determine the compiler. */
 /// \{
 #ifndef BST_COMPILER_CONFIG
 # if defined(_GCCXML)

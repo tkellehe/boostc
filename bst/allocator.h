@@ -1,12 +1,15 @@
+//  Copyright (C) 2020-? T. Mitchell Kelleher
+//
+//  Distributed under the Boost Software License, Version 1.0. (See
+//  accompanying file LICENSE_1_0.txt or copy at
+//  http://www.boost.org/LICENSE_1_0.txt)
 #ifndef BST__ALLOCATOR_H
 #define BST__ALLOCATOR_H
 
 
 #include <bst/config.h>
 #include <bst/ctuple.h>
-
-
-#include <stdlib.h>
+#include <bst/stdlib.h>
 
 
 /* Provide without namespace */
@@ -36,19 +39,11 @@
 /// \}
 
 
-/* Provide the stdlib calls with the namespace */
-/// \{
-#define bst_free free
-#define bst_malloc malloc
-#define bst_realloc realloc
-/// \}
-
-
 /* Pack arguments provided into a single ctuple maintaining the standard order where defaults are no-ops */
 /// \{
-#define bst_alloc_ctuple_free(f) bst_alloc_set_free(bst_alloc_defaults, free)
-#define bst_alloc_ctuple_malloc(m) bst_alloc_set_malloc(bst_alloc_defaults, malloc)
-#define bst_alloc_ctuple_realloc(r) bst_alloc_set_realloc(bst_alloc_defaults, realloc)
+#define bst_alloc_ctuple_free(f) bst_alloc_set_free(bst_alloc_defaults, bst_free)
+#define bst_alloc_ctuple_malloc(m) bst_alloc_set_malloc(bst_alloc_defaults, bst_malloc)
+#define bst_alloc_ctuple_realloc(r) bst_alloc_set_realloc(bst_alloc_defaults, bst_realloc)
 
 #define bst_alloc_free(tpl) bst_ctuple_getI(tpl, 0)
 #define bst_alloc_malloc(tpl) bst_ctuple_getI(tpl, 1)
