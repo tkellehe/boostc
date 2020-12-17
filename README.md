@@ -24,7 +24,7 @@ Then the compiler will treat it as a function and potentially reducing the size 
 Provides compile time decisions to create a _C++_ like vector in _C_. Uses the _template_ interface.
 
 ```c
-#include <bstc/vector.h>
+#include <boostc/vector.h>
 #include <stdio.h>
 
 int main(int argc, char *argv[])
