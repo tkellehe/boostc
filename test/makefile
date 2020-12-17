@@ -5,7 +5,7 @@ PROJECT_DIR := $(abspath $(TEST_DIR)/..)
 TEST_DIR := $(PROJECT_DIR)/test
 
 # Convert paths to windows.
-# winpaths=$(subst /,\,$1)
+# winpaths=$(substc /,\,$1)
 winpaths=$(shell cygpath -w $1)
 
 # https://stackoverflow.com/a/12959694/5407843
@@ -16,50 +16,50 @@ rwildcard=$(wildcard $1$2) $(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2))
 ALL_MAINC := $(call rwildcard,$(TEST_DIR)/,*main.c)
 
 # Check to see if the bin directory has been specified.
-BST_BIN ?= $(TEST_DIR)/bin
+BSTC_BIN ?= $(TEST_DIR)/bin
 
 all: gcc clang vs14
 
 clean:
-	@rm -rf $(BST_BIN) *.obj
+	@rm -rf $(BSTC_BIN) *.obj
 
 #-------------------------------------------------------------------------------------------------------------
-BST_GCC_TESTS := $(ALL_MAINC:$(TEST_DIR)/%/main.c=$(BST_BIN)/gcc/%)
-BST_GCC_FLAGS ?= -O6 -Wall -Werror -pedantic -I $(PROJECT_DIR)
-BST_GCC ?= gcc
+BSTC_GCC_TESTS := $(ALL_MAINC:$(TEST_DIR)/%/main.c=$(BSTC_BIN)/gcc/%)
+BSTC_GCC_FLAGS ?= -O6 -Wall -Werror -pedantic -I $(PROJECT_DIR)
+BSTC_GCC ?= gcc
 
-gcc: $(BST_GCC_TESTS)
+gcc: $(BSTC_GCC_TESTS)
 
-$(BST_BIN)/gcc/%: $(TEST_DIR)/%/main.c
+$(BSTC_BIN)/gcc/%: $(TEST_DIR)/%/main.c
 	@echo "(GCC) Building Test: $@"
 	@mkdir -p `dirname $@`
-	$(BST_GCC) $(BST_GCC_FLAGS) $? -o $@
+	$(BSTC_GCC) $(BSTC_GCC_FLAGS) $? -o $@
 	@echo
 
 #-------------------------------------------------------------------------------------------------------------
-BST_CLANG_TESTS := $(ALL_MAINC:$(TEST_DIR)/%/main.c=$(BST_BIN)/clang/%)
-BST_CLANG_FLAGS ?= -O3 -Wall -Werror -pedantic -I $(PROJECT_DIR)
-BST_CLANG ?= clang
+BSTC_CLANG_TESTS := $(ALL_MAINC:$(TEST_DIR)/%/main.c=$(BSTC_BIN)/clang/%)
+BSTC_CLANG_FLAGS ?= -O3 -Wall -Werror -pedantic -I $(PROJECT_DIR)
+BSTC_CLANG ?= clang
 
-clang: $(BST_CLANG_TESTS)
+clang: $(BSTC_CLANG_TESTS)
 
-$(BST_BIN)/clang/%: $(TEST_DIR)/%/main.c
+$(BSTC_BIN)/clang/%: $(TEST_DIR)/%/main.c
 	@echo "(CLANG) Building Test: $@"
 	@mkdir -p `dirname $@`
-	$(BST_CLANG) $(BST_CLANG_FLAGS) $? -o $@
+	$(BSTC_CLANG) $(BSTC_CLANG_FLAGS) $? -o $@
 	@echo
 
 #-------------------------------------------------------------------------------------------------------------
-BST_VS14_TESTS := $(ALL_MAINC:$(TEST_DIR)/%/main.c=$(BST_BIN)/vs14/%)
-BST_VS14_FLAGS ?= /nologo /EHsc /Ox /W4 /link kernel32.lib user32.lib
-BST_VS14 ?= $(PROJECT_DIR)/scripts/msvc.bash run_vs14 cl
+BSTC_VS14_TESTS := $(ALL_MAINC:$(TEST_DIR)/%/main.c=$(BSTC_BIN)/vs14/%)
+BSTC_VS14_FLAGS ?= /nologo /EHsc /Ox /W4 /link kernel32.lib user32.lib
+BSTC_VS14 ?= $(PROJECT_DIR)/scripts/msvc.bash run_vs14 cl
 
-vs14: $(BST_VS14_TESTS)
+vs14: $(BSTC_VS14_TESTS)
 
-$(BST_BIN)/vs14/%: $(TEST_DIR)/%/main.c
+$(BSTC_BIN)/vs14/%: $(TEST_DIR)/%/main.c
 	@echo "(VS14) Building Test: $@"
 	@mkdir -p `dirname $@`
-	$(BST_VS14) "$(call winpaths,$?)" /I "$(call winpaths,$(PROJECT_DIR))" $(BST_VS14_FLAGS) /OUT:"$(call winpaths,$@)"
+	$(BSTC_VS14) "$(call winpaths,$?)" /I "$(call winpaths,$(PROJECT_DIR))" $(BSTC_VS14_FLAGS) /OUT:"$(call winpaths,$@)"
 	rm main.obj
 	@echo
 

@@ -23,7 +23,7 @@
  *  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
  *  IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
  *  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
- *  NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ *  NOT LIMITED TO, PROCUREMENT OF SUBSTCITUTE GOODS OR SERVICES; LOSS OF USE,
  *  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
  *  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  *  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
@@ -190,7 +190,7 @@
 
 
 /* T. Mitchell Kelleher */
-#include <bst/config.h>
+#include <bstc/config.h>
 
 
 #include <stddef.h>
@@ -745,7 +745,7 @@ typedef uint_least32_t uint_fast32_t;
 
 /* BEGIN -- T. Mitchell Kelleher -- BEGIN */
 #ifndef STDINT_H_UINTPTR_T_DEFINED
-# define stdint_intptr_bits BST_INTPTR_NBITS
+# define stdint_intptr_bits BSTC_INTPTR_NBITS
 // #ifndef STDINT_H_UINTPTR_T_DEFINED
 // # if defined (__alpha__) || defined (__ia64__) || defined (__x86_64__) || defined (_WIN64) || defined (__ppc64__)
 // #  define stdint_intptr_bits 64
@@ -930,88 +930,88 @@ int main () {
 
 /* T. Mitchell Kelleher - Provide with namespace */
 /// \{
-#if defined(INT8_MAX) && !defined(bst_int8_t)
-# define bst_int8_t int8_t
+#if defined(INT8_MAX) && !defined(bstc_int8_t)
+# define bstc_int8_t int8_t
 #endif
-#if defined(INT16_MAX) && !defined(bst_int16_t)
-# define bst_int16_t int16_t
+#if defined(INT16_MAX) && !defined(bstc_int16_t)
+# define bstc_int16_t int16_t
 #endif
-#if defined(INT32_MAX) && !defined(bst_int32_t)
-# define bst_int32_t int32_t
+#if defined(INT32_MAX) && !defined(bstc_int32_t)
+# define bstc_int32_t int32_t
 #endif
-#if defined(INT64_MAX) && !defined(bst_int64_t)
-# define bst_int64_t int64_t
+#if defined(INT64_MAX) && !defined(bstc_int64_t)
+# define bstc_int64_t int64_t
 #endif
-#if defined(INT_FAST8_MAX) && !defined(bst_int_fast8_t)
-# define bst_int_fast8_t int_fast8_t
+#if defined(INT_FAST8_MAX) && !defined(bstc_int_fast8_t)
+# define bstc_int_fast8_t int_fast8_t
 #endif
-#if defined(INT_FAST16_MAX) && !defined(bst_int_fast16_t)
-# define bst_int_fast16_t int_fast16_t
+#if defined(INT_FAST16_MAX) && !defined(bstc_int_fast16_t)
+# define bstc_int_fast16_t int_fast16_t
 #endif
-#if defined(INT_FAST32_MAX) && !defined(bst_int_fast32_t)
-# define bst_int_fast32_t int_fast32_t
+#if defined(INT_FAST32_MAX) && !defined(bstc_int_fast32_t)
+# define bstc_int_fast32_t int_fast32_t
 #endif
-#if defined(INT_FAST64_MAX) && !defined(bst_int_fast64_t)
-# define bst_int_fast64_t int_fast64_t
+#if defined(INT_FAST64_MAX) && !defined(bstc_int_fast64_t)
+# define bstc_int_fast64_t int_fast64_t
 #endif
-#if defined(INT_LEAST8_MAX) && !defined(bst_int_least8_t)
-# define bst_int_least8_t int_least8_t
+#if defined(INT_LEAST8_MAX) && !defined(bstc_int_least8_t)
+# define bstc_int_least8_t int_least8_t
 #endif
-#if defined(INT_LEAST16_MAX) && !defined(bst_int_least16_t)
-# define bst_int_least16_t int_least16_t
+#if defined(INT_LEAST16_MAX) && !defined(bstc_int_least16_t)
+# define bstc_int_least16_t int_least16_t
 #endif
-#if defined(INT_LEAST32_MAX) && !defined(bst_int_least32_t)
-# define bst_int_least32_t int_least32_t
+#if defined(INT_LEAST32_MAX) && !defined(bstc_int_least32_t)
+# define bstc_int_least32_t int_least32_t
 #endif
-#if defined(INT_LEAST64_MAX) && !defined(bst_int_least64_t)
-# define bst_int_least64_t int_least64_t
+#if defined(INT_LEAST64_MAX) && !defined(bstc_int_least64_t)
+# define bstc_int_least64_t int_least64_t
 #endif
-#if defined(INTMAX_MAX) && !defined(bst_intmax_t)
-# define bst_intmax_t intmax_t
+#if defined(INTMAX_MAX) && !defined(bstc_intmax_t)
+# define bstc_intmax_t intmax_t
 #endif
-#if defined(INTPTR_MAX) && !defined(bst_intptr_t)
-# define bst_intptr_t intptr_t
+#if defined(INTPTR_MAX) && !defined(bstc_intptr_t)
+# define bstc_intptr_t intptr_t
 #endif
-#if defined(UINT8_MAX) && !defined(bst_uint8_t)
-# define bst_uint8_t uint8_t
+#if defined(UINT8_MAX) && !defined(bstc_uint8_t)
+# define bstc_uint8_t uint8_t
 #endif
-#if defined(UINT16_MAX) && !defined(bst_uint16_t)
-# define bst_uint16_t uint16_t
+#if defined(UINT16_MAX) && !defined(bstc_uint16_t)
+# define bstc_uint16_t uint16_t
 #endif
-#if defined(UINT32_MAX) && !defined(bst_uint32_t)
-# define bst_uint32_t uint32_t
+#if defined(UINT32_MAX) && !defined(bstc_uint32_t)
+# define bstc_uint32_t uint32_t
 #endif
-#if defined(UINT64_MAX) && !defined(bst_uint64_t)
-# define bst_uint64_t uint64_t
+#if defined(UINT64_MAX) && !defined(bstc_uint64_t)
+# define bstc_uint64_t uint64_t
 #endif
-#if defined(UINT_FAST8_MAX) && !defined(bst_uint_fast8_t)
-# define bst_uint_fast8_t uint_fast8_t
+#if defined(UINT_FAST8_MAX) && !defined(bstc_uint_fast8_t)
+# define bstc_uint_fast8_t uint_fast8_t
 #endif
-#if defined(UINT_FAST16_MAX) && !defined(bst_uint_fast16_t)
-# define bst_uint_fast16_t uint_fast16_t
+#if defined(UINT_FAST16_MAX) && !defined(bstc_uint_fast16_t)
+# define bstc_uint_fast16_t uint_fast16_t
 #endif
-#if defined(UINT_FAST32_MAX) && !defined(bst_uint_fast32_t)
-# define bst_uint_fast32_t uint_fast32_t
+#if defined(UINT_FAST32_MAX) && !defined(bstc_uint_fast32_t)
+# define bstc_uint_fast32_t uint_fast32_t
 #endif
-#if defined(UINT_FAST64_MAX) && !defined(bst_uint_fast64_t)
-# define bst_uint_fast64_t uint_fast64_t
+#if defined(UINT_FAST64_MAX) && !defined(bstc_uint_fast64_t)
+# define bstc_uint_fast64_t uint_fast64_t
 #endif
-#if defined(UINT_LEAST8_MAX) && !defined(bst_uint_least8_t)
-# define bst_uint_least8_t uint_least8_t
+#if defined(UINT_LEAST8_MAX) && !defined(bstc_uint_least8_t)
+# define bstc_uint_least8_t uint_least8_t
 #endif
-#if defined(UINT_LEAST16_MAX) && !defined(bst_uint_least16_t)
-# define bst_uint_least16_t uint_least16_t
+#if defined(UINT_LEAST16_MAX) && !defined(bstc_uint_least16_t)
+# define bstc_uint_least16_t uint_least16_t
 #endif
-#if defined(UINT_LEAST32_MAX) && !defined(bst_uint_least32_t)
-# define bst_uint_least32_t uint_least32_t
+#if defined(UINT_LEAST32_MAX) && !defined(bstc_uint_least32_t)
+# define bstc_uint_least32_t uint_least32_t
 #endif
-#if defined(UINT_LEAST64_MAX) && !defined(bst_uint_least64_t)
-# define bst_uint_least64_t uint_least64_t
+#if defined(UINT_LEAST64_MAX) && !defined(bstc_uint_least64_t)
+# define bstc_uint_least64_t uint_least64_t
 #endif
-#if defined(UINTMAX_MAX) && !defined(bst_uintmax_t)
-# define bst_uintmax_t uintmax_t
+#if defined(UINTMAX_MAX) && !defined(bstc_uintmax_t)
+# define bstc_uintmax_t uintmax_t
 #endif
-#if defined(UINTPTR_MAX) && !defined(bst_uintptr_t)
-# define bst_uintptr_t uintptr_t
+#if defined(UINTPTR_MAX) && !defined(bstc_uintptr_t)
+# define bstc_uintptr_t uintptr_t
 #endif
 /// \}

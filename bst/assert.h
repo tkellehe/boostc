@@ -3,7 +3,7 @@
 //  Distributed under the Boost Software License, Version 1.0. (See
 //  accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
-#include <bst/config.h>
+#include <bstc/config.h>
 
 
 #ifdef __cplusplus
@@ -15,7 +15,7 @@
 
 /* Add namespaced version. */
 /// \{
-#ifndef bst_assert
-# define bst_assert assert
+#ifndef bstc_assert
+# define bstc_assert assert
 #endif
 /// \}

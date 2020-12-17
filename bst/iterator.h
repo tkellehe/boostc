@@ -1,90 +1,90 @@
-#ifndef BST__ITERATOR_H
-#define BST__ITERATOR_H
+#ifndef BSTC__ITERATOR_H
+#define BSTC__ITERATOR_H
 
 
-#include <bst/config.h>
-#include <bst/ctuple.h>
+#include <bstc/config.h>
+#include <bstc/ctuple.h>
 
 
 /* Provide without namespace */
 /// \{
-#ifdef BST_NO_NAMESPACE
-#define iter_ctuple_t bst_iter_ctuple_t
-#define iter_ctuple_nxt bst_iter_ctuple_nxt
-#define iter_ctuple_eq bst_iter_ctuple_eq
-#define iter_ctuple_val bst_iter_ctuple_val
-#define iter_ctuple_set bst_iter_ctuple_set
-#define iter_ctuple_swap bst_iter_ctuple_swap
+#ifdef BSTC_NO_NAMESPACE
+#define iter_ctuple_t bstc_iter_ctuple_t
+#define iter_ctuple_nxt bstc_iter_ctuple_nxt
+#define iter_ctuple_eq bstc_iter_ctuple_eq
+#define iter_ctuple_val bstc_iter_ctuple_val
+#define iter_ctuple_set bstc_iter_ctuple_set
+#define iter_ctuple_swap bstc_iter_ctuple_swap
 
-#define iter_t bst_iter_t
-#define iter_nxt bst_iter_nxt
-#define iter_eq bst_iter_eq
-#define iter_val bst_iter_val
-#define iter_set bst_iter_set
-#define iter_swap bst_iter_swap
+#define iter_t bstc_iter_t
+#define iter_nxt bstc_iter_nxt
+#define iter_eq bstc_iter_eq
+#define iter_val bstc_iter_val
+#define iter_set bstc_iter_set
+#define iter_swap bstc_iter_swap
 
-#define iter_set_t bst_iter_set_t
-#define iter_set_nxt bst_iter_set_nxt
-#define iter_set_eq bst_iter_set_eq
-#define iter_set_val bst_iter_set_val
-#define iter_set_set bst_iter_set_set
-#define iter_set_swap bst_iter_set_swap
+#define iter_set_t bstc_iter_set_t
+#define iter_set_nxt bstc_iter_set_nxt
+#define iter_set_eq bstc_iter_set_eq
+#define iter_set_val bstc_iter_set_val
+#define iter_set_set bstc_iter_set_set
+#define iter_set_swap bstc_iter_set_swap
 
-#define iter_defaults bst_iter_defaults
-#define iter_no_t bst_iter_no_t
-#define iter_nonxt bst_iter_nonxt
-#define iter_noeq bst_iter_noeq
-#define iter_noval bst_iter_noval
-#define iter_noset bst_iter_noset
-#define iter_noswap bst_iter_noswap
+#define iter_defaults bstc_iter_defaults
+#define iter_no_t bstc_iter_no_t
+#define iter_nonxt bstc_iter_nonxt
+#define iter_noeq bstc_iter_noeq
+#define iter_noval bstc_iter_noval
+#define iter_noset bstc_iter_noset
+#define iter_noswap bstc_iter_noswap
 
-#define iter_isa bst_iter_isa
+#define iter_isa bstc_iter_isa
 #endif
 /// \}
 
 
 /* Pack arguments provided into a single ctuple maintaining the standard order where defaults are no-ops */
 /// \{
-#define bst_iter_ctuple_t(t) bst_iter_set_t(bst_iter_defaults, t)
-#define bst_iter_ctuple_nxt(nxt) bst_iter_set_nxt(bst_iter_defaults, nxt)
-#define bst_iter_ctuple_eq(eq) bst_iter_set_eq(bst_iter_defaults, eq)
-#define bst_iter_ctuple_val(val) bst_iter_set_val(bst_iter_defaults, val)
-#define bst_iter_ctuple_set(set) bst_iter_set_set(bst_iter_defaults, set)
-#define bst_iter_ctuple_swap(swap) bst_iter_set_swap(bst_iter_defaults, swap)
+#define bstc_iter_ctuple_t(t) bstc_iter_set_t(bstc_iter_defaults, t)
+#define bstc_iter_ctuple_nxt(nxt) bstc_iter_set_nxt(bstc_iter_defaults, nxt)
+#define bstc_iter_ctuple_eq(eq) bstc_iter_set_eq(bstc_iter_defaults, eq)
+#define bstc_iter_ctuple_val(val) bstc_iter_set_val(bstc_iter_defaults, val)
+#define bstc_iter_ctuple_set(set) bstc_iter_set_set(bstc_iter_defaults, set)
+#define bstc_iter_ctuple_swap(swap) bstc_iter_set_swap(bstc_iter_defaults, swap)
 
-#define bst_iter_t(tpl) bst_ctuple_getI(tpl, 0)
-#define bst_iter_nxt(tpl) bst_ctuple_getI(tpl, 1)
-#define bst_iter_eq(tpl) bst_ctuple_getI(tpl, 2)
-#define bst_iter_val(tpl) bst_ctuple_getI(tpl, 3)
-#define bst_iter_set(tpl) bst_ctuple_getI(tpl, 4)
-#define bst_iter_swap(tpl) bst_ctuple_getI(tpl, 5)
+#define bstc_iter_t(tpl) bstc_ctuple_getI(tpl, 0)
+#define bstc_iter_nxt(tpl) bstc_ctuple_getI(tpl, 1)
+#define bstc_iter_eq(tpl) bstc_ctuple_getI(tpl, 2)
+#define bstc_iter_val(tpl) bstc_ctuple_getI(tpl, 3)
+#define bstc_iter_set(tpl) bstc_ctuple_getI(tpl, 4)
+#define bstc_iter_swap(tpl) bstc_ctuple_getI(tpl, 5)
 
-#define bst_iter_set_t(tpl, t) bst_ctuple_setI(tpl, 0, t)
-#define bst_iter_set_nxt(tpl, nxt) bst_ctuple_setI(tpl, 1, nxt)
-#define bst_iter_set_eq(tpl, eq) bst_ctuple_setI(tpl, 2, eq)
-#define bst_iter_set_val(tpl, val) bst_ctuple_setI(tpl, 3, val)
-#define bst_iter_set_set(tpl, set) bst_ctuple_setI(tpl, 4, set)
-#define bst_iter_set_swap(tpl, swap) bst_ctuple_setI(tpl, 5, swap)
+#define bstc_iter_set_t(tpl, t) bstc_ctuple_setI(tpl, 0, t)
+#define bstc_iter_set_nxt(tpl, nxt) bstc_ctuple_setI(tpl, 1, nxt)
+#define bstc_iter_set_eq(tpl, eq) bstc_ctuple_setI(tpl, 2, eq)
+#define bstc_iter_set_val(tpl, val) bstc_ctuple_setI(tpl, 3, val)
+#define bstc_iter_set_set(tpl, set) bstc_ctuple_setI(tpl, 4, set)
+#define bstc_iter_set_swap(tpl, swap) bstc_ctuple_setI(tpl, 5, swap)
 /// \}
 
 
 /* Packs the iterator defaults */
-#define bst_iter_defaults bst_ctuple(bst_iter_no_t, bst_iter_nonxt, bst_iter_noeq, bst_iter_noval, bst_iter_noset, bst_iter_noswap)
+#define bstc_iter_defaults bstc_ctuple(bstc_iter_no_t, bstc_iter_nonxt, bstc_iter_noeq, bstc_iter_noval, bstc_iter_noset, bstc_iter_noswap)
 
 
 /* Default do-nothing iterator functions */
 /// \{
-#define bst_iter_no_t(...) int
-#define bst_iter_nonxt(...) ((void)0)
-#define bst_iter_noeq(...) 0
-#define bst_iter_noval(...) ((void)0)
-#define bst_iter_noset(...) ((void)0)
-#define bst_iter_noswap(...) ((void)0)
+#define bstc_iter_no_t(...) int
+#define bstc_iter_nonxt(...) ((void)0)
+#define bstc_iter_noeq(...) 0
+#define bstc_iter_noval(...) ((void)0)
+#define bstc_iter_noset(...) ((void)0)
+#define bstc_iter_noswap(...) ((void)0)
 /// \}
 
 
 /* Detect if provided a ctuple that could be an iterator */
-#define bst_iter_isa(tpl, _t, _f) bst_ctuple_isa(tpl, bst_ctuple_hasN(tpl, 6, _t, _f), _f)
+#define bstc_iter_isa(tpl, _t, _f) bstc_ctuple_isa(tpl, bstc_ctuple_hasN(tpl, 6, _t, _f), _f)
 
 
-#endif // BST__ITERATOR_H
+#endif // BSTC__ITERATOR_H

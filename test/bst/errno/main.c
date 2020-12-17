@@ -1,4 +1,4 @@
-#include <bst/errno.h>
+#include <bstc/errno.h>
 #include <stdio.h>
 
 int main()
@@ -10,9 +10,9 @@ int main()
 
     // //--------------------------------------------------------------------------------------------------------
     // error = ETIME;
-    // printf("bst_set_errno & bst_get_errno\n");
-    // bst_set_errno(error);
-    // if(bst_get_errno() == error)
+    // printf("bstc_set_errno & bstc_get_errno\n");
+    // bstc_set_errno(error);
+    // if(bstc_get_errno() == error)
     // {
     //     ++num_pass;
     //     printf("    passed\n");

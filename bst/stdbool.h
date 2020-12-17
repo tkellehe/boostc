@@ -3,14 +3,14 @@
 //  Distributed under the Boost Software License, Version 1.0. (See
 //  accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
-#include <bst/config.h>
+#include <bstc/config.h>
 
 
 // https://stackoverflow.com/a/30875579/5407843
 // The `stdbool.h` was added in C99 before C++11 which is when it was added to C++.
-#ifdef BST_LEAST_CPP11
+#ifdef BSTC_LEAST_CPP11
 # include <cstdbool>
-#elif BST_LEAST_C99
+#elif BSTC_LEAST_C99
 # include <stdbool.h>
 #endif
 
@@ -49,19 +49,19 @@
 
 /* Add namespaced version. */
 /// \{
-#ifndef bst_Bool
-# define bst_Bool _Bool
+#ifndef bstc_Bool
+# define bstc_Bool _Bool
 #endif
 
-#ifndef bst_bool
-# define bst_bool bool
+#ifndef bstc_bool
+# define bstc_bool bool
 #endif
 
-#ifndef bst_true
-# define bst_true true
+#ifndef bstc_true
+# define bstc_true true
 #endif
 
-#ifndef bst_false
-# define bst_false false
+#ifndef bstc_false
+# define bstc_false false
 #endif
 /// \}

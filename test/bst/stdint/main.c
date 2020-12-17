@@ -1,4 +1,4 @@
-#include <bst/stdint.h>
+#include <bstc/stdint.h>
 #include <stdio.h>
 
 int main()

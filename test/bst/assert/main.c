@@ -1,4 +1,4 @@
-#include <bst/assert.h>
+#include <bstc/assert.h>
 #include <stdio.h>
 
 int main()

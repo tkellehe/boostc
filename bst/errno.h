@@ -3,43 +3,43 @@
 //  Distributed under the Boost Software License, Version 1.0. (See
 //  accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
-#include <bst/config.h>
+#include <bstc/config.h>
 
 
 /* Add the ability to get the errno based on what is best for the platform. */
 /// \{
-#ifdef BST_OSAPI_WINDOWS
+#ifdef BSTC_OSAPI_WINDOWS
 # include <errno.h>
-# ifndef bst_get_errno
-#  define bst_get_errno() GetLastError()
+# ifndef bstc_get_errno
+#  define bstc_get_errno() GetLastError()
 # endif
-# ifndef bst_set_errno
-#  define bst_set_errno(x) SetLastError(x)
+# ifndef bstc_set_errno
+#  define bstc_set_errno(x) SetLastError(x)
 # endif
-# ifndef bst_errno
-#  define bst_errno errno
+# ifndef bstc_errno
+#  define bstc_errno errno
 # endif
-#elif defined(BST_PLATFORM_IRIX)
+#elif defined(BSTC_PLATFORM_IRIX)
 # include <errno.h>
-# ifndef bst_get_errno
-#  define bst_get_errno() oserror()
+# ifndef bstc_get_errno
+#  define bstc_get_errno() oserror()
 # endif
-# ifndef bst_set_errno
-#  define bst_set_errno(x) setoserror(x)
+# ifndef bstc_set_errno
+#  define bstc_set_errno(x) setoserror(x)
 # endif
-# ifndef bst_errno
-#  define bst_errno errno
+# ifndef bstc_errno
+#  define bstc_errno errno
 # endif
-#elif defined(BST_OSAPI_POSIX)
+#elif defined(BSTC_OSAPI_POSIX)
 # include <errno.h>
-# ifndef bst_get_errno
-#  define bst_get_errno() errno
+# ifndef bstc_get_errno
+#  define bstc_get_errno() errno
 # endif
-# ifndef bst_set_errno
-#  define bst_set_errno(x) errno = x
+# ifndef bstc_set_errno
+#  define bstc_set_errno(x) errno = x
 # endif
-# ifndef bst_errno
-#  define bst_errno errno
+# ifndef bstc_errno
+#  define bstc_errno errno
 # endif
 #else
 # error "Unsupported platform for errno."
@@ -49,17 +49,17 @@
 
 /* Provide without namespace. */
 /// \{
-#ifdef BST_NO_NAMESPACE
+#ifdef BSTC_NO_NAMESPACE
 # ifndef get_errno
-#  define get_errno bst_get_errno
+#  define get_errno bstc_get_errno
 # endif
 
 # ifndef get_errno
-#  define get_errno bst_get_errno
+#  define get_errno bstc_get_errno
 # endif
 
 # ifndef set_errno
-#  define set_errno bst_set_errno
+#  define set_errno bstc_set_errno
 # endif
 #endif
 /// \}

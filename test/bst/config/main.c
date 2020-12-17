@@ -1,5 +1,5 @@
-#include <bst/config.h>
-#include <bst/stdlib.h>
+#include <bstc/config.h>
+#include <bstc/stdlib.h>
 #include <stdio.h>
 
 int main()
@@ -8,95 +8,95 @@ int main()
     int num_fail = 0;
 
     //--------------------------------------------------------------------------------------------------------
-    printf("BST_IFEQ(0, 0)\n");
-    BST_IFEQ(0, 0, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("BST_IFEQ(0, 1)\n");
-    BST_IFEQ(0, 1, (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
-    printf("BST_IFEQ(10, 1)\n");
-    BST_IFEQ(10, 1, (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
+    printf("BSTC_IFEQ(0, 0)\n");
+    BSTC_IFEQ(0, 0, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("BSTC_IFEQ(0, 1)\n");
+    BSTC_IFEQ(0, 1, (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
+    printf("BSTC_IFEQ(10, 1)\n");
+    BSTC_IFEQ(10, 1, (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
 
     //--------------------------------------------------------------------------------------------------------
-    printf("BST_IFLT(0, 1)\n");
-    BST_IFLT(0, 1, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("BST_IFLT(30, 4)\n");
-    BST_IFLT(30, 4, (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
-    printf("BST_IFLT(1, 1)\n");
-    BST_IFLT(1, 1, (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
+    printf("BSTC_IFLT(0, 1)\n");
+    BSTC_IFLT(0, 1, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("BSTC_IFLT(30, 4)\n");
+    BSTC_IFLT(30, 4, (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
+    printf("BSTC_IFLT(1, 1)\n");
+    BSTC_IFLT(1, 1, (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
 
     //--------------------------------------------------------------------------------------------------------
-    printf("BST_IFGT(0, 1)\n");
-    BST_IFGT(1, 0, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("BST_IFGT(3, 4)\n");
-    BST_IFGT(3, 4, (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
-    printf("BST_IFGT(1, 1)\n");
-    BST_IFGT(1, 1, (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
+    printf("BSTC_IFGT(0, 1)\n");
+    BSTC_IFGT(1, 0, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("BSTC_IFGT(3, 4)\n");
+    BSTC_IFGT(3, 4, (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
+    printf("BSTC_IFGT(1, 1)\n");
+    BSTC_IFGT(1, 1, (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
 
     //--------------------------------------------------------------------------------------------------------
-    printf("BST_GET_ARG0(8, 7, 6, 5)\n");
-    BST_IFEQ(BST_GET_ARG0(8, 7, 6, 5), 8, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("BST_GET_ARG1(8, 7, 6, 5)\n");
-    BST_IFEQ(BST_GET_ARG1(8, 7, 6, 5), 7, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("BST_GET_ARG2(8, 7, 6, 5)\n");
-    BST_IFEQ(BST_GET_ARG2(8, 7, 6, 5), 6, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("BST_GET_ARG3(8, 7, 6, 5)\n");
-    BST_IFEQ(BST_GET_ARG3(8, 7, 6, 5), 5, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("BSTC_GET_ARG0(8, 7, 6, 5)\n");
+    BSTC_IFEQ(BSTC_GET_ARG0(8, 7, 6, 5), 8, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("BSTC_GET_ARG1(8, 7, 6, 5)\n");
+    BSTC_IFEQ(BSTC_GET_ARG1(8, 7, 6, 5), 7, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("BSTC_GET_ARG2(8, 7, 6, 5)\n");
+    BSTC_IFEQ(BSTC_GET_ARG2(8, 7, 6, 5), 6, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("BSTC_GET_ARG3(8, 7, 6, 5)\n");
+    BSTC_IFEQ(BSTC_GET_ARG3(8, 7, 6, 5), 5, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
 
     //--------------------------------------------------------------------------------------------------------
-    printf("BST_CONST_ADD1(3)\n");
-    BST_IFEQ(BST_CONST_ADD1(3), 4, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("BST_CONST_ADD1(8)\n");
-    BST_IFEQ(BST_CONST_ADD1(8), 9, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("BST_CONST_ADD1(30)\n");
-    BST_IFEQ(BST_CONST_ADD1(30), 31, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("BSTC_CONST_ADD1(3)\n");
+    BSTC_IFEQ(BSTC_CONST_ADD1(3), 4, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("BSTC_CONST_ADD1(8)\n");
+    BSTC_IFEQ(BSTC_CONST_ADD1(8), 9, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("BSTC_CONST_ADD1(30)\n");
+    BSTC_IFEQ(BSTC_CONST_ADD1(30), 31, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
 
     //--------------------------------------------------------------------------------------------------------
-    printf("BST_CONST_SUB1(3)\n");
-    BST_IFEQ(BST_CONST_SUB1(3), 2, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("BST_CONST_SUB1(8)\n");
-    BST_IFEQ(BST_CONST_SUB1(8), 7, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("BST_CONST_SUB1(30)\n");
-    BST_IFEQ(BST_CONST_SUB1(30), 29, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("BSTC_CONST_SUB1(3)\n");
+    BSTC_IFEQ(BSTC_CONST_SUB1(3), 2, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("BSTC_CONST_SUB1(8)\n");
+    BSTC_IFEQ(BSTC_CONST_SUB1(8), 7, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("BSTC_CONST_SUB1(30)\n");
+    BSTC_IFEQ(BSTC_CONST_SUB1(30), 29, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
 
     //--------------------------------------------------------------------------------------------------------
-    printf("BST_ARGCNT(A, B, C, D)\n");
-    BST_IFEQ(BST_ARGCNT(A, B, C, D), 4, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("BST_ARGCNT(A)\n");
-    BST_IFEQ(BST_ARGCNT(A), 1, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("BST_ARGCNT((A, B, C))\n");
-    BST_IFEQ(BST_ARGCNT((A, B, C)), 1, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("BSTC_ARGCNT(A, B, C, D)\n");
+    BSTC_IFEQ(BSTC_ARGCNT(A, B, C, D), 4, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("BSTC_ARGCNT(A)\n");
+    BSTC_IFEQ(BSTC_ARGCNT(A), 1, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("BSTC_ARGCNT((A, B, C))\n");
+    BSTC_IFEQ(BSTC_ARGCNT((A, B, C)), 1, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
 
     //--------------------------------------------------------------------------------------------------------
-    printf("BST_ISA_TUPLE(())\n");
-    BST_ISA_TUPLE((), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("BST_ISA_TUPLE(A)\n");
-    BST_ISA_TUPLE(A, (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
-    printf("BST_ISA_TUPLE()\n");
-    BST_ISA_TUPLE(, (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
+    printf("BSTC_ISA_TUPLE(())\n");
+    BSTC_ISA_TUPLE((), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("BSTC_ISA_TUPLE(A)\n");
+    BSTC_ISA_TUPLE(A, (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
+    printf("BSTC_ISA_TUPLE()\n");
+    BSTC_ISA_TUPLE(, (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
 
     //--------------------------------------------------------------------------------------------------------
-    printf("BST_IF_ARG0_EMPTY(())\n");
-    BST_IF_ARG0_EMPTY((), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("BST_IF_ARG0_EMPTY((,))\n");
-    BST_IF_ARG0_EMPTY((,), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("BST_IF_ARG0_EMPTY((,A))\n");
-    BST_IF_ARG0_EMPTY((,A), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("BST_IF_ARG0_EMPTY((1,2))\n");
-    BST_IF_ARG0_EMPTY((1,2), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
-    printf("BST_IF_ARG0_EMPTY((B,A))\n");
-    BST_IF_ARG0_EMPTY((B,A), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
-    printf("BST_IF_ARG0_EMPTY(('1','2'))\n");
-    BST_IF_ARG0_EMPTY(('1','2'), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
-    printf("BST_IF_ARG0_EMPTY((\"1\",\"2\"))\n");
-    BST_IF_ARG0_EMPTY(("1","2"), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
-    printf("BST_IF_ARG0_EMPTY(((\"1\"),\"2\"))\n");
-    BST_IF_ARG0_EMPTY((("1"),"2"), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
-    printf("BST_IF_ARG0_EMPTY(((),\"2\"))\n");
-    BST_IF_ARG0_EMPTY(((),"2"), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
-    printf("BST_IF_ARG0_EMPTY((((),),\"2\",,))\n");
-    BST_IF_ARG0_EMPTY((((),),"2",,), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
+    printf("BSTC_IF_ARG0_EMPTY(())\n");
+    BSTC_IF_ARG0_EMPTY((), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("BSTC_IF_ARG0_EMPTY((,))\n");
+    BSTC_IF_ARG0_EMPTY((,), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("BSTC_IF_ARG0_EMPTY((,A))\n");
+    BSTC_IF_ARG0_EMPTY((,A), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("BSTC_IF_ARG0_EMPTY((1,2))\n");
+    BSTC_IF_ARG0_EMPTY((1,2), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
+    printf("BSTC_IF_ARG0_EMPTY((B,A))\n");
+    BSTC_IF_ARG0_EMPTY((B,A), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
+    printf("BSTC_IF_ARG0_EMPTY(('1','2'))\n");
+    BSTC_IF_ARG0_EMPTY(('1','2'), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
+    printf("BSTC_IF_ARG0_EMPTY((\"1\",\"2\"))\n");
+    BSTC_IF_ARG0_EMPTY(("1","2"), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
+    printf("BSTC_IF_ARG0_EMPTY(((\"1\"),\"2\"))\n");
+    BSTC_IF_ARG0_EMPTY((("1"),"2"), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
+    printf("BSTC_IF_ARG0_EMPTY(((),\"2\"))\n");
+    BSTC_IF_ARG0_EMPTY(((),"2"), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
+    printf("BSTC_IF_ARG0_EMPTY((((),),\"2\",,))\n");
+    BSTC_IF_ARG0_EMPTY((((),),"2",,), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
     #define ARG0_EMPTY_TEST() 0,0
-    printf("BST_IF_ARG0_EMPTY((ARG0_EMPTY_TEST))\n");
-    BST_IF_ARG0_EMPTY((ARG0_EMPTY_TEST), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
+    printf("BSTC_IF_ARG0_EMPTY((ARG0_EMPTY_TEST))\n");
+    BSTC_IF_ARG0_EMPTY((ARG0_EMPTY_TEST), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
 
     //--------------------------------------------------------------------------------------------------------
     printf("-----------------------------\n");
@@ -104,5 +104,5 @@ int main()
     printf("     %04i     |     %04i     \n", num_pass, num_fail);
     printf("-----------------------------\n");
 
-    return num_fail ? bst_exit_failure : bst_exit_success;
+    return num_fail ? bstc_exit_failure : bstc_exit_success;
 }

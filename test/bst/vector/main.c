@@ -1,5 +1,5 @@
-#include <bst/vector.h>
-#include <bst/algorithm/find.h>
+#include <bstc/vector.h>
+#include <bstc/algorithm/find.h>
 #include <stdio.h>
 
 int main()

@@ -3,7 +3,7 @@
 //  Distributed under the Boost Software License, Version 1.0. (See
 //  accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
-#include <bst/config.h>
+#include <bstc/config.h>
 
 
 #ifdef __cplusplus
@@ -15,183 +15,183 @@
 
 /* Add namespaced version. */
 /// \{
-#if defined(BST_LEAST_C11) || defined(BST_LEAST_CPP11)
-# ifndef bst_aligned_alloc
-#  define bst_aligned_alloc aligned_alloc
+#if defined(BSTC_LEAST_C11) || defined(BSTC_LEAST_CPP11)
+# ifndef bstc_aligned_alloc
+#  define bstc_aligned_alloc aligned_alloc
 # endif
 
-# ifndef bst_quick_exit
-#  define bst_quick_exit quick_exit
+# ifndef bstc_quick_exit
+#  define bstc_quick_exit quick_exit
 # endif
 
-# ifndef bst_at_quick_exit
-#  define bst_at_quick_exit at_quick_exit
+# ifndef bstc_at_quick_exit
+#  define bstc_at_quick_exit at_quick_exit
 # endif
 
-# ifndef bst_getenv_s
-#  define bst_getenv_s getenv_s
+# ifndef bstc_getenv_s
+#  define bstc_getenv_s getenv_s
 # endif
 
-# ifndef bst_wctomb_s
-#  define bst_wctomb_s wctomb_s
+# ifndef bstc_wctomb_s
+#  define bstc_wctomb_s wctomb_s
 # endif
 
-# ifndef bst_mbstowcs_s
-#  define bst_mbstowcs_s mbstowcs_s
+# ifndef bstc_mbstcowcs_s
+#  define bstc_mbstcowcs_s mbstcowcs_s
 # endif
 
-# ifndef bst_wcstombs_s
-#  define bst_wcstombs_s wcstombs_s
+# ifndef bstc_wcstombs_s
+#  define bstc_wcstombs_s wcstombs_s
 # endif
 
-#ifndef bst_qsort_s
-# define bst_qsort_s qsort_s
+#ifndef bstc_qsort_s
+# define bstc_qsort_s qsort_s
 #endif
 
-#ifndef bst_bsearch_s
-# define bst_bsearch_s bsearch_s
+#ifndef bstc_bsearch_s
+# define bstc_bsearch_s bsearch_s
 #endif
 #endif
 
-#if defined(BST_LEAST_C99) || defined(BST_LEAST_CPP11)
-# ifndef bst_Exit
-#  define bst_Exit _Exit
+#if defined(BSTC_LEAST_C99) || defined(BSTC_LEAST_CPP11)
+# ifndef bstc_Exit
+#  define bstc_Exit _Exit
 # endif
 
-# ifndef bst_atoll
-#  define bst_atoll atoll
+# ifndef bstc_atoll
+#  define bstc_atoll atoll
 # endif
 
-# ifndef bst_strtoll
-#  define bst_strtoll strtoll
+# ifndef bstc_strtoll
+#  define bstc_strtoll strtoll
 # endif
 
-# ifndef bst_strtoull
-#  define bst_strtoull strtoull
+# ifndef bstc_strtoull
+#  define bstc_strtoull strtoull
 # endif
 
-# ifndef bst_strtof
-#  define bst_strtof strtof
+# ifndef bstc_strtof
+#  define bstc_strtof strtof
 # endif
 
-# ifndef bst_strtold
-#  define bst_strtold strtold
+# ifndef bstc_strtold
+#  define bstc_strtold strtold
 # endif
 #endif
 
-#ifndef bst_malloc 
-# define bst_malloc malloc
+#ifndef bstc_malloc 
+# define bstc_malloc malloc
 #endif
 
-#ifndef bst_calloc 
-# define bst_calloc calloc
+#ifndef bstc_calloc 
+# define bstc_calloc calloc
 #endif
 
-#ifndef bst_realloc 
-# define bst_realloc realloc
+#ifndef bstc_realloc 
+# define bstc_realloc realloc
 #endif
 
-#ifndef bst_free 
-# define bst_free free
+#ifndef bstc_free 
+# define bstc_free free
 #endif
 
-#ifndef bst_abort 
-# define bst_abort abort
+#ifndef bstc_abort 
+# define bstc_abort abort
 #endif
 
-#ifndef bst_exit 
-# define bst_exit exit
+#ifndef bstc_exit 
+# define bstc_exit exit
 #endif
 
-#ifndef bst_atexit 
-# define bst_atexit atexit
+#ifndef bstc_atexit 
+# define bstc_atexit atexit
 #endif
 
-#ifndef bst_exit_success 
-# define bst_exit_success EXIT_SUCCESS
+#ifndef bstc_exit_success 
+# define bstc_exit_success EXIT_SUCCESS
 #endif
 
-#ifndef bst_exit_failure 
-# define bst_exit_failure EXIT_FAILURE
+#ifndef bstc_exit_failure 
+# define bstc_exit_failure EXIT_FAILURE
 #endif
 
-#ifndef bst_system 
-# define bst_system system
+#ifndef bstc_system 
+# define bstc_system system
 #endif
 
-#ifndef bst_getenv 
-# define bst_getenv getenv
+#ifndef bstc_getenv 
+# define bstc_getenv getenv
 #endif
 
-#ifndef bst_atof 
-# define bst_atof atof
+#ifndef bstc_atof 
+# define bstc_atof atof
 #endif
 
-#ifndef bst_atoi 
-# define bst_atoi atoi
+#ifndef bstc_atoi 
+# define bstc_atoi atoi
 #endif
 
-#ifndef bst_atol 
-# define bst_atol atol
+#ifndef bstc_atol 
+# define bstc_atol atol
 #endif
 
-#ifndef bst_strtol 
-# define bst_strtol strtol
+#ifndef bstc_strtol 
+# define bstc_strtol strtol
 #endif
 
-#ifndef bst_strtoul 
-# define bst_strtoul strtoul
+#ifndef bstc_strtoul 
+# define bstc_strtoul strtoul
 #endif
 
-#ifndef bst_strtod 
-# define bst_strtod strtod
+#ifndef bstc_strtod 
+# define bstc_strtod strtod
 #endif
 
-#ifndef bst_mblen 
-# define bst_mblen mblen
+#ifndef bstc_mblen 
+# define bstc_mblen mblen
 #endif
 
-#ifndef bst_mbtowc 
-# define bst_mbtowc mbtowc
+#ifndef bstc_mbtowc 
+# define bstc_mbtowc mbtowc
 #endif
 
-#ifndef bst_wctomb 
-# define bst_wctomb wctomb
+#ifndef bstc_wctomb 
+# define bstc_wctomb wctomb
 #endif
 
-#ifndef bst_mbstowcs 
-# define bst_mbstowcs mbstowcs
+#ifndef bstc_mbstcowcs 
+# define bstc_mbstcowcs mbstcowcs
 #endif
 
-#ifndef bst_wcstombs 
-# define bst_wcstombs wcstombs
+#ifndef bstc_wcstombs 
+# define bstc_wcstombs wcstombs
 #endif
 
-#ifndef bst_mb_len_max 
-# define bst_mb_len_max MB_LEN_MAX
+#ifndef bstc_mb_len_max 
+# define bstc_mb_len_max MB_LEN_MAX
 #endif
 
-#ifndef bst_wchar_t 
-# define bst_wchar_t wchar_t
+#ifndef bstc_wchar_t 
+# define bstc_wchar_t wchar_t
 #endif
 
-#ifndef bst_rand
-# define bst_rand rand
+#ifndef bstc_rand
+# define bstc_rand rand
 #endif
 
-#ifndef bst_srand
-# define bst_srand srand
+#ifndef bstc_srand
+# define bstc_srand srand
 #endif
 
-#ifndef bst_rand_max
-# define bst_rand_max RAND_MAX
+#ifndef bstc_rand_max
+# define bstc_rand_max RAND_MAX
 #endif
 
-#ifndef bst_qsort
-# define bst_qsort qsort
+#ifndef bstc_qsort
+# define bstc_qsort qsort
 #endif
 
-#ifndef bst_bsearch
-# define bst_bsearch bsearch
+#ifndef bstc_bsearch
+# define bstc_bsearch bsearch
 #endif
 /// \}

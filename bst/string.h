@@ -3,7 +3,7 @@
 //  Distributed under the Boost Software License, Version 1.0. (See
 //  accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
-#include <bst/config.h>
+#include <bstc/config.h>
 
 
 #ifdef __cplusplus
@@ -15,91 +15,91 @@
 
 /* Add namespaced version. */
 /// \{
-#ifdef bst_memcpy 
-# define bst_memcpy memcpy
+#ifdef bstc_memcpy 
+# define bstc_memcpy memcpy
 #endif
 
-#ifdef bst_memmove 
-# define bst_memmove memmove
+#ifdef bstc_memmove 
+# define bstc_memmove memmove
 #endif
 
-#ifdef bst_strcpy 
-# define bst_strcpy strcpy
+#ifdef bstc_strcpy 
+# define bstc_strcpy strcpy
 #endif
 
-#ifdef bst_strncpy 
-# define bst_strncpy strncpy
+#ifdef bstc_strncpy 
+# define bstc_strncpy strncpy
 #endif
 
-#ifdef bst_strcat 
-# define bst_strcat strcat
+#ifdef bstc_strcat 
+# define bstc_strcat strcat
 #endif
 
-#ifdef bst_strncat 
-# define bst_strncat strncat
+#ifdef bstc_strncat 
+# define bstc_strncat strncat
 #endif
 
-#ifdef bst_memcmp 
-# define bst_memcmp memcmp
+#ifdef bstc_memcmp 
+# define bstc_memcmp memcmp
 #endif
 
-#ifdef bst_strcmp 
-# define bst_strcmp strcmp
+#ifdef bstc_strcmp 
+# define bstc_strcmp strcmp
 #endif
 
-#ifdef bst_strcoll 
-# define bst_strcoll strcoll
+#ifdef bstc_strcoll 
+# define bstc_strcoll strcoll
 #endif
 
-#ifdef bst_strncmp 
-# define bst_strncmp strncmp
+#ifdef bstc_strncmp 
+# define bstc_strncmp strncmp
 #endif
 
-#ifdef bst_strxfrm 
-# define bst_strxfrm strxfrm
+#ifdef bstc_strxfrm 
+# define bstc_strxfrm strxfrm
 #endif
 
-#ifdef bst_memchr 
-# define bst_memchr memchr
+#ifdef bstc_memchr 
+# define bstc_memchr memchr
 #endif
 
-#ifdef bst_strchr 
-# define bst_strchr strchr
+#ifdef bstc_strchr 
+# define bstc_strchr strchr
 #endif
 
-#ifdef bst_strcspn 
-# define bst_strcspn strcspn
+#ifdef bstc_strcspn 
+# define bstc_strcspn strcspn
 #endif
 
-#ifdef bst_strpbrk 
-# define bst_strpbrk strpbrk
+#ifdef bstc_strpbrk 
+# define bstc_strpbrk strpbrk
 #endif
 
-#ifdef bst_strrchr 
-# define bst_strrchr strrchr
+#ifdef bstc_strrchr 
+# define bstc_strrchr strrchr
 #endif
 
-#ifdef bst_strspn 
-# define bst_strspn strspn
+#ifdef bstc_strspn 
+# define bstc_strspn strspn
 #endif
 
-#ifdef bst_strstr 
-# define bst_strstr strstr
+#ifdef bstc_strstr 
+# define bstc_strstr strstr
 #endif
 
-#ifdef bst_strtok 
-# define bst_strtok strtok
+#ifdef bstc_strtok 
+# define bstc_strtok strtok
 #endif
 
-#ifdef bst_memset 
-# define bst_memset memset
+#ifdef bstc_memset 
+# define bstc_memset memset
 #endif
 
-#ifdef bst_strerror 
-# define bst_strerror strerror
+#ifdef bstc_strerror 
+# define bstc_strerror strerror
 #endif
 
-#ifdef bst_strlen 
-# define bst_strlen strlen
+#ifdef bstc_strlen 
+# define bstc_strlen strlen
 #endif
 /// \}

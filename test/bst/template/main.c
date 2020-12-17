@@ -1,4 +1,4 @@
-#include <bst/template.h>
+#include <bstc/template.h>
 #include <stdio.h>
 
 // The function that gets inserted is merely the symbol, therein does not matter when it is defined.

@@ -3,24 +3,24 @@
 //  Distributed under the Boost Software License, Version 1.0. (See
 //  accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
-#ifndef BST__CONFIG__COMPILER__VISUALC_H
-#define BST__CONFIG__COMPILER__VISUALC_H
+#ifndef BSTC__CONFIG__COMPILER__VISUALC_H
+#define BSTC__CONFIG__COMPILER__VISUALC_H
 
 
 /* Provide a way to detect the version of VISUALC. */
 /// \{
 #if _MSC_FULL_VER > 100000000
-# define BST_VISUALC_VER _MSC_FULL_VER
+# define BSTC_VISUALC_VER _MSC_FULL_VER
 #else
-# define BST_VISUALC_VER (_MSC_FULL_VER * 10)
+# define BSTC_VISUALC_VER (_MSC_FULL_VER * 10)
 #endif
 /// \}
 
 
 /* Add branch predictors. */
 /// \{
-#define BST_LIKELY(x) __builtin_expect(x, 1)
-#define BST_UNLIKELY(x) __builtin_expect(x, 0)
+#define BSTC_LIKELY(x) __builtin_expect(x, 1)
+#define BSTC_UNLIKELY(x) __builtin_expect(x, 0)
 /// \}
 
 
@@ -36,7 +36,7 @@
 
 /* Indicate visualc allows pasting symbols to strings. */
 /// \{
-#define BST_HAS_STRING_PASTE
+#define BSTC_HAS_STRING_PASTE
 /// \}
 
 
@@ -47,4 +47,4 @@
 /// \}
 
 
-#endif // BST__CONFIG__COMPILER__VISUALC_H
+#endif // BSTC__CONFIG__COMPILER__VISUALC_H
