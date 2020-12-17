@@ -1,5 +1,5 @@
-# bst
-A library like [**B**oo**st** _C++_](https://github.com/boostorg), but for C.
+# boostc
+A library like [Boost _C++_](https://github.com/boostorg), but for C.
 Provides compile time decisions similar to templating in a simple API.
 Also has polyfills for C standards.
 
@@ -10,15 +10,11 @@ Therein, I began to wonder if I could take this and get it into a _C_ library.
 
 So, this library is my attempt to make a _C_ version without copying _Boost C++_ directly for my own learning experience.
 
-The name comes from taking _**O**bject **O**riented_ out of _B**oo**st C++_.
-At least that is what I say now.
-It really is just an abbreviation of _Boost_, by removing the vowels...
-
 ### Interface Namespaces
-The current interface is to prefix everything with `bst_`.
+The current interface is to prefix everything with `bstc_`.
 Also, the library provides an interface without this prefix.
 This may cause problems in your library if you have something with a similar name.
-To avoid this, you can define `BST_NAMESPACE_ONLY` and it will remove the other non-stdc interfaces without the `bst_`.
+To avoid this, you can define `BSTC_NAMESPACE_ONLY` and it will remove the other non-stdc interfaces without the `bstc_`.
 
 ### Compile Time Requirement
 Currently, the goal is to write all of the library as compile time insertions of the code.
@@ -34,7 +30,7 @@ Then the compiler will treat it as a function and potentially reducing the size 
 Provides compile time decisions to create a _C++_ like vector in _C_. Uses the _template_ interface.
 
 ```c
-#include <bst/vector.h>
+#include <bstc/vector.h>
 #include <stdio.h>
 
 int main()
