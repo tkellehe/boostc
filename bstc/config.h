@@ -10,14 +10,6 @@
 #include <bstc/config/version.h>
 
 
-/* Default is to provide BSTC with no namespaces and namespaced */
-/// \{
-#if !defined(BSTC_NAMESPACE_ONLY) && !defined(BSTC_NO_NAMESPACE)
-#define BSTC_NO_NAMESPACE
-#endif
-/// \}
-
-
 #include <bstc/config/macros.h>
 
 

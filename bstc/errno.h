@@ -47,24 +47,6 @@
 /// \}
 
 
-/* Provide without namespace. */
-/// \{
-#ifdef BSTC_NO_NAMESPACE
-# ifndef get_errno
-#  define get_errno bstc_get_errno
-# endif
-
-# ifndef get_errno
-#  define get_errno bstc_get_errno
-# endif
-
-# ifndef set_errno
-#  define set_errno bstc_set_errno
-# endif
-#endif
-/// \}
-
-
 /* Add potentially missing errno values. */
 /// \{
 #ifndef EAFNOSUPPORT

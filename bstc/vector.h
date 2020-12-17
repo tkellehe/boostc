@@ -16,64 +16,16 @@
 #include <bstc/detail/vector.h>
 
 
-/* Provide interface without namespace */
-/// \{
-#ifdef BSTC_NO_NAMESPACE
-#define vect_tmplt_t bstc_vect_tmplt_t
-#define vect_t bstc_vect_t
-#define vect_init bstc_vect_init
-#define vect_destroy bstc_vect_destroy
-#define vect_len bstc_vect_len
-#define vect_cap bstc_vect_cap
-#define vect_rsz bstc_vect_rsz
-#define vect_rsv bstc_vect_rsv
-#define vect_empty bstc_vect_empty
-#define vect_front bstc_vect_front
-#define vect_back bstc_vect_back
-#define vect_push bstc_vect_push
-#define vect_begin bstc_vect_begin
-#define vect_end bstc_vect_end
-#define vect_rbegin bstc_vect_rbegin
-#define vect_rend bstc_vect_rend
-
-
-#define vect_iter_t bstc_vect_iter_t
-#define vect_iter_nxt bstc_vect_iter_nxt
-#define vect_iter_eq bstc_vect_iter_eq
-#define vect_iter_val bstc_vect_iter_val
-#define vect_iter_set bstc_vect_iter_set
-
-
-#define vect_riter_t bstc_vect_riter_t
-#define vect_riter_nxt bstc_vect_riter_nxt
-#define vect_riter_eq bstc_vect_riter_eq
-#define vect_riter_val bstc_vect_riter_val
-#define vect_riter_set bstc_vect_riter_set
-#endif
-/// \}
-
-
 /** Declares the vector template type.
  * \param T The type of the data in the vector.
  * \param alloc An optional argument which is the allocator for the template type.
  */
 /// \{
-#ifdef BSTC_NO_NAMESPACE
-# define bstc_vect_tmplt_t(T, ...) \
-    bstc_tmplt_isa(bstc_vect_tmplt_ ## T,\
-        bstc_vect_tmplt_ ## T,\
-        bstc_tmplt_isa(vect_tmplt_ ## T,\
-            vect_tmplt_ ## T,\
-            bstc_dtl_vect_tmplt_t(T, __VA_ARGS__)\
-        )\
-    )
-#else
-# define bstc_vect_tmplt_t(T, ...)  \
+#define bstc_vect_tmplt_t(T, ...)  \
     bstc_tmplt_isa(bstc_vect_tmplt_ ## T,\
         bstc_vect_tmplt_ ## T,\
         bstc_dtl_vect_tmplt_t(T, __VA_ARGS__)\
     )
-#endif
 /// \}
 
 

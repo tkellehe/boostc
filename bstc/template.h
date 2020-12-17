@@ -13,41 +13,6 @@
 #include <bstc/iterator.h>
 
 
-/* Provide without namespace */
-/// \{
-#ifdef BSTC_NO_NAMESPACE
-#define tmplt_ctuple_type bstc_tmplt_ctuple_type
-#define tmplt_ctuple_info bstc_tmplt_ctuple_info
-#define tmplt_ctuple_fns bstc_tmplt_ctuple_fns
-#define tmplt_ctuple_iter bstc_tmplt_ctuple_iter
-#define tmplt_ctuple_riter bstc_tmplt_ctuple_riter
-#define tmplt_ctuple_alloc bstc_tmplt_ctuple_alloc
-
-#define tmplt_ctuple_fn bstc_tmplt_ctuple_fn
-
-#define tmplt_type bstc_tmplt_type
-#define tmplt_info bstc_tmplt_info
-#define tmplt_fns bstc_tmplt_fns
-#define tmplt_iter bstc_tmplt_iter
-#define tmplt_riter bstc_tmplt_riter
-#define tmplt_alloc bstc_tmplt_alloc
-
-#define tmplt_fn bstc_tmplt_fn
-
-#define tmplt_set_type bstc_tmplt_set_type
-#define tmplt_set_info bstc_tmplt_set_info
-#define tmplt_set_fns bstc_tmplt_set_fns
-#define tmplt_set_iter bstc_tmplt_set_iter
-#define tmplt_set_riter bstc_tmplt_set_riter
-#define tmplt_set_alloc bstc_tmplt_set_alloc
-
-#define tmplt_defaults bstc_tmplt_defaults
-
-#define tmplt_isa bstc_tmplt_isa
-#endif
-/// \}
-
-
 /** Provide operations on bstc template types.
  * type: The actual type for the template.
  * info: A ctuple of the information about the type.

@@ -12,33 +12,6 @@
 #include <bstc/stdlib.h>
 
 
-/* Provide without namespace */
-/// \{
-#ifdef BSTC_NO_NAMESPACE
-#define alloc_ctuple_free bstc_alloc_ctuple_free
-#define alloc_ctuple_malloc bstc_alloc_ctuple_malloc
-#define alloc_ctuple_realloc bstc_alloc_ctuple_realloc
-
-#define alloc_free bstc_alloc_free
-#define alloc_malloc bstc_alloc_malloc
-#define alloc_realloc bstc_alloc_realloc
-
-#define alloc_set_free bstc_alloc_set_free
-#define alloc_set_malloc bstc_alloc_set_malloc
-#define alloc_set_realloc bstc_alloc_set_realloc
-
-#define alloc_stdlib bstc_alloc_stdlib
-#define alloc_defaults bstc_alloc_defaults
-
-#define alloc_nofree bstc_alloc_nofree
-#define alloc_nomalloc bstc_alloc_nomalloc
-#define alloc_norealloc bstc_alloc_norealloc
-
-#define alloc_isa bstc_alloc_isa
-#endif
-/// \}
-
-
 /* Pack arguments provided into a single ctuple maintaining the standard order where defaults are no-ops */
 /// \{
 #define bstc_alloc_ctuple_free(f) bstc_alloc_set_free(bstc_alloc_defaults, bstc_free)

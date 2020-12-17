@@ -26,8 +26,8 @@ int main()
     // //--------------------------------------------------------------------------------------------------------
     // error = EPROTO;
     // printf("errno\n");
-    // errno = error;
-    // if((int)errno == error)
+    // bstc_errno = error;
+    // if((int)bstc_errno == error)
     // {
     //     ++num_pass;
     //     printf("    passed\n");

@@ -11,15 +11,6 @@
 #include <bstc/iterator.h>
 
 
-/* Provide interface with no namespace */
-/// \{
-#ifdef BSTC_NO_NAMESPACE
-# define alg_findpred bstc_alg_findpred
-# define alg_find bstc_alg_find
-#endif
-/// \}
-
-
 /* Uses the BSTC iterator interface to interact with unordered content */
 /// \{
 #define bstc_alg_find(iters, iter, end, val) bstc_alg_findpred(iters, iter, end, (bstc_iter_val(iters)(iter) == val))
