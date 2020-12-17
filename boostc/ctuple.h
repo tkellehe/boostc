@@ -188,11 +188,12 @@
 /// \{
 #ifndef bstc_ctuple_collect
 # define bstc_ctuple_collect(tpl, N) \
-    bstc_ctuple_hasGTE(tpl, N,\
+    bstc_ctuple_hasGT(tpl, N,\
         (BSTC_CALL(BSTC_JOIN2(bstc_dtl_ctuple_collect, N), bstc_dtl_ctuple_collect_augmented(tpl))),\
-        BSTC_CTUPLE_OUT_OF_BOUNDS\
+        bstc_ctuple_hasN(tpl, N, tpl, BSTC_CTUPLE_OUT_OF_BOUNDS)\
     )
 #endif
+/// \}
 
 
 /** Creates a new ctuple by removing the first N items. */
@@ -227,5 +228,9 @@
 
 /** Creates a new ctuple and sets the value at the provided location. */
 /// \{
-#define bstc_ctuple_setI(tpl, I, val) bstc_ctuple_concat(bstc_ctuple_append(bstc_ctuple_collect(tpl, I), val), bstc_ctuple_ltrim(tpl, BSTC_CONST_ADD1(I)))
+#define bstc_ctuple_setI(tpl, I, val) \
+    BSTC_IFEQ(I, 0,\
+        bstc_ctuple_hasN(tpl, 1, bstc_ctuple(val), bstc_ctuple_prepend(bstc_ctuple_ltrim(tpl, 1), val)),\
+        bstc_ctuple_hasN(tpl, BSTC_CONST_ADD1(I), bstc_ctuple_append(bstc_ctuple_collect(tpl, I), val), bstc_dtl_ctuple_setI(tpl, I, val))\
+    )
 /// \}

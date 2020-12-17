@@ -27,7 +27,7 @@
 /** Creates a ctuple with the defaults set except for the realloc function provided. */
 /// \{
 #ifndef bstc_alloc_pack_realloc
-# define bstc_alloc_pack_realloc(realloc) bstc_alloc_set_realloc(bstc_alloc_defaults, realloc)
+# define bstc_alloc_pack_realloc(realloc) BSTC_EXPAND(bstc_alloc_set_realloc(bstc_alloc_defaults, realloc))
 #endif
 /// \}
 
@@ -75,7 +75,7 @@
 /** Create a copy of the ctuple as an allocator with the realloc function changed to what is provided. */
 /// \{
 #ifndef bstc_alloc_set_realloc
-# define bstc_alloc_set_realloc(tpl, realloc) bstc_ctuple_setI(tpl, 2, realloc)
+# define bstc_alloc_set_realloc(tpl, realloc) BSTC_EXPAND(bstc_ctuple_setI(tpl, 2, realloc))
 #endif
 /// \}
 
@@ -123,6 +123,6 @@
 /** Detects if the ctuple provided could be a valid allocator ctuple. */
 /// \{
 #ifndef bstc_alloc_isa
-# define bstc_alloc_isa(tpl, _t, _f) bstc_ctuple_isa(tpl, bstc_ctuple_hasN(tpl, 3, _t, _f), _f)
+# define bstc_alloc_isa(tpl, _t, _f) BSTC_EXPAND(bstc_ctuple_isa(tpl, bstc_ctuple_hasN(tpl, 3, _t, _f), _f))
 #endif
 /// \}

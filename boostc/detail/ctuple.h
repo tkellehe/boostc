@@ -15,6 +15,8 @@
 #define bstc_dtl_ctuple_append(tpl, ...) (bstc_ctuple_expand tpl, __VA_ARGS__)
 #define bstc_dtl_ctuple_prepend(tpl, ...) (__VA_ARGS__, bstc_ctuple_expand tpl)
 
+#define bstc_dtl_ctuple_setI(tpl, I, val) bstc_ctuple_concat(bstc_ctuple_append(bstc_ctuple_collect(tpl, I), val), bstc_ctuple_ltrim(tpl, BSTC_CONST_ADD1(I)))
+
 
 #define bstc_dtl_ctuple_reverse0()
 #define bstc_dtl_ctuple_reverse1(_0) _0
@@ -224,6 +226,7 @@
 
 #define bstc_dtl_ctuple_collect_augmented(tpl) BSTC_EXPAND(BSTC_UNPACK tpl), unused
 #define bstc_dtl_ctuple_collect0(...)
+#define bstc_dtl_ctuple_collect1(_0, ...) _0
 #define bstc_dtl_ctuple_collect2(_0,_1, ...) _0,_1
 #define bstc_dtl_ctuple_collect3(_0,_1,_2, ...) _0,_1,_2
 #define bstc_dtl_ctuple_collect4(_0,_1,_2,_3, ...) _0,_1,_2,_3
