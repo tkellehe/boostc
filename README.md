@@ -10,12 +10,6 @@ Therein, I began to wonder if I could take this and get it into a _C_ library.
 
 So, this library is my attempt to make a _C_ version without copying _Boost C++_ directly for my own learning experience.
 
-### Interface Namespaces
-The current interface is to prefix everything with `bstc_`.
-Also, the library provides an interface without this prefix.
-This may cause problems in your library if you have something with a similar name.
-To avoid this, you can define `BSTC_NAMESPACE_ONLY` and it will remove the other non-stdc interfaces without the `bstc_`.
-
 ### Compile Time Requirement
 Currently, the goal is to write all of the library as compile time insertions of the code.
 This allows more flexibility and makes it closer to _Boost C++_.
@@ -33,16 +27,20 @@ Provides compile time decisions to create a _C++_ like vector in _C_. Uses the _
 #include <bstc/vector.h>
 #include <stdio.h>
 
-int main()
+int main(int argc, char *argv[])
 {
+    (void)argc;
+    (void)argv;
     // Note: It is recommended to do as typedef because there is no guarantee that the types will be the same.
     //       This problem is more relevant when the underlying structure is a more complex data structure.
-    vect_t(int) vect;
+    bstc_vect_t(int) vect;
     
-    vect_init(vect);
+    // Initialize the state of the vector.
+    bstc_vect_init(vect);
+    
     // Default is to use stdlib allocator.
-    vect_push(vect, 11);
-    vect_push(vect, 12);
+    bstc_vect_push(vect, 11);
+    bstc_vect_push(vect, 12);
     
     // Can use basic array operator on the data.
     vect[0] += 10;
@@ -50,10 +48,11 @@ int main()
     // Can loop over the contents.
     {
         int i;
-        for(i = 0; i < vect_len(vect); ++i) printf("%i\n", vect[i]);
+        for(i = 0; i < bstc_vect_len(vect); ++i) printf("%i\n", vect[i]);
     }
     
-    vect_destroy(vect);
+    // Deallocate any memory.
+    bstc_vect_destroy(vect);
     
     return 0;
 }
