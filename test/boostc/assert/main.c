@@ -1,8 +1,10 @@
 #include <boostc/assert.h>
 #include <stdio.h>
 
-int main()
+int main(int argc, char *argv[])
 {
+    (void)argc;
+    (void)argv;
     printf("passed\n");
     return 0;
 }

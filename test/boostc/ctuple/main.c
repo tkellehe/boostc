@@ -2,8 +2,10 @@
 #include <boostc/stdlib.h>
 #include <stdio.h>
 
-int main()
+int main(int argc, char *argv[])
 {
+    (void)argc;
+    (void)argv;
     int num_pass = 0;
     int num_fail = 0;
 

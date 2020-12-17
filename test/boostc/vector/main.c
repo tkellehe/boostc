@@ -2,8 +2,10 @@
 #include <boostc/algorithm/find.h>
 #include <stdio.h>
 
-int main()
+int main(int argc, char *argv[])
 {
+    (void)argc;
+    (void)argv;
     #define tmplt bstc_vect_tmplt_t(int)
     typedef bstc_vect_t(tmplt) vect_int_t;
     typedef bstc_vect_iter_t(tmplt) vect_int_iter_t;

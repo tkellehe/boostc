@@ -26,8 +26,10 @@ static short fooT_short(short x, short y)
 // Since everything is a macro, we just need to define this (like real templates) before it is used.
 #define fooT_tmplt_short bstc_tmplt_ctuple_fn(fooT_short)
 
-int main()
+int main(int argc, char *argv[])
 {
+    (void)argc;
+    (void)argv;
     int i = fooT(int, 2, 5);
     short s = fooT(short, 2, 5);
     unsigned u = fooT(unsigned, 2, 5);
