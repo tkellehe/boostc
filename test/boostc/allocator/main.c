@@ -17,16 +17,16 @@ int main(int argc, char *argv[])
     //--------------------------------------------------------------------------------------------------------
     printf("bstc_alloc_isa(%s)\n", bstc_ctuple_tostring(alloc1));
     bstc_alloc_isa(alloc1, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    // printf("bstc_alloc_isa(%s)\n", bstc_ctuple_tostring(alloc2));
-    // bstc_alloc_isa(alloc2, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("bstc_alloc_isa(%s)\n", bstc_ctuple_tostring(alloc2));
+    bstc_alloc_isa(alloc2, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
     printf("bstc_alloc_isa(%s)\n", bstc_ctuple_tostring(alloc3));
     bstc_alloc_isa(alloc3, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    // printf("bstc_alloc_isa(%s)\n", bstc_ctuple_tostring(alloc4));
-    // bstc_alloc_isa(alloc4, (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
-    // printf("bstc_alloc_isa(%s)\n", bstc_ctuple_tostring(bstc_alloc_defaults));
-    // bstc_alloc_isa(bstc_alloc_defaults, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    // printf("bstc_alloc_isa(%s)\n", bstc_ctuple_tostring(bstc_alloc_stdlib));
-    // bstc_alloc_isa(bstc_alloc_stdlib, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("bstc_alloc_isa(%s)\n", bstc_ctuple_tostring(alloc4));
+    bstc_alloc_isa(alloc4, (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
+    printf("bstc_alloc_isa(%s)\n", bstc_ctuple_tostring(bstc_alloc_defaults));
+    bstc_alloc_isa(bstc_alloc_defaults, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("bstc_alloc_isa(%s)\n", bstc_ctuple_tostring(bstc_alloc_stdlib));
+    bstc_alloc_isa(bstc_alloc_stdlib, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
 
     //--------------------------------------------------------------------------------------------------------
     printf("-----------------------------\n");

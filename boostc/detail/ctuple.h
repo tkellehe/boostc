@@ -12,10 +12,13 @@
 
 /* Details for ctuples. */
 /// \{
-#define bstc_dtl_ctuple_append(tpl, ...) (bstc_ctuple_expand tpl, __VA_ARGS__)
+#define bstc_dtl_ctuple_append(tpl, ...) bstc_dtl_ctuple_append_expand(bstc_ctuple(BSTC_AUGMENTED(bstc_ctuple_expand tpl)), bstc_ctuple(__VA_ARGS__))
+#define bstc_dtl_ctuple_append_expand(L, R) BSTC_EXPAND(bstc_dtl_ctuple_append_expand1(bstc_ctuple_expand L, bstc_ctuple_expand R))
+#define bstc_dtl_ctuple_append_expand1(...) BSTC_EXPAND(bstc_dtl_ctuple_append_expand2(__VA_ARGS__))
+#define bstc_dtl_ctuple_append_expand2(U, ...) BSTC_EXPAND(bstc_ctuple(__VA_ARGS__))
 
 
-#define bstc_dtl_ctuple_prepend(tpl, ...) (__VA_ARGS__, bstc_ctuple_expand tpl)
+#define bstc_dtl_ctuple_prepend(tpl, ...) bstc_ctuple(__VA_ARGS__, bstc_ctuple_expand tpl)
 
 
 #define bstc_dtl_ctuple_ltrim_select(tpl, N) \
