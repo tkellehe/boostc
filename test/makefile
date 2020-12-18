@@ -64,4 +64,17 @@ $(BSTC_BIN)/vs14/%: $(TEST_DIR)/%/main.c
 	@echo
 
 #-------------------------------------------------------------------------------------------------------------
+BSTC_TCC_TESTS := $(ALL_MAINC:$(TEST_DIR)/%/main.c=$(BSTC_BIN)/tcc/%)
+BSTC_TCC_FLAGS ?= -O3 -Wall -Werror -pedantic
+BSTC_TCC ?= /tcc/win64/tcc
+
+tcc: $(BSTC_TCC_TESTS)
+
+$(BSTC_BIN)/tcc/%: $(TEST_DIR)/%/main.c
+	@echo "(TCC) Building Test: $@"
+	@mkdir -p `dirname $@`
+	$(BSTC_TCC) $(BSTC_TCC_FLAGS) -I "$(call winpaths,$(PROJECT_DIR))" "$(call winpaths,$?)" -o "$(call winpaths,$@)"
+	@echo
+
+#-------------------------------------------------------------------------------------------------------------
 print-%: ; @echo $* = $($*)
