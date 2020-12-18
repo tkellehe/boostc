@@ -193,26 +193,11 @@
         BSTC_IFEQ(N, 1,\
             bstc_ctuple(BSTC_GET_ARG0 tpl),\
             bstc_ctuple_hasGT(tpl, N,\
-                (BSTC_CALL(BSTC_JOIN2(bstc_dtl_ctuple_collect, N), bstc_dtl_ctuple_collect_augmented(tpl))),\
+                bstc_ctuple(BSTC_CALL(BSTC_JOIN2(bstc_dtl_ctuple_collect, N), bstc_dtl_ctuple_collect_augmented(tpl))),\
                 bstc_ctuple_hasN(tpl, N, tpl, BSTC_CTUPLE_OUT_OF_BOUNDS)\
             )\
         )\
     )
-/*# define bstc_ctuple_collect(tpl, N) \
-    BSTC_IFEQ(N, 0,\
-        bstc_ctuple_empty(),\
-        bstc_dtl_ctuple_collect(tpl, N)\
-    )
-
-#define bstc_dtl_ctuple_collect(tpl, N) bstc_dtl_ctuple_collect_(bstc_dtl_ctuple_collect_select(tpl, N), tpl, N)
-#define bstc_dtl_ctuple_collect_select(tpl, N) \
-    bstc_ctuple_hasGT(tpl, N,\
-        bstc_dtl_ctuple_collect_apply,\
-        bstc_dtl_ctuple_collect_exact\
-    )
-#define bstc_dtl_ctuple_collect_(F, tpl, N) BSTC_EXPAND(BSTC_CALL(F, tpl, N))
-#define bstc_dtl_ctuple_collect_exact(tpl, N) bstc_ctuple_hasN(tpl, N, tpl, BSTC_CTUPLE_OUT_OF_BOUNDS)
-#define bstc_dtl_ctuple_collect_apply(tpl, N) (BSTC_CALL(BSTC_JOIN2(bstc_dtl_ctuple_collect, N), bstc_dtl_ctuple_collect_augmented(tpl)))*/
 #endif
 /// \}
 
