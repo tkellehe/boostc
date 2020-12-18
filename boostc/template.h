@@ -19,7 +19,7 @@
  */
 
 
-/** . */
+/** Creates a ctuple with the defaults set except for the template type provided. */
 /// \{
 #ifndef bstc_tmplt_pack_t
 # define bstc_tmplt_pack_t(t) bstc_tmplt_set_t(bstc_tmplt_defaults, t)
@@ -27,7 +27,7 @@
 /// \}
 
 
-/** . */
+/** Creates a ctuple with the defaults set except for the info ctuple provided. */
 /// \{
 #ifndef bstc_tmplt_pack_info
 # define bstc_tmplt_pack_info(info) bstc_ctuple_isa(info, bstc_tmplt_set_info(bstc_tmplt_defaults, info), BSTC_TMPLT_NOT_CREATED_ERROR)
@@ -35,7 +35,7 @@
 /// \}
 
 
-/** . */
+/** Creates a ctuple with the defaults set except for the functions ctuple provided. */
 /// \{
 #ifndef bstc_tmplt_pack_fns
 # define bstc_tmplt_pack_fns(fns) bstc_ctuple_isa(fns, bstc_tmplt_set_fns(bstc_tmplt_defaults, fns), BSTC_TMPLT_NOT_CREATED_ERROR)
@@ -43,7 +43,7 @@
 /// \}
 
 
-/** . */
+/** Creates a ctuple with the defaults set except for the iterator ctuple provided. */
 /// \{
 #ifndef bstc_tmplt_pack_iter
 # define bstc_tmplt_pack_iter(iter) bstc_iter_isa(iter, bstc_tmplt_set_iter(bstc_tmplt_defaults, iter), BSTC_TMPLT_NOT_CREATED_ERROR)
@@ -51,7 +51,7 @@
 /// \}
 
 
-/** . */
+/** Creates a ctuple with the defaults set except for the reverse iterator ctuple provided. */
 /// \{
 #ifndef bstc_tmplt_pack_riter
 # define bstc_tmplt_pack_riter(riter) bstc_iter_isa(riter, bstc_tmplt_set_riter(bstc_tmplt_defaults, riter), BSTC_TMPLT_NOT_CREATED_ERROR)
@@ -59,7 +59,7 @@
 /// \}
 
 
-/** . */
+/** Creates a ctuple with the defaults set except for the allocator ctuple provided. */
 /// \{
 #ifndef bstc_tmplt_pack_alloc
 # define bstc_tmplt_pack_alloc(alloc) bstc_alloc_isa(alloc, bstc_tmplt_set_alloc(bstc_tmplt_defaults, alloc), BSTC_TMPLT_NOT_CREATED_ERROR)
@@ -67,7 +67,7 @@
 /// \}
 
 
-/** . */
+/** Creates a ctuple with the defaults set except for the function provided which will be packed into a ctuple. */
 /// \{
 #ifndef bstc_tmplt_pack_fn
 # define bstc_tmplt_pack_fn(fn) bstc_tmplt_pack_fns(bstc_ctuple(fn))
@@ -75,7 +75,7 @@
 /// \}
 
 
-/** . */
+/** Get the template type that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_tmplt_t
 # define bstc_tmplt_t(tpl) bstc_ctuple_getI(tpl, 0)
@@ -83,7 +83,7 @@
 /// \}
 
 
-/** . */
+/** Get the template info ctuple that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_tmplt_info
 # define bstc_tmplt_info(tpl) bstc_ctuple_getI(tpl, 1)
@@ -91,7 +91,7 @@
 /// \}
 
 
-/** . */
+/** Get the template functions ctuple that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_tmplt_fns
 # define bstc_tmplt_fns(tpl) bstc_ctuple_getI(tpl, 2)
@@ -99,7 +99,7 @@
 /// \}
 
 
-/** . */
+/** Get the template iterator ctuple that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_tmplt_iter
 # define bstc_tmplt_iter(tpl) bstc_ctuple_getI(tpl, 3)
@@ -107,7 +107,7 @@
 /// \}
 
 
-/** . */
+/** Get the template reverse iterator ctuple that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_tmplt_riter
 # define bstc_tmplt_riter(tpl) bstc_ctuple_getI(tpl, 4)
@@ -115,7 +115,7 @@
 /// \}
 
 
-/** . */
+/** Get the template allocator ctuple that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_tmplt_alloc
 # define bstc_tmplt_alloc(tpl) bstc_ctuple_getI(tpl, 5)
@@ -123,7 +123,7 @@
 /// \}
 
 
-/** . */
+/** Get the first item in the template functions ctuple that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_tmplt_fn
 # define bstc_tmplt_fn(tpl) bstc_ctuple_getI(bstc_tmplt_fns(tpl), 0)
@@ -131,7 +131,7 @@
 /// \}
 
 
-/** . */
+/** Create a copy of the ctuple as a template with the template type changed to what is provided. */
 /// \{
 #ifndef bstc_tmplt_set_t
 # define bstc_tmplt_set_t(tpl, t) bstc_ctuple_setI(tpl, 0, t)
@@ -139,7 +139,7 @@
 /// \}
 
 
-/** . */
+/** Create a copy of the ctuple as a template with the template info ctuple changed to what is provided. */
 /// \{
 #ifndef bstc_tmplt_set_info
 # define bstc_tmplt_set_info(tpl, info) bstc_ctuple_setI(tpl, 1, info)
@@ -147,7 +147,7 @@
 /// \}
 
 
-/** . */
+/** Create a copy of the ctuple as a template with the template functions ctuple changed to what is provided. */
 /// \{
 #ifndef bstc_tmplt_set_fns
 # define bstc_tmplt_set_fns(tpl, fns) bstc_ctuple_setI(tpl, 2, fns)
@@ -155,7 +155,7 @@
 /// \}
 
 
-/** . */
+/** Create a copy of the ctuple as a template with the template iterator ctuple changed to what is provided. */
 /// \{
 #ifndef bstc_tmplt_set_iter
 # define bstc_tmplt_set_iter(tpl, iter) bstc_ctuple_setI(tpl, 3, iter)
@@ -163,7 +163,7 @@
 /// \}
 
 
-/** . */
+/** Create a copy of the ctuple as a template with the template reverse iterator ctuple changed to what is provided. */
 /// \{
 #ifndef bstc_tmplt_set_riter
 # define bstc_tmplt_set_riter(tpl, riter) bstc_ctuple_setI(tpl, 4, riter)
@@ -171,7 +171,7 @@
 /// \}
 
 
-/** . */
+/** Create a copy of the ctuple as a template with the template allocator ctuple changed to what is provided. */
 /// \{
 #ifndef bstc_tmplt_set_alloc
 # define bstc_tmplt_set_alloc(tpl, alloc) bstc_ctuple_setI(tpl, 5, alloc)
@@ -179,7 +179,7 @@
 /// \}
 
 
-/** . */
+/** Default template function that does nothing. */
 /// \{
 #ifndef bstc_tmplt_fn_default
 # define bstc_tmplt_fn_default(...) ((void)0)
@@ -187,7 +187,7 @@
 /// \}
 
 
-/** . */
+/** Default template ctuple that uses the default iterators, allocator, info, type, and functions. */
 /// \{
 #ifndef bstc_tmplt_defaults
 # define bstc_tmplt_defaults bstc_ctuple(int, bstc_ctuple(0), bstc_ctuple(bstc_tmplt_fn_default), bstc_iter_defaults, bstc_iter_defaults, bstc_alloc_defaults)
@@ -195,7 +195,7 @@
 /// \}
 
 
-/** . */
+/** Detects if the ctuple provided could be a valid template ctuple. */
 /// \{
 #ifndef bstc_tmplt_isa
 # define bstc_tmplt_isa(tpl, _t, _f) \

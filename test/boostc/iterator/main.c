@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
     int num_pass = 0;
     int num_fail = 0;
 
+    //--------------------------------------------------------------------------------------------------------
     #define iter1 bstc_iter_pack_t(A)
     #define iter2 bstc_iter_pack_nxt(B)
     #define iter3 bstc_iter_pack_eq(C)

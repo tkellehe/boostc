@@ -151,14 +151,6 @@
 /// \}
 
 
-/** Default iterator ctuple that uses the no-op iterator functions. */
-/// \{
-#ifndef bstc_iter_defaults
-# define bstc_iter_defaults bstc_ctuple(bstc_iter_no_t, bstc_iter_nonxt, bstc_iter_noeq, bstc_iter_noval, bstc_iter_noset, bstc_iter_noswap)
-#endif
-/// \}
-
-
 /** Default iterator type that is just int. */
 /// \{
 #ifndef bstc_iter_no_t
@@ -203,6 +195,14 @@
 /// \{
 #ifndef bstc_iter_noswap
 # define bstc_iter_noswap(left, right) ((void)0)
+#endif
+/// \}
+
+
+/** Default iterator ctuple that uses the no-op iterator functions. */
+/// \{
+#ifndef bstc_iter_defaults
+# define bstc_iter_defaults bstc_ctuple(bstc_iter_no_t, bstc_iter_nonxt, bstc_iter_noeq, bstc_iter_noval, bstc_iter_noset, bstc_iter_noswap)
 #endif
 /// \}
 

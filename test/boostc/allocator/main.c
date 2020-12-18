@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
     int num_pass = 0;
     int num_fail = 0;
 
+    //--------------------------------------------------------------------------------------------------------
     #define alloc1 bstc_alloc_pack_free(bstc_free)
     #define alloc2 bstc_alloc_pack_malloc(bstc_malloc)
     #define alloc3 bstc_alloc_pack_realloc(bstc_realloc)
