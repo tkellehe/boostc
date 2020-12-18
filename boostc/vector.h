@@ -3,10 +3,6 @@
 //  Distributed under the Boost Software License, Version 1.0. (See
 //  accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
-#ifndef BSTC__VECTOR_H
-#define BSTC__VECTOR_H
-
-
 #include <boostc/config.h>
 #include <boostc/assert.h>
 #include <boostc/ctuple.h>
@@ -21,39 +17,49 @@
  * \param alloc An optional argument which is the allocator for the template type.
  */
 /// \{
-#define bstc_vect_tmplt_t(T, ...)  \
-    bstc_tmplt_isa(bstc_vect_tmplt_ ## T,\
-        bstc_vect_tmplt_ ## T,\
-        bstc_dtl_vect_tmplt_t(T, __VA_ARGS__)\
-    )
+#ifndef bstc_vect_tmplt_t
+# define bstc_vect_tmplt_t(...) BSTC_EXPAND(bstc_ctuple_call(bstc_dtl_vect_tmplt_t_select(bstc_ctuple(__VA_ARGS__)), bstc_ctuple(__VA_ARGS__)))
+#endif
 /// \}
 
 
 /** Declares the vector type.
  * \param T The template type of the vector or the type of the vector.
  */
-#define bstc_vect_t(T) bstc_tmplt_isa(T, bstc_tmplt_t(T), T*)
+/// \{
+#ifndef bstc_vect_t
+# define bstc_vect_t(T) bstc_tmplt_isa(T, bstc_tmplt_t(T), T*)
+#endif
+/// \}
 
 
 /** Initializes the vector structure.
  * \param vect Reference to the vector.
  */
-#define bstc_vect_init(vect, ...) \
+/// \{
+#ifndef bstc_vect_init
+# define bstc_vect_init(...) \
     bstc_tmplt_isa(vect,\
         bstc_dtl_vect_get_init(vect)(vect, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
         bstc_dtl_vect_init(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect)\
     )
+#endif
+/// \}
 
 
 /** Destroys and frees any memory allocated for the vector.
  * \param vect Reference to the vector.
  * \return Returns one when successful and zero otherwise.
  */
-#define bstc_vect_destroy(vect, ...) \
+/// \{
+#ifndef bstc_vect_destroy
+# define bstc_vect_destroy(vect, ...) \
     bstc_tmplt_isa(vect,\
         bstc_dtl_vect_get_destroy(vect)(vect, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
         bstc_dtl_vect_destroy(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect)\
     )
+#endif
+/// \}
 
 
 /** Gets the number of items that have been added or resized to.
@@ -237,6 +243,3 @@
         bstc_iter_swap(bstc_tmplt_riter(left))(right, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
         bstc_dtl_vect_riter_swap(left, right)\
     )
-
-
-#endif // BSTC__VECTOR_H

@@ -3,8 +3,8 @@
 //  Distributed under the Boost Software License, Version 1.0. (See
 //  accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
-#ifndef BSTC__CONFIG_H
-#define BSTC__CONFIG_H
+#ifndef BOOSTC__CONFIG_H
+#define BOOSTC__CONFIG_H
 
 
 #include <boostc/config/version.h>
@@ -176,4 +176,4 @@
 /// \}
 
 
-#endif // BSTC__CONFIG_H
+#endif // BOOSTC__CONFIG_H

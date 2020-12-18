@@ -3,8 +3,8 @@
 //  Distributed under the Boost Software License, Version 1.0. (See
 //  accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
-#ifndef BSTC__ALGORITHM__FIND_H
-#define BSTC__ALGORITHM__FIND_H
+#ifndef BOOSTC__ALGORITHM__FIND_H
+#define BOOSTC__ALGORITHM__FIND_H
 
 
 #include <boostc/config.h>

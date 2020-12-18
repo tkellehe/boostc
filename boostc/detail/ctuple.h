@@ -3,14 +3,14 @@
 //  Distributed under the Boost Software License, Version 1.0. (See
 //  accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
-#ifndef BSTC__DETAIL__CTUPLE_H
-#define BSTC__DETAIL__CTUPLE_H
+#ifndef BOOSTC__DETAIL__CTUPLE_H
+#define BOOSTC__DETAIL__CTUPLE_H
 
 
 #include <boostc/config.h>
 
 
-/* Details for ctuples. */
+/* Details for ctuple. */
 /// \{
 #define bstc_dtl_ctuple_append(tpl, ...) bstc_dtl_ctuple_append_expand(bstc_ctuple(BSTC_AUGMENTED(bstc_ctuple_expand tpl)), bstc_ctuple(__VA_ARGS__))
 #define bstc_dtl_ctuple_append_expand(L, R) BSTC_EXPAND(bstc_dtl_ctuple_append_expand1(bstc_ctuple_expand L, bstc_ctuple_expand R))
@@ -346,4 +346,4 @@
 /// \}
 
 
-#endif // BSTC__DETAIL__CTUPLE_H
+#endif // BOOSTC__DETAIL__CTUPLE_H

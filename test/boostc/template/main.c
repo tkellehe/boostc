@@ -57,8 +57,8 @@ int main(int argc, char *argv[])
 
     //--------------------------------------------------------------------------------------------------------
     #define tmplt1 bstc_tmplt_pack_t(A)
-    #define tmplt2 bstc_tmplt_pack_info(bstc_ctuple(B))
-    #define tmplt3 bstc_tmplt_pack_fns(bstc_ctuple(C))
+    #define tmplt2 bstc_tmplt_pack_info(bstc_ctuple(B, BB, BBB))
+    #define tmplt3 bstc_tmplt_pack_fns(bstc_ctuple(C, CC, CCC))
     #define tmplt4 bstc_tmplt_pack_iter(bstc_iter_pack_t(D))
     #define tmplt5 bstc_tmplt_pack_riter(bstc_iter_pack_t(E))
     #define tmplt6 bstc_tmplt_pack_alloc(bstc_alloc_pack_free(F))

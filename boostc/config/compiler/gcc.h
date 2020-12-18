@@ -3,8 +3,8 @@
 //  Distributed under the Boost Software License, Version 1.0. (See
 //  accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
-#ifndef BSTC__CONFIG__COMPILER__GCC_H
-#define BSTC__CONFIG__COMPILER__GCC_H
+#ifndef BOOSTC__CONFIG__COMPILER__GCC_H
+#define BOOSTC__CONFIG__COMPILER__GCC_H
 
 
 /* Provide a way to detect the version of GCC. */
@@ -34,4 +34,4 @@
 /// \}
 
 
-#endif // BSTC__CONFIG__COMPILER__GCC_H
+#endif // BOOSTC__CONFIG__COMPILER__GCC_H

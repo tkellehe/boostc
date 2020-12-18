@@ -3,91 +3,42 @@
 //  Distributed under the Boost Software License, Version 1.0. (See
 //  accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
-#include <boostc/vector.h>
 #include <boostc/algorithm/find.h>
+#include <boostc/stdlib.h>
+#include <boostc/vector.h>
 #include <stdio.h>
 
 int main(int argc, char *argv[])
 {
     (void)argc;
     (void)argv;
-    #define tmplt bstc_vect_tmplt_t(int)
-    typedef bstc_vect_t(tmplt) vect_int_t;
-    typedef bstc_vect_iter_t(tmplt) vect_int_iter_t;
-    typedef bstc_vect_riter_t(tmplt) vect_int_riter_t;
+    int num_pass = 0;
+    int num_fail = 0;
 
-    vect_int_t v;
-    vect_int_iter_t iter;
-    vect_int_riter_t riter;
+    //--------------------------------------------------------------------------------------------------------
+    #define vtmplt1 bstc_vect_tmplt_t(int)
+    #define vtmplt2 bstc_vect_tmplt_t(float, bstc_alloc_defaults)
 
-    typedef struct { int x; int y; } s_t;
-    typedef bstc_vect_t(s_t) vect_s_t;
-    vect_s_t u;
+    //--------------------------------------------------------------------------------------------------------
+    printf("bstc_vect_tmplt_t(int): %s\n", bstc_ctuple_tostring(vtmplt1));
+    bstc_tmplt_isa(vtmplt1, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+    printf("bstc_vect_tmplt_t(float, bstc_alloc_defaults): %s\n", bstc_ctuple_tostring(vtmplt2));
+    bstc_tmplt_isa(vtmplt2, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
 
-    int x = 3;
-    bstc_vect_init(v);
-    bstc_vect_rsv(v, 100);
-    bstc_vect_push(tmplt, v, 1);
-    bstc_vect_push(v, 2);
-    bstc_vect_push(v, x);
-    bstc_vect_push(v, 4);
-    bstc_vect_push(v, x);
-    bstc_vect_push(v, 5);
-
-    iter = bstc_vect_begin(v);
-
-    bstc_alg_find(bstc_tmplt_iter(tmplt), iter, bstc_vect_end(v), x);
-    if(iter != bstc_vect_end(v))
+    //--------------------------------------------------------------------------------------------------------
     {
-        printf("%i\n", bstc_vect_iter_val(iter));
+        bstc_vect_t(float) vect;
+        bstc_vect_init(vect);
+        printf("bstc_vect_t(float) & bstc_vect_init(vect): %p\n", (void*)vect);
+        if(vect == bstc_null) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+        // bstc_vect_destroy(vect);
     }
 
-    riter = bstc_vect_rbegin(v);
-    bstc_alg_find(bstc_tmplt_riter(tmplt), riter, bstc_vect_rend(v), x);
-    if(riter != bstc_vect_rend(v))
-    {
-        printf("%i\n", bstc_vect_riter_val(riter));
-    }
+    //--------------------------------------------------------------------------------------------------------
+    printf("-----------------------------\n");
+    printf("     pass     |     fail     \n");
+    printf("     %04i     |     %04i     \n", num_pass, num_fail);
+    printf("-----------------------------\n");
 
-    bstc_vect_iter_set(iter, 90);
-    bstc_vect_riter_set(riter, 100);
-
-    iter = bstc_vect_begin(v);
-    bstc_alg_find(bstc_tmplt_iter(tmplt), iter, bstc_vect_end(v), x);
-    if(iter == bstc_vect_end(v))
-    {
-        printf("not found\n");
-    }
-
-    riter = bstc_vect_rbegin(v);
-    bstc_alg_find(bstc_tmplt_riter(tmplt), riter, bstc_vect_rend(v), x);
-    if(riter == bstc_vect_rend(v))
-    {
-        printf("not found\n");
-    }
-
-    for(x = 0; x < bstc_vect_len(v); ++x)
-    {
-        printf("v[%i] = %i\n", x, v[x]);
-    }
-
-    bstc_vect_destroy(v);
-
-    bstc_vect_init(u);
-    {
-        s_t t = {1, 2};
-        bstc_vect_push(u, t);
-    }
-    {
-        s_t t = {3, 4};
-        bstc_vect_push(u, t);
-    }
-
-    for(x = 0; x < bstc_vect_len(u); ++x)
-    {
-        printf("u[%i] = {.x=%i, .y=%i}\n", x, u[x].x, u[x].y);
-    }
-
-    bstc_vect_destroy(u);
-    return 0;
+    return num_fail ? bstc_exit_failure : bstc_exit_success;
 }
