@@ -3,10 +3,6 @@
 //  Distributed under the Boost Software License, Version 1.0. (See
 //  accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
-#ifndef BSTC__TEMPLATE_H
-#define BSTC__TEMPLATE_H
-
-
 #include <boostc/config.h>
 #include <boostc/ctuple.h>
 #include <boostc/allocator.h>
@@ -21,47 +17,188 @@
  * riter: The bstc reverse iterator calls as a ctuple for the type.
  * alloc: The bstc allocator calls as a ctuple for the type.
  */
+
+
+/** . */
 /// \{
-#define bstc_tmplt_ctuple_type(type) bstc_tmplt_set_type(bstc_tmplt_defaults, type)
-#define bstc_tmplt_ctuple_info(info) bstc_ctuple_isa(info, bstc_tmplt_set_info(bstc_tmplt_defaults, info), BSTC_TMPLT_NOT_CREATED_ERROR)
-#define bstc_tmplt_ctuple_fns(fns) bstc_ctuple_isa(fns, bstc_tmplt_set_fns(bstc_tmplt_defaults, fns), BSTC_TMPLT_NOT_CREATED_ERROR)
-#define bstc_tmplt_ctuple_iter(iter) bstc_iter_isa(iter, bstc_tmplt_set_iter(bstc_tmplt_defaults, iter), BSTC_TMPLT_NOT_CREATED_ERROR)
-#define bstc_tmplt_ctuple_riter(riter) bstc_iter_isa(riter, bstc_tmplt_set_riter(bstc_tmplt_defaults, riter), BSTC_TMPLT_NOT_CREATED_ERROR)
-#define bstc_tmplt_ctuple_alloc(alloc) bstc_alloc_isa(alloc, bstc_tmplt_set_alloc(bstc_tmplt_defaults, alloc), BSTC_TMPLT_NOT_CREATED_ERROR)
-
-#define bstc_tmplt_ctuple_fn(fn) bstc_tmplt_ctuple_fns(bstc_ctuple(fn))
-
-#define bstc_dtl_tmplt_ctuple(...) \
-    bstc_ctuple_defaults(\
-        bstc_ctuple(__VA_ARGS__),\
-        bstc_tmplt_defaults\
-    )
-
-#define bstc_tmplt_type(tpl) bstc_ctuple_getI(tpl, 0)
-#define bstc_tmplt_info(tpl) bstc_ctuple_getI(tpl, 1)
-#define bstc_tmplt_fns(tpl) bstc_ctuple_getI(tpl, 2)
-#define bstc_tmplt_iter(tpl) bstc_ctuple_getI(tpl, 3)
-#define bstc_tmplt_riter(tpl) bstc_ctuple_getI(tpl, 4)
-#define bstc_tmplt_alloc(tpl) bstc_ctuple_getI(tpl, 5)
-
-#define bstc_tmplt_fn(tpl) bstc_ctuple_getI(bstc_tmplt_fns(tpl), 0)
-
-#define bstc_tmplt_set_type(tpl, type) bstc_ctuple_setI(tpl, 0, type)
-#define bstc_tmplt_set_info(tpl, info) bstc_ctuple_setI(tpl, 1, info)
-#define bstc_tmplt_set_fns(tpl, fns) bstc_ctuple_setI(tpl, 2, fns)
-#define bstc_tmplt_set_iter(tpl, iter) bstc_ctuple_setI(tpl, 3, iter)
-#define bstc_tmplt_set_riter(tpl, riter) bstc_ctuple_setI(tpl, 4, riter)
-#define bstc_tmplt_set_alloc(tpl, alloc) bstc_ctuple_setI(tpl, 5, alloc)
+#ifndef bstc_tmplt_pack_t
+# define bstc_tmplt_pack_t(t) bstc_tmplt_set_t(bstc_tmplt_defaults, t)
+#endif
 /// \}
 
 
-/* Packs the defaults */
-#define bstc_tmplt_fn_default(...) ((void)0)
-#define bstc_tmplt_defaults bstc_ctuple(int, (0), (bstc_tmplt_fn_default), bstc_iter_defaults, bstc_iter_defaults, bstc_alloc_defaults)
+/** . */
+/// \{
+#ifndef bstc_tmplt_pack_info
+# define bstc_tmplt_pack_info(info) bstc_ctuple_isa(info, bstc_tmplt_set_info(bstc_tmplt_defaults, info), BSTC_TMPLT_NOT_CREATED_ERROR)
+#endif
+/// \}
 
 
-/* Detect if provided a ctuple that could be a template */
-#define bstc_tmplt_isa(tpl, _t, _f) \
+/** . */
+/// \{
+#ifndef bstc_tmplt_pack_fns
+# define bstc_tmplt_pack_fns(fns) bstc_ctuple_isa(fns, bstc_tmplt_set_fns(bstc_tmplt_defaults, fns), BSTC_TMPLT_NOT_CREATED_ERROR)
+#endif
+/// \}
+
+
+/** . */
+/// \{
+#ifndef bstc_tmplt_pack_iter
+# define bstc_tmplt_pack_iter(iter) bstc_iter_isa(iter, bstc_tmplt_set_iter(bstc_tmplt_defaults, iter), BSTC_TMPLT_NOT_CREATED_ERROR)
+#endif
+/// \}
+
+
+/** . */
+/// \{
+#ifndef bstc_tmplt_pack_riter
+# define bstc_tmplt_pack_riter(riter) bstc_iter_isa(riter, bstc_tmplt_set_riter(bstc_tmplt_defaults, riter), BSTC_TMPLT_NOT_CREATED_ERROR)
+#endif
+/// \}
+
+
+/** . */
+/// \{
+#ifndef bstc_tmplt_pack_alloc
+# define bstc_tmplt_pack_alloc(alloc) bstc_alloc_isa(alloc, bstc_tmplt_set_alloc(bstc_tmplt_defaults, alloc), BSTC_TMPLT_NOT_CREATED_ERROR)
+#endif
+/// \}
+
+
+/** . */
+/// \{
+#ifndef bstc_tmplt_pack_fn
+# define bstc_tmplt_pack_fn(fn) bstc_tmplt_pack_fns(bstc_ctuple(fn))
+#endif
+/// \}
+
+
+/** . */
+/// \{
+#ifndef bstc_tmplt_t
+# define bstc_tmplt_t(tpl) bstc_ctuple_getI(tpl, 0)
+#endif
+/// \}
+
+
+/** . */
+/// \{
+#ifndef bstc_tmplt_info
+# define bstc_tmplt_info(tpl) bstc_ctuple_getI(tpl, 1)
+#endif
+/// \}
+
+
+/** . */
+/// \{
+#ifndef bstc_tmplt_fns
+# define bstc_tmplt_fns(tpl) bstc_ctuple_getI(tpl, 2)
+#endif
+/// \}
+
+
+/** . */
+/// \{
+#ifndef bstc_tmplt_iter
+# define bstc_tmplt_iter(tpl) bstc_ctuple_getI(tpl, 3)
+#endif
+/// \}
+
+
+/** . */
+/// \{
+#ifndef bstc_tmplt_riter
+# define bstc_tmplt_riter(tpl) bstc_ctuple_getI(tpl, 4)
+#endif
+/// \}
+
+
+/** . */
+/// \{
+#ifndef bstc_tmplt_alloc
+# define bstc_tmplt_alloc(tpl) bstc_ctuple_getI(tpl, 5)
+#endif
+/// \}
+
+
+/** . */
+/// \{
+#ifndef bstc_tmplt_fn
+# define bstc_tmplt_fn(tpl) bstc_ctuple_getI(bstc_tmplt_fns(tpl), 0)
+#endif
+/// \}
+
+
+/** . */
+/// \{
+#ifndef bstc_tmplt_set_t
+# define bstc_tmplt_set_t(tpl, t) bstc_ctuple_setI(tpl, 0, t)
+#endif
+/// \}
+
+
+/** . */
+/// \{
+#ifndef bstc_tmplt_set_info
+# define bstc_tmplt_set_info(tpl, info) bstc_ctuple_setI(tpl, 1, info)
+#endif
+/// \}
+
+
+/** . */
+/// \{
+#ifndef bstc_tmplt_set_fns
+# define bstc_tmplt_set_fns(tpl, fns) bstc_ctuple_setI(tpl, 2, fns)
+#endif
+/// \}
+
+
+/** . */
+/// \{
+#ifndef bstc_tmplt_set_iter
+# define bstc_tmplt_set_iter(tpl, iter) bstc_ctuple_setI(tpl, 3, iter)
+#endif
+/// \}
+
+
+/** . */
+/// \{
+#ifndef bstc_tmplt_set_riter
+# define bstc_tmplt_set_riter(tpl, riter) bstc_ctuple_setI(tpl, 4, riter)
+#endif
+/// \}
+
+
+/** . */
+/// \{
+#ifndef bstc_tmplt_set_alloc
+# define bstc_tmplt_set_alloc(tpl, alloc) bstc_ctuple_setI(tpl, 5, alloc)
+#endif
+/// \}
+
+
+/** . */
+/// \{
+#ifndef bstc_tmplt_fn_default
+# define bstc_tmplt_fn_default(...) ((void)0)
+#endif
+/// \}
+
+
+/** . */
+/// \{
+#ifndef bstc_tmplt_defaults
+# define bstc_tmplt_defaults bstc_ctuple(int, bstc_ctuple(0), bstc_ctuple(bstc_tmplt_fn_default), bstc_iter_defaults, bstc_iter_defaults, bstc_alloc_defaults)
+#endif
+/// \}
+
+
+/** . */
+/// \{
+#ifndef bstc_tmplt_isa
+# define bstc_tmplt_isa(tpl, _t, _f) \
     bstc_ctuple_isa(tpl,\
         bstc_ctuple_hasN(tpl, 6,\
             bstc_iter_isa(bstc_tmplt_iter(tpl),\
@@ -78,6 +215,5 @@
         ),\
         _f\
     )
-
-
-#endif // BSTC__TEMPLATE_H
+#endif
+/// \}

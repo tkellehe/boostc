@@ -1,35 +1,42 @@
 #!/usr/bin/env bash
 
-function run_in_vs_env
+#  Copyright (C) 2020-? T. Mitchell Kelleher
+#
+#  Distributed under the Boost Software License, Version 1.0. (See
+#  accompanying file LICENSE_1_0.txt or copy at
+#  http://www.boost.org/LICENSE_1_0.txt)
+
+
+function run_env
 {
     eval vssetup="\$$1\\vsvars32.bat"
     cmd /Q /C call "$vssetup" "&&" "${@:2}"
 }
 
-function run_vs14
+function vs14
 {
-    run_in_vs_env VS140COMNTOOLS "$@"
+    run_env VS140COMNTOOLS "$@"
 }
 
-function run_vs13
+function vs13
 {
-    run_in_vs_env VS130COMNTOOLS "$@"
+    run_env VS130COMNTOOLS "$@"
 }
 
-function run_vs12
+function vs12
 {
-    run_in_vs_env VS120COMNTOOLS "$@"
+    run_env VS120COMNTOOLS "$@"
 }
 
-function run_vs11
+function vs11
 {
-    run_in_vs_env VS110COMNTOOLS "$@"
+    run_env VS110COMNTOOLS "$@"
 }
 
-function run_vs10
+function vs10
 {
-    run_in_vs_env VS100COMNTOOLS "$@"
+    run_env VS100COMNTOOLS "$@"
 }
 
-# Usage: msvc.bash run_v14 cl <compilation options>
+# Usage: msvc.bash vs14 cl <compilation options>
 "$@"

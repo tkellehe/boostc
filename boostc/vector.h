@@ -32,7 +32,7 @@
 /** Declares the vector type.
  * \param T The template type of the vector or the type of the vector.
  */
-#define bstc_vect_t(T) bstc_tmplt_isa(T, bstc_tmplt_type(T), T*)
+#define bstc_vect_t(T) bstc_tmplt_isa(T, bstc_tmplt_t(T), T*)
 
 
 /** Initializes the vector structure.
@@ -41,7 +41,7 @@
 #define bstc_vect_init(vect, ...) \
     bstc_tmplt_isa(vect,\
         bstc_dtl_vect_get_init(vect)(vect, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_init(bstc_tmplt_ctuple_alloc(bstc_alloc_stdlib), vect)\
+        bstc_dtl_vect_init(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect)\
     )
 
 
@@ -52,7 +52,7 @@
 #define bstc_vect_destroy(vect, ...) \
     bstc_tmplt_isa(vect,\
         bstc_dtl_vect_get_destroy(vect)(vect, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_destroy(bstc_tmplt_ctuple_alloc(bstc_alloc_stdlib), vect)\
+        bstc_dtl_vect_destroy(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect)\
     )
 
 
@@ -63,7 +63,7 @@
 #define bstc_vect_len(vect, ...) \
     bstc_tmplt_isa(vect,\
         bstc_dtl_vect_get_len(vect)(vect, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_len(bstc_tmplt_ctuple_alloc(bstc_alloc_stdlib), vect)\
+        bstc_dtl_vect_len(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect)\
     )
 
 
@@ -74,7 +74,7 @@
 #define bstc_vect_cap(vect, ...) \
     bstc_tmplt_isa(vect,\
         bstc_dtl_vect_get_cap(vect)(vect, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_cap(bstc_tmplt_ctuple_alloc(bstc_alloc_stdlib), vect)\
+        bstc_dtl_vect_cap(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect)\
     )
 
 
@@ -86,7 +86,7 @@
 #define bstc_vect_rsz(vect, nsz, ...) \
     bstc_tmplt_isa(vect,\
         bstc_dtl_vect_get_rsz(vect)(vect, nsz, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_rsz(bstc_tmplt_ctuple_alloc(bstc_alloc_stdlib), vect, nsz)\
+        bstc_dtl_vect_rsz(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect, nsz)\
     )
 
 
@@ -98,7 +98,7 @@
 #define bstc_vect_rsv(vect, ncap, ...) \
     bstc_tmplt_isa(vect,\
         bstc_dtl_vect_get_rsv(vect)(vect, ncap, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_rsv(bstc_tmplt_ctuple_alloc(bstc_alloc_stdlib), vect, ncap)\
+        bstc_dtl_vect_rsv(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect, ncap)\
     )
 
 
@@ -110,7 +110,7 @@
 #define bstc_vect_at(vect, i, ...) \
     bstc_tmplt_isa(vect,\
         bstc_dtl_vect_get_at(vect)(vect, i, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_at(bstc_tmplt_ctuple_alloc(bstc_alloc_stdlib), vect, i)\
+        bstc_dtl_vect_at(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect, i)\
     )
 
 
@@ -121,7 +121,7 @@
 #define bstc_vect_empty(vect, ...) \
     bstc_tmplt_isa(vect,\
         bstc_dtl_vect_get_empty(vect)(vect, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_empty(bstc_tmplt_ctuple_alloc(bstc_alloc_stdlib), vect)\
+        bstc_dtl_vect_empty(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect)\
     )
 
 
@@ -132,7 +132,7 @@
 #define bstc_vect_front(vect, ...) \
     bstc_tmplt_isa(vect,\
         bstc_dtl_vect_get_front(vect)(vect, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_front(bstc_tmplt_ctuple_alloc(bstc_alloc_stdlib), vect)\
+        bstc_dtl_vect_front(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect)\
     )
 
 
@@ -143,7 +143,7 @@
 #define bstc_vect_back(vect, ...) \
     bstc_tmplt_isa(vect,\
         bstc_dtl_vect_get_back(vect)(vect, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_back(bstc_tmplt_ctuple_alloc(bstc_alloc_stdlib), vect)\
+        bstc_dtl_vect_back(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect)\
     )
 
 
@@ -155,31 +155,31 @@
 #define bstc_vect_push(vect, val, ...) \
     bstc_tmplt_isa(vect,\
         bstc_dtl_vect_get_push(vect)(vect, val, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_push(bstc_tmplt_ctuple_alloc(bstc_alloc_stdlib), vect, val)\
+        bstc_dtl_vect_push(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect, val)\
     )
 
 
 #define bstc_vect_begin(vect, ...) \
     bstc_tmplt_isa(vect,\
         bstc_dtl_vect_get_begin(vect)(vect, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_begin(bstc_tmplt_ctuple_alloc(bstc_alloc_stdlib), vect)\
+        bstc_dtl_vect_begin(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect)\
     )
 #define bstc_vect_end(vect, ...) \
     bstc_tmplt_isa(vect,\
         bstc_dtl_vect_get_end(vect)(vect, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_end(bstc_tmplt_ctuple_alloc(bstc_alloc_stdlib), vect)\
+        bstc_dtl_vect_end(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect)\
     )
 
 
 #define bstc_vect_rbegin(vect, ...) \
     bstc_tmplt_isa(vect,\
         bstc_dtl_vect_get_rbegin(vect)(vect, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_rbegin(bstc_tmplt_ctuple_alloc(bstc_alloc_stdlib), vect)\
+        bstc_dtl_vect_rbegin(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect)\
     )
 #define bstc_vect_rend(vect, ...) \
     bstc_tmplt_isa(vect,\
         bstc_dtl_vect_get_rend(vect)(vect, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_rend(bstc_tmplt_ctuple_alloc(bstc_alloc_stdlib), vect)\
+        bstc_dtl_vect_rend(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect)\
     )
 
 

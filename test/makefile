@@ -1,3 +1,9 @@
+#  Copyright (C) 2020-? T. Mitchell Kelleher
+#
+#  Distributed under the Boost Software License, Version 1.0. (See
+#  accompanying file LICENSE_1_0.txt or copy at
+#  http://www.boost.org/LICENSE_1_0.txt)
+
 # Current directory for project.
 TEST_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 PROJECT_DIR := $(abspath $(TEST_DIR)/..)
@@ -52,7 +58,7 @@ $(BSTC_BIN)/clang/%: $(TEST_DIR)/%/main.c
 #-------------------------------------------------------------------------------------------------------------
 BSTC_VS14_TESTS := $(ALL_MAINC:$(TEST_DIR)/%/main.c=$(BSTC_BIN)/vs14/%)
 BSTC_VS14_FLAGS ?= /nologo /EHsc /Ox /W4 /link kernel32.lib user32.lib
-BSTC_VS14 ?= $(PROJECT_DIR)/scripts/msvc.bash run_vs14 cl
+BSTC_VS14 ?= $(PROJECT_DIR)/scripts/msvc.bash vs14 cl
 
 vs14: $(BSTC_VS14_TESTS)
 

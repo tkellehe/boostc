@@ -1,3 +1,8 @@
+//  Copyright (C) 2020-? T. Mitchell Kelleher
+//
+//  Distributed under the Boost Software License, Version 1.0. (See
+//  accompanying file LICENSE_1_0.txt or copy at
+//  http://www.boost.org/LICENSE_1_0.txt)
 #include <boostc/template.h>
 #include <stdio.h>
 
@@ -5,7 +10,7 @@
 #define fooT_int(x, y) (x + y)
 
 // Can use the template API to create a default template with only a single function packed in.
-#define fooT_tmplt_int bstc_tmplt_ctuple_fn(fooT_int)
+#define fooT_tmplt_int bstc_tmplt_pack_fn(fooT_int)
 
 // This is the actual function that is templated.
 #define fooT(T, x, y) \
@@ -24,7 +29,7 @@ static short fooT_short(short x, short y)
 }
 
 // Since everything is a macro, we just need to define this (like real templates) before it is used.
-#define fooT_tmplt_short bstc_tmplt_ctuple_fn(fooT_short)
+#define fooT_tmplt_short bstc_tmplt_pack_fn(fooT_short)
 
 int main(int argc, char *argv[])
 {
