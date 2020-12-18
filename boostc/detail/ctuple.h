@@ -13,7 +13,21 @@
 /* Details for ctuples. */
 /// \{
 #define bstc_dtl_ctuple_append(tpl, ...) (bstc_ctuple_expand tpl, __VA_ARGS__)
+
+
 #define bstc_dtl_ctuple_prepend(tpl, ...) (__VA_ARGS__, bstc_ctuple_expand tpl)
+
+
+#define bstc_dtl_ctuple_ltrim_select(tpl, N) \
+        bstc_ctuple_hasLTE(tpl, N,\
+            bstc_dtl_ctuple_ltrim_empty,\
+            bstc_dtl_ctuple_ltrim_apply\
+        )
+#define bstc_dtl_ctuple_ltrim(tpl, N) bstc_dtl_ctuple_ltrim_(bstc_dtl_ctuple_ltrim_select(tpl, N), tpl, N)
+#define bstc_dtl_ctuple_ltrim_(F, tpl, N) BSTC_EXPAND(BSTC_CALL(F, tpl, N))
+#define bstc_dtl_ctuple_ltrim_empty(tpl, N) bstc_ctuple_empty()
+#define bstc_dtl_ctuple_ltrim_apply(tpl, N) bstc_ctuple(bstc_ctuple_call(BSTC_JOIN2(bstc_dtl_ctuple_ltrim, N), tpl))
+
 
 #define bstc_dtl_ctuple_setI(tpl, I, val) bstc_ctuple_concat(bstc_ctuple_append(bstc_ctuple_collect(tpl, I), val), bstc_ctuple_ltrim(tpl, BSTC_CONST_ADD1(I)))
 

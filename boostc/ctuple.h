@@ -202,10 +202,7 @@
 # define bstc_ctuple_ltrim(tpl, N) \
     BSTC_IFEQ(N, 0,\
         tpl,\
-        bstc_ctuple_hasLTE(tpl, N,\
-            bstc_ctuple_empty(),\
-            bstc_ctuple(bstc_ctuple_call(BSTC_JOIN2(bstc_dtl_ctuple_ltrim, N), tpl))\
-        )\
+        bstc_dtl_ctuple_ltrim(tpl, N)\
     )
 #endif
 /// \}
@@ -217,10 +214,7 @@
 # define bstc_ctuple_rtrim(tpl, N) \
     BSTC_IFEQ(N, 0,\
         tpl,\
-        bstc_ctuple_hasLTE(tpl, N,\
-            bstc_ctuple_empty(),\
-            bstc_ctuple_reverse(bstc_ctuple_ltrim(bstc_ctuple_reverse(tpl), N))\
-        )\
+        bstc_ctuple_reverse(bstc_ctuple_ltrim(bstc_ctuple_reverse(tpl), N))\
     )
 #endif
 /// \}
