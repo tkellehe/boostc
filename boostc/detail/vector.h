@@ -50,7 +50,7 @@
 
 // Has issue where not resolving even with gcc and getI detects that it is not a tuple...
 // #define bstc_dtl_vect_init(tmplt, vect) BSTC_CALL(bstc_dtl_vect_get_init(tmplt), tmplt, vect)
-#define bstc_dtl_vect_init(tmplt, vect) (*((void**)&(vect)) = bstc_null)
+#define bstc_dtl_vect_init(tmplt, vect) BSTC_CALL(bstc_dtl_vect_get_init(tmplt), tmplt, vect)
 #define bstc_dtl_vect_default_init(tmplt, vect) (*((void**)&(vect)) = bstc_null)
 
 
@@ -146,21 +146,21 @@
 #define bstc_dtl_vect_rbegin(tmplt, vect) ((vect)+bstc_vect_len(vect))
 #define bstc_dtl_vect_rend(tmplt, vect) ((vect)+1)
 
-#define bstc_dtl_vect_get_init(tmplt) bstc_ctuple_getI(bstc_tmplt_fns(tmplt), 0)
-#define bstc_dtl_vect_get_destroy(tmplt) bstc_ctuple_getI(bstc_tmplt_fns(tmplt), 1)
-#define bstc_dtl_vect_get_len(tmplt) bstc_ctuple_getI(bstc_tmplt_fns(tmplt), 2)
-#define bstc_dtl_vect_get_cap(tmplt) bstc_ctuple_getI(bstc_tmplt_fns(tmplt), 3)
-#define bstc_dtl_vect_get_rsz(tmplt) bstc_ctuple_getI(bstc_tmplt_fns(tmplt), 4)
-#define bstc_dtl_vect_get_rsv(tmplt) bstc_ctuple_getI(bstc_tmplt_fns(tmplt), 5)
-#define bstc_dtl_vect_get_at(tmplt) bstc_ctuple_getI(bstc_tmplt_fns(tmplt), 6)
-#define bstc_dtl_vect_get_empty(tmplt) bstc_ctuple_getI(bstc_tmplt_fns(tmplt), 7)
-#define bstc_dtl_vect_get_front(tmplt) bstc_ctuple_getI(bstc_tmplt_fns(tmplt), 8)
-#define bstc_dtl_vect_get_back(tmplt) bstc_ctuple_getI(bstc_tmplt_fns(tmplt), 9)
-#define bstc_dtl_vect_get_push(tmplt) bstc_ctuple_getI(bstc_tmplt_fns(tmplt), 10)
-#define bstc_dtl_vect_get_begin(tmplt) bstc_ctuple_getI(bstc_tmplt_fns(tmplt), 11)
-#define bstc_dtl_vect_get_end(tmplt) bstc_ctuple_getI(bstc_tmplt_fns(tmplt), 12)
-#define bstc_dtl_vect_get_rbegin(tmplt) bstc_ctuple_getI(bstc_tmplt_fns(tmplt), 13)
-#define bstc_dtl_vect_get_rend(tmplt) bstc_ctuple_getI(bstc_tmplt_fns(tmplt), 14)
+#define bstc_dtl_vect_get_init(tmplt) BSTC_GET_ARG0 bstc_tmplt_fns(tmplt)
+#define bstc_dtl_vect_get_destroy(tmplt) BSTC_GET_ARG1 bstc_tmplt_fns(tmplt)
+#define bstc_dtl_vect_get_len(tmplt) BSTC_GET_ARG2 bstc_tmplt_fns(tmplt)
+#define bstc_dtl_vect_get_cap(tmplt) BSTC_GET_ARG3 bstc_tmplt_fns(tmplt)
+#define bstc_dtl_vect_get_rsz(tmplt) BSTC_GET_ARG4 bstc_tmplt_fns(tmplt)
+#define bstc_dtl_vect_get_rsv(tmplt) BSTC_GET_ARG5 bstc_tmplt_fns(tmplt)
+#define bstc_dtl_vect_get_at(tmplt) BSTC_GET_ARG6 bstc_tmplt_fns(tmplt)
+#define bstc_dtl_vect_get_empty(tmplt) BSTC_GET_ARG7 bstc_tmplt_fns(tmplt)
+#define bstc_dtl_vect_get_front(tmplt) BSTC_GET_ARG8 bstc_tmplt_fns(tmplt)
+#define bstc_dtl_vect_get_back(tmplt) BSTC_GET_ARG9 bstc_tmplt_fns(tmplt)
+#define bstc_dtl_vect_get_push(tmplt) BSTC_GET_ARG10 bstc_tmplt_fns(tmplt)
+#define bstc_dtl_vect_get_begin(tmplt) BSTC_GET_ARG11 bstc_tmplt_fns(tmplt)
+#define bstc_dtl_vect_get_end(tmplt) BSTC_GET_ARG12 bstc_tmplt_fns(tmplt)
+#define bstc_dtl_vect_get_rbegin(tmplt) BSTC_GET_ARG13 bstc_tmplt_fns(tmplt)
+#define bstc_dtl_vect_get_rend(tmplt) BSTC_GET_ARG14 bstc_tmplt_fns(tmplt)
 
 
 // The type bstc_intptr_t is used because the memory may need to be word aligned.
