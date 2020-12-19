@@ -20,7 +20,7 @@
 #define bstc_dtl_vect_tmplt_t_T_(T) \
     bstc_ctuple(\
         T*,\
-        (T),\
+        bstc_ctuple(T),\
         bstc_dtl_vect_default_fns,\
         bstc_dtl_vect_iter_defaults(T),\
         bstc_dtl_vect_riter_defaults(T),\
@@ -36,7 +36,7 @@
 #define bstc_dtl_vect_tmplt_t_T_alloc_(T, alloc) \
     bstc_ctuple(\
         T*,\
-        (T),\
+        bstc_ctuple(T),\
         bstc_dtl_vect_default_fns,\
         bstc_dtl_vect_iter_defaults(T),\
         bstc_dtl_vect_riter_defaults(T),\
@@ -46,7 +46,14 @@
         )\
     )
 
+#define bstc_dtl_vect_add_tmplt(tpl) bstc_tmplt_isa(bstc_ctuple_getI(tpl, 0), tpl, bstc_ctuple_prepend(tpl, bstc_dtl_vect_tmplt_t_T_(void)))
+
+// Has issue where not resolving even with gcc and getI detects that it is not a tuple...
+// #define bstc_dtl_vect_init(tmplt, vect) BSTC_CALL(bstc_dtl_vect_get_init(tmplt), tmplt, vect)
 #define bstc_dtl_vect_init(tmplt, vect) (*((void**)&(vect)) = bstc_null)
+#define bstc_dtl_vect_default_init(tmplt, vect) (*((void**)&(vect)) = bstc_null)
+
+
 #define bstc_dtl_vect_destroy(tmplt, vect) ((vect) ? bstc_alloc_free(bstc_tmplt_alloc(tmplt))(bstc_dtl_vect_raw_(vect)),*((void**)&(vect))=bstc_null,1 : 0)
 #define bstc_dtl_vect_len(tmplt, vect) ((vect) ? (int)bstc_dtl_vect_len_(vect) : 0)
 #define bstc_dtl_vect_cap(tmplt, vect) ((vect) ? (int)bstc_dtl_vect_cap_(vect) : 0)
@@ -166,7 +173,7 @@
 // Preparing for potential specialization concept.
 #define bstc_dtl_vect_default_fns \
     bstc_ctuple(\
-        bstc_dtl_vect_init,\
+        bstc_dtl_vect_default_init,\
         bstc_dtl_vect_destroy,\
         bstc_dtl_vect_len,\
         bstc_dtl_vect_cap,\

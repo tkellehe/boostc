@@ -27,10 +27,11 @@ int main(int argc, char *argv[])
 
     //--------------------------------------------------------------------------------------------------------
     {
-        bstc_vect_t(float) vect;
-        bstc_vect_init(vect);
-        printf("bstc_vect_t(float) & bstc_vect_init(vect): %p\n", (void*)vect);
-        if(vect == bstc_null) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+        printf("%s\n", bstc_ctuple_tostring(bstc_vect_init(vect)));
+        // bstc_vect_t(float) vect;
+        // bstc_vect_init(vect);
+        // printf("bstc_vect_t(float) & bstc_vect_init(vect): %p\n", (void*)vect);
+        // if(vect == bstc_null) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
         // bstc_vect_destroy(vect);
     }
 

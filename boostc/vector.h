@@ -38,11 +38,7 @@
  */
 /// \{
 #ifndef bstc_vect_init
-# define bstc_vect_init(...) \
-    bstc_tmplt_isa(vect,\
-        bstc_dtl_vect_get_init(vect)(vect, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_init(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect)\
-    )
+# define bstc_vect_init(...) bstc_ctuple_call(bstc_dtl_vect_init, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
 #endif
 /// \}
 
