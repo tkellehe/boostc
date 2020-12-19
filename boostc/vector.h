@@ -49,11 +49,7 @@
  */
 /// \{
 #ifndef bstc_vect_destroy
-# define bstc_vect_destroy(vect, ...) \
-    bstc_tmplt_isa(vect,\
-        bstc_dtl_vect_get_destroy(vect)(vect, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_destroy(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect)\
-    )
+# define bstc_vect_destroy(...) bstc_ctuple_call(bstc_dtl_vect_destroy, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
 #endif
 /// \}
 
@@ -154,11 +150,11 @@
  * \param val The value to push on.
  * \return Returns the new value pushed on.
  */
-#define bstc_vect_push(vect, val, ...) \
-    bstc_tmplt_isa(vect,\
-        bstc_dtl_vect_get_push(vect)(vect, val, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_push(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect, val)\
-    )
+/// \{
+#ifndef bstc_vect_push
+# define bstc_vect_push(...) bstc_ctuple_call(bstc_dtl_vect_push, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+#endif
+/// \}
 
 
 #define bstc_vect_begin(vect, ...) \

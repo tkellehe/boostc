@@ -78,7 +78,7 @@
 /** Get the template type that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_tmplt_t
-# define bstc_tmplt_t(tpl) BSTC_GET_ARG0 tpl
+# define bstc_tmplt_t(tpl) BSTC_EXPAND(BSTC_GET_ARG0 tpl)
 #endif
 /// \}
 
@@ -86,7 +86,7 @@
 /** Get the template info ctuple that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_tmplt_info
-# define bstc_tmplt_info(tpl) BSTC_GET_ARG1 tpl
+# define bstc_tmplt_info(tpl) BSTC_EXPAND(BSTC_GET_ARG1 tpl)
 #endif
 /// \}
 
@@ -94,7 +94,7 @@
 /** Get the template functions ctuple that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_tmplt_fns
-# define bstc_tmplt_fns(tpl) BSTC_GET_ARG2 tpl
+# define bstc_tmplt_fns(tpl) BSTC_EXPAND(BSTC_GET_ARG2 tpl)
 #endif
 /// \}
 
@@ -102,7 +102,7 @@
 /** Get the template iterator ctuple that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_tmplt_iter
-# define bstc_tmplt_iter(tpl) BSTC_GET_ARG3 tpl
+# define bstc_tmplt_iter(tpl) BSTC_EXPAND(BSTC_GET_ARG3 tpl)
 #endif
 /// \}
 
@@ -110,7 +110,7 @@
 /** Get the template reverse iterator ctuple that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_tmplt_riter
-# define bstc_tmplt_riter(tpl) BSTC_GET_ARG4 tpl
+# define bstc_tmplt_riter(tpl) BSTC_EXPAND(BSTC_GET_ARG4 tpl)
 #endif
 /// \}
 
@@ -118,7 +118,7 @@
 /** Get the template allocator ctuple that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_tmplt_alloc
-# define bstc_tmplt_alloc(tpl) BSTC_GET_ARG5 tpl
+# define bstc_tmplt_alloc(tpl) BSTC_EXPAND(BSTC_GET_ARG5 tpl)
 #endif
 /// \}
 

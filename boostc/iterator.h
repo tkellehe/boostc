@@ -58,7 +58,7 @@
 /** Get the iterator type that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_iter_t
-# define bstc_iter_t(tpl) bstc_ctuple_getI(tpl, 0)
+# define bstc_iter_t(tpl) BSTC_EXPAND(BSTC_GET_ARG0 tpl)
 #endif
 /// \}
 
@@ -66,7 +66,7 @@
 /** Get the nxt function that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_iter_nxt
-# define bstc_iter_nxt(tpl) bstc_ctuple_getI(tpl, 1)
+# define bstc_iter_nxt(tpl) BSTC_EXPAND(BSTC_GET_ARG1 tpl)
 #endif
 /// \}
 
@@ -74,7 +74,7 @@
 /** Get the eq function that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_iter_eq
-# define bstc_iter_eq(tpl) bstc_ctuple_getI(tpl, 2)
+# define bstc_iter_eq(tpl) BSTC_EXPAND(BSTC_GET_ARG2 tpl)
 #endif
 /// \}
 
@@ -82,7 +82,7 @@
 /** Get the val function that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_iter_val
-# define bstc_iter_val(tpl) bstc_ctuple_getI(tpl, 3)
+# define bstc_iter_val(tpl) BSTC_EXPAND(BSTC_GET_ARG3 tpl)
 #endif
 /// \}
 
@@ -90,7 +90,7 @@
 /** Get the set function that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_iter_set
-# define bstc_iter_set(tpl) bstc_ctuple_getI(tpl, 4)
+# define bstc_iter_set(tpl) BSTC_EXPAND(BSTC_GET_ARG4 tpl)
 #endif
 /// \}
 
@@ -98,7 +98,7 @@
 /** Get the swap function that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_iter_swap
-# define bstc_iter_swap(tpl) bstc_ctuple_getI(tpl, 5)
+# define bstc_iter_swap(tpl) BSTC_EXPAND(BSTC_GET_ARG5 tpl)
 #endif
 /// \}
 

@@ -54,7 +54,10 @@
 #define bstc_dtl_vect_default_init(tmplt, vect) (*((void**)&(vect)) = bstc_null)
 
 
-#define bstc_dtl_vect_destroy(tmplt, vect) ((vect) ? bstc_alloc_free(bstc_tmplt_alloc(tmplt))(bstc_dtl_vect_raw_(vect)),*((void**)&(vect))=bstc_null,1 : 0)
+#define bstc_dtl_vect_destroy(tmplt, vect) BSTC_CALL(bstc_dtl_vect_get_destroy(tmplt), tmplt, vect)
+#define bstc_dtl_vect_default_destroy(tmplt, vect) ((vect) ? bstc_alloc_free(bstc_tmplt_alloc(tmplt))(bstc_dtl_vect_raw_(vect)),*((void**)&(vect))=bstc_null : bstc_null)
+
+
 #define bstc_dtl_vect_len(tmplt, vect) ((vect) ? (int)bstc_dtl_vect_len_(vect) : 0)
 #define bstc_dtl_vect_cap(tmplt, vect) ((vect) ? (int)bstc_dtl_vect_cap_(vect) : 0)
 #define bstc_dtl_vect_rsz(tmplt, vect, nsz) \
@@ -118,7 +121,9 @@
 #define bstc_dtl_vect_empty(tmplt, vect) (bstc_vect_len(vect) == 0)
 #define bstc_dtl_vect_front(tmplt, vect) (vect)[0]
 #define bstc_dtl_vect_back(tmplt, vect) (vect)[bstc_dtl_vect_len_(vect)-1]
-#define bstc_dtl_vect_push(tmplt, vect, val) \
+
+#define bstc_dtl_vect_push(tmplt, vect, val) BSTC_CALL(bstc_dtl_vect_get_push(tmplt), tmplt, vect, val)
+#define bstc_dtl_vect_default_push(tmplt, vect, val) \
 /* Check to see if the vector has anything allocated yet. */\
 ((vect) ?\
     (bstc_dtl_vect_cap_(vect) < (bstc_dtl_vect_len_(vect)+1) ?\
@@ -141,6 +146,7 @@
         (vect[0] = val)\
     )\
 )
+
 #define bstc_dtl_vect_begin(tmplt, vect) (vect)
 #define bstc_dtl_vect_end(tmplt, vect) ((vect)+bstc_vect_len(vect))
 #define bstc_dtl_vect_rbegin(tmplt, vect) ((vect)+bstc_vect_len(vect))
@@ -174,7 +180,7 @@
 #define bstc_dtl_vect_default_fns \
     bstc_ctuple(\
         bstc_dtl_vect_default_init,\
-        bstc_dtl_vect_destroy,\
+        bstc_dtl_vect_default_destroy,\
         bstc_dtl_vect_len,\
         bstc_dtl_vect_cap,\
         bstc_dtl_vect_rsz,\
@@ -183,7 +189,7 @@
         bstc_dtl_vect_empty,\
         bstc_dtl_vect_front,\
         bstc_dtl_vect_back,\
-        bstc_dtl_vect_push,\
+        bstc_dtl_vect_default_push,\
         bstc_dtl_vect_begin,\
         bstc_dtl_vect_end,\
         bstc_dtl_vect_rbegin,\

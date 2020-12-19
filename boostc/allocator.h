@@ -35,7 +35,7 @@
 /** Get the free function that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_alloc_free
-# define bstc_alloc_free(tpl) bstc_ctuple_getI(tpl, 0)
+# define bstc_alloc_free(tpl) BSTC_EXPAND(BSTC_GET_ARG0 tpl)
 #endif
 /// \}
 
@@ -43,7 +43,7 @@
 /** Get the malloc function that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_alloc_malloc
-# define bstc_alloc_malloc(tpl) bstc_ctuple_getI(tpl, 1)
+# define bstc_alloc_malloc(tpl) BSTC_EXPAND(BSTC_GET_ARG1 tpl)
 #endif
 /// \}
 
@@ -51,7 +51,7 @@
 /** Get the realloc function that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_alloc_realloc
-# define bstc_alloc_realloc(tpl) bstc_ctuple_getI(tpl, 2)
+# define bstc_alloc_realloc(tpl) BSTC_EXPAND(BSTC_GET_ARG2 tpl)
 #endif
 /// \}
 
