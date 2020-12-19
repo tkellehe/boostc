@@ -58,7 +58,9 @@
 #define bstc_dtl_vect_default_destroy(tmplt, vect) ((vect) ? bstc_alloc_free(bstc_tmplt_alloc(tmplt))(bstc_dtl_vect_raw_(vect)),*((void**)&(vect))=bstc_null : bstc_null)
 
 
-#define bstc_dtl_vect_len(tmplt, vect) ((vect) ? (int)bstc_dtl_vect_len_(vect) : 0)
+#define bstc_dtl_vect_len(tmplt, vect) BSTC_CALL(bstc_dtl_vect_get_len(tmplt), tmplt, vect)
+#define bstc_dtl_vect_default_len(tmplt, vect) ((vect) ? (int)bstc_dtl_vect_len_(vect) : 0)
+
 #define bstc_dtl_vect_cap(tmplt, vect) ((vect) ? (int)bstc_dtl_vect_cap_(vect) : 0)
 #define bstc_dtl_vect_rsz(tmplt, vect, nsz) \
 /* Check to see if the vector has anything allocated yet. */\
@@ -181,7 +183,7 @@
     bstc_ctuple(\
         bstc_dtl_vect_default_init,\
         bstc_dtl_vect_default_destroy,\
-        bstc_dtl_vect_len,\
+        bstc_dtl_vect_default_len,\
         bstc_dtl_vect_cap,\
         bstc_dtl_vect_rsz,\
         bstc_dtl_vect_rsv,\

@@ -58,11 +58,11 @@
  * \param vect Reference to the vector.
  * \return Returns the number of items.
  */
-#define bstc_vect_len(vect, ...) \
-    bstc_tmplt_isa(vect,\
-        bstc_dtl_vect_get_len(vect)(vect, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_len(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect)\
-    )
+/// \{
+#ifndef bstc_vect_len
+# define bstc_vect_len(...) bstc_ctuple_call(bstc_dtl_vect_len, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+#endif
+/// \}
 
 
 /** Gets the capacity that the vector has been allocated for.
