@@ -9,13 +9,7 @@
 
 /* Details for vector */
 /// \{
-#define bstc_dtl_vect_tmplt_t_select(tpl) bstc_ctuple_hasN(tpl, 1, bstc_dtl_vect_tmplt_specialize_t1, bstc_dtl_vect_tmplt_t2)
-
-#define bstc_dtl_vect_tmplt_specialize_t1(T) \
-    bstc_tmplt_isa(bstc_vect_tmplt_ ## T,\
-        bstc_vect_tmplt_ ## T,\
-        bstc_dtl_vect_tmplt_t1(T)\
-    )
+#define bstc_dtl_vect_tmplt_t_select(tpl) bstc_ctuple_hasN(tpl, 1, bstc_dtl_vect_tmplt_t1, bstc_dtl_vect_tmplt_t2)
 
 #define bstc_dtl_vect_tmplt_t1(T) \
     bstc_ctuple(\
@@ -27,15 +21,6 @@
         bstc_alloc_stdlib\
     )
 
-// #define bstc_dtl_vect_tmplt_specialize_t2(T, alloc) \
-//     bstc_tmplt_isa(bstc_vect_tmplt_ ## T,\
-//         bstc_dtl_vect_tmplt_specialize_t2_(bstc_vect_tmplt_ ## T, alloc),\
-//         bstc_dtl_vect_tmplt_t1(T)\
-//     )
-
-// #define bstc_dtl_vect_tmplt_specialize_t2_(tmplt, alloc) bstc_tmplt_set_alloc(tmplt, alloc)
-
-// Specialization should select then set the allocator.
 #define bstc_dtl_vect_tmplt_t2(T, alloc) \
     bstc_ctuple(\
         T*,\
@@ -64,8 +49,11 @@
 #define bstc_dtl_vect_len(tmplt, vect) BSTC_CALL(bstc_dtl_vect_get_len(tmplt), tmplt, vect)
 #define bstc_dtl_vect_default_len(tmplt, vect) ((vect) ? (int)bstc_dtl_vect_len_(vect) : 0)
 
-#define bstc_dtl_vect_cap(tmplt, vect) ((vect) ? (int)bstc_dtl_vect_cap_(vect) : 0)
-#define bstc_dtl_vect_rsz(tmplt, vect, nsz) \
+#define bstc_dtl_vect_cap(tmplt, vect) BSTC_CALL(bstc_dtl_vect_get_cap(tmplt), tmplt, vect)
+#define bstc_dtl_vect_default_cap(tmplt, vect) ((vect) ? (int)bstc_dtl_vect_cap_(vect) : 0)
+
+#define bstc_dtl_vect_rsz(tmplt, vect, nsz) BSTC_CALL(bstc_dtl_vect_get_rsz(tmplt), tmplt, vect, nsz)
+#define bstc_dtl_vect_default_rsz(tmplt, vect, nsz) \
 /* Check to see if the vector has anything allocated yet. */\
 ((vect) ?\
     /* Check to see if the new size already fits. */\
@@ -100,7 +88,9 @@
         (bstc_dtl_vect_len_(vect) = bstc_dtl_vect_cap_(vect))\
     )\
 )
-#define bstc_dtl_vect_rsv(tmplt, vect, ncap) \
+
+#define bstc_dtl_vect_rsv(tmplt, vect, ncap) BSTC_CALL(bstc_dtl_vect_get_rsv(tmplt), tmplt, vect, ncap)
+#define bstc_dtl_vect_default_rsv(tmplt, vect, ncap) \
 /* Check to see if the vector has anything allocated yet. */\
 ((vect) ?\
     /* Check to see if the new capacity already fits. */\
@@ -122,10 +112,18 @@
         (bstc_dtl_vect_cap_(vect) = (bstc_intptr_t)(ncap))\
     )\
 )
-#define bstc_dtl_vect_at(tmplt, vect, i) (bstc_assert((i) < bstc_vect_len(vect)), (vect)[(i)])
-#define bstc_dtl_vect_empty(tmplt, vect) (bstc_vect_len(vect) == 0)
-#define bstc_dtl_vect_front(tmplt, vect) (vect)[0]
-#define bstc_dtl_vect_back(tmplt, vect) (vect)[bstc_dtl_vect_len_(vect)-1]
+
+#define bstc_dtl_vect_at(tmplt, vect, i) BSTC_CALL(bstc_dtl_vect_get_at(tmplt), tmplt, vect, i)
+#define bstc_dtl_vect_default_at(tmplt, vect, i) (bstc_assert((i) < bstc_dtl_vect_default_len(tmplt, vect)), (vect)[(i)])
+
+#define bstc_dtl_vect_empty(tmplt, vect) BSTC_CALL(bstc_dtl_vect_get_empty(tmplt), tmplt, vect)
+#define bstc_dtl_vect_default_empty(tmplt, vect) (bstc_dtl_vect_default_len(tmplt, vect) == 0)
+
+#define bstc_dtl_vect_front(tmplt, vect) BSTC_CALL(bstc_dtl_vect_get_front(tmplt), tmplt, vect)
+#define bstc_dtl_vect_default_front(tmplt, vect) (vect)[0]
+
+#define bstc_dtl_vect_back(tmplt, vect) BSTC_CALL(bstc_dtl_vect_get_back(tmplt), tmplt, vect)
+#define bstc_dtl_vect_default_back(tmplt, vect) (vect)[bstc_dtl_vect_len_(vect)-1]
 
 #define bstc_dtl_vect_push(tmplt, vect, val) BSTC_CALL(bstc_dtl_vect_get_push(tmplt), tmplt, vect, val)
 #define bstc_dtl_vect_default_push(tmplt, vect, val) \
@@ -153,8 +151,8 @@
 )
 
 #define bstc_dtl_vect_begin(tmplt, vect) (vect)
-#define bstc_dtl_vect_end(tmplt, vect) ((vect)+bstc_vect_len(vect))
-#define bstc_dtl_vect_rbegin(tmplt, vect) ((vect)+bstc_vect_len(vect))
+#define bstc_dtl_vect_end(tmplt, vect) ((vect)+bstc_dtl_vect_default_len(tmplt, vect))
+#define bstc_dtl_vect_rbegin(tmplt, vect) ((vect)+bstc_dtl_vect_default_len(tmplt, vect))
 #define bstc_dtl_vect_rend(tmplt, vect) ((vect)+1)
 
 #define bstc_dtl_vect_get_init(tmplt) BSTC_GET_ARG0 bstc_tmplt_fns(tmplt)
@@ -187,18 +185,18 @@
         bstc_dtl_vect_default_init,\
         bstc_dtl_vect_default_destroy,\
         bstc_dtl_vect_default_len,\
-        bstc_dtl_vect_cap,\
-        bstc_dtl_vect_rsz,\
-        bstc_dtl_vect_rsv,\
-        bstc_dtl_vect_at,\
-        bstc_dtl_vect_empty,\
-        bstc_dtl_vect_front,\
-        bstc_dtl_vect_back,\
+        bstc_dtl_vect_default_cap,\
+        bstc_dtl_vect_default_rsz,\
+        bstc_dtl_vect_default_rsv,\
+        bstc_dtl_vect_default_at,\
+        bstc_dtl_vect_default_empty,\
+        bstc_dtl_vect_default_front,\
+        bstc_dtl_vect_default_back,\
         bstc_dtl_vect_default_push,\
-        bstc_dtl_vect_begin,\
-        bstc_dtl_vect_end,\
-        bstc_dtl_vect_rbegin,\
-        bstc_dtl_vect_rend\
+        bstc_dtl_vect_default_begin,\
+        bstc_dtl_vect_default_end,\
+        bstc_dtl_vect_default_rbegin,\
+        bstc_dtl_vect_default_rend\
     )
 
 

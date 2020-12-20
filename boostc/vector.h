@@ -69,11 +69,11 @@
  * \param vect Reference to the vector.
  * \return Returns the capacity for the vector.
  */
-#define bstc_vect_cap(vect, ...) \
-    bstc_tmplt_isa(vect,\
-        bstc_dtl_vect_get_cap(vect)(vect, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_cap(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect)\
-    )
+/// \{
+#ifndef bstc_vect_cap
+# define bstc_vect_cap(...) bstc_ctuple_call(bstc_dtl_vect_cap, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+#endif
+/// \}
 
 
 /** Resizes the vector to be able to hold the new size.
@@ -81,11 +81,11 @@
  * \param nsz The new size for the vector.
  * \return Returns the new size.
  */
-#define bstc_vect_rsz(vect, nsz, ...) \
-    bstc_tmplt_isa(vect,\
-        bstc_dtl_vect_get_rsz(vect)(vect, nsz, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_rsz(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect, nsz)\
-    )
+/// \{
+#ifndef bstc_vect_rsz
+# define bstc_vect_rsz(...) bstc_ctuple_call(bstc_dtl_vect_rsz, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+#endif
+/// \}
 
 
 /** Reserves the requested capacity for the vector by only reserving more.
@@ -93,11 +93,11 @@
  * \param ncap The new capacity for the vector.
  * \return Returns the new capacity.
  */
-#define bstc_vect_rsv(vect, ncap, ...) \
-    bstc_tmplt_isa(vect,\
-        bstc_dtl_vect_get_rsv(vect)(vect, ncap, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_rsv(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect, ncap)\
-    )
+/// \{
+#ifndef bstc_vect_rsv
+# define bstc_vect_rsv(...) bstc_ctuple_call(bstc_dtl_vect_rsv, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+#endif
+/// \}
 
 
 /** Assert at the index provided then read the value in the array.
@@ -105,44 +105,44 @@
  * \param i The index to access.
  * \return Returns the value at the index.
  */
-#define bstc_vect_at(vect, i, ...) \
-    bstc_tmplt_isa(vect,\
-        bstc_dtl_vect_get_at(vect)(vect, i, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_at(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect, i)\
-    )
+/// \{
+#ifndef bstc_vect_at
+# define bstc_vect_at(...) bstc_ctuple_call(bstc_dtl_vect_at, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+#endif
+/// \}
 
 
 /** Checks to see if the vector is empty.
  * \param vect Reference to the vector.
  * \return Returns one if empty and zero otherwise.
  */
-#define bstc_vect_empty(vect, ...) \
-    bstc_tmplt_isa(vect,\
-        bstc_dtl_vect_get_empty(vect)(vect, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_empty(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect)\
-    )
+/// \{
+#ifndef bstc_vect_empty
+# define bstc_vect_empty(...) bstc_ctuple_call(bstc_dtl_vect_empty, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+#endif
+/// \}
 
 
 /** Get the front value of the vector.
  * \param vect Reference to the vector.
  * \return Returns the value at the first index.
  */
-#define bstc_vect_front(vect, ...) \
-    bstc_tmplt_isa(vect,\
-        bstc_dtl_vect_get_front(vect)(vect, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_front(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect)\
-    )
+/// \{
+#ifndef bstc_vect_front
+# define bstc_vect_front(...) bstc_ctuple_call(bstc_dtl_vect_front, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+#endif
+/// \}
 
 
 /** Get the back value of the vector.
  * \param vect Reference to the vector.
  * \return Returns the value at the last index.
  */
-#define bstc_vect_back(vect, ...) \
-    bstc_tmplt_isa(vect,\
-        bstc_dtl_vect_get_back(vect)(vect, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_back(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect)\
-    )
+/// \{
+#ifndef bstc_vect_back
+# define bstc_vect_back(...) bstc_ctuple_call(bstc_dtl_vect_back, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+#endif
+/// \}
 
 
 /** Pushes a single value onto the back of the vector and resizes if needed.
