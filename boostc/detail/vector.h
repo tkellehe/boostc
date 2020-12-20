@@ -210,23 +210,30 @@
 #define bstc_dtl_vect_iter_defaults(T) \
     bstc_ctuple(\
         bstc_dtl_vect_default_iter_t(T),\
-        bstc_dtl_vect_iter_nxt,\
-        bstc_dtl_vect_iter_eq,\
+        bstc_dtl_vect_default_iter_nxt,\
+        bstc_dtl_vect_default_iter_eq,\
         bstc_dtl_vect_default_iter_val,\
-        bstc_dtl_vect_iter_set,\
-        bstc_dtl_vect_iter_swap\
+        bstc_dtl_vect_default_iter_set,\
+        bstc_dtl_vect_default_iter_swap\
     )
 
 
 #define bstc_dtl_vect_default_iter_t(T) T*
-#define bstc_dtl_vect_iter_nxt(iter) (++iter)
-#define bstc_dtl_vect_iter_eq(left, right) (left == right)
+
+#define bstc_dtl_vect_iter_nxt(tmplt, iter) BSTC_CALL(bstc_iter_nxt(bstc_tmplt_iter(tmplt)), iter)
+#define bstc_dtl_vect_default_iter_nxt(iter) (++iter)
+
+#define bstc_dtl_vect_iter_eq(tmplt, left, right) BSTC_CALL(bstc_iter_eq(bstc_tmplt_iter(tmplt)), left, right)
+#define bstc_dtl_vect_default_iter_eq(left, right) (left == right)
 
 #define bstc_dtl_vect_iter_val(tmplt, iter) BSTC_CALL(bstc_iter_val(bstc_tmplt_iter(tmplt)), iter)
 #define bstc_dtl_vect_default_iter_val(iter) *(iter)
 
-#define bstc_dtl_vect_iter_set(iter, val) (*(iter) = val)
-#define bstc_dtl_vect_iter_swap(left, right) \
+#define bstc_dtl_vect_iter_set(tmplt, iter, val) BSTC_CALL(bstc_iter_set(bstc_tmplt_iter(tmplt)), iter, val)
+#define bstc_dtl_vect_default_iter_set(iter, val) (*(iter) = val)
+
+#define bstc_dtl_vect_iter_swap(tmplt, left, right) BSTC_CALL(bstc_iter_swap(bstc_tmplt_iter(tmplt)), left, right)
+#define bstc_dtl_vect_default_iter_swap(left, right) \
     {\
         char __bstc_dtl_swap[sizeof(*(left))];\
         memcpy((void*)__bstc_dtl_swap, (void*)(left), sizeof(*(left)));\
@@ -234,23 +241,38 @@
         memcpy((void*)(right), (void*)__bstc_dtl_swap, sizeof(*(left)));\
     }
 
-#define bstc_dtl_vect_riter_defaults(T) bstc_ctuple(bstc_dtl_vect_default_riter_t(T), bstc_dtl_vect_riter_nxt, bstc_dtl_vect_riter_eq, bstc_dtl_vect_default_riter_val, bstc_dtl_vect_riter_set, bstc_dtl_vect_riter_swap)
+#define bstc_dtl_vect_riter_defaults(T) \
+    bstc_ctuple(\
+        bstc_dtl_vect_default_riter_t(T),\
+        bstc_dtl_vect_default_riter_nxt,\
+        bstc_dtl_vect_default_riter_eq,\
+        bstc_dtl_vect_default_riter_val,\
+        bstc_dtl_vect_default_riter_set,\
+        bstc_dtl_vect_default_riter_swap\
+    )
 
 
 #define bstc_dtl_vect_default_riter_t(T) T*
-#define bstc_dtl_vect_riter_nxt(riter) (--riter)
-#define bstc_dtl_vect_riter_eq(left, right) (left == right)
+
+#define bstc_dtl_vect_riter_nxt(tmplt, riter) BSTC_CALL(bstc_iter_nxt(bstc_tmplt_riter(tmplt)), riter)
+#define bstc_dtl_vect_default_riter_nxt(riter) (--riter)
+
+#define bstc_dtl_vect_riter_eq(tmplt, left, right) BSTC_CALL(bstc_iter_eq(bstc_tmplt_riter(tmplt)), left, right)
+#define bstc_dtl_vect_default_riter_eq(left, right) (left == right)
 
 #define bstc_dtl_vect_riter_val(tmplt, riter) BSTC_CALL(bstc_iter_val(bstc_tmplt_riter(tmplt)), riter)
 #define bstc_dtl_vect_default_riter_val(riter) *((riter)-1)
 
-#define bstc_dtl_vect_riter_set(riter, val) (*((riter)-1) = val)
-#define bstc_dtl_vect_riter_swap(left, right) \
+#define bstc_dtl_vect_riter_set(tmplt, riter, val) BSTC_CALL(bstc_iter_set(bstc_tmplt_riter(tmplt)), riter, val)
+#define bstc_dtl_vect_default_riter_set(riter, val) (*((riter)-1) = val)
+
+#define bstc_dtl_vect_riter_swap(tmplt, left, right) BSTC_CALL(bstc_iter_swap(bstc_tmplt_riter(tmplt)), left, right)
+#define bstc_dtl_vect_default_riter_swap(left, right) \
     {\
         char __bstc_dtl_swap[sizeof(*(left))];\
-        memcpy((void*)__bstc_dtl_swap, (void*)(left), sizeof(*(left)));\
-        memcpy((void*)(left), (void*)(right), sizeof(*(left)));\
-        memcpy((void*)(right), (void*)__bstc_dtl_swap, sizeof(*(left)));\
+        memcpy((void*)__bstc_dtl_swap, (void*)((left)-1), sizeof(*(left)));\
+        memcpy((void*)((left)-1), (void*)((right)-1), sizeof(*(left)));\
+        memcpy((void*)((right)-1), (void*)__bstc_dtl_swap, sizeof(*(left)));\
     }
 /// \}
 

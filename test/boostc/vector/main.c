@@ -190,6 +190,8 @@ int main(int argc, char *argv[])
         printf("bstc_vect_rend(vect): %p\n", (void*)bstc_vect_rend(vect));
         if(riter != bstc_null) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
 
+
+
         iter = bstc_vect_begin(vect);
         printf("bstc_vect_begin(vect): %p\n", (void*)bstc_vect_begin(vect));
         if(iter != bstc_null) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
@@ -197,12 +199,45 @@ int main(int argc, char *argv[])
         printf("bstc_vect_iter_val(iter): %i\n", bstc_vect_iter_val(iter));
         if(bstc_vect_iter_val(iter) == 0) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
 
+        bstc_vect_iter_nxt(iter);
+        printf("bstc_vect_iter_val(iter): %i\n", bstc_vect_iter_val(iter));
+        if(bstc_vect_iter_val(iter) == 1) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+
+        bstc_vect_iter_set(iter, 10);
+        printf("bstc_vect_iter_set(iter, 10): %i\n", bstc_vect_iter_val(iter));
+        if(bstc_vect_iter_val(iter) == 10) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+
+        printf("bstc_vect_iter_eq(iter, end)\n");
+        if(!bstc_vect_iter_eq(iter, bstc_vect_end(vect))) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+
+        bstc_vect_iter_swap(iter, bstc_vect_begin(vect));
+        printf("bstc_vect_iter_swap(iter, begin): {%i, %i, %i, %i}\n", vect[0], vect[1], vect[2], vect[3]);
+        if(vect[0] == 10 && vect[1] == 0) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+
+
+
         riter = bstc_vect_rbegin(vect);
         printf("bstc_vect_rbegin(vect): %p\n", (void*)bstc_vect_rbegin(vect));
         if(riter != bstc_null) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
 
         printf("bstc_vect_riter_val(iter): %i\n", bstc_vect_riter_val(riter));
         if(bstc_vect_riter_val(riter) == 3) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+
+        bstc_vect_riter_nxt(riter);
+        printf("bstc_vect_riter_val(riter): %i\n", bstc_vect_riter_val(riter));
+        if(bstc_vect_riter_val(riter) == 2) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+
+        bstc_vect_riter_set(riter, 11);
+        printf("bstc_vect_riter_set(riter, 11): %i\n", bstc_vect_riter_val(riter));
+        if(bstc_vect_riter_val(riter) == 11) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+
+        printf("bstc_vect_riter_eq(riter, rend)\n");
+        if(!bstc_vect_riter_eq(riter, bstc_vect_rend(vect))) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+
+        bstc_vect_riter_swap(riter, bstc_vect_rbegin(vect));
+        printf("bstc_vect_riter_swap(riter, rbegin): {%i, %i, %i, %i}\n", vect[0], vect[1], vect[2], vect[3]);
+        if(vect[3] == 11 && vect[2] == 3) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+
 
         bstc_vect_destroy(vect);
     }

@@ -211,19 +211,28 @@
 /// \}
 
 
-#define bstc_vect_iter_nxt(iter, ...) \
-    bstc_tmplt_isa(iter,\
-        bstc_iter_nxt(bstc_tmplt_iter(iter))(bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_iter_nxt(iter)\
-    )
-#define bstc_vect_iter_eq(left, right, ...) \
-    bstc_tmplt_isa(left,\
-        bstc_iter_eq(bstc_tmplt_iter(left))(right, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_iter_eq(left, right)\
-    )
+/** Moves the forward iterator to the next iterator.
+ * \param iter Reference to the vector.
+ */
+/// \{
+#ifndef bstc_vect_iter_nxt
+# define bstc_vect_iter_nxt(...) bstc_ctuple_call(bstc_dtl_vect_iter_nxt, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+#endif
+/// \}
 
 
-/** Declares the forward iterator type.
+/** Detects if two forward iterators are referencing the same location.
+ * \param left Reference to the vector.
+ * \param right Reference to the vector.
+ */
+/// \{
+#ifndef bstc_vect_iter_eq
+# define bstc_vect_iter_eq(...) bstc_ctuple_call(bstc_dtl_vect_iter_eq, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+#endif
+/// \}
+
+
+/** Accesses the value of the forward iterator.
  * \param iter Reference to the vector.
  */
 /// \{
@@ -233,17 +242,26 @@
 /// \}
 
 
-#define bstc_vect_iter_set(iter, val, ...) \
-    bstc_tmplt_isa(iter,\
-        bstc_iter_set(bstc_tmplt_iter(iter))(val, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_iter_set(iter, val)\
-    )
-#define bstc_vect_iter_swap(left, right, ...) \
-    bstc_tmplt_isa(left,\
-        bstc_iter_swap(bstc_tmplt_iter(left))(right, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_iter_swap(left, right)\
-    )
+/** Accesses the value of the forward iterator.
+ * \param iter Reference to the vector.
+ * \param val The value to assign to where the iterator is referencing.
+ */
+/// \{
+#ifndef bstc_vect_iter_set
+# define bstc_vect_iter_set(...) bstc_ctuple_call(bstc_dtl_vect_iter_set, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+#endif
+/// \}
 
+
+/** Swaps the contents of to forward iterators.
+ * \param left Reference to the vector.
+ * \param right Reference to the vector.
+ */
+/// \{
+#ifndef bstc_vect_iter_swap
+# define bstc_vect_iter_swap(...) bstc_ctuple_call(bstc_dtl_vect_iter_swap, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+#endif
+/// \}
 
 
 /** Declares the reverse iterator type.
@@ -256,19 +274,28 @@
 /// \}
 
 
-#define bstc_vect_riter_nxt(iter, ...) \
-    bstc_tmplt_isa(iter,\
-        bstc_iter_nxt(bstc_tmplt_riter(iter))(bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_riter_nxt(iter)\
-    )
-#define bstc_vect_riter_eq(left, right, ...) \
-    bstc_tmplt_isa(left,\
-        bstc_iter_eq(bstc_tmplt_riter(left))(right, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_riter_eq(left, right)\
-    )
+/** Moves the reverse iterator to the next iterator.
+ * \param iter Reference to the vector.
+ */
+/// \{
+#ifndef bstc_vect_riter_nxt
+# define bstc_vect_riter_nxt(...) bstc_ctuple_call(bstc_dtl_vect_riter_nxt, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+#endif
+/// \}
 
 
-/** Declares the reverse iterator type.
+/** Detects if two reverse iterators are referencing the same location.
+ * \param left Reference to the vector.
+ * \param right Reference to the vector.
+ */
+/// \{
+#ifndef bstc_vect_riter_eq
+# define bstc_vect_riter_eq(...) bstc_ctuple_call(bstc_dtl_vect_riter_eq, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+#endif
+/// \}
+
+
+/** Accesses the value of the reverse iterator.
  * \param iter Reference to the vector.
  */
 /// \{
@@ -278,13 +305,23 @@
 /// \}
 
 
-#define bstc_vect_riter_set(iter, val, ...) \
-    bstc_tmplt_isa(iter,\
-        bstc_iter_set(bstc_tmplt_riter(iter))(val, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_riter_set(iter, val)\
-    )
-#define bstc_vect_riter_swap(left, right, ...) \
-    bstc_tmplt_isa(left,\
-        bstc_iter_swap(bstc_tmplt_riter(left))(right, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_riter_swap(left, right)\
-    )
+/** Accesses the value of the reverse iterator.
+ * \param iter Reference to the vector.
+ * \param val The value to assign to where the iterator is referencing.
+ */
+/// \{
+#ifndef bstc_vect_riter_set
+# define bstc_vect_riter_set(...) bstc_ctuple_call(bstc_dtl_vect_riter_set, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+#endif
+/// \}
+
+
+/** Swaps the contents of to reverse iterators.
+ * \param left Reference to the vector.
+ * \param right Reference to the vector.
+ */
+/// \{
+#ifndef bstc_vect_riter_swap
+# define bstc_vect_riter_swap(...) bstc_ctuple_call(bstc_dtl_vect_riter_swap, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+#endif
+/// \}
