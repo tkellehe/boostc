@@ -157,11 +157,17 @@
 /// \}
 
 
-#define bstc_vect_begin(vect, ...) \
-    bstc_tmplt_isa(vect,\
-        bstc_dtl_vect_get_begin(vect)(vect, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
-        bstc_dtl_vect_begin(bstc_tmplt_pack_alloc(bstc_alloc_stdlib), vect)\
-    )
+/** Get a forward iterator referencing the first item.
+ * \param vect Reference to the vector.
+ * \return Returns the forward iterator to the first item.
+ */
+/// \{
+#ifndef bstc_vect_begin
+# define bstc_vect_begin(...) bstc_ctuple_call(bstc_dtl_vect_begin, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+#endif
+/// \}
+
+
 #define bstc_vect_end(vect, ...) \
     bstc_tmplt_isa(vect,\
         bstc_dtl_vect_get_end(vect)(vect, bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
@@ -181,7 +187,16 @@
     )
 
 
-#define bstc_vect_iter_t(tmplt) bstc_iter_t(bstc_tmplt_iter(tmplt))
+/** Declares the forward iterator type.
+ * \param T The base type of the vector or the template.
+ */
+/// \{
+#ifndef bstc_vect_iter_t
+# define bstc_vect_iter_t(T) bstc_tmplt_isa(T, bstc_iter_t(bstc_tmplt_iter(T)), bstc_dtl_vect_default_iter_t(T))
+#endif
+/// \}
+
+
 #define bstc_vect_iter_nxt(iter, ...) \
     bstc_tmplt_isa(iter,\
         bstc_iter_nxt(bstc_tmplt_iter(iter))(bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\
@@ -209,7 +224,17 @@
     )
 
 
-#define bstc_vect_riter_t(tmplt) bstc_iter_t(bstc_tmplt_riter(tmplt))
+
+/** Declares the reverse iterator type.
+ * \param T The base type of the vector or the template.
+ */
+/// \{
+#ifndef bstc_vect_riter_t
+# define bstc_vect_riter_t(T) bstc_tmplt_isa(T, bstc_iter_t(bstc_tmplt_riter(T)), bstc_dtl_vect_default_riter_t(T))
+#endif
+/// \}
+
+
 #define bstc_vect_riter_nxt(iter, ...) \
     bstc_tmplt_isa(iter,\
         bstc_iter_nxt(bstc_tmplt_riter(iter))(bstc_ctuple_getI(bstc_ctuple(__VA_ARGS__), 0)),\

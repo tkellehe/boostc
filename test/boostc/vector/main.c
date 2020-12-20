@@ -169,6 +169,20 @@ int main(int argc, char *argv[])
     }
 
     //--------------------------------------------------------------------------------------------------------
+    {
+        bstc_vect_t(int) vect;
+        bstc_vect_iter_t(int) iter;
+        bstc_vect_init(vect);
+        bstc_vect_rsz(vect, 4);
+        vect[0] = 0;
+        vect[1] = 1;
+        vect[2] = 2;
+        vect[3] = 3;
+        iter = bstc_vect_begin(vect);
+        bstc_vect_destroy(vect);
+    }
+
+    //--------------------------------------------------------------------------------------------------------
     printf("-----------------------------\n");
     printf("     pass     |     fail     \n");
     printf("     %04i     |     %04i     \n", num_pass, num_fail);
