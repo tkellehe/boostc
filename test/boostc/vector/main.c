@@ -172,13 +172,38 @@ int main(int argc, char *argv[])
     {
         bstc_vect_t(int) vect;
         bstc_vect_iter_t(int) iter;
+        bstc_vect_riter_t(int) riter;
+        
         bstc_vect_init(vect);
         bstc_vect_rsz(vect, 4);
+
         vect[0] = 0;
         vect[1] = 1;
         vect[2] = 2;
         vect[3] = 3;
+
+        iter = bstc_vect_end(vect);
+        printf("bstc_vect_end(vect): %p\n", (void*)bstc_vect_end(vect));
+        if(iter != bstc_null) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+
+        riter = bstc_vect_rend(vect);
+        printf("bstc_vect_rend(vect): %p\n", (void*)bstc_vect_rend(vect));
+        if(riter != bstc_null) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+
         iter = bstc_vect_begin(vect);
+        printf("bstc_vect_begin(vect): %p\n", (void*)bstc_vect_begin(vect));
+        if(iter != bstc_null) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+
+        printf("bstc_vect_iter_val(iter): %i\n", bstc_vect_iter_val(iter));
+        if(bstc_vect_iter_val(iter) == 0) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+
+        riter = bstc_vect_rbegin(vect);
+        printf("bstc_vect_rbegin(vect): %p\n", (void*)bstc_vect_rbegin(vect));
+        if(riter != bstc_null) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+
+        printf("bstc_vect_riter_val(iter): %i\n", bstc_vect_riter_val(riter));
+        if(bstc_vect_riter_val(riter) == 3) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+
         bstc_vect_destroy(vect);
     }
 
