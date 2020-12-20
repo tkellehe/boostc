@@ -9,15 +9,15 @@
 
 /* Details for vector */
 /// \{
-#define bstc_dtl_vect_tmplt_t_select(tpl) bstc_ctuple_hasN(tpl, 1, bstc_dtl_vect_tmplt_t_T, bstc_dtl_vect_tmplt_t_T_alloc)
+#define bstc_dtl_vect_tmplt_t_select(tpl) bstc_ctuple_hasN(tpl, 1, bstc_dtl_vect_tmplt_specialize_t1, bstc_dtl_vect_tmplt_t2)
 
-#define bstc_dtl_vect_tmplt_t_T(T) \
+#define bstc_dtl_vect_tmplt_specialize_t1(T) \
     bstc_tmplt_isa(bstc_vect_tmplt_ ## T,\
         bstc_vect_tmplt_ ## T,\
-        bstc_dtl_vect_tmplt_t_T_(T)\
+        bstc_dtl_vect_tmplt_t1(T)\
     )
 
-#define bstc_dtl_vect_tmplt_t_T_(T) \
+#define bstc_dtl_vect_tmplt_t1(T) \
     bstc_ctuple(\
         T*,\
         bstc_ctuple(T),\
@@ -27,13 +27,16 @@
         bstc_alloc_stdlib\
     )
 
-#define bstc_dtl_vect_tmplt_t_T_alloc(T, alloc) \
-    bstc_tmplt_isa(bstc_vect_tmplt_ ## T,\
-        bstc_vect_tmplt_ ## T,\
-        bstc_dtl_vect_tmplt_t_T_alloc_(T, alloc)\
-    )
+// #define bstc_dtl_vect_tmplt_specialize_t2(T, alloc) \
+//     bstc_tmplt_isa(bstc_vect_tmplt_ ## T,\
+//         bstc_dtl_vect_tmplt_specialize_t2_(bstc_vect_tmplt_ ## T, alloc),\
+//         bstc_dtl_vect_tmplt_t1(T)\
+//     )
 
-#define bstc_dtl_vect_tmplt_t_T_alloc_(T, alloc) \
+// #define bstc_dtl_vect_tmplt_specialize_t2_(tmplt, alloc) bstc_tmplt_set_alloc(tmplt, alloc)
+
+// Specialization should select then set the allocator.
+#define bstc_dtl_vect_tmplt_t2(T, alloc) \
     bstc_ctuple(\
         T*,\
         bstc_ctuple(T),\
@@ -46,10 +49,10 @@
         )\
     )
 
-#define bstc_dtl_vect_add_tmplt(tpl) bstc_tmplt_isa(bstc_ctuple_getI(tpl, 0), tpl, bstc_ctuple_prepend(tpl, bstc_dtl_vect_tmplt_t_T_(void)))
 
-// Has issue where not resolving even with gcc and getI detects that it is not a tuple...
-// #define bstc_dtl_vect_init(tmplt, vect) BSTC_CALL(bstc_dtl_vect_get_init(tmplt), tmplt, vect)
+#define bstc_dtl_vect_add_tmplt(tpl) bstc_tmplt_isa(bstc_ctuple_getI(tpl, 0), tpl, bstc_ctuple_prepend(tpl, bstc_dtl_vect_tmplt_t1(void)))
+
+
 #define bstc_dtl_vect_init(tmplt, vect) BSTC_CALL(bstc_dtl_vect_get_init(tmplt), tmplt, vect)
 #define bstc_dtl_vect_default_init(tmplt, vect) (*((void**)&(vect)) = bstc_null)
 
