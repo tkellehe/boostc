@@ -4,7 +4,7 @@ Provides compile time decisions similar to templating in a simple API.
 Also has polyfills for C standards.
 
 ## Why Make This?
-I had began to write my own variation of _Boost C++_ to get better at _C++_.
+I began to write my own variation of _Boost C++_ to get better at _C++_.
 I was able to write a lot of parts that competed well with Boost, but overall useless.
 Therein, I began to wonder if I could take this and get it into a _C_ library.
 
