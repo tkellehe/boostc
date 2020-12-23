@@ -3,7 +3,7 @@
 //  Distributed under the Boost Software License, Version 1.0. (See
 //  accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
-#include <boostc/algorithm/find.h>
+#include <boostc/algorithm.h>
 #include <boostc/stdlib.h>
 #include <boostc/vector.h>
 #include <stdio.h>
@@ -237,6 +237,9 @@ int main(int argc, char *argv[])
         bstc_vect_riter_swap(riter, bstc_vect_rbegin(vect));
         printf("bstc_vect_riter_swap(riter, rbegin): {%i, %i, %i, %i}\n", vect[0], vect[1], vect[2], vect[3]);
         if(vect[3] == 11 && vect[2] == 3) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+
+
+        // bstc_alg_foreach(bstc_)
 
 
         bstc_vect_destroy(vect);
