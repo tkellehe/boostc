@@ -160,7 +160,7 @@
 #define bstc_dtl_vect_default_rbegin(tmplt, vect) ((vect)+bstc_dtl_vect_default_len(tmplt, vect))
 
 #define bstc_dtl_vect_rend(tmplt, vect) BSTC_CALL(bstc_dtl_vect_get_rend(tmplt), tmplt, vect)
-#define bstc_dtl_vect_default_rend(tmplt, vect) ((vect)+1)
+#define bstc_dtl_vect_default_rend(tmplt, vect) (vect)
 
 #define bstc_dtl_vect_get_init(tmplt) BSTC_GET_ARG0 bstc_tmplt_fns(tmplt)
 #define bstc_dtl_vect_get_destroy(tmplt) BSTC_GET_ARG1 bstc_tmplt_fns(tmplt)

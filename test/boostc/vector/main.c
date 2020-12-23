@@ -207,7 +207,7 @@ int main(int argc, char *argv[])
         printf("bstc_vect_iter_set(iter, 10): %i\n", bstc_vect_iter_val(iter));
         if(bstc_vect_iter_val(iter) == 10) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
 
-        printf("bstc_vect_iter_eq(iter, end)\n");
+        printf("bstc_vect_iter_eq(iter, end):\n");
         if(!bstc_vect_iter_eq(iter, bstc_vect_end(vect))) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
 
         bstc_vect_iter_swap(iter, bstc_vect_begin(vect));
@@ -231,16 +231,60 @@ int main(int argc, char *argv[])
         printf("bstc_vect_riter_set(riter, 11): %i\n", bstc_vect_riter_val(riter));
         if(bstc_vect_riter_val(riter) == 11) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
 
-        printf("bstc_vect_riter_eq(riter, rend)\n");
+        printf("bstc_vect_riter_eq(riter, rend):\n");
         if(!bstc_vect_riter_eq(riter, bstc_vect_rend(vect))) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
 
         bstc_vect_riter_swap(riter, bstc_vect_rbegin(vect));
         printf("bstc_vect_riter_swap(riter, rbegin): {%i, %i, %i, %i}\n", vect[0], vect[1], vect[2], vect[3]);
         if(vect[3] == 11 && vect[2] == 3) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
 
+        {
+            int i = 0;
+            int c = 0;
+            printf("bstc_alg_foreach(iter):\n");
+            iter = bstc_vect_begin(vect);
+            bstc_alg_foreach(bstc_tmplt_iter(vtmplt1), iter, bstc_vect_end(vect),
+                printf("    vext[%i]: %i\n", i, bstc_vect_iter_val(iter));
+                c += vect[i] == bstc_vect_iter_val(iter);
+                ++i;
+            )
+            if(c == bstc_vect_len(vect))  ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+        }
 
-        // bstc_alg_foreach(bstc_)
+        {
+            int i = bstc_vect_len(vect);
+            int c = 0;
+            printf("bstc_alg_foreach(riter):\n");
+            riter = bstc_vect_rbegin(vect);
+            bstc_alg_foreach(bstc_tmplt_riter(vtmplt1), riter, bstc_vect_rend(vect),
+                --i;
+                printf("    vext[%i]: %i\n", i, bstc_vect_riter_val(riter));
+                c += vect[i] == bstc_vect_riter_val(riter);
+            )
+            if(c == bstc_vect_len(vect))  ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+        }
 
+        {
+            printf("bstc_alg_find(iter, 3):\n");
+            iter = bstc_vect_begin(vect);
+            bstc_alg_find(bstc_tmplt_iter(vtmplt1), iter, bstc_vect_end(vect), 3)
+            if(iter != bstc_vect_end(vect) && bstc_vect_iter_val(iter) == 3)  ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+            printf("bstc_alg_find(iter, 100):\n");
+            iter = bstc_vect_begin(vect);
+            bstc_alg_find(bstc_tmplt_iter(vtmplt1), iter, bstc_vect_end(vect), 100)
+            if(iter == bstc_vect_end(vect))  ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+        }
+
+        {
+            printf("bstc_alg_find(riter, 3):\n");
+            riter = bstc_vect_rbegin(vect);
+            bstc_alg_find(bstc_tmplt_riter(vtmplt1), riter, bstc_vect_rend(vect), 3)
+            if(riter != bstc_vect_rend(vect) && bstc_vect_riter_val(riter) == 3)  ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+            printf("bstc_alg_find(riter, 100):\n");
+            riter = bstc_vect_rbegin(vect);
+            bstc_alg_find(bstc_tmplt_riter(vtmplt1), riter, bstc_vect_rend(vect), 100)
+            if(riter == bstc_vect_rend(vect))  ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+        }
 
         bstc_vect_destroy(vect);
     }
