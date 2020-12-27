@@ -1,3 +1,5 @@
+![boostc icon](images/boostc-icon.png)
+
 # boostc
 A library like [Boost _C++_](https://github.com/boostorg), but for C.
 Provides compile time decisions similar to templating in a simple API.
