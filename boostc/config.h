@@ -107,11 +107,20 @@
 
 /* Provide a null type */
 /// \{
-#ifndef bstc_null
+#ifndef bstc_nullptr
 # ifdef BSTC_LEAST_CPP11
-#  define bstc_null nullptr
+#  define bstc_nullptr nullptr
 # else
-#  define bstc_null 0
+#  ifdef __cplusplus
+#   include <cstddef>
+#  else
+#   include <stddef.h>
+#  endif
+#  ifdef NULL
+#   define bstc_nullptr NULL
+#  else
+#   define bstc_nullptr 0
+#  endif
 # endif
 #endif
 /// \}

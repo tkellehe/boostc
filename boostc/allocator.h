@@ -107,7 +107,7 @@
 /** Default malloc function that does nothing. */
 /// \{
 #ifndef bstc_alloc_nomalloc
-# define bstc_alloc_nomalloc(size) ((void*)bstc_null)
+# define bstc_alloc_nomalloc(size) ((void*)bstc_nullptr)
 #endif
 /// \}
 
@@ -115,7 +115,7 @@
 /** Default realloc function that does nothing. */
 /// \{
 #ifndef bstc_alloc_norealloc
-# define bstc_alloc_norealloc(memory, size) ((void*)bstc_null)
+# define bstc_alloc_norealloc(memory, size) ((void*)bstc_nullptr)
 #endif
 /// \}
 

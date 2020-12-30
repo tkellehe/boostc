@@ -39,11 +39,11 @@
 
 
 #define bstc_dtl_vect_init(tmplt, vect) BSTC_CALL(bstc_dtl_vect_get_init(tmplt), tmplt, vect)
-#define bstc_dtl_vect_default_init(tmplt, vect) (*((void**)&(vect)) = bstc_null)
+#define bstc_dtl_vect_default_init(tmplt, vect) (*((void**)&(vect)) = bstc_nullptr)
 
 
 #define bstc_dtl_vect_destroy(tmplt, vect) BSTC_CALL(bstc_dtl_vect_get_destroy(tmplt), tmplt, vect)
-#define bstc_dtl_vect_default_destroy(tmplt, vect) ((vect) ? bstc_alloc_free(bstc_tmplt_alloc(tmplt))(bstc_dtl_vect_raw_(vect)),*((void**)&(vect))=bstc_null : bstc_null)
+#define bstc_dtl_vect_default_destroy(tmplt, vect) ((vect) ? bstc_alloc_free(bstc_tmplt_alloc(tmplt))(bstc_dtl_vect_raw_(vect)),*((void**)&(vect))=bstc_nullptr : bstc_nullptr)
 
 
 #define bstc_dtl_vect_len(tmplt, vect) BSTC_CALL(bstc_dtl_vect_get_len(tmplt), tmplt, vect)
