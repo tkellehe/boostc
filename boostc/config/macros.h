@@ -9,8 +9,15 @@
 
 /* Provide a helper that joins two symbols. */
 /// \{
-#define BSTC_DTL_JOIN2(L, R) L ## R
+#define BSTC_DTL_JOIN2(L, R) L##R
 #define BSTC_JOIN2(L, R) BSTC_DTL_JOIN2(L, R)
+/// \}
+
+
+/* Provide a helper that joins three symbols. */
+/// \{
+#define BSTC_DTL_JOIN3(L, C, R) L##C##R
+#define BSTC_JOIN3(L, C, R) BSTC_DTL_JOIN3(L, C, R)
 /// \}
 
 
