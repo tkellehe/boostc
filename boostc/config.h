@@ -13,6 +13,20 @@
 #include <boostc/config/macros.h>
 
 
+/* Make sure that macros are available for stdint. */
+/// \{
+#if !defined(BSTC_NO_FORMAT_MACROS) || defined(BSTC_HAS_FORMAT_MACROS)
+# ifdef __STDC_FORMAT_MACROS
+#  undef __STDC_FORMAT_MACROS
+# endif
+# define __STDC_FORMAT_MACROS 1
+# ifndef BSTC_HAS_FORMAT_MACROS
+#  define BSTC_HAS_FORMAT_MACROS
+# endif
+#endif
+/// \}
+
+
 /* Configure the compiler */
 /// \{
 #if !defined(BSTC_COMPILER_CONFIG) && !defined(BSTC_NO_COMPILER_CONFIG) && !defined(BSTC_NO_CONFIG)
