@@ -16,6 +16,9 @@
 # elif defined(__clang__)
 #  define BSTC_COMPILER_CLANG
 #  define BSTC_COMPILER_CONFIG "boostc/config/compiler/clang.h"
+# elif defined(__WATCOMC__)
+#  define BSTC_COMPILER_WATCOM
+#  define BSTC_COMPILER_CONFIG "boostc/config/compiler/watcom.h"
 # elif defined(__GNUC__) && !defined(__ibmxl__)
 #  define BSTC_COMPILER_GCC
 #  define BSTC_COMPILER_CONFIG "boostc/config/compiler/gcc.h"
