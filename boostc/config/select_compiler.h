@@ -19,6 +19,9 @@
 # elif defined(__WATCOMC__)
 #  define BSTC_COMPILER_WATCOM
 #  define BSTC_COMPILER_CONFIG "boostc/config/compiler/watcom.h"
+# elif defined(__BORLANDC__)
+#  define BSTC_COMPILER_BORLAND
+#  define BSTC_COMPILER_CONFIG "boostc/config/compiler/borland.h"
 # elif defined(__GNUC__) && !defined(__ibmxl__)
 #  define BSTC_COMPILER_GCC
 #  define BSTC_COMPILER_CONFIG "boostc/config/compiler/gcc.h"

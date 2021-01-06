@@ -3,19 +3,19 @@
 //  Distributed under the Boost Software License, Version 1.0. (See
 //  accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
-#ifndef BOOSTC__CONFIG__COMPILER__WATCOM_H
-#define BOOSTC__CONFIG__COMPILER__WATCOM_H
+#ifndef BOOSTC__CONFIG__COMPILER__BORLAND_H
+#define BOOSTC__CONFIG__COMPILER__BORLAND_H
 
 
-/* Provide a way to detect the version of WATCOM. */
+/* Provide a way to detect the version of BORLAND. */
 /// \{
-#define BSTC_WATCOM_VER __WATCOMC__
+#define BSTC_BORLAND_VER __BORLANDC__
 /// \}
 
 
 /* Detect if has int64 support. */
 /// \{
-#if defined(__WATCOM_INT64__)
+#if defined (__BORLANDC__) && __BORLANDC__ > 0x460
 # define BSTC_HAS_64BIT
 # define bstc_uint64_t unsigned __int64
 # define bstc_int64_t __int64
@@ -25,4 +25,4 @@
 /// \}
 
 
-#endif // BOOSTC__CONFIG__COMPILER__WATCOM_H
+#endif // BOOSTC__CONFIG__COMPILER__BORLAND_H

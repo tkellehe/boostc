@@ -40,6 +40,18 @@
 /// \}
 
 
+/* Detect the max number of integral bits. */
+/// \{
+#if defined(_INTEGRAL_MAX_BITS) && _INTEGRAL_MAX_BITS >= 64
+# define BSTC_HAS_64BIT
+# define bstc_uint64_t unsigned __int64
+# define bstc_int64_t __int64
+# define bstc_uint64_c(v) v ## UI64
+# define bstc_int64_t(v) v ## I64
+#endif
+/// \}
+
+
 /* Make sure that the main libraries are linked in. */
 /// \{
 #pragma comment(lib, "user32.lib")
