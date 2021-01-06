@@ -94,6 +94,13 @@
 #endif
 
 
+#if !defined(BSTC_HAS_64BIT) && !defined(BSTC_NO_64BIT)
+# ifdef BSTC_LEAST_C99
+#  define BSTC_HAS_64BIT
+# endif
+#endif
+
+
 #if !defined(BSTC_HAS_LONG_LONG) && !defined(BSTC_NO_LONG_LONG) && !defined(BSTC_MSVC) && !defined(__BORLANDC__)
 # ifdef __cplusplus
 #  include <climits>
