@@ -48,6 +48,8 @@
 # define bstc_int64_t __int64
 # define bstc_uint64_c(v) v ## UI64
 # define bstc_int64_t(v) v ## I64
+#else
+# define BSTC_NO_64BIT
 #endif
 /// \}
 
