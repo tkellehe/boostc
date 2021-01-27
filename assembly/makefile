@@ -57,7 +57,7 @@ $(BSTC_BIN)/clang/%.s: $(ASSEMBLY_DIR)/%/main.c
 
 #-------------------------------------------------------------------------------------------------------------
 BSTC_VS14_ASSEMBLIES := $(ALL_MAINC:$(ASSEMBLY_DIR)/%/main.c=$(BSTC_BIN)/vs14/%.s)
-BSTC_VS14_FLAGS ?= /nologo /EHsc /Ox /W4 /link kernel32.lib user32.lib
+BSTC_VS14_FLAGS ?= /Fa /nologo /EHsc /Ox /W4 /link kernel32.lib user32.lib
 BSTC_VS14 ?= $(PROJECT_DIR)/scripts/msvc.bash vs14 cl
 
 vs14: $(BSTC_VS14_ASSEMBLIES)
@@ -66,20 +66,9 @@ $(BSTC_BIN)/vs14/%.s: $(ASSEMBLY_DIR)/%/main.c
 	@echo "(VS14) Building Test: $@"
 	@mkdir -p `dirname $@`
 	$(BSTC_VS14) "$(call winpaths,$?)" /I "$(call winpaths,$(PROJECT_DIR))" $(BSTC_VS14_FLAGS) /OUT:"$(call winpaths,$@)"
+	rm $@
 	rm main.obj
-	@echo
-
-#-------------------------------------------------------------------------------------------------------------
-BSTC_TCC_ASSEMBLIES := $(ALL_MAINC:$(ASSEMBLY_DIR)/%/main.c=$(BSTC_BIN)/tcc/%.s)
-BSTC_TCC_FLAGS ?= -O3 -Wall -Werror -pedantic
-BSTC_TCC ?= /tcc/win64/tcc
-
-tcc: $(BSTC_TCC_ASSEMBLIES)
-
-$(BSTC_BIN)/tcc/%.s: $(ASSEMBLY_DIR)/%/main.c
-	@echo "(TCC) Building Test: $@"
-	@mkdir -p `dirname $@`
-	$(BSTC_TCC) $(BSTC_TCC_FLAGS) -I "$(call winpaths,$(PROJECT_DIR))" "$(call winpaths,$?)" -o "$(call winpaths,$@)"
+	mv main.asm $@
 	@echo
 
 #-------------------------------------------------------------------------------------------------------------

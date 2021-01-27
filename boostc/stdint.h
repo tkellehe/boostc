@@ -254,7 +254,7 @@
 #  ifdef INT64_C
 #   define bstc_int64_c INT64_C
 #  elif BSTC_HAS_LONG_LONG
-#   define bstc_uint64_c(v) v ## LL
+#   define bstc_int64_c(v) v ## LL
 #  else
 #   define bstc_int64_c(v) ((bstc_int64_t) v)
 #  endif
