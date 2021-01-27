@@ -75,6 +75,34 @@ int main(int argc, char *argv[])
     #endif
 
     //--------------------------------------------------------------------------------------------------------
+    #ifdef bstc_uintmax_t
+        printf("sizeof(bstc_uintmax_t): %i\n", (int)sizeof(bstc_uintmax_t));
+        # if bstc_uintmax_max == bstc_uint64_max
+        if(sizeof(bstc_uintmax_t) == sizeof(bstc_uint64_t)) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+        # elif bstc_uintmax_max == bstc_uint32_max
+        if(sizeof(bstc_uintmax_t) == sizeof(bstc_uint32_t)) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+        # elif bstc_uintmax_max == bstc_uint16_max
+        if(sizeof(bstc_uintmax_t) == sizeof(bstc_uint16_t)) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+        # elif bstc_uintmax_max == bstc_uint8_max
+        if(sizeof(bstc_uintmax_t) == sizeof(bstc_uint8_t)) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+        # endif
+    #endif
+
+    //--------------------------------------------------------------------------------------------------------
+    #ifdef bstc_intmax_t
+        printf("sizeof(bstc_intmax_t): %i\n", (int)sizeof(bstc_intmax_t));
+        # if bstc_intmax_max == bstc_int64_max
+        if(sizeof(bstc_intmax_t) == sizeof(bstc_int64_t)) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+        # elif bstc_intmax_max == bstc_int32_max
+        if(sizeof(bstc_intmax_t) == sizeof(bstc_int32_t)) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+        # elif bstc_intmax_max == bstc_int16_max
+        if(sizeof(bstc_intmax_t) == sizeof(bstc_int16_t)) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+        # elif bstc_intmax_max == bstc_int8_max
+        if(sizeof(bstc_intmax_t) == sizeof(bstc_int8_t)) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+        # endif
+    #endif
+
+    //--------------------------------------------------------------------------------------------------------
     printf("-----------------------------\n");
     printf("     pass     |     fail     \n");
     printf("     %04i     |     %04i     \n", num_pass, num_fail);
