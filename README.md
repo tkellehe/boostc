@@ -50,7 +50,8 @@ int main(int argc, char *argv[])
     // Can loop over the contents.
     {
         int i;
-        for(i = 0; i < bstc_vect_len(vect); ++i) printf("%i\n", vect[i]);
+        for(i = 0; i < bstc_vect_len(vect); ++i)
+            printf("%i\n", vect[i]);
     }
     
     // Deallocate any memory.
