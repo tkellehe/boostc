@@ -14,7 +14,11 @@ int main(int argc, char *argv[])
     bstc_vect_init(v);
     bstc_vect_push(v, 11);
     bstc_vect_push(v, 12);
-    printf("%i\n", v[0]);
+    {
+        int i;
+        for(i = 0; i < bstc_vect_len(v); ++i)
+            printf("%i\n", v[i]);
+    }
     bstc_vect_destroy(v);
     return 0;
 }
