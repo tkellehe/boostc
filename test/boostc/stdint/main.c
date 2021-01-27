@@ -151,6 +151,54 @@ int main(int argc, char *argv[])
     #endif
 
     //--------------------------------------------------------------------------------------------------------
+    #ifdef bstc_uint_fast8_t
+        printf("sizeof(bstc_uint_fast8_t): %i\n", (int)sizeof(bstc_uint_fast8_t));
+        if((int)sizeof(bstc_uint_fast8_t) >= 1) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+    #endif
+
+    //--------------------------------------------------------------------------------------------------------
+    #ifdef bstc_int_fast8_t
+        printf("sizeof(bstc_int_fast8_t): %i\n", (int)sizeof(bstc_int_fast8_t));
+        if((int)sizeof(bstc_int_fast8_t) >= 1) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+    #endif
+
+    //--------------------------------------------------------------------------------------------------------
+    #ifdef bstc_uint_fast16_t
+        printf("sizeof(bstc_uint_fast16_t): %i\n", (int)sizeof(bstc_uint_fast16_t));
+        if((int)sizeof(bstc_uint_fast16_t) >= 2) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+    #endif
+
+    //--------------------------------------------------------------------------------------------------------
+    #ifdef bstc_int_fast16_t
+        printf("sizeof(bstc_int_fast16_t): %i\n", (int)sizeof(bstc_int_fast16_t));
+        if((int)sizeof(bstc_int_fast16_t) >= 2) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+    #endif
+
+    //--------------------------------------------------------------------------------------------------------
+    #ifdef bstc_uint_fast32_t
+        printf("sizeof(bstc_uint_fast32_t): %i\n", (int)sizeof(bstc_uint_fast32_t));
+        if((int)sizeof(bstc_uint_fast32_t) >= 4) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+    #endif
+
+    //--------------------------------------------------------------------------------------------------------
+    #ifdef bstc_int_fast32_t
+        printf("sizeof(bstc_int_fast32_t): %i\n", (int)sizeof(bstc_int_fast32_t));
+        if((int)sizeof(bstc_int_fast32_t) >= 4) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+    #endif
+
+    //--------------------------------------------------------------------------------------------------------
+    #ifdef bstc_uint_fast64_t
+        printf("sizeof(bstc_uint_fast64_t): %i\n", (int)sizeof(bstc_uint_fast64_t));
+        if((int)sizeof(bstc_uint_fast64_t) >= 8) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+    #endif
+
+    //--------------------------------------------------------------------------------------------------------
+    #ifdef bstc_int_fast64_t
+        printf("sizeof(bstc_int_fast64_t): %i\n", (int)sizeof(bstc_int_fast64_t));
+        if((int)sizeof(bstc_int_fast64_t) >= 8) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+    #endif
+
+    //--------------------------------------------------------------------------------------------------------
     printf("-----------------------------\n");
     printf("     pass     |     fail     \n");
     printf("     %04i     |     %04i     \n", num_pass, num_fail);
