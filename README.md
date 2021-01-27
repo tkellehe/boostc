@@ -60,3 +60,74 @@ int main(int argc, char *argv[])
     return 0;
 }
 ```
+
+## Changing Templates
+
+The basic implementation works by taking the default template if the first parameter does not syntactically appear as a template.
+A template is basically a tuple of symbols that follows a particular pattern.
+The default layout of this pattern can be generated using the template vector macro.
+Then you can do things like changing the default allocator.
+
+```c
+#include <boostc/vector.h>
+#include <stdio.h>
+
+// This is a simple allocator that is not the best, but provides as a simple example.
+int _memory[1024];
+int _pos = 0;
+void* my_malloc(int sz)
+{
+    int* res = &_memory[_pos];
+    _pos += sz / sizeof(int);
+    return (void*)res;
+}
+void* my_realloc(void* mem, int sz)
+{
+    (void)mem;
+    int* res = &_memory[_pos];
+    _pos += sz / sizeof(int);
+    return (void*)res;
+}
+
+
+int main(int argc, char *argv[])
+{
+    (void)argc;
+    (void)argv;
+    // It is recommended to create a definition for the macro type to make it more readable.
+    // The type provided first is the underlying type of the vector.
+    // The symbol tuple is merely indicated by parentheses and the three symbols provided.
+    // They must be provided in the following order: free, malloc, realloc.
+    #define vect_int bstc_vect_tmplt_t(int, (bstc_alloc_nofree, my_malloc, my_realloc))
+
+    // You can print out what was actually encoded into the symbol tuple:
+    printf("vect_int: %s\n", BSTC_TOSTRING(vect_int));
+
+    // Passing it into a vector function will cause it to extract the symbol representing the type.
+    bstc_vect_t(vect_int) vect;
+    
+    // Initializes the state by extracting the symbol encoded representing the init function.
+    // It is not required to use the template here since the default behavior does not change when changing the allocators.
+    // But, it is recommended for consistency.
+    bstc_vect_init(vect_int, vect);
+    
+    // Uses the allocator encoded into the template to realloc and malloc the memory.
+    bstc_vect_push(vect_int, vect, 11);
+    bstc_vect_push(vect_int, vect, 12);
+    
+    // Can still use basic array operator on the data.
+    vect[0] += 10;
+    
+    // Can loop over the contents where the template is not necessary, but recommended for consistency.
+    {
+        int i;
+        for(i = 0; i < bstc_vect_len(vect_int, vect); ++i)
+            printf("%i\n", vect[i]);
+    }
+    
+    // Deallocates any memory allocated using what is encoded in the template.
+    bstc_vect_destroy(vect_int, vect);
+    
+    return 0;
+}
+```
