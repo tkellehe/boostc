@@ -41,7 +41,7 @@
 #  endif
 # else
 // This most likely will need to be resolved in the config area.
-#  error "System does not support bool."
+#  error "BOOSTC system does not support bool."
 # endif
 #endif
 /// \}

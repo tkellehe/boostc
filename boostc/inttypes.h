@@ -115,7 +115,7 @@
 #   elif bstc_ushrt_max == bstc_uint16_max
 #    define bstc_prid16 "hhd"
 #   else
-#    error "Format macro could not be determined for [u]int16_t."
+#    error "BOOSTC format macro could not be determined for [u]int16_t."
 #   endif
 #  endif
 # endif
@@ -128,7 +128,7 @@
 #   elif bstc_ushrt_max == bstc_uint16_max
 #    define bstc_prii16 "hhi"
 #   else
-#    error "Format macro could not be determined for [u]int16_t."
+#    error "BOOSTC format macro could not be determined for [u]int16_t."
 #   endif
 #  endif
 # endif
@@ -141,7 +141,7 @@
 #   elif bstc_ushrt_max == bstc_uint16_max
 #    define bstc_priu16 "hhu"
 #   else
-#    error "Format macro could not be determined for [u]int16_t."
+#    error "BOOSTC format macro could not be determined for [u]int16_t."
 #   endif
 #  endif
 # endif
@@ -154,7 +154,7 @@
 #   elif bstc_ushrt_max == bstc_uint16_max
 #    define bstc_prio16 "hho"
 #   else
-#    error "Format macro could not be determined for [u]int16_t."
+#    error "BOOSTC format macro could not be determined for [u]int16_t."
 #   endif
 #  endif
 # endif
@@ -167,7 +167,7 @@
 #   elif bstc_ushrt_max == bstc_uint16_max
 #    define bstc_prix16 "hhx"
 #   else
-#    error "Format macro could not be determined for [u]int16_t."
+#    error "BOOSTC format macro could not be determined for [u]int16_t."
 #   endif
 #  endif
 # endif
@@ -180,7 +180,7 @@
 #   elif bstc_ushrt_max == bstc_uint16_max
 #    define bstc_priX16 "hhX"
 #   else
-#    error "Format macro could not be determined for [u]int16_t."
+#    error "BOOSTC format macro could not be determined for [u]int16_t."
 #   endif
 #  endif
 # endif
@@ -193,7 +193,7 @@
 #   elif bstc_ushrt_max == bstc_uint16_max
 #    define bstc_scnd16 "hhd"
 #   else
-#    error "Format macro could not be determined for [u]int16_t."
+#    error "BOOSTC format macro could not be determined for [u]int16_t."
 #   endif
 #  endif
 # endif
@@ -206,7 +206,7 @@
 #   elif bstc_ushrt_max == bstc_uint16_max
 #    define bstc_scni16 "hhi"
 #   else
-#    error "Format macro could not be determined for [u]int16_t."
+#    error "BOOSTC format macro could not be determined for [u]int16_t."
 #   endif
 #  endif
 # endif
@@ -219,7 +219,7 @@
 #   elif bstc_ushrt_max == bstc_uint16_max
 #    define bstc_scnu16 "hhu"
 #   else
-#    error "Format macro could not be determined for [u]int16_t."
+#    error "BOOSTC format macro could not be determined for [u]int16_t."
 #   endif
 #  endif
 # endif
@@ -232,7 +232,7 @@
 #   elif bstc_ushrt_max == bstc_uint16_max
 #    define bstc_scno16 "hho"
 #   else
-#    error "Format macro could not be determined for [u]int16_t."
+#    error "BOOSTC format macro could not be determined for [u]int16_t."
 #   endif
 #  endif
 # endif
@@ -245,7 +245,7 @@
 #   elif bstc_ushrt_max == bstc_uint16_max
 #    define bstc_scnx16 "hhx"
 #   else
-#    error "Format macro could not be determined for [u]int16_t."
+#    error "BOOSTC format macro could not be determined for [u]int16_t."
 #   endif
 #  endif
 # endif
@@ -267,7 +267,7 @@
 #   elif bstc_ushrt_max == bstc_uint32_max
 #    define bstc_prid32 "hd"
 #   else
-#    error "Format macro could not be determined for [u]int32_t."
+#    error "BOOSTC format macro could not be determined for [u]int32_t."
 #   endif
 #  endif
 # endif
@@ -282,7 +282,7 @@
 #   elif bstc_ushrt_max == bstc_uint32_max
 #    define bstc_prii32 "hi"
 #   else
-#    error "Format macro could not be determined for [u]int32_t."
+#    error "BOOSTC format macro could not be determined for [u]int32_t."
 #   endif
 #  endif
 # endif
@@ -297,7 +297,7 @@
 #   elif bstc_ushrt_max == bstc_uint32_max
 #    define bstc_priu32 "hu"
 #   else
-#    error "Format macro could not be determined for [u]int32_t."
+#    error "BOOSTC format macro could not be determined for [u]int32_t."
 #   endif
 #  endif
 # endif
@@ -312,7 +312,7 @@
 #   elif bstc_ushrt_max == bstc_uint32_max
 #    define bstc_prio32 "ho"
 #   else
-#    error "Format macro could not be determined for [u]int32_t."
+#    error "BOOSTC format macro could not be determined for [u]int32_t."
 #   endif
 #  endif
 # endif
@@ -327,7 +327,7 @@
 #   elif bstc_ushrt_max == bstc_uint32_max
 #    define bstc_prix32 "hx"
 #   else
-#    error "Format macro could not be determined for [u]int32_t."
+#    error "BOOSTC format macro could not be determined for [u]int32_t."
 #   endif
 #  endif
 # endif
@@ -342,7 +342,7 @@
 #   elif bstc_ushrt_max == bstc_uint32_max
 #    define bstc_priX32 "hX"
 #   else
-#    error "Format macro could not be determined for [u]int32_t."
+#    error "BOOSTC format macro could not be determined for [u]int32_t."
 #   endif
 #  endif
 # endif
@@ -357,7 +357,7 @@
 #   elif bstc_ushrt_max == bstc_uint32_max
 #    define bstc_scnd32 "hd"
 #   else
-#    error "Format macro could not be determined for [u]int32_t."
+#    error "BOOSTC format macro could not be determined for [u]int32_t."
 #   endif
 #  endif
 # endif
@@ -372,7 +372,7 @@
 #   elif bstc_ushrt_max == bstc_uint32_max
 #    define bstc_scni32 "hi"
 #   else
-#    error "Format macro could not be determined for [u]int32_t."
+#    error "BOOSTC format macro could not be determined for [u]int32_t."
 #   endif
 #  endif
 # endif
@@ -387,7 +387,7 @@
 #   elif bstc_ushrt_max == bstc_uint32_max
 #    define bstc_scnu32 "hu"
 #   else
-#    error "Format macro could not be determined for [u]int32_t."
+#    error "BOOSTC format macro could not be determined for [u]int32_t."
 #   endif
 #  endif
 # endif
@@ -402,7 +402,7 @@
 #   elif bstc_ushrt_max == bstc_uint32_max
 #    define bstc_scno32 "ho"
 #   else
-#    error "Format macro could not be determined for [u]int32_t."
+#    error "BOOSTC format macro could not be determined for [u]int32_t."
 #   endif
 #  endif
 # endif
@@ -417,7 +417,7 @@
 #   elif bstc_ushrt_max == bstc_uint32_max
 #    define bstc_scnx32 "hx"
 #   else
-#    error "Format macro could not be determined for [u]int32_t."
+#    error "BOOSTC format macro could not be determined for [u]int32_t."
 #   endif
 #  endif
 # endif
@@ -440,7 +440,7 @@
 #    elif bstc_ulong_max == bstc_uint64_max
 #     define bstc_prid64 "ld"
 #    else
-#     error "Format macro could not be determined for [u]int64_t."
+#     error "BOOSTC format macro could not be determined for [u]int64_t."
 #    endif
 #   endif
 #  endif
@@ -457,7 +457,7 @@
 #    elif bstc_ulong_max == bstc_uint64_max
 #     define bstc_prii64 "li"
 #    else
-#     error "Format macro could not be determined for [u]int64_t."
+#     error "BOOSTC format macro could not be determined for [u]int64_t."
 #    endif
 #   endif
 #  endif
@@ -474,7 +474,7 @@
 #    elif bstc_ulong_max == bstc_uint64_max
 #     define bstc_priu64 "lu"
 #    else
-#     error "Format macro could not be determined for [u]int64_t."
+#     error "BOOSTC format macro could not be determined for [u]int64_t."
 #    endif
 #   endif
 #  endif
@@ -491,7 +491,7 @@
 #    elif bstc_ulong_max == bstc_uint64_max
 #     define bstc_prio64 "lo"
 #    else
-#     error "Format macro could not be determined for [u]int64_t."
+#     error "BOOSTC format macro could not be determined for [u]int64_t."
 #    endif
 #   endif
 #  endif
@@ -508,7 +508,7 @@
 #    elif bstc_ulong_max == bstc_uint64_max
 #     define bstc_prix64 "lx"
 #    else
-#     error "Format macro could not be determined for [u]int64_t."
+#     error "BOOSTC format macro could not be determined for [u]int64_t."
 #    endif
 #   endif
 #  endif
@@ -525,7 +525,7 @@
 #    elif bstc_ulong_max == bstc_uint64_max
 #     define bstc_priX64 "lX"
 #    else
-#     error "Format macro could not be determined for [u]int64_t."
+#     error "BOOSTC format macro could not be determined for [u]int64_t."
 #    endif
 #   endif
 #  endif
@@ -542,7 +542,7 @@
 #    elif bstc_ulong_max == bstc_uint64_max
 #     define bstc_scnd64 "ld"
 #    else
-#     error "Format macro could not be determined for [u]int64_t."
+#     error "BOOSTC format macro could not be determined for [u]int64_t."
 #    endif
 #   endif
 #  endif
@@ -559,7 +559,7 @@
 #    elif bstc_ulong_max == bstc_uint64_max
 #     define bstc_scni64 "li"
 #    else
-#     error "Format macro could not be determined for [u]int64_t."
+#     error "BOOSTC format macro could not be determined for [u]int64_t."
 #    endif
 #   endif
 #  endif
@@ -576,7 +576,7 @@
 #    elif bstc_ulong_max == bstc_uint64_max
 #     define bstc_scnu64 "lu"
 #    else
-#     error "Format macro could not be determined for [u]int64_t."
+#     error "BOOSTC format macro could not be determined for [u]int64_t."
 #    endif
 #   endif
 #  endif
@@ -593,7 +593,7 @@
 #    elif bstc_ulong_max == bstc_uint64_max
 #     define bstc_scno64 "lo"
 #    else
-#     error "Format macro could not be determined for [u]int64_t."
+#     error "BOOSTC format macro could not be determined for [u]int64_t."
 #    endif
 #   endif
 #  endif
@@ -610,7 +610,7 @@
 #    elif bstc_ulong_max == bstc_uint64_max
 #     define bstc_scnx64 "lx"
 #    else
-#     error "Format macro could not be determined for [u]int64_t."
+#     error "BOOSTC format macro could not be determined for [u]int64_t."
 #    endif
 #   endif
 #  endif

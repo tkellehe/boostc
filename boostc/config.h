@@ -89,7 +89,7 @@
 // If made it this far, it typically is a 32 bit system.
 #  define BSTC_INTPTR_NBITS 32
 # else
-#  error "Could not determine BSTC_INTPTR_NBITS."
+#  error "BOOSTC could not determine BSTC_INTPTR_NBITS."
 # endif
 #endif
 

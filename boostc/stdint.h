@@ -102,7 +102,7 @@
 # elif bstc_uint16_max == bstc_ushrt_max
 #  define bstc_uint16_t unsigned short
 # else
-#  error "Could not determine bstc_uint16_t."
+#  error "BOOSTC could not determine bstc_uint16_t."
 # endif
 #endif
 
@@ -137,7 +137,7 @@
 # elif bstc_int16_max == bstc_shrt_max
 #  define bstc_int16_t short
 # else
-#  error "Could not determine bstc_int16_t."
+#  error "BOOSTC could not determine bstc_int16_t."
 # endif
 #endif
 
@@ -170,7 +170,7 @@
 # elif bstc_uint32_max == bstc_ushrt_max
 #  define bstc_uint32_t unsigned short
 # else
-#  error "Could not determine bstc_uint32_t."
+#  error "BOOSTC could not determine bstc_uint32_t."
 # endif
 #endif
 
@@ -207,7 +207,7 @@
 # elif bstc_int32_max == bstc_shrt_max
 #  define bstc_int32_t short
 # else
-#  error "Could not determine bstc_int32_t."
+#  error "BOOSTC could not determine bstc_int32_t."
 # endif
 #endif
 
@@ -245,7 +245,7 @@
 #  elif bstc_uint64_max == bstc_ushrt_max
 #   define bstc_uint64_t unsigned short
 #  else
-#   error "Could not determine bstc_uint64_t."
+#   error "BOOSTC could not determine bstc_uint64_t."
 #  endif
 # endif
 
@@ -286,7 +286,7 @@
 #  elif bstc_int64_max == bstc_shrt_max
 #   define bstc_int64_t short
 #  else
-#   error "Could not determine bstc_int64_t."
+#   error "BOOSTC could not determine bstc_int64_t."
 #  endif
 # endif
 #endif
@@ -416,6 +416,6 @@
 #   define bstc_intptr_min bstc_int8_min
 #  endif
 # else
-#  error "Cannot define bstc_intptr_t or bstc_uintptr_t."
+#  error "BOOSTC cannot define bstc_intptr_t or bstc_uintptr_t."
 # endif
 #endif

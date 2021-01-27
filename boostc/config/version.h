@@ -13,7 +13,7 @@
 # if __cplusplus >= 199711L
 #  define BSTC_LEAST_CPP98
 # else
-#  error "Compiler does not support at least C++98 features."
+#  error "BOOSTC compiler does not support at least C++98 features."
 # endif
 # if __cplusplus >= 201103L
 #  define BSTC_LEAST_CPP11
@@ -40,7 +40,7 @@
 # if __STDC_VERSION__ >= 199901L
 #  define BSTC_LEAST_C99
 # else
-#  error "Compiler does not support at least C99 features."
+#  error "BOOSTC compiler does not support at least C99 features."
 # endif
 # if __STDC_VERSION__ >= 201112L
 #  define BSTC_LEAST_C11

@@ -42,7 +42,7 @@
 #  define bstc_errno errno
 # endif
 #else
-# error "Unsupported platform for errno."
+# error "BOOSTC unsupported platform for errno."
 #endif
 /// \}
 

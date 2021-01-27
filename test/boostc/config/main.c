@@ -15,6 +15,16 @@ int main(int argc, char *argv[])
     int num_fail = 0;
 
     //--------------------------------------------------------------------------------------------------------
+    printf("BSTC Environment:\n");
+    #if defined(BSTC_OSAPI_WINDOWS)
+    printf("    BSTC_OSAPI_WINDOWS\n");
+    #elif defined(BSTC_OSAPI_POSIX)
+    printf("    BSTC_OSAPI_POSIX\n");
+    #endif
+    printf("    BSTC_COMPILER_CONFIG: %s\n", BSTC_COMPILER_CONFIG);
+    printf("    BSTC_PLATFORM_CONFIG: %s\n", BSTC_PLATFORM_CONFIG);
+
+    //--------------------------------------------------------------------------------------------------------
     printf("BSTC_IFEQ(0, 0)\n");
     BSTC_IFEQ(0, 0, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
     printf("BSTC_IFEQ(0, 1)\n");

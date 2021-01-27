@@ -18,7 +18,7 @@
 #  ifdef LLONG_MAX
 #   define bstc_llong_max LLONG_MAX
 #  else
-#   error "LLONG_MAX is not provided for this system."
+#   error "BOOSTC LLONG_MAX is not provided for this system."
 #  endif
 # endif
 
@@ -27,7 +27,7 @@
 #  ifdef LLONG_MIN
 #   define bstc_llong_min LLONG_MIN
 #  else
-#   error "LLONG_MIN is not provided for this system."
+#   error "BOOSTC LLONG_MIN is not provided for this system."
 #  endif
 # endif
 
@@ -36,7 +36,7 @@
 #  ifdef ULLONG_MAX
 #   define bstc_ullong_max ULLONG_MAX
 #  else
-#   error "ULLONG_MAX is not provided for this system."
+#   error "BOOSTC ULLONG_MAX is not provided for this system."
 #  endif
 # endif
 #endif
@@ -46,7 +46,7 @@
 # ifdef CHAR_BIT
 #  define bstc_char_bit CHAR_BIT
 # else
-#  error "CHAR_BIT is not provided for this system."
+#  error "BOOSTC CHAR_BIT is not provided for this system."
 # endif
 #endif
 
@@ -55,7 +55,7 @@
 # ifdef MB_LEN_MAX
 #  define bstc_mb_len_max MB_LEN_MAX
 # else
-#  error "MB_LEN_MAX is not provided for this system."
+#  error "BOOSTC MB_LEN_MAX is not provided for this system."
 # endif
 #endif
 
@@ -64,7 +64,7 @@
 # ifdef CHAR_MIN
 #  define bstc_char_min CHAR_MIN
 # else
-#  error "CHAR_MIN is not provided for this system."
+#  error "BOOSTC CHAR_MIN is not provided for this system."
 # endif
 #endif
 
@@ -73,7 +73,7 @@
 # ifdef CHAR_MAX
 #  define bstc_char_max CHAR_MAX
 # else
-#  error "CHAR_MAX is not provided for this system."
+#  error "BOOSTC CHAR_MAX is not provided for this system."
 # endif
 #endif
 
@@ -82,7 +82,7 @@
 # ifdef SCHAR_MIN
 #  define bstc_schar_min SCHAR_MIN
 # else
-#  error "SCHAR_MIN is not provided for this system."
+#  error "BOOSTC SCHAR_MIN is not provided for this system."
 # endif
 #endif
 
@@ -91,7 +91,7 @@
 # ifdef SHRT_MIN
 #  define bstc_shrt_min SHRT_MIN
 # else
-#  error "SHRT_MIN is not provided for this system."
+#  error "BOOSTC SHRT_MIN is not provided for this system."
 # endif
 #endif
 
@@ -100,7 +100,7 @@
 # ifdef INT_MIN
 #  define bstc_int_min INT_MIN
 # else
-#  error "INT_MIN is not provided for this system."
+#  error "BOOSTC INT_MIN is not provided for this system."
 # endif
 #endif
 
@@ -109,7 +109,7 @@
 # ifdef LONG_MIN
 #  define bstc_long_min LONG_MIN
 # else
-#  error "LONG_MIN is not provided for this system."
+#  error "BOOSTC LONG_MIN is not provided for this system."
 # endif
 #endif
 
@@ -118,7 +118,7 @@
 # ifdef SCHAR_MAX
 #  define bstc_schar_max SCHAR_MAX
 # else
-#  error "SCHAR_MAX is not provided for this system."
+#  error "BOOSTC SCHAR_MAX is not provided for this system."
 # endif
 #endif
 
@@ -127,7 +127,7 @@
 # ifdef SHRT_MAX
 #  define bstc_shrt_max SHRT_MAX
 # else
-#  error "SHRT_MAX is not provided for this system."
+#  error "BOOSTC SHRT_MAX is not provided for this system."
 # endif
 #endif
 
@@ -136,7 +136,7 @@
 # ifdef INT_MAX
 #  define bstc_int_max INT_MAX
 # else
-#  error "INT_MAX is not provided for this system."
+#  error "BOOSTC INT_MAX is not provided for this system."
 # endif
 #endif
 
@@ -145,7 +145,7 @@
 # ifdef LONG_MAX
 #  define bstc_long_max LONG_MAX
 # else
-#  error "LONG_MAX is not provided for this system."
+#  error "BOOSTC LONG_MAX is not provided for this system."
 # endif
 #endif
 
@@ -154,7 +154,7 @@
 # ifdef UCHAR_MAX
 #  define bstc_uchar_max UCHAR_MAX
 # else
-#  error "UCHAR_MAX is not provided for this system."
+#  error "BOOSTC UCHAR_MAX is not provided for this system."
 # endif
 #endif
 
@@ -163,7 +163,7 @@
 # ifdef USHRT_MAX
 #  define bstc_ushrt_max USHRT_MAX
 # else
-#  error "USHRT_MAX is not provided for this system."
+#  error "BOOSTC USHRT_MAX is not provided for this system."
 # endif
 #endif
 
@@ -172,7 +172,7 @@
 # ifdef UINT_MAX
 #  define bstc_uint_max UINT_MAX
 # else
-#  error "UINT_MAX is not provided for this system."
+#  error "BOOSTC UINT_MAX is not provided for this system."
 # endif
 #endif
 
@@ -181,7 +181,7 @@
 # ifdef ULONG_MAX
 #  define bstc_ulong_max ULONG_MAX
 # else
-#  error "ULONG_MAX is not provided for this system."
+#  error "BOOSTC ULONG_MAX is not provided for this system."
 # endif
 #endif
 
