@@ -103,6 +103,54 @@ int main(int argc, char *argv[])
     #endif
 
     //--------------------------------------------------------------------------------------------------------
+    #ifdef bstc_uint_least8_t
+        printf("sizeof(bstc_uint_least8_t): %i\n", (int)sizeof(bstc_uint_least8_t));
+        if((int)sizeof(bstc_uint_least8_t) >= 1) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+    #endif
+
+    //--------------------------------------------------------------------------------------------------------
+    #ifdef bstc_int_least8_t
+        printf("sizeof(bstc_int_least8_t): %i\n", (int)sizeof(bstc_int_least8_t));
+        if((int)sizeof(bstc_int_least8_t) >= 1) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+    #endif
+
+    //--------------------------------------------------------------------------------------------------------
+    #ifdef bstc_uint_least16_t
+        printf("sizeof(bstc_uint_least16_t): %i\n", (int)sizeof(bstc_uint_least16_t));
+        if((int)sizeof(bstc_uint_least16_t) >= 2) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+    #endif
+
+    //--------------------------------------------------------------------------------------------------------
+    #ifdef bstc_int_least16_t
+        printf("sizeof(bstc_int_least16_t): %i\n", (int)sizeof(bstc_int_least16_t));
+        if((int)sizeof(bstc_int_least16_t) >= 2) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+    #endif
+
+    //--------------------------------------------------------------------------------------------------------
+    #ifdef bstc_uint_least32_t
+        printf("sizeof(bstc_uint_least32_t): %i\n", (int)sizeof(bstc_uint_least32_t));
+        if((int)sizeof(bstc_uint_least32_t) >= 4) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+    #endif
+
+    //--------------------------------------------------------------------------------------------------------
+    #ifdef bstc_int_least32_t
+        printf("sizeof(bstc_int_least32_t): %i\n", (int)sizeof(bstc_int_least32_t));
+        if((int)sizeof(bstc_int_least32_t) >= 4) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+    #endif
+
+    //--------------------------------------------------------------------------------------------------------
+    #ifdef bstc_uint_least64_t
+        printf("sizeof(bstc_uint_least64_t): %i\n", (int)sizeof(bstc_uint_least64_t));
+        if((int)sizeof(bstc_uint_least64_t) >= 8) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+    #endif
+
+    //--------------------------------------------------------------------------------------------------------
+    #ifdef bstc_int_least64_t
+        printf("sizeof(bstc_int_least64_t): %i\n", (int)sizeof(bstc_int_least64_t));
+        if((int)sizeof(bstc_int_least64_t) >= 8) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+    #endif
+
+    //--------------------------------------------------------------------------------------------------------
     printf("-----------------------------\n");
     printf("     pass     |     fail     \n");
     printf("     %04i     |     %04i     \n", num_pass, num_fail);

@@ -1004,3 +1004,779 @@
 #  endif
 # endif
 #endif
+
+
+//------------------------------------------------------------------------------------------------------------
+//                                               [u]int_least8
+//------------------------------------------------------------------------------------------------------------
+#if defined(bstc_uint_least8_t) || defined(bstc_int_least8_t)
+# ifndef bstc_prid_least8
+#  ifdef PRIdLEAST8
+#   define bstc_prid_least8 PRIdLEAST8
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least8_max == bstc_uint64_max
+#    define bstc_prid_least8 bstc_prid64
+#   elif bstc_uint_least8_max == bstc_uint32_max
+#    define bstc_prid_least8 bstc_prid32
+#   elif bstc_uint_least8_max == bstc_uint16_max
+#    define bstc_prid_least8 bstc_prid16
+#   elif bstc_uint_least8_max == bstc_uint8_max
+#    define bstc_prid_least8 bstc_prid8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least8_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_prii_least8
+#  ifdef PRIiLEAST8
+#   define bstc_prii_least8 PRIiLEAST8
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least8_max == bstc_uint64_max
+#    define bstc_prii_least8 bstc_prii64
+#   elif bstc_uint_least8_max == bstc_uint32_max
+#    define bstc_prii_least8 bstc_prii32
+#   elif bstc_uint_least8_max == bstc_uint16_max
+#    define bstc_prii_least8 bstc_prii16
+#   elif bstc_uint_least8_max == bstc_uint8_max
+#    define bstc_prii_least8 bstc_prii8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least8_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_priu_least8
+#  ifdef PRIuLEAST8
+#   define bstc_priu_least8 PRIuLEAST8
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least8_max == bstc_uint64_max
+#    define bstc_priu_least8 bstc_priu64
+#   elif bstc_uint_least8_max == bstc_uint32_max
+#    define bstc_priu_least8 bstc_priu32
+#   elif bstc_uint_least8_max == bstc_uint16_max
+#    define bstc_priu_least8 bstc_priu16
+#   elif bstc_uint_least8_max == bstc_uint8_max
+#    define bstc_priu_least8 bstc_priu8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least8_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_prio_least8
+#  ifdef PRIoLEAST8
+#   define bstc_prio_least8 PRIoLEAST8
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least8_max == bstc_uint64_max
+#    define bstc_prio_least8 bstc_prio64
+#   elif bstc_uint_least8_max == bstc_uint32_max
+#    define bstc_prio_least8 bstc_prio32
+#   elif bstc_uint_least8_max == bstc_uint16_max
+#    define bstc_prio_least8 bstc_prio16
+#   elif bstc_uint_least8_max == bstc_uint8_max
+#    define bstc_prio_least8 bstc_prio8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least8_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_prix_least8
+#  ifdef PRIxLEAST8
+#   define bstc_prix_least8 PRIxLEAST8
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least8_max == bstc_uint64_max
+#    define bstc_prix_least8 bstc_prix64
+#   elif bstc_uint_least8_max == bstc_uint32_max
+#    define bstc_prix_least8 bstc_prix32
+#   elif bstc_uint_least8_max == bstc_uint16_max
+#    define bstc_prix_least8 bstc_prix16
+#   elif bstc_uint_least8_max == bstc_uint8_max
+#    define bstc_prix_least8 bstc_prix8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least8_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_priX_least8
+#  ifdef PRIXLEAST8
+#   define bstc_priX_least8 PRIXLEAST8
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least8_max == bstc_uint64_max
+#    define bstc_priX_least8 bstc_priX64
+#   elif bstc_uint_least8_max == bstc_uint32_max
+#    define bstc_priX_least8 bstc_priX32
+#   elif bstc_uint_least8_max == bstc_uint16_max
+#    define bstc_priX_least8 bstc_priX16
+#   elif bstc_uint_least8_max == bstc_uint8_max
+#    define bstc_priX_least8 bstc_priX8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least8_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_scnd_least8
+#  ifdef SCNdLEAST8
+#   define bstc_scnd_least8 SCNdLEAST8
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least8_max == bstc_uint64_max
+#    define bstc_scnd_least8 bstc_scnd64
+#   elif bstc_uint_least8_max == bstc_uint32_max
+#    define bstc_scnd_least8 bstc_scnd32
+#   elif bstc_uint_least8_max == bstc_uint16_max
+#    define bstc_scnd_least8 bstc_scnd16
+#   elif bstc_uint_least8_max == bstc_uint8_max
+#    define bstc_scnd_least8 bstc_scnd8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least8_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_scni_least8
+#  ifdef SCNiLEAST8
+#   define bstc_scni_least8 SCNiLEAST8
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least8_max == bstc_uint64_max
+#    define bstc_scni_least8 bstc_scni64
+#   elif bstc_uint_least8_max == bstc_uint32_max
+#    define bstc_scni_least8 bstc_scni32
+#   elif bstc_uint_least8_max == bstc_uint16_max
+#    define bstc_scni_least8 bstc_scni16
+#   elif bstc_uint_least8_max == bstc_uint8_max
+#    define bstc_scni_least8 bstc_scni8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least8_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_scnu_least8
+#  ifdef SCNuLEAST8
+#   define bstc_scnu_least8 SCNuLEAST8
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least8_max == bstc_uint64_max
+#    define bstc_scnu_least8 bstc_scnu64
+#   elif bstc_uint_least8_max == bstc_uint32_max
+#    define bstc_scnu_least8 bstc_scnu32
+#   elif bstc_uint_least8_max == bstc_uint16_max
+#    define bstc_scnu_least8 bstc_scnu16
+#   elif bstc_uint_least8_max == bstc_uint8_max
+#    define bstc_scnu_least8 bstc_scnu8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least8_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_scno_least8
+#  ifdef SCNoLEAST8
+#   define bstc_scno_least8 SCNoLEAST8
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least8_max == bstc_uint64_max
+#    define bstc_scno_least8 bstc_scno64
+#   elif bstc_uint_least8_max == bstc_uint32_max
+#    define bstc_scno_least8 bstc_scno32
+#   elif bstc_uint_least8_max == bstc_uint16_max
+#    define bstc_scno_least8 bstc_scno16
+#   elif bstc_uint_least8_max == bstc_uint8_max
+#    define bstc_scno_least8 bstc_scno8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least8_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_scnx_least8
+#  ifdef SCNxLEAST8
+#   define bstc_scnx_least8 SCNxLEAST8
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least8_max == bstc_uint64_max
+#    define bstc_scnx_least8 bstc_scnx64
+#   elif bstc_uint_least8_max == bstc_uint32_max
+#    define bstc_scnx_least8 bstc_scnx32
+#   elif bstc_uint_least8_max == bstc_uint16_max
+#    define bstc_scnx_least8 bstc_scnx16
+#   elif bstc_uint_least8_max == bstc_uint8_max
+#    define bstc_scnx_least8 bstc_scnx8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least8_t."
+#   endif
+#  endif
+# endif
+#endif
+
+
+//------------------------------------------------------------------------------------------------------------
+//                                               [u]int_least16
+//------------------------------------------------------------------------------------------------------------
+#if defined(bstc_uint_least16_t) || defined(bstc_int_least16_t)
+# ifndef bstc_prid_least16
+#  ifdef PRIdLEAST16
+#   define bstc_prid_least16 PRIdLEAST16
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least16_max == bstc_uint64_max
+#    define bstc_prid_least16 bstc_prid64
+#   elif bstc_uint_least16_max == bstc_uint32_max
+#    define bstc_prid_least16 bstc_prid32
+#   elif bstc_uint_least16_max == bstc_uint16_max
+#    define bstc_prid_least16 bstc_prid16
+#   elif bstc_uint_least16_max == bstc_uint8_max
+#    define bstc_prid_least16 bstc_prid8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least16_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_prii_least16
+#  ifdef PRIiLEAST16
+#   define bstc_prii_least16 PRIiLEAST16
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least16_max == bstc_uint64_max
+#    define bstc_prii_least16 bstc_prii64
+#   elif bstc_uint_least16_max == bstc_uint32_max
+#    define bstc_prii_least16 bstc_prii32
+#   elif bstc_uint_least16_max == bstc_uint16_max
+#    define bstc_prii_least16 bstc_prii16
+#   elif bstc_uint_least16_max == bstc_uint8_max
+#    define bstc_prii_least16 bstc_prii8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least16_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_priu_least16
+#  ifdef PRIuLEAST16
+#   define bstc_priu_least16 PRIuLEAST16
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least16_max == bstc_uint64_max
+#    define bstc_priu_least16 bstc_priu64
+#   elif bstc_uint_least16_max == bstc_uint32_max
+#    define bstc_priu_least16 bstc_priu32
+#   elif bstc_uint_least16_max == bstc_uint16_max
+#    define bstc_priu_least16 bstc_priu16
+#   elif bstc_uint_least16_max == bstc_uint8_max
+#    define bstc_priu_least16 bstc_priu8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least16_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_prio_least16
+#  ifdef PRIoLEAST16
+#   define bstc_prio_least16 PRIoLEAST16
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least16_max == bstc_uint64_max
+#    define bstc_prio_least16 bstc_prio64
+#   elif bstc_uint_least16_max == bstc_uint32_max
+#    define bstc_prio_least16 bstc_prio32
+#   elif bstc_uint_least16_max == bstc_uint16_max
+#    define bstc_prio_least16 bstc_prio16
+#   elif bstc_uint_least16_max == bstc_uint8_max
+#    define bstc_prio_least16 bstc_prio8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least16_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_prix_least16
+#  ifdef PRIxLEAST16
+#   define bstc_prix_least16 PRIxLEAST16
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least16_max == bstc_uint64_max
+#    define bstc_prix_least16 bstc_prix64
+#   elif bstc_uint_least16_max == bstc_uint32_max
+#    define bstc_prix_least16 bstc_prix32
+#   elif bstc_uint_least16_max == bstc_uint16_max
+#    define bstc_prix_least16 bstc_prix16
+#   elif bstc_uint_least16_max == bstc_uint8_max
+#    define bstc_prix_least16 bstc_prix8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least16_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_priX_least16
+#  ifdef PRIXLEAST16
+#   define bstc_priX_least16 PRIXLEAST16
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least16_max == bstc_uint64_max
+#    define bstc_priX_least16 bstc_priX64
+#   elif bstc_uint_least16_max == bstc_uint32_max
+#    define bstc_priX_least16 bstc_priX32
+#   elif bstc_uint_least16_max == bstc_uint16_max
+#    define bstc_priX_least16 bstc_priX16
+#   elif bstc_uint_least16_max == bstc_uint8_max
+#    define bstc_priX_least16 bstc_priX8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least16_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_scnd_least16
+#  ifdef SCNdLEAST16
+#   define bstc_scnd_least16 SCNdLEAST16
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least16_max == bstc_uint64_max
+#    define bstc_scnd_least16 bstc_scnd64
+#   elif bstc_uint_least16_max == bstc_uint32_max
+#    define bstc_scnd_least16 bstc_scnd32
+#   elif bstc_uint_least16_max == bstc_uint16_max
+#    define bstc_scnd_least16 bstc_scnd16
+#   elif bstc_uint_least16_max == bstc_uint8_max
+#    define bstc_scnd_least16 bstc_scnd8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least16_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_scni_least16
+#  ifdef SCNiLEAST16
+#   define bstc_scni_least16 SCNiLEAST16
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least16_max == bstc_uint64_max
+#    define bstc_scni_least16 bstc_scni64
+#   elif bstc_uint_least16_max == bstc_uint32_max
+#    define bstc_scni_least16 bstc_scni32
+#   elif bstc_uint_least16_max == bstc_uint16_max
+#    define bstc_scni_least16 bstc_scni16
+#   elif bstc_uint_least16_max == bstc_uint8_max
+#    define bstc_scni_least16 bstc_scni8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least16_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_scnu_least16
+#  ifdef SCNuLEAST16
+#   define bstc_scnu_least16 SCNuLEAST16
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least16_max == bstc_uint64_max
+#    define bstc_scnu_least16 bstc_scnu64
+#   elif bstc_uint_least16_max == bstc_uint32_max
+#    define bstc_scnu_least16 bstc_scnu32
+#   elif bstc_uint_least16_max == bstc_uint16_max
+#    define bstc_scnu_least16 bstc_scnu16
+#   elif bstc_uint_least16_max == bstc_uint8_max
+#    define bstc_scnu_least16 bstc_scnu8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least16_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_scno_least16
+#  ifdef SCNoLEAST16
+#   define bstc_scno_least16 SCNoLEAST16
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least16_max == bstc_uint64_max
+#    define bstc_scno_least16 bstc_scno64
+#   elif bstc_uint_least16_max == bstc_uint32_max
+#    define bstc_scno_least16 bstc_scno32
+#   elif bstc_uint_least16_max == bstc_uint16_max
+#    define bstc_scno_least16 bstc_scno16
+#   elif bstc_uint_least16_max == bstc_uint8_max
+#    define bstc_scno_least16 bstc_scno8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least16_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_scnx_least16
+#  ifdef SCNxLEAST16
+#   define bstc_scnx_least16 SCNxLEAST16
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least16_max == bstc_uint64_max
+#    define bstc_scnx_least16 bstc_scnx64
+#   elif bstc_uint_least16_max == bstc_uint32_max
+#    define bstc_scnx_least16 bstc_scnx32
+#   elif bstc_uint_least16_max == bstc_uint16_max
+#    define bstc_scnx_least16 bstc_scnx16
+#   elif bstc_uint_least16_max == bstc_uint8_max
+#    define bstc_scnx_least16 bstc_scnx8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least16_t."
+#   endif
+#  endif
+# endif
+#endif
+
+
+//------------------------------------------------------------------------------------------------------------
+//                                               [u]int_least32
+//------------------------------------------------------------------------------------------------------------
+#if defined(bstc_uint_least32_t) || defined(bstc_int_least32_t)
+# ifndef bstc_prid_least32
+#  ifdef PRIdLEAST32
+#   define bstc_prid_least32 PRIdLEAST32
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least32_max == bstc_uint64_max
+#    define bstc_prid_least32 bstc_prid64
+#   elif bstc_uint_least32_max == bstc_uint32_max
+#    define bstc_prid_least32 bstc_prid32
+#   elif bstc_uint_least32_max == bstc_uint16_max
+#    define bstc_prid_least32 bstc_prid16
+#   elif bstc_uint_least32_max == bstc_uint8_max
+#    define bstc_prid_least32 bstc_prid8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least32_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_prii_least32
+#  ifdef PRIiLEAST32
+#   define bstc_prii_least32 PRIiLEAST32
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least32_max == bstc_uint64_max
+#    define bstc_prii_least32 bstc_prii64
+#   elif bstc_uint_least32_max == bstc_uint32_max
+#    define bstc_prii_least32 bstc_prii32
+#   elif bstc_uint_least32_max == bstc_uint16_max
+#    define bstc_prii_least32 bstc_prii16
+#   elif bstc_uint_least32_max == bstc_uint8_max
+#    define bstc_prii_least32 bstc_prii8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least32_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_priu_least32
+#  ifdef PRIuLEAST32
+#   define bstc_priu_least32 PRIuLEAST32
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least32_max == bstc_uint64_max
+#    define bstc_priu_least32 bstc_priu64
+#   elif bstc_uint_least32_max == bstc_uint32_max
+#    define bstc_priu_least32 bstc_priu32
+#   elif bstc_uint_least32_max == bstc_uint16_max
+#    define bstc_priu_least32 bstc_priu16
+#   elif bstc_uint_least32_max == bstc_uint8_max
+#    define bstc_priu_least32 bstc_priu8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least32_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_prio_least32
+#  ifdef PRIoLEAST32
+#   define bstc_prio_least32 PRIoLEAST32
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least32_max == bstc_uint64_max
+#    define bstc_prio_least32 bstc_prio64
+#   elif bstc_uint_least32_max == bstc_uint32_max
+#    define bstc_prio_least32 bstc_prio32
+#   elif bstc_uint_least32_max == bstc_uint16_max
+#    define bstc_prio_least32 bstc_prio16
+#   elif bstc_uint_least32_max == bstc_uint8_max
+#    define bstc_prio_least32 bstc_prio8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least32_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_prix_least32
+#  ifdef PRIxLEAST32
+#   define bstc_prix_least32 PRIxLEAST32
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least32_max == bstc_uint64_max
+#    define bstc_prix_least32 bstc_prix64
+#   elif bstc_uint_least32_max == bstc_uint32_max
+#    define bstc_prix_least32 bstc_prix32
+#   elif bstc_uint_least32_max == bstc_uint16_max
+#    define bstc_prix_least32 bstc_prix16
+#   elif bstc_uint_least32_max == bstc_uint8_max
+#    define bstc_prix_least32 bstc_prix8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least32_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_priX_least32
+#  ifdef PRIXLEAST32
+#   define bstc_priX_least32 PRIXLEAST32
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least32_max == bstc_uint64_max
+#    define bstc_priX_least32 bstc_priX64
+#   elif bstc_uint_least32_max == bstc_uint32_max
+#    define bstc_priX_least32 bstc_priX32
+#   elif bstc_uint_least32_max == bstc_uint16_max
+#    define bstc_priX_least32 bstc_priX16
+#   elif bstc_uint_least32_max == bstc_uint8_max
+#    define bstc_priX_least32 bstc_priX8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least32_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_scnd_least32
+#  ifdef SCNdLEAST32
+#   define bstc_scnd_least32 SCNdLEAST32
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least32_max == bstc_uint64_max
+#    define bstc_scnd_least32 bstc_scnd64
+#   elif bstc_uint_least32_max == bstc_uint32_max
+#    define bstc_scnd_least32 bstc_scnd32
+#   elif bstc_uint_least32_max == bstc_uint16_max
+#    define bstc_scnd_least32 bstc_scnd16
+#   elif bstc_uint_least32_max == bstc_uint8_max
+#    define bstc_scnd_least32 bstc_scnd8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least32_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_scni_least32
+#  ifdef SCNiLEAST32
+#   define bstc_scni_least32 SCNiLEAST32
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least32_max == bstc_uint64_max
+#    define bstc_scni_least32 bstc_scni64
+#   elif bstc_uint_least32_max == bstc_uint32_max
+#    define bstc_scni_least32 bstc_scni32
+#   elif bstc_uint_least32_max == bstc_uint16_max
+#    define bstc_scni_least32 bstc_scni16
+#   elif bstc_uint_least32_max == bstc_uint8_max
+#    define bstc_scni_least32 bstc_scni8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least32_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_scnu_least32
+#  ifdef SCNuLEAST32
+#   define bstc_scnu_least32 SCNuLEAST32
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least32_max == bstc_uint64_max
+#    define bstc_scnu_least32 bstc_scnu64
+#   elif bstc_uint_least32_max == bstc_uint32_max
+#    define bstc_scnu_least32 bstc_scnu32
+#   elif bstc_uint_least32_max == bstc_uint16_max
+#    define bstc_scnu_least32 bstc_scnu16
+#   elif bstc_uint_least32_max == bstc_uint8_max
+#    define bstc_scnu_least32 bstc_scnu8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least32_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_scno_least32
+#  ifdef SCNoLEAST32
+#   define bstc_scno_least32 SCNoLEAST32
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least32_max == bstc_uint64_max
+#    define bstc_scno_least32 bstc_scno64
+#   elif bstc_uint_least32_max == bstc_uint32_max
+#    define bstc_scno_least32 bstc_scno32
+#   elif bstc_uint_least32_max == bstc_uint16_max
+#    define bstc_scno_least32 bstc_scno16
+#   elif bstc_uint_least32_max == bstc_uint8_max
+#    define bstc_scno_least32 bstc_scno8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least32_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_scnx_least32
+#  ifdef SCNxLEAST32
+#   define bstc_scnx_least32 SCNxLEAST32
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least32_max == bstc_uint64_max
+#    define bstc_scnx_least32 bstc_scnx64
+#   elif bstc_uint_least32_max == bstc_uint32_max
+#    define bstc_scnx_least32 bstc_scnx32
+#   elif bstc_uint_least32_max == bstc_uint16_max
+#    define bstc_scnx_least32 bstc_scnx16
+#   elif bstc_uint_least32_max == bstc_uint8_max
+#    define bstc_scnx_least32 bstc_scnx8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least32_t."
+#   endif
+#  endif
+# endif
+#endif
+
+
+//------------------------------------------------------------------------------------------------------------
+//                                               [u]int_least64
+//------------------------------------------------------------------------------------------------------------
+#if defined(bstc_uint_least64_t) || defined(bstc_int_least64_t)
+# ifndef bstc_prid_least64
+#  ifdef PRIdLEAST64
+#   define bstc_prid_least64 PRIdLEAST64
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least64_max == bstc_uint64_max
+#    define bstc_prid_least64 bstc_prid64
+#   elif bstc_uint_least64_max == bstc_uint32_max
+#    define bstc_prid_least64 bstc_prid32
+#   elif bstc_uint_least64_max == bstc_uint16_max
+#    define bstc_prid_least64 bstc_prid16
+#   elif bstc_uint_least64_max == bstc_uint8_max
+#    define bstc_prid_least64 bstc_prid8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least64_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_prii_least64
+#  ifdef PRIiLEAST64
+#   define bstc_prii_least64 PRIiLEAST64
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least64_max == bstc_uint64_max
+#    define bstc_prii_least64 bstc_prii64
+#   elif bstc_uint_least64_max == bstc_uint32_max
+#    define bstc_prii_least64 bstc_prii32
+#   elif bstc_uint_least64_max == bstc_uint16_max
+#    define bstc_prii_least64 bstc_prii16
+#   elif bstc_uint_least64_max == bstc_uint8_max
+#    define bstc_prii_least64 bstc_prii8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least64_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_priu_least64
+#  ifdef PRIuLEAST64
+#   define bstc_priu_least64 PRIuLEAST64
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least64_max == bstc_uint64_max
+#    define bstc_priu_least64 bstc_priu64
+#   elif bstc_uint_least64_max == bstc_uint32_max
+#    define bstc_priu_least64 bstc_priu32
+#   elif bstc_uint_least64_max == bstc_uint16_max
+#    define bstc_priu_least64 bstc_priu16
+#   elif bstc_uint_least64_max == bstc_uint8_max
+#    define bstc_priu_least64 bstc_priu8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least64_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_prio_least64
+#  ifdef PRIoLEAST64
+#   define bstc_prio_least64 PRIoLEAST64
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least64_max == bstc_uint64_max
+#    define bstc_prio_least64 bstc_prio64
+#   elif bstc_uint_least64_max == bstc_uint32_max
+#    define bstc_prio_least64 bstc_prio32
+#   elif bstc_uint_least64_max == bstc_uint16_max
+#    define bstc_prio_least64 bstc_prio16
+#   elif bstc_uint_least64_max == bstc_uint8_max
+#    define bstc_prio_least64 bstc_prio8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least64_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_prix_least64
+#  ifdef PRIxLEAST64
+#   define bstc_prix_least64 PRIxLEAST64
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least64_max == bstc_uint64_max
+#    define bstc_prix_least64 bstc_prix64
+#   elif bstc_uint_least64_max == bstc_uint32_max
+#    define bstc_prix_least64 bstc_prix32
+#   elif bstc_uint_least64_max == bstc_uint16_max
+#    define bstc_prix_least64 bstc_prix16
+#   elif bstc_uint_least64_max == bstc_uint8_max
+#    define bstc_prix_least64 bstc_prix8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least64_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_priX_least64
+#  ifdef PRIXLEAST64
+#   define bstc_priX_least64 PRIXLEAST64
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least64_max == bstc_uint64_max
+#    define bstc_priX_least64 bstc_priX64
+#   elif bstc_uint_least64_max == bstc_uint32_max
+#    define bstc_priX_least64 bstc_priX32
+#   elif bstc_uint_least64_max == bstc_uint16_max
+#    define bstc_priX_least64 bstc_priX16
+#   elif bstc_uint_least64_max == bstc_uint8_max
+#    define bstc_priX_least64 bstc_priX8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least64_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_scnd_least64
+#  ifdef SCNdLEAST64
+#   define bstc_scnd_least64 SCNdLEAST64
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least64_max == bstc_uint64_max
+#    define bstc_scnd_least64 bstc_scnd64
+#   elif bstc_uint_least64_max == bstc_uint32_max
+#    define bstc_scnd_least64 bstc_scnd32
+#   elif bstc_uint_least64_max == bstc_uint16_max
+#    define bstc_scnd_least64 bstc_scnd16
+#   elif bstc_uint_least64_max == bstc_uint8_max
+#    define bstc_scnd_least64 bstc_scnd8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least64_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_scni_least64
+#  ifdef SCNiLEAST64
+#   define bstc_scni_least64 SCNiLEAST64
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least64_max == bstc_uint64_max
+#    define bstc_scni_least64 bstc_scni64
+#   elif bstc_uint_least64_max == bstc_uint32_max
+#    define bstc_scni_least64 bstc_scni32
+#   elif bstc_uint_least64_max == bstc_uint16_max
+#    define bstc_scni_least64 bstc_scni16
+#   elif bstc_uint_least64_max == bstc_uint8_max
+#    define bstc_scni_least64 bstc_scni8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least64_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_scnu_least64
+#  ifdef SCNuLEAST64
+#   define bstc_scnu_least64 SCNuLEAST64
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least64_max == bstc_uint64_max
+#    define bstc_scnu_least64 bstc_scnu64
+#   elif bstc_uint_least64_max == bstc_uint32_max
+#    define bstc_scnu_least64 bstc_scnu32
+#   elif bstc_uint_least64_max == bstc_uint16_max
+#    define bstc_scnu_least64 bstc_scnu16
+#   elif bstc_uint_least64_max == bstc_uint8_max
+#    define bstc_scnu_least64 bstc_scnu8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least64_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_scno_least64
+#  ifdef SCNoLEAST64
+#   define bstc_scno_least64 SCNoLEAST64
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least64_max == bstc_uint64_max
+#    define bstc_scno_least64 bstc_scno64
+#   elif bstc_uint_least64_max == bstc_uint32_max
+#    define bstc_scno_least64 bstc_scno32
+#   elif bstc_uint_least64_max == bstc_uint16_max
+#    define bstc_scno_least64 bstc_scno16
+#   elif bstc_uint_least64_max == bstc_uint8_max
+#    define bstc_scno_least64 bstc_scno8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least64_t."
+#   endif
+#  endif
+# endif
+# ifndef bstc_scnx_least64
+#  ifdef SCNxLEAST64
+#   define bstc_scnx_least64 SCNxLEAST64
+#  else
+#   if defined(bstc_uint64_max) && bstc_uint_least64_max == bstc_uint64_max
+#    define bstc_scnx_least64 bstc_scnx64
+#   elif bstc_uint_least64_max == bstc_uint32_max
+#    define bstc_scnx_least64 bstc_scnx32
+#   elif bstc_uint_least64_max == bstc_uint16_max
+#    define bstc_scnx_least64 bstc_scnx16
+#   elif bstc_uint_least64_max == bstc_uint8_max
+#    define bstc_scnx_least64 bstc_scnx8
+#   else
+#    error "BOOSTC format macro could not be determined for [u]int_least64_t."
+#   endif
+#  endif
+# endif
+#endif

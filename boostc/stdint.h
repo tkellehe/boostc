@@ -538,3 +538,313 @@
 #  error "BOOSTC could not determine bstc_intmax_min."
 # endif
 #endif
+
+
+//------------------------------------------------------------------------------------------------------------
+//                                               [u]int_least8
+//------------------------------------------------------------------------------------------------------------
+#ifndef bstc_uint_least8_c
+# ifdef UINT_LEAST8_C
+#  define bstc_uint_least8_c UINT_LEAST8_C
+# endif
+#endif
+#ifndef bstc_uint_least8_max
+# ifdef UINT_LEAST8_MAX
+#  define bstc_uint_least8_max UINT_LEAST8_MAX
+#  ifndef bstc_uint_least8_t
+#   define bstc_uint_least8_t uint_least8_t
+#  endif
+# elif defined(bstc_uint8_max)
+#  define bstc_uint_least8_max bstc_uint8_max
+# endif
+#endif
+#if !defined(bstc_uint_least8_t) && defined(bstc_uint_least8_max)
+# if bstc_uint_least8_max == bstc_uint8_max
+#  define bstc_uint_least8_t bstc_uint8_t
+# else
+#  error "BOOSTC could not determine bstc_uint_least8_t."
+# endif
+#endif
+#if !defined(bstc_uint_least8_c) && defined(bstc_uint_least8_max)
+# if bstc_uint_least8_max == bstc_uint8_max
+#  define bstc_uint_least8_c bstc_uint8_c
+# else
+#  error "BOOSTC could not determine bstc_uint_least8_c."
+# endif
+#endif
+
+
+#ifndef bstc_int_least8_c
+# ifdef INT_LEAST8_C
+#  define bstc_int_least8_c INT_LEAST8_C
+# endif
+#endif
+#ifndef bstc_int_least8_min
+# ifdef INT_LEAST8_MIN
+#  define bstc_int_least8_min INT_LEAST8_MIN
+# endif
+#endif
+#ifndef bstc_int_least8_max
+# ifdef INT_LEAST8_MAX
+#  define bstc_int_least8_max INT_LEAST8_MAX
+#  ifndef bstc_int_least8_t
+#   define bstc_int_least8_t int_least8_t
+#  endif
+# elif defined(bstc_int8_max)
+#  define bstc_int_least8_max bstc_int8_max
+# endif
+#endif
+#if !defined(bstc_int_least8_t) && defined(bstc_int_least8_max)
+# if bstc_int_least8_max == bstc_int8_max
+#  define bstc_int_least8_t bstc_int8_t
+# else
+#  error "BOOSTC could not determine bstc_int_least8_t."
+# endif
+#endif
+#if !defined(bstc_int_least8_c) && defined(bstc_int_least8_max)
+# if bstc_int_least8_max == bstc_int8_max
+#  define bstc_int_least8_c bstc_int8_c
+# else
+#  error "BOOSTC could not determine bstc_int_least8_c."
+# endif
+#endif
+#if !defined(bstc_int_least8_min) && defined(bstc_int_least8_max)
+# if bstc_int_least8_max == bstc_int8_max
+#  define bstc_int_least8_min bstc_int8_min
+# else
+#  error "BOOSTC could not determine bstc_int_least8_min."
+# endif
+#endif
+
+
+//------------------------------------------------------------------------------------------------------------
+//                                               [u]int_least16
+//------------------------------------------------------------------------------------------------------------
+#ifndef bstc_uint_least16_c
+# ifdef UINT_LEAST16_C
+#  define bstc_uint_least16_c UINT_LEAST16_C
+# endif
+#endif
+#ifndef bstc_uint_least16_max
+# ifdef UINT_LEAST16_MAX
+#  define bstc_uint_least16_max UINT_LEAST16_MAX
+#  ifndef bstc_uint_least16_t
+#   define bstc_uint_least16_t uint_least16_t
+#  endif
+# elif defined(bstc_uint16_max)
+#  define bstc_uint_least16_max bstc_uint16_max
+# endif
+#endif
+#if !defined(bstc_uint_least16_t) && defined(bstc_uint_least16_max)
+# if bstc_uint_least16_max == bstc_uint16_max
+#  define bstc_uint_least16_t bstc_uint16_t
+# else
+#  error "BOOSTC could not determine bstc_uint_least16_t."
+# endif
+#endif
+#if !defined(bstc_uint_least16_c) && defined(bstc_uint_least16_max)
+# if bstc_uint_least16_max == bstc_uint16_max
+#  define bstc_uint_least16_c bstc_uint16_c
+# else
+#  error "BOOSTC could not determine bstc_uint_least16_c."
+# endif
+#endif
+
+
+#ifndef bstc_int_least16_c
+# ifdef INT_LEAST16_C
+#  define bstc_int_least16_c INT_LEAST16_C
+# endif
+#endif
+#ifndef bstc_int_least16_min
+# ifdef INT_LEAST16_MIN
+#  define bstc_int_least16_min INT_LEAST16_MIN
+# endif
+#endif
+#ifndef bstc_int_least16_max
+# ifdef INT_LEAST16_MAX
+#  define bstc_int_least16_max INT_LEAST16_MAX
+#  ifndef bstc_int_least16_t
+#   define bstc_int_least16_t int_least16_t
+#  endif
+# elif defined(bstc_int16_max)
+#  define bstc_int_least16_max bstc_int16_max
+# endif
+#endif
+#if !defined(bstc_int_least16_t) && defined(bstc_int_least16_max)
+# if bstc_int_least16_max == bstc_int16_max
+#  define bstc_int_least16_t bstc_int16_t
+# else
+#  error "BOOSTC could not determine bstc_int_least16_t."
+# endif
+#endif
+#if !defined(bstc_int_least16_c) && defined(bstc_int_least16_max)
+# if bstc_int_least16_max == bstc_int16_max
+#  define bstc_int_least16_c bstc_int16_c
+# else
+#  error "BOOSTC could not determine bstc_int_least16_c."
+# endif
+#endif
+#if !defined(bstc_int_least16_min) && defined(bstc_int_least16_max)
+# if bstc_int_least16_max == bstc_int16_max
+#  define bstc_int_least16_min bstc_int16_min
+# else
+#  error "BOOSTC could not determine bstc_int_least16_min."
+# endif
+#endif
+
+
+//------------------------------------------------------------------------------------------------------------
+//                                               [u]int_least32
+//------------------------------------------------------------------------------------------------------------
+#ifndef bstc_uint_least32_c
+# ifdef UINT_LEAST32_C
+#  define bstc_uint_least32_c UINT_LEAST32_C
+# endif
+#endif
+#ifndef bstc_uint_least32_max
+# ifdef UINT_LEAST32_MAX
+#  define bstc_uint_least32_max UINT_LEAST32_MAX
+#  ifndef bstc_uint_least32_t
+#   define bstc_uint_least32_t uint_least32_t
+#  endif
+# elif defined(bstc_uint32_max)
+#  define bstc_uint_least32_max bstc_uint32_max
+# endif
+#endif
+#if !defined(bstc_uint_least32_t) && defined(bstc_uint_least32_max)
+# if bstc_uint_least32_max == bstc_uint32_max
+#  define bstc_uint_least32_t bstc_uint32_t
+# else
+#  error "BOOSTC could not determine bstc_uint_least32_t."
+# endif
+#endif
+#if !defined(bstc_uint_least32_c) && defined(bstc_uint_least32_max)
+# if bstc_uint_least32_max == bstc_uint32_max
+#  define bstc_uint_least32_c bstc_uint32_c
+# else
+#  error "BOOSTC could not determine bstc_uint_least32_c."
+# endif
+#endif
+
+
+#ifndef bstc_int_least32_c
+# ifdef INT_LEAST32_C
+#  define bstc_int_least32_c INT_LEAST32_C
+# endif
+#endif
+#ifndef bstc_int_least32_min
+# ifdef INT_LEAST32_MIN
+#  define bstc_int_least32_min INT_LEAST32_MIN
+# endif
+#endif
+#ifndef bstc_int_least32_max
+# ifdef INT_LEAST32_MAX
+#  define bstc_int_least32_max INT_LEAST32_MAX
+#  ifndef bstc_int_least32_t
+#   define bstc_int_least32_t int_least32_t
+#  endif
+# elif defined(bstc_int32_max)
+#  define bstc_int_least32_max bstc_int32_max
+# endif
+#endif
+#if !defined(bstc_int_least32_t) && defined(bstc_int_least32_max)
+# if bstc_int_least32_max == bstc_int32_max
+#  define bstc_int_least32_t bstc_int32_t
+# else
+#  error "BOOSTC could not determine bstc_int_least32_t."
+# endif
+#endif
+#if !defined(bstc_int_least32_c) && defined(bstc_int_least32_max)
+# if bstc_int_least32_max == bstc_int32_max
+#  define bstc_int_least32_c bstc_int32_c
+# else
+#  error "BOOSTC could not determine bstc_int_least32_c."
+# endif
+#endif
+#if !defined(bstc_int_least32_min) && defined(bstc_int_least32_max)
+# if bstc_int_least32_max == bstc_int32_max
+#  define bstc_int_least32_min bstc_int32_min
+# else
+#  error "BOOSTC could not determine bstc_int_least32_min."
+# endif
+#endif
+
+
+//------------------------------------------------------------------------------------------------------------
+//                                               [u]int_least64
+//------------------------------------------------------------------------------------------------------------
+#ifdef BSTC_HAS_64BIT
+# ifndef bstc_uint_least64_c
+#  ifdef UINT_LEAST64_C
+#   define bstc_uint_least64_c UINT_LEAST64_C
+#  endif
+# endif
+# ifndef bstc_uint_least64_max
+#  ifdef UINT_LEAST64_MAX
+#   define bstc_uint_least64_max UINT_LEAST64_MAX
+#   ifndef bstc_uint_least64_t
+#    define bstc_uint_least64_t uint_least64_t
+#   endif
+#  elif defined(bstc_uint64_max)
+#   define bstc_uint_least64_max bstc_uint64_max
+#  endif
+# endif
+# if !defined(bstc_uint_least64_t) && defined(bstc_uint_least64_max)
+#  if bstc_uint_least64_max == bstc_uint64_max
+#   define bstc_uint_least64_t bstc_uint64_t
+#  else
+#   error "BOOSTC could not determine bstc_uint_least64_t."
+#  endif
+# endif
+# if !defined(bstc_uint_least64_c) && defined(bstc_uint_least64_max)
+#  if bstc_uint_least64_max == bstc_uint64_max
+#   define bstc_uint_least64_c bstc_uint64_c
+#  else
+#   error "BOOSTC could not determine bstc_uint_least64_c."
+#  endif
+# endif
+
+
+# ifndef bstc_int_least64_c
+#  ifdef INT_LEAST64_C
+#   define bstc_int_least64_c INT_LEAST64_C
+#  endif
+# endif
+# ifndef bstc_int_least64_min
+#  ifdef INT_LEAST64_MIN
+#   define bstc_int_least64_min INT_LEAST64_MIN
+#  endif
+# endif
+# ifndef bstc_int_least64_max
+#  ifdef INT_LEAST64_MAX
+#   define bstc_int_least64_max INT_LEAST64_MAX
+#   ifndef bstc_int_least64_t
+#    define bstc_int_least64_t int_least64_t
+#   endif
+#  elif defined(bstc_int64_max)
+#   define bstc_int_least64_max bstc_int64_max
+#  endif
+# endif
+# if !defined(bstc_int_least64_t) && defined(bstc_int_least64_max)
+#  if bstc_int_least64_max == bstc_int64_max
+#   define bstc_int_least64_t bstc_int64_t
+#  else
+#   error "BOOSTC could not determine bstc_int_least64_t."
+#  endif
+# endif
+# if !defined(bstc_int_least64_c) && defined(bstc_int_least64_max)
+#  if bstc_int_least64_max == bstc_int64_max
+#   define bstc_int_least64_c bstc_int64_c
+#  else
+#   error "BOOSTC could not determine bstc_int_least64_c."
+#  endif
+# endif
+# if !defined(bstc_int_least64_min) && defined(bstc_int_least64_max)
+#  if bstc_int_least64_max == bstc_int64_max
+#   define bstc_int_least64_min bstc_int64_min
+#  else
+#   error "BOOSTC could not determine bstc_int_least64_min."
+#  endif
+# endif
+#endif
