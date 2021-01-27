@@ -1021,6 +1021,10 @@
 #if !defined(bstc_uint_fast16_t) && defined(bstc_uint_fast16_max)
 # if bstc_uint_fast16_max == bstc_uint16_max
 #  define bstc_uint_fast16_t bstc_uint16_t
+# elif bstc_uint_fast32_max == bstc_uint32_max
+#  define bstc_uint_fast16_t bstc_uint32_t
+# elif defined(bstc_uint64_max) && bstc_uint_fast16_max == bstc_uint64_max
+#  define bstc_uint_fast16_t bstc_uint64_t
 # else
 #  error "BOOSTC could not determine bstc_uint_fast16_t."
 # endif
@@ -1028,6 +1032,10 @@
 #if !defined(bstc_uint_fast16_c) && defined(bstc_uint_fast16_max)
 # if bstc_uint_fast16_max == bstc_uint16_max
 #  define bstc_uint_fast16_c bstc_uint16_c
+# elif bstc_uint_fast32_max == bstc_uint32_max
+#  define bstc_uint_fast16_c bstc_uint32_c
+# elif defined(bstc_uint64_max) && bstc_uint_fast16_max == bstc_uint64_max
+#  define bstc_uint_fast16_c bstc_uint64_c
 # else
 #  error "BOOSTC could not determine bstc_uint_fast16_c."
 # endif
@@ -1057,6 +1065,10 @@
 #if !defined(bstc_int_fast16_t) && defined(bstc_int_fast16_max)
 # if bstc_int_fast16_max == bstc_int16_max
 #  define bstc_int_fast16_t bstc_int16_t
+# elif bstc_int_fast32_max == bstc_int32_max
+#  define bstc_int_fast16_t bstc_int32_t
+# elif defined(bstc_int64_max) && bstc_int_fast16_max == bstc_int64_max
+#  define bstc_int_fast16_t bstc_int64_t
 # else
 #  error "BOOSTC could not determine bstc_int_fast16_t."
 # endif
@@ -1064,6 +1076,10 @@
 #if !defined(bstc_int_fast16_c) && defined(bstc_int_fast16_max)
 # if bstc_int_fast16_max == bstc_int16_max
 #  define bstc_int_fast16_c bstc_int16_c
+# elif bstc_int_fast32_max == bstc_int32_max
+#  define bstc_int_fast16_c bstc_int32_c
+# elif defined(bstc_int64_max) && bstc_int_fast16_max == bstc_int64_max
+#  define bstc_int_fast16_c bstc_int64_c
 # else
 #  error "BOOSTC could not determine bstc_int_fast16_c."
 # endif
@@ -1071,6 +1087,8 @@
 #if !defined(bstc_int_fast16_min) && defined(bstc_int_fast16_max)
 # if bstc_int_fast16_max == bstc_int16_max
 #  define bstc_int_fast16_min bstc_int16_min
+# elif defined(bstc_int64_max) && bstc_int_fast16_max == bstc_int64_max
+#  define bstc_int_fast16_min bstc_int64_min
 # else
 #  error "BOOSTC could not determine bstc_int_fast16_min."
 # endif
@@ -1098,6 +1116,8 @@
 #if !defined(bstc_uint_fast32_t) && defined(bstc_uint_fast32_max)
 # if bstc_uint_fast32_max == bstc_uint32_max
 #  define bstc_uint_fast32_t bstc_uint32_t
+# elif defined(bstc_uint64_max) && bstc_uint_fast32_max == bstc_uint64_max
+#  define bstc_uint_fast32_t bstc_uint64_t
 # else
 #  error "BOOSTC could not determine bstc_uint_fast32_t."
 # endif
@@ -1105,6 +1125,8 @@
 #if !defined(bstc_uint_fast32_c) && defined(bstc_uint_fast32_max)
 # if bstc_uint_fast32_max == bstc_uint32_max
 #  define bstc_uint_fast32_c bstc_uint32_c
+# elif defined(bstc_uint64_max) && bstc_uint_fast32_max == bstc_uint64_max
+#  define bstc_uint_fast32_c bstc_uint64_c
 # else
 #  error "BOOSTC could not determine bstc_uint_fast32_c."
 # endif
@@ -1134,6 +1156,8 @@
 #if !defined(bstc_int_fast32_t) && defined(bstc_int_fast32_max)
 # if bstc_int_fast32_max == bstc_int32_max
 #  define bstc_int_fast32_t bstc_int32_t
+# elif defined(bstc_int64_max) && bstc_int_fast32_max == bstc_int64_max
+#  define bstc_int_fast32_t bstc_int64_t
 # else
 #  error "BOOSTC could not determine bstc_int_fast32_t."
 # endif
@@ -1141,6 +1165,8 @@
 #if !defined(bstc_int_fast32_c) && defined(bstc_int_fast32_max)
 # if bstc_int_fast32_max == bstc_int32_max
 #  define bstc_int_fast32_c bstc_int32_c
+# elif defined(bstc_int64_max) && bstc_int_fast32_max == bstc_int64_max
+#  define bstc_int_fast32_c bstc_int64_c
 # else
 #  error "BOOSTC could not determine bstc_int_fast32_c."
 # endif
@@ -1148,6 +1174,8 @@
 #if !defined(bstc_int_fast32_min) && defined(bstc_int_fast32_max)
 # if bstc_int_fast32_max == bstc_int32_max
 #  define bstc_int_fast32_min bstc_int32_min
+# elif defined(bstc_int64_max) && bstc_int_fast32_max == bstc_int64_max
+#  define bstc_int_fast32_min bstc_int64_min
 # else
 #  error "BOOSTC could not determine bstc_int_fast32_min."
 # endif
