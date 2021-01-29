@@ -129,6 +129,19 @@
 #if !defined(BSTC_HAS_STRING_PASTE) && !defined(BSTC_NO_STRING_PASTE)
 # define BSTC_NO_STRING_PASTE
 #endif
+
+
+#ifndef BSTC_INLINE
+# if defined(BSTC_LEAST_C99) || defined(__cplusplus)
+#  define BSTC_INLINE inline
+# elif defined(BSTC_COMPILER_GCC) || defined(BSTC_COMPILER_TCC) || defined(BSTC_COMPILER_CLANG)
+#  define BSTC_INLINE __inline__
+# elif defined(BSTC_COMPILER_VISUALC)
+#  define BSTC_INLINE __declspec(inline)
+# else
+#  define BSTC_INLINE
+# endif
+#endif
 /// \}
 
 
