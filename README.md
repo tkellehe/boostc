@@ -61,6 +61,73 @@ int main(int argc, char *argv[])
 }
 ```
 
+## Iterators
+
+The vector API provides a C++ like iterator interface for accessing elements in the vector.
+The current generic iterator API provides the following functionalities for forward and reverse iterators:
+ * `bstc_*iter_t` : A function that represents the type declaration of the iterator.
+ * `bstc_*iter_nxt` : A function that moves the iterator to the next position.
+ * `bstc_*iter_eq` : A function that compares if two iterators represent the same element.
+ * `bstc_*iter_val` : A function to get the current value of the iterator.
+ * `bstc_*iter_set` : A function to set the current value of the iterator.
+ * `bstc_*iter_swap` : A function to swap the contents of two iterators.
+
+```c
+#include <boostc/vector.h>
+#include <stdio.h>
+
+int main(int argc, char *argv[])
+{
+    (void)argc;
+    (void)argv;
+    // Declare a vector that contains type 'int'.
+    bstc_vect_t(int) vect;
+    // Also declare a forward and reverse iterator for a vector of type 'int'.
+    bstc_vect_iter_t(int) iter;
+    bstc_vect_riter_t(int) riter;
+    
+    // Initialize the state of the vector.
+    bstc_vect_init(vect);
+    
+    // Add some elements to the vector.
+    bstc_vect_push(vect, 1);
+    bstc_vect_push(vect, 2);
+    bstc_vect_push(vect, 3);
+    
+    // Can loop over the contents and check if reached the end.
+    {
+        printf("forward iterator:\n");
+        for(iter = bstc_vect_begin(vect); iter != bstc_vect_end(vect); ++iter)
+            printf("    %i\n", *iter);
+    }
+    // Can also use the functions provided to be more explicit.
+    {
+        printf("forward iterator & vector functions:\n");
+        for(iter = bstc_vect_begin(vect); !bstc_vect_iter_eq(iter, bstc_vect_end(vect)); bstc_vect_iter_nxt(iter))
+            printf("    %i\n", bstc_vect_iter_val(iter));
+    }
+
+    iter = bstc_vect_begin(vect);
+    // The recommended way is to use the functions provided to access elements.
+    bstc_vect_iter_set(iter, bstc_vect_iter_val(iter) + 10);
+    // But, the vector iterator interface provides both.
+    *iter += 10;
+
+    // For the reverse iterators, the functions provided are the best option since the access is not direct.
+    {
+        printf("reverse iterator & vector functions:\n");
+        // Note: That you can use 'riter != bstc_vect_rend(vect)' if it is more readable.
+        for(riter = bstc_vect_rbegin(vect); !bstc_vect_riter_eq(riter, bstc_vect_rend(vect)); bstc_vect_riter_nxt(riter))
+            printf("    %i\n", bstc_vect_riter_val(riter));
+    }
+    
+    // Deallocate any memory.
+    bstc_vect_destroy(vect);
+    
+    return 0;
+}
+```
+
 ## Changing Templates
 
 The basic implementation works by taking the default template if the first parameter does not syntactically appear as a template.
