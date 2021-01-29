@@ -46,7 +46,7 @@
 #  define BSTC_LEAST_C11
 # endif
 # if __STDC_VERSION__ >= 201710L
-#  define BSTC_LEAST_C18
+#  define BSTC_LEAST_C17
 # endif
 #endif
 /// \}

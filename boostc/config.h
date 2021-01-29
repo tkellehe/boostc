@@ -80,6 +80,15 @@
 #endif
 
 
+#if !(defined(BSTC_NO_STDTHREADS) || defined(BSTC_HAS_STDTHREADS))
+# if (defined(__STDC_NO_THREADS__) && (__STDC_NO_THREADS__ == 1)) || !defined(BSTC_LEAST_C11)
+#  define BSTC_NO_STDTHREADS
+# else
+#  define BSTC_HAS_STDTHREADS
+# endif
+#endif
+
+
 #if !defined(BSTC_INTPTR_NBITS)
 # if defined(__alpha__) || defined(__ia64__) || defined(__x86_64__) || defined(_WIN64) || defined(__ppc64__)
 #  define BSTC_INTPTR_NBITS 64
@@ -137,7 +146,7 @@
 # elif defined(BSTC_COMPILER_GCC) || defined(BSTC_COMPILER_TCC) || defined(BSTC_COMPILER_CLANG)
 #  define BSTC_INLINE __inline__
 # elif defined(BSTC_COMPILER_VISUALC)
-#  define BSTC_INLINE __declspec(inline)
+#  define BSTC_INLINE __inline
 # else
 #  define BSTC_INLINE
 # endif
