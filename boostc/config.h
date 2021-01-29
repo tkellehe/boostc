@@ -7,6 +7,12 @@
 #define BOOSTC__CONFIG_H
 
 
+/* The current version of the boostc library. */
+/// \{
+#define BSTC 0L
+/// \}
+
+
 #include <boostc/config/version.h>
 
 
