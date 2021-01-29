@@ -20,7 +20,7 @@ Another benefit is that you do not need to build this library.
 ### Insertion Code Bloat
 Since most interfaces are inlined code, this can cause binaries to be quite large.
 A simple solution is to instantiate your own function to wrap the _boostc_ functions.
-Then the compiler will treat it as a function and potentially reducing the size of binaries.
+Then the compiler will treat it as a single function and potentially reducing the size of binaries.
 
 # vector
 Provides compile time decisions to create a _C++_ like vector in _C_. Uses the _template_ interface.
