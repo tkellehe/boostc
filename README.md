@@ -1,9 +1,9 @@
 ![boostc icon](images/boostc-icon.png)
 
-# boostc
+# [boostc](https://tkellehe.github.io/boostc/)
 A library like [Boost _C++_](https://github.com/boostorg), but for C.
 Provides compile time decisions similar to templating in a simple API.
-Also has polyfills for C standards.
+Also has polyfills for C standards. Documentation can be viewed [here](https://tkellehe.github.io/boostc/docs/).
 
 ## Why Make This?
 I began to write my own variation of _Boost C++_ to get better at _C++_.

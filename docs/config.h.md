@@ -1,3 +1,7 @@
+![boostc icon](images/boostc-icon.png)
+
+[Home](https://tkellehe.github.io/boostc/docs/)
+
 # boostc/config.h
 
 Utilizes directives to make decisions about the environment.
