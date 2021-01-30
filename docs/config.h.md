@@ -120,7 +120,7 @@ These are list of macros defined for detecting features about the language/envir
  * `BSTC_NO_64BIT` & `BSTC_HAS_64BIT` : Defined based off of if 64-bit integers are available.
  * `BOOST_NO_LONG_LONG` & `BOOST_HAS_LONG_LONG` : Defined based off of if `long long` is available.
  * `BSTC_NO_STRING_PASTE` & `BSTC_HAS_STRING_PASTE` : Defined based off if symbols can be pasted next to a string literal.
- * `BSTC_NO_VA_ARGS_PASTE` & `BSTC_HAS_VA_ARGS_PASTE` : Defined based off if concatenation of the null symbol and `__VA_ARGS__` is supported by the compiler.
+ * `BSTC_NO_VA_ARGS_PASTE` & `BSTC_HAS_VA_ARGS_PASTE` : Defined based off if concatenation of the empty character and `__VA_ARGS__` is supported by the compiler.
  * `BSTC_NO_STDATOMICS` & `BSTC_HAS_STDATOMICS` : Defined based off if the standard atomics library is provided.
  * `BSTC_NO_STDTHREADS` & `BSTC_HAS_STDTHREADS` : Defined based off if the standard threads library is provided.
  * `BSTC_LIKELY(expr)` : A macro for branch prediction to begin as _likely_ detection if available else it will insert the boolean expression.
@@ -132,6 +132,16 @@ These are list of macros defined for detecting features about the language/envir
 ### Macro Helpers
 The following are macros provided to assist with creating the _boostc_ library.
 
- * `BSTC_UNPACK(...)` : Unpacks a symbol parameter tuple representation by using it like `BSTC_UNPACK ctuple`.
- * `BSTC_ISA_TUPLE(tpl, _t, _f)`
- * `BSTC_IF_ARG0_EMPTY(tpl, _t, _f)`
+ * `BSTC_UNPACK(...)` : Unpacks a symbol parameter tuple representation by using it like `BSTC_UNPACK tpl`.
+ * `BSTC_ISA_TUPLE(tpl, _t, _f)` : If the provided symbol is a tuple then `_t` will be inserted, otherwise `_f` will be inserted.
+ * `BSTC_IF_ARG0_EMPTY(tpl, _t, _f)` : If the provided tuple represents `(,...)` then `_t` will be inserted, otherwise `_f` will be inserted.
+ * `BSTC_JOIN2(L, R)` : Pastes the two symbols provided expanding each one before concatenation.
+ * `BSTC_JOIN3(L, C, R)` : Pastes the three symbols provided expanding each one before concatenation.
+ * `BSTC_TOSTRING(X)` : Converts the symbols provided into a string and expands them.
+ * `BSTC_ARGCNT(...)` : Counts the number of arguments provided where zero is not supported. Note that `BSTC_IF_ARG0_EMPTY` can be used for detecting zero.
+ * `BSTC_IFEQ(X, Y, T, F)` : Detects if two literals in `[0-100]` are equal selecting `T` if true and `F` otherwise.
+ * `BSTC_IFLT(X, Y, T, F)` : Compares two literals in `[0-100]` if `X` is less than `Y` then `T` is selected and `F` otherwise.
+ * `BSTC_IFGT(X, Y, T, F)` : Compares two literals in `[0-100]` if `X` is greater than `Y` then `T` is selected and `F` otherwise.
+ * `BSTC_GET_ARG[0-101](...)` : Gets the `Nth` argument provided.
+ * `BSTC_CONST_ADD1(N)` : Adds one to a literal in `[0-100]`.
+ * `BSTC_CONST_SUB1(N)` : Subs one to a literal in `[1-101]`.
