@@ -2,4 +2,4 @@
 
 # boostc docs
 
- * [`boostc/config.h`](https://tkellehe.github.io/boostc/docs/config.h.md)
+ * [`boostc/config.h`](https://tkellehe.github.io/boostc/docs/config.h.html)
