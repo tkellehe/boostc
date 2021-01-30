@@ -1,4 +1,4 @@
-![boostc icon](../images/boostc-icon.png)
+![boostc icon](https://tkellehe.github.io/boostc/images/boostc-icon.png)
 
 # boostc docs
 

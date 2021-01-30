@@ -1,4 +1,4 @@
-![boostc icon](images/boostc-icon.png)
+![boostc icon](https://tkellehe.github.io/boostc/images/boostc-icon.png)
 
 [Home](https://tkellehe.github.io/boostc/docs/)
 
