@@ -7,6 +7,13 @@
 Utilizes directives to make decisions about the environment.
 These decisions include compiler, platform, and language versions.
 
+## Version
+
+ * `BSTC` : Assigned an integer value presenting the current version of __boostc__ included.
+
+|-version-|-description|
+|  `0L`   | Unreleased version for testing |
+
 ## Language Versions Detection
 The following are macros defined depending on if _C++_ is used or _C_ and are determined in the header `boostc/config/version.h`.
 Most testing has obviously been done for _C_.
