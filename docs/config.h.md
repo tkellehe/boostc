@@ -11,7 +11,8 @@ These decisions include compiler, platform, and language versions.
 
  * `BSTC` : Assigned an integer value presenting the current version of __boostc__ included.
 
-|-version-|-description|
+| version |description|
+|:-------:|:----------|
 |  `0L`   | Unreleased version for testing |
 
 ## Language Versions Detection
