@@ -11,19 +11,19 @@ So, the interface can be checked if it could not be resolved.
 
 ## `bstc_Bool`
 
-https://en.cppreference.com/w/c/language/arithmetic_types#Boolean_type
+Description and standard overview can be found here: https://en.cppreference.com/w/c/language/arithmetic_types#Boolean_type
 
 
 ## `bstc_bool`
 
-https://en.cppreference.com/w/c/types/boolean
+Description and standard overview can be found here: https://en.cppreference.com/w/c/types/boolean
 
 
 ## `bstc_true`
 
-https://en.cppreference.com/w/c/types/boolean
+Description and standard overview can be found here: https://en.cppreference.com/w/c/types/boolean
 
 
 ## `bstc_false`
 
-https://en.cppreference.com/w/c/types/boolean
+Description and standard overview can be found here: https://en.cppreference.com/w/c/types/boolean

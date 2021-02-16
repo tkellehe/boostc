@@ -12,7 +12,7 @@ So, the interface can be checked if it could not be resolved.
 ## `bstc_noreturn`
 
 Defined per the compiler and language support, prioritizing what is provided in the language.
-Description can be found [here](https://en.cppreference.com/w/c/language/_Noreturn).
+Description and standard overview can be found here: https://en.cppreference.com/w/c/language/_Noreturn
 
 ```c
 #include <boostc/stdlib.h>
