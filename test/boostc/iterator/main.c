@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
     #define iter2 bstc_iter_pack_nxt(B)
     #define iter3 bstc_iter_pack_eq(C)
     #define iter4 bstc_iter_pack_val(D)
-    #define iter5 bstc_iter_pack_set(E)
+    #define iter5 bstc_iter_pack_put(E)
     #define iter6 bstc_iter_pack_swap(F)
     #define iterN bstc_ctuple(1, 2, 3, 4)
 

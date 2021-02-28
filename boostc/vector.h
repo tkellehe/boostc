@@ -247,8 +247,8 @@
  * \param val The value to assign to where the iterator is referencing.
  */
 /// \{
-#ifndef bstc_vect_iter_set
-# define bstc_vect_iter_set(...) bstc_ctuple_call(bstc_dtl_vect_iter_set, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+#ifndef bstc_vect_iter_put
+# define bstc_vect_iter_put(...) bstc_ctuple_call(bstc_dtl_vect_iter_put, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
 #endif
 /// \}
 
@@ -310,8 +310,8 @@
  * \param val The value to assign to where the iterator is referencing.
  */
 /// \{
-#ifndef bstc_vect_riter_set
-# define bstc_vect_riter_set(...) bstc_ctuple_call(bstc_dtl_vect_riter_set, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+#ifndef bstc_vect_riter_put
+# define bstc_vect_riter_put(...) bstc_ctuple_call(bstc_dtl_vect_riter_put, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
 #endif
 /// \}
 

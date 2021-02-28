@@ -24,7 +24,7 @@ ALL_MAINC := $(call rwildcard,$(TEST_DIR)/,*main.c)
 # Check to see if the bin directory has been specified.
 BSTC_BIN ?= $(TEST_DIR)/bin
 
-all: gcc clang vs14
+all: gcc clang vs14 tcc
 
 clean:
 	@rm -rf $(BSTC_BIN) *.obj

@@ -41,8 +41,8 @@
 
 /** Creates a ctuple with the defaults set except for the set function provided. */
 /// \{
-#ifndef bstc_iter_pack_set
-# define bstc_iter_pack_set(set) bstc_iter_set_set(bstc_iter_defaults, set)
+#ifndef bstc_iter_pack_put
+# define bstc_iter_pack_put(put) bstc_iter_set_put(bstc_iter_defaults, put)
 #endif
 /// \}
 
@@ -89,8 +89,8 @@
 
 /** Get the set function that has been packed into the ctuple. */
 /// \{
-#ifndef bstc_iter_set
-# define bstc_iter_set(tpl) BSTC_EXPAND(BSTC_GET_ARG4 tpl)
+#ifndef bstc_iter_put
+# define bstc_iter_put(tpl) BSTC_EXPAND(BSTC_GET_ARG4 tpl)
 #endif
 /// \}
 
@@ -137,8 +137,8 @@
 
 /** Create a copy of the ctuple as an iterator with the set function changed to what is provided. */
 /// \{
-#ifndef bstc_iter_set_set
-# define bstc_iter_set_set(tpl, set) bstc_ctuple_setI(tpl, 4, set)
+#ifndef bstc_iter_set_put
+# define bstc_iter_set_put(tpl, put) bstc_ctuple_setI(tpl, 4, put)
 #endif
 /// \}
 
@@ -185,8 +185,8 @@
 
 /** Default set function that does nothing. */
 /// \{
-#ifndef bstc_iter_noset
-# define bstc_iter_noset(iter, val) ((void)0)
+#ifndef bstc_iter_noput
+# define bstc_iter_noput(iter, val) ((void)0)
 #endif
 /// \}
 
@@ -202,7 +202,7 @@
 /** Default iterator ctuple that uses the no-op iterator functions. */
 /// \{
 #ifndef bstc_iter_defaults
-# define bstc_iter_defaults bstc_ctuple(bstc_iter_no_t, bstc_iter_nonxt, bstc_iter_noeq, bstc_iter_noval, bstc_iter_noset, bstc_iter_noswap)
+# define bstc_iter_defaults bstc_ctuple(bstc_iter_no_t, bstc_iter_nonxt, bstc_iter_noeq, bstc_iter_noval, bstc_iter_noput, bstc_iter_noswap)
 #endif
 /// \}
 
