@@ -11,7 +11,7 @@
 
 # ifndef bstc_noreturn
 #  ifdef __cplusplus
-#   define bstc_noreturn noreturn
+#   define bstc_noreturn [[noreturn]]
 #  else
 #   define bstc_noreturn _Noreturn
 #  endif

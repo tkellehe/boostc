@@ -24,10 +24,23 @@ ALL_MAINC := $(call rwildcard,$(TEST_DIR)/,*main.c)
 # Check to see if the bin directory has been specified.
 BSTC_BIN ?= $(TEST_DIR)/bin
 
-all: gcc clang vs14 tcc
+all: gcc clang vs14 tcc g++
 
 clean:
 	@rm -rf $(BSTC_BIN) *.obj
+
+#-------------------------------------------------------------------------------------------------------------
+BSTC_GPP_TESTS := $(ALL_MAINC:$(TEST_DIR)/%/main.c=$(BSTC_BIN)/g++/%)
+BSTC_GPP_FLAGS ?= -O6 -Wall -Werror -pedantic -I $(PROJECT_DIR)
+BSTC_GPP ?= g++
+
+g++: $(BSTC_GPP_TESTS)
+
+$(BSTC_BIN)/g++/%: $(TEST_DIR)/%/main.c
+	@echo "(GPP) Building Test: $@"
+	@mkdir -p `dirname $@`
+	$(BSTC_GPP) $(BSTC_GPP_FLAGS) $? -o $@
+	@echo
 
 #-------------------------------------------------------------------------------------------------------------
 BSTC_GCC_TESTS := $(ALL_MAINC:$(TEST_DIR)/%/main.c=$(BSTC_BIN)/gcc/%)

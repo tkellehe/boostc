@@ -112,6 +112,8 @@
 #if !defined(BSTC_HAS_64BIT) && !defined(BSTC_NO_64BIT)
 # ifdef BSTC_LEAST_C99
 #  define BSTC_HAS_64BIT
+# elif defined(BSTC_LEAST_CPP98)
+#  define BSTC_HAS_64BIT
 # endif
 #endif
 
