@@ -151,8 +151,8 @@
  * \return Returns the new value pushed on.
  */
 /// \{
-#ifndef bstc_vect_push
-# define bstc_vect_push(...) bstc_ctuple_call(bstc_dtl_vect_push, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+#ifndef bstc_vect_pushb
+# define bstc_vect_pushb(...) bstc_ctuple_call(bstc_dtl_vect_pushb, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
 #endif
 /// \}
 

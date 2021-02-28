@@ -62,8 +62,8 @@ int main(int argc, char *argv[])
         if(vect == bstc_nullptr) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
         printf("bstc_vect_len(vect): %i\n", (int)bstc_vect_len(vect));
         if(bstc_vect_len(vect) == 0) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
-        bstc_vect_push(vect, 0.0f);
-        printf("bstc_vect_t(float) & bstc_vect_push(vect): %p\n", (void*)vect);
+        bstc_vect_pushb(vect, 0.0f);
+        printf("bstc_vect_t(float) & bstc_vect_pushb(vect): %p\n", (void*)vect);
         if(vect != bstc_nullptr) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
         printf("vect[0]: %f\n", vect[0]);
         if(vect[0] == 0.0f) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
@@ -93,8 +93,8 @@ int main(int argc, char *argv[])
         if(vect == bstc_nullptr) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
         printf("bstc_vect_len(vect): %i\n", (int)bstc_vect_len(vtmplt3, vect));
         if(bstc_vect_len(vtmplt3, vect) == 0) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
-        bstc_vect_push(vtmplt3, vect, 0.0f);
-        printf("bstc_vect_t(float) & bstc_vect_push(vect): %p\n", (void*)vect);
+        bstc_vect_pushb(vtmplt3, vect, 0.0f);
+        printf("bstc_vect_t(float) & bstc_vect_pushb(vect): %p\n", (void*)vect);
         if(vect != bstc_nullptr) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
         printf("vect[0]: %f\n", vect[0]);
         if(vect[0] == 0.0f) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");

@@ -41,8 +41,8 @@ int main(int argc, char *argv[])
     bstc_vect_init(vect);
     
     // Default is to use stdlib allocator.
-    bstc_vect_push(vect, 11);
-    bstc_vect_push(vect, 12);
+    bstc_vect_pushb(vect, 11);
+    bstc_vect_pushb(vect, 12);
     
     // Can use basic array operator on the data.
     vect[0] += 10;
@@ -90,9 +90,9 @@ int main(int argc, char *argv[])
     bstc_vect_init(vect);
     
     // Add some elements to the vector.
-    bstc_vect_push(vect, 1);
-    bstc_vect_push(vect, 2);
-    bstc_vect_push(vect, 3);
+    bstc_vect_pushb(vect, 1);
+    bstc_vect_pushb(vect, 2);
+    bstc_vect_pushb(vect, 3);
     
     // Can loop over the contents and check if reached the end.
     {
@@ -179,8 +179,8 @@ int main(int argc, char *argv[])
     bstc_vect_init(vect_int, vect);
     
     // Uses the allocator encoded into the template to realloc and malloc the memory.
-    bstc_vect_push(vect_int, vect, 11);
-    bstc_vect_push(vect_int, vect, 12);
+    bstc_vect_pushb(vect_int, vect, 11);
+    bstc_vect_pushb(vect_int, vect, 12);
     
     // Can still use basic array operator on the data.
     vect[0] += 10;

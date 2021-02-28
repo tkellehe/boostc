@@ -125,8 +125,8 @@
 #define bstc_dtl_vect_back(tmplt, vect) BSTC_CALL(bstc_dtl_vect_get_back(tmplt), tmplt, vect)
 #define bstc_dtl_vect_default_back(tmplt, vect) (vect)[bstc_dtl_vect_len_(vect)-1]
 
-#define bstc_dtl_vect_push(tmplt, vect, val) BSTC_CALL(bstc_dtl_vect_get_push(tmplt), tmplt, vect, val)
-#define bstc_dtl_vect_default_push(tmplt, vect, val) \
+#define bstc_dtl_vect_pushb(tmplt, vect, val) BSTC_CALL(bstc_dtl_vect_get_pushb(tmplt), tmplt, vect, val)
+#define bstc_dtl_vect_default_pushb(tmplt, vect, val) \
 /* Check to see if the vector has anything allocated yet. */\
 ((vect) ?\
     (bstc_dtl_vect_cap_(vect) < (bstc_dtl_vect_len_(vect)+1) ?\
@@ -172,7 +172,7 @@
 #define bstc_dtl_vect_get_empty(tmplt) BSTC_GET_ARG7 bstc_tmplt_fns(tmplt)
 #define bstc_dtl_vect_get_front(tmplt) BSTC_GET_ARG8 bstc_tmplt_fns(tmplt)
 #define bstc_dtl_vect_get_back(tmplt) BSTC_GET_ARG9 bstc_tmplt_fns(tmplt)
-#define bstc_dtl_vect_get_push(tmplt) BSTC_GET_ARG10 bstc_tmplt_fns(tmplt)
+#define bstc_dtl_vect_get_pushb(tmplt) BSTC_GET_ARG10 bstc_tmplt_fns(tmplt)
 #define bstc_dtl_vect_get_begin(tmplt) BSTC_GET_ARG11 bstc_tmplt_fns(tmplt)
 #define bstc_dtl_vect_get_end(tmplt) BSTC_GET_ARG12 bstc_tmplt_fns(tmplt)
 #define bstc_dtl_vect_get_rbegin(tmplt) BSTC_GET_ARG13 bstc_tmplt_fns(tmplt)
@@ -199,7 +199,7 @@
         bstc_dtl_vect_default_empty,\
         bstc_dtl_vect_default_front,\
         bstc_dtl_vect_default_back,\
-        bstc_dtl_vect_default_push,\
+        bstc_dtl_vect_default_pushb,\
         bstc_dtl_vect_default_begin,\
         bstc_dtl_vect_default_end,\
         bstc_dtl_vect_default_rbegin,\
