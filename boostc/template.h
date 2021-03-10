@@ -5,8 +5,8 @@
 //  http://www.boost.org/LICENSE_1_0.txt)
 #include <boostc/config.h>
 #include <boostc/ctuple.h>
-#include <boostc/allocator.h>
-#include <boostc/iterator.h>
+#include <boostc/traits/allocator.h>
+#include <boostc/traits/iterator.h>
 
 
 /** Provide operations on bstc template types.
