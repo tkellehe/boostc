@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
     int num_pass = 0;
     int num_fail = 0;
 
+#ifdef bstc_iter_isa
     //--------------------------------------------------------------------------------------------------------
     #define iter1 bstc_iter_pack_t(A)
     #define iter2 bstc_iter_pack_nxt(B)
@@ -40,6 +41,29 @@ int main(int argc, char *argv[])
     bstc_iter_isa(iterN, (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
     printf("bstc_iter_isa(%s):\n", bstc_ctuple_tostring(bstc_iter_defaults));
     bstc_iter_isa(bstc_iter_defaults, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+#endif
+
+    //--------------------------------------------------------------------------------------------------------
+    #define iterA bstc_iter((++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
+    #define iterB bstc_iter((++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
+    #define iterC bstc_iter((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
+    #define iterD bstc_iter((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
+    #define iterE bstc_iter((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")))
+    #define iterF bstc_iter((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")))
+
+    //--------------------------------------------------------------------------------------------------------
+    printf("bstc_iter_t(tpl):\n");
+    bstc_iter_t(iterA);
+    printf("bstc_iter_nxt(tpl):\n");
+    bstc_iter_nxt(iterB);
+    printf("bstc_iter_eq(tpl):\n");
+    bstc_iter_eq(iterC);
+    printf("bstc_iter_val(tpl):\n");
+    bstc_iter_val(iterD);
+    printf("bstc_iter_put(tpl):\n");
+    bstc_iter_put(iterE);
+    printf("bstc_iter_swap(tpl):\n");
+    bstc_iter_swap(iterF);
 
     //--------------------------------------------------------------------------------------------------------
     printf("-----------------------------\n");

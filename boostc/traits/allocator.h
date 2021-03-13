@@ -8,7 +8,7 @@
 #include <boostc/stdlib.h>
 
 
-/** Ensure that the parameter are packed into a tuple. */
+/** Ensure that the parameters are packed into a tuple. */
 /// \{
 #ifndef bstc_alloc
 # define bstc_alloc(f, m, r) (f, m, r)

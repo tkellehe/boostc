@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
     bstc_alloc_isa(bstc_alloc_stdlib, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
 #endif
 
-    // //--------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
     #define alloc5 bstc_alloc((++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
     #define alloc6 bstc_alloc((++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")))
     #define alloc7 bstc_alloc((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")))
