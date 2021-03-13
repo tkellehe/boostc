@@ -8,7 +8,7 @@
 #include <boostc/ctuple.h>
 #include <boostc/stdint.h>
 #include <boostc/string.h>
-#include <boostc/template.h>
+#include <boostc/traits/template.h>
 #include <boostc/detail/vector.h>
 
 

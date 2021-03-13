@@ -4,7 +4,7 @@
 //  accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
 #include <boostc/stdlib.h>
-#include <boostc/template.h>
+#include <boostc/traits/template.h>
 #include <stdio.h>
 
 // The function that gets inserted is merely the symbol, therein does not matter when it is defined.
