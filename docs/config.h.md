@@ -22,6 +22,7 @@ Note that the _C_ group will not be provided if _C++_ is used, and vice versa.
 
 ### C Language Detection
 
+ * `BSTC_LEAST_C89` : Present if using a compiler that supports at least _C89_ features.
  * `BSTC_LEAST_C95` : Present if using a compiler that supports at least _C95_ features.
  * `BSTC_LEAST_C99` : Present if using a compiler that supports at least _C99_ features.
  * `BSTC_LEAST_C11` : Present if using a compiler that supports at least _C11_ features.
@@ -131,10 +132,11 @@ These are list of macros defined for detecting features about the language/envir
 
  * `BSTC_NO_64BIT` & `BSTC_HAS_64BIT` : Defined based off of if 64-bit integers are available.
  * `BOOST_NO_LONG_LONG` & `BOOST_HAS_LONG_LONG` : Defined based off of if `long long` is available.
- * `BSTC_NO_STRING_PASTE` & `BSTC_HAS_STRING_PASTE` : Defined based off if symbols can be pasted next to a string literal.
- * `BSTC_NO_VA_ARGS_PASTE` & `BSTC_HAS_VA_ARGS_PASTE` : Defined based off if concatenation of the empty character and `__VA_ARGS__` is supported by the compiler.
- * `BSTC_NO_STDATOMICS` & `BSTC_HAS_STDATOMICS` : Defined based off if the standard atomics library is provided.
- * `BSTC_NO_STDTHREADS` & `BSTC_HAS_STDTHREADS` : Defined based off if the standard threads library is provided.
+ * `BSTC_NO_STRING_PASTE` & `BSTC_HAS_STRING_PASTE` : Defined based off of if symbols can be pasted next to a string literal.
+ * `BSTC_NO_VA_ARGS_PASTE` & `BSTC_HAS_VA_ARGS_PASTE` : Defined based off of if concatenation of the empty character and `__VA_ARGS__` is supported by the compiler.
+ * `BSTC_NO_STDATOMICS` & `BSTC_HAS_STDATOMICS` : Defined based off of if the standard atomics library is provided.
+ * `BSTC_NO_STDTHREADS` & `BSTC_HAS_STDTHREADS` : Defined based off of if the standard threads library is provided.
+ * `BSTC_NO_VARIADIC_MACROS` & `BSTC_HAS_VARIADIC_MACROS` : Defined based off of if variadic macros are available.
  * `BSTC_LIKELY(expr)` : A macro for branch prediction to begin as _likely_ detection if available else it will insert the boolean expression.
  * `BSTC_UNLIKELY(expr)` : A macro for branch prediction to begin as _unlikely_ detection if available else it will insert the boolean expression.
  * `BSTC_INLINE` : Provides _C_ style inline keyword insert if available else it will be empty.

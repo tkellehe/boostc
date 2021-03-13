@@ -142,6 +142,18 @@
 #endif
 
 
+#if !defined(BSTC_HAS_VARIADIC_MACROS) && !defined(BSTC_NO_VARIADIC_MACROS)
+# if defined(BSTC_LEAST_C99) || defined(BSTC_LEAST_CPP98)
+#  define BSTC_HAS_VARIADIC_MACROS
+# else
+#  define BSTC_NO_VARIADIC_MACROS
+# endif
+#endif
+#if defined(BSTC_HAS_VARIADIC_MACROS) && defined(BSTC_NO_VARIADIC_MACROS)
+# undef BSTC_HAS_VARIADIC_MACROS
+#endif
+
+
 #ifndef BSTC_INLINE
 # if defined(BSTC_LEAST_C99) || defined(__cplusplus)
 #  define BSTC_INLINE inline

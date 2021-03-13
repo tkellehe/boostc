@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
     int num_pass = 0;
     int num_fail = 0;
 
+#ifdef bstc_alloc_isa
     //--------------------------------------------------------------------------------------------------------
     #define alloc1 bstc_alloc_pack_free(bstc_free)
     #define alloc2 bstc_alloc_pack_malloc(bstc_malloc)
@@ -21,18 +22,32 @@ int main(int argc, char *argv[])
     #define alloc4 bstc_ctuple(1, 2, 3, 4)
 
     //--------------------------------------------------------------------------------------------------------
-    printf("bstc_alloc_isa(%s)\n", bstc_ctuple_tostring(alloc1));
+    printf("bstc_alloc_isa(%s):\n", BSTC_TOSTRING(alloc1));
     bstc_alloc_isa(alloc1, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("bstc_alloc_isa(%s)\n", bstc_ctuple_tostring(alloc2));
+    printf("bstc_alloc_isa(%s):\n", BSTC_TOSTRING(alloc2));
     bstc_alloc_isa(alloc2, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("bstc_alloc_isa(%s)\n", bstc_ctuple_tostring(alloc3));
+    printf("bstc_alloc_isa(%s):\n", BSTC_TOSTRING(alloc3));
     bstc_alloc_isa(alloc3, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("bstc_alloc_isa(%s)\n", bstc_ctuple_tostring(alloc4));
+    printf("bstc_alloc_isa(%s):\n", BSTC_TOSTRING(alloc4));
     bstc_alloc_isa(alloc4, (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
-    printf("bstc_alloc_isa(%s)\n", bstc_ctuple_tostring(bstc_alloc_defaults));
+    printf("bstc_alloc_isa(%s):\n", BSTC_TOSTRING(bstc_alloc_defaults));
     bstc_alloc_isa(bstc_alloc_defaults, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("bstc_alloc_isa(%s)\n", bstc_ctuple_tostring(bstc_alloc_stdlib));
+    printf("bstc_alloc_isa(%s):\n", BSTC_TOSTRING(bstc_alloc_stdlib));
     bstc_alloc_isa(bstc_alloc_stdlib, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+#endif
+
+    // //--------------------------------------------------------------------------------------------------------
+    #define alloc5 bstc_alloc((++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
+    #define alloc6 bstc_alloc((++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")))
+    #define alloc7 bstc_alloc((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")))
+
+    //--------------------------------------------------------------------------------------------------------
+    printf("bstc_alloc_free(tpl):\n");
+    bstc_alloc_free(alloc5);
+    printf("bstc_alloc_malloc(tpl):\n");
+    bstc_alloc_malloc(alloc6);
+    printf("bstc_alloc_realloc(tpl):\n");
+    bstc_alloc_realloc(alloc7);
 
     //--------------------------------------------------------------------------------------------------------
     printf("-----------------------------\n");

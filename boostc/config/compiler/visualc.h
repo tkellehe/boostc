@@ -54,6 +54,18 @@
 /// \}
 
 
+/* Since MSVC does not support C99 or any really, need to add specific things that are available. */
+/// \{
+#if !defined(BSTC_HAS_VARIADIC_MACROS) && !defined(BSTC_NO_VARIADIC_MACROS)
+# if _MSC_VER < 1400
+#  define BSTC_NO_VARIADIC_MACROS
+# else
+#  define BSTC_HAS_VARIADIC_MACROS
+# endif
+#endif
+/// \}
+
+
 /* Make sure that the main libraries are linked in. */
 /// \{
 #pragma comment(lib, "user32.lib")

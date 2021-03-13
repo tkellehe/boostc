@@ -24,21 +24,21 @@ int main(int argc, char *argv[])
     #define iterN bstc_ctuple(1, 2, 3, 4)
 
     //--------------------------------------------------------------------------------------------------------
-    printf("bstc_iter_isa(%s)\n", bstc_ctuple_tostring(iter1));
+    printf("bstc_iter_isa(%s):\n", bstc_ctuple_tostring(iter1));
     bstc_iter_isa(iter1, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("bstc_iter_isa(%s)\n", bstc_ctuple_tostring(iter2));
+    printf("bstc_iter_isa(%s):\n", bstc_ctuple_tostring(iter2));
     bstc_iter_isa(iter2, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("bstc_iter_isa(%s)\n", bstc_ctuple_tostring(iter3));
+    printf("bstc_iter_isa(%s):\n", bstc_ctuple_tostring(iter3));
     bstc_iter_isa(iter3, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("bstc_iter_isa(%s)\n", bstc_ctuple_tostring(iter4));
+    printf("bstc_iter_isa(%s):\n", bstc_ctuple_tostring(iter4));
     bstc_iter_isa(iter4, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("bstc_iter_isa(%s)\n", bstc_ctuple_tostring(iter5));
+    printf("bstc_iter_isa(%s):\n", bstc_ctuple_tostring(iter5));
     bstc_iter_isa(iter5, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("bstc_iter_isa(%s)\n", bstc_ctuple_tostring(iter6));
+    printf("bstc_iter_isa(%s):\n", bstc_ctuple_tostring(iter6));
     bstc_iter_isa(iter6, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("bstc_iter_isa(%s)\n", bstc_ctuple_tostring(iterN));
+    printf("bstc_iter_isa(%s):\n", bstc_ctuple_tostring(iterN));
     bstc_iter_isa(iterN, (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
-    printf("bstc_iter_isa(%s)\n", bstc_ctuple_tostring(bstc_iter_defaults));
+    printf("bstc_iter_isa(%s):\n", bstc_ctuple_tostring(bstc_iter_defaults));
     bstc_iter_isa(bstc_iter_defaults, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
 
     //--------------------------------------------------------------------------------------------------------

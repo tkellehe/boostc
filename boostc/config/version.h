@@ -34,6 +34,9 @@
 /* Determine the C standard version provided by the compiler. */
 /// \{
 #if !defined(__cplusplus) && defined(__STDC_VERSION__)
+# if defined(__STDC__) && __STDC__ == 1 
+#  define BSTC_LEAST_C89
+# endif
 # if __STDC_VERSION__ >= 199409L
 #  define BSTC_LEAST_C95
 # endif
