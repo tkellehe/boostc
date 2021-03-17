@@ -7,6 +7,8 @@
 #include <boostc/traits/template.h>
 #include <stdio.h>
 
+#ifdef bstc_tmplt_isa
+
 // The function that gets inserted is merely the symbol, therein does not matter when it is defined.
 #define fooT_int(x, y) (x + y)
 
@@ -32,6 +34,8 @@ static short fooT_short(short x, short y)
 // Since everything is a macro, we just need to define this (like real templates) before it is used.
 #define fooT_tmplt_short bstc_tmplt_pack_fn(fooT_short)
 
+#endif
+
 int main(int argc, char *argv[])
 {
     bstc_unused_param(argc);;
@@ -39,6 +43,7 @@ int main(int argc, char *argv[])
     int num_pass = 0;
     int num_fail = 0;
 
+#ifdef bstc_tmplt_isa
     //--------------------------------------------------------------------------------------------------------
     // Here is what the specialization resolves to:
     printf("fooT_tmplt_int = %s\n", bstc_ctuple_tostring(fooT_tmplt_int));
@@ -62,7 +67,7 @@ int main(int argc, char *argv[])
     #define tmplt4 bstc_tmplt_pack_iter(bstc_iter_pack_t(D))
     #define tmplt5 bstc_tmplt_pack_riter(bstc_iter_pack_t(E))
     #define tmplt6 bstc_tmplt_pack_alloc(bstc_alloc_pack_free(F))
-    #define tmpltN bstc_ctuple(1, 2, 3, 4, 5, 6)
+    #define tmpltN bstc_tmplt_traits(1, 2, 3, 4, 5, 6)
 
     //--------------------------------------------------------------------------------------------------------
     printf("bstc_tmplt_isa(%s)\n", bstc_ctuple_tostring(tmplt1));
@@ -81,6 +86,29 @@ int main(int argc, char *argv[])
     bstc_tmplt_isa(tmpltN, (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
     printf("bstc_tmplt_isa(%s)\n", bstc_ctuple_tostring(bstc_tmplt_defaults));
     bstc_tmplt_isa(bstc_tmplt_defaults, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
+#endif
+
+    //--------------------------------------------------------------------------------------------------------
+    #define tmpltA bstc_tmplt_traits((++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
+    #define tmpltB bstc_tmplt_traits((++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
+    #define tmpltC bstc_tmplt_traits((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
+    #define tmpltD bstc_tmplt_traits((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
+    #define tmpltE bstc_tmplt_traits((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")))
+    #define tmpltF bstc_tmplt_traits((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")))
+
+    //--------------------------------------------------------------------------------------------------------
+    printf("bstc_tmplt_t(tpl):\n");
+    bstc_tmplt_t(tmpltA);
+    printf("bstc_tmplt_info(tpl):\n");
+    bstc_tmplt_info(tmpltB);
+    printf("bstc_tmplt_fns(tpl):\n");
+    bstc_tmplt_fns(tmpltC);
+    printf("bstc_tmplt_iter(tpl):\n");
+    bstc_tmplt_iter(tmpltD);
+    printf("bstc_tmplt_riter(tpl):\n");
+    bstc_tmplt_riter(tmpltE);
+    printf("bstc_tmplt_alloc(tpl):\n");
+    bstc_tmplt_alloc(tmpltF);
 
     //--------------------------------------------------------------------------------------------------------
     printf("-----------------------------\n");

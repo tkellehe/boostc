@@ -9,8 +9,8 @@
 
 /** Ensure that the parameters are packed into a tuple. */
 /// \{
-#ifndef bstc_iter
-# define bstc_iter(t, nxt, eq, val, put, swap) (t, nxt, eq, val, put, swap)
+#ifndef bstc_iter_traits
+# define bstc_iter_traits(t, nxt, eq, val, put, swap) (t, nxt, eq, val, put, swap)
 #endif
 /// \}
 
@@ -122,7 +122,7 @@
 #ifndef bstc_iter_set_t
 # define bstc_dtl_iter_set_t(tpl, p) bstc_dtl_iter_set_t_expand(BSTC_LAYOUT6 tpl, p)
 # define bstc_dtl_iter_set_t_expand(L, p) BSTC_EXPAND(bstc_dtl_iter_set_t_expand1(L, p))
-# define bstc_dtl_iter_set_t_expand1(t, nxt, eq, val, put, swap, p) bstc_iter(p, nxt, eq, val, put, swap)
+# define bstc_dtl_iter_set_t_expand1(t, nxt, eq, val, put, swap, p) bstc_iter_traits(p, nxt, eq, val, put, swap)
 # define bstc_iter_set_t(tpl, t) BSTC_EXPAND(bstc_dtl_iter_set_t(tpl, t))
 #endif
 /// \}
@@ -133,8 +133,8 @@
 #ifndef bstc_iter_set_nxt
 # define bstc_dtl_iter_set_nxt(tpl, p) bstc_dtl_iter_set_nxt_expand(BSTC_LAYOUT6 tpl, p)
 # define bstc_dtl_iter_set_nxt_expand(L, p) BSTC_EXPAND(bstc_dtl_iter_set_nxt_expand1(L, p))
-# define bstc_dtl_iter_set_nxt_expand1(t, nxt, eq, val, put, swap, p) bstc_iter(t, p, eq, val, put, swap)
-# define bstc_iter_set_nxt(tpl, t) BSTC_EXPAND(bstc_dtl_iter_set_nxt(tpl, t))
+# define bstc_dtl_iter_set_nxt_expand1(t, nxt, eq, val, put, swap, p) bstc_iter_traits(t, p, eq, val, put, swap)
+# define bstc_iter_set_nxt(tpl, nxt) BSTC_EXPAND(bstc_dtl_iter_set_nxt(tpl, nxt))
 #endif
 /// \}
 
@@ -144,8 +144,8 @@
 #ifndef bstc_iter_set_eq
 # define bstc_dtl_iter_set_eq(tpl, p) bstc_dtl_iter_set_eq_expand(BSTC_LAYOUT6 tpl, p)
 # define bstc_dtl_iter_set_eq_expand(L, p) BSTC_EXPAND(bstc_dtl_iter_set_eq_expand1(L, p))
-# define bstc_dtl_iter_set_eq_expand1(t, nxt, eq, val, put, swap, p) bstc_iter(t, nxt, p, val, put, swap)
-# define bstc_iter_set_eq(tpl, t) BSTC_EXPAND(bstc_dtl_iter_set_eq(tpl, t))
+# define bstc_dtl_iter_set_eq_expand1(t, nxt, eq, val, put, swap, p) bstc_iter_traits(t, nxt, p, val, put, swap)
+# define bstc_iter_set_eq(tpl, eq) BSTC_EXPAND(bstc_dtl_iter_set_eq(tpl, eq))
 #endif
 /// \}
 
@@ -155,8 +155,8 @@
 #ifndef bstc_iter_set_val
 # define bstc_dtl_iter_set_val(tpl, p) bstc_dtl_iter_set_val_expand(BSTC_LAYOUT6 tpl, p)
 # define bstc_dtl_iter_set_val_expand(L, p) BSTC_EXPAND(bstc_dtl_iter_set_val_expand1(L, p))
-# define bstc_dtl_iter_set_val_expand1(t, nxt, eq, val, put, swap, p) bstc_iter(t, nxt, eq, p, put, swap)
-# define bstc_iter_set_val(tpl, t) BSTC_EXPAND(bstc_dtl_iter_set_val(tpl, t))
+# define bstc_dtl_iter_set_val_expand1(t, nxt, eq, val, put, swap, p) bstc_iter_traits(t, nxt, eq, p, put, swap)
+# define bstc_iter_set_val(tpl, val) BSTC_EXPAND(bstc_dtl_iter_set_val(tpl, val))
 #endif
 /// \}
 
@@ -166,8 +166,8 @@
 #ifndef bstc_iter_set_put
 # define bstc_dtl_iter_set_put(tpl, p) bstc_dtl_iter_set_put_expand(BSTC_LAYOUT6 tpl, p)
 # define bstc_dtl_iter_set_put_expand(L, p) BSTC_EXPAND(bstc_dtl_iter_set_put_expand1(L, p))
-# define bstc_dtl_iter_set_put_expand1(t, nxt, eq, val, put, swap, p) bstc_iter(t, nxt, eq, val, p, swap)
-# define bstc_iter_set_put(tpl, t) BSTC_EXPAND(bstc_dtl_iter_set_put(tpl, t))
+# define bstc_dtl_iter_set_put_expand1(t, nxt, eq, val, put, swap, p) bstc_iter_traits(t, nxt, eq, val, p, swap)
+# define bstc_iter_set_put(tpl, put) BSTC_EXPAND(bstc_dtl_iter_set_put(tpl, put))
 #endif
 /// \}
 
@@ -177,8 +177,8 @@
 #ifndef bstc_iter_set_swap
 # define bstc_dtl_iter_set_swap(tpl, p) bstc_dtl_iter_set_swap_expand(BSTC_LAYOUT6 tpl, p)
 # define bstc_dtl_iter_set_swap_expand(L, p) BSTC_EXPAND(bstc_dtl_iter_set_swap_expand1(L, p))
-# define bstc_dtl_iter_set_swap_expand1(t, nxt, eq, val, put, swap, p) bstc_iter(t, nxt, eq, val, put, p)
-# define bstc_iter_set_swap(tpl, t) BSTC_EXPAND(bstc_dtl_iter_set_swap(tpl, t))
+# define bstc_dtl_iter_set_swap_expand1(t, nxt, eq, val, put, swap, p) bstc_iter_traits(t, nxt, eq, val, put, p)
+# define bstc_iter_set_swap(tpl, swap) BSTC_EXPAND(bstc_dtl_iter_set_swap(tpl, swap))
 #endif
 /// \}
 
@@ -234,7 +234,7 @@
 /** Default iterator ctuple that uses the no-op iterator functions. */
 /// \{
 #ifndef bstc_iter_defaults
-# define bstc_iter_defaults bstc_iter(bstc_iter_no_t, bstc_iter_nonxt, bstc_iter_noeq, bstc_iter_noval, bstc_iter_noput, bstc_iter_noswap)
+# define bstc_iter_defaults bstc_iter_traits(bstc_iter_no_t, bstc_iter_nonxt, bstc_iter_noeq, bstc_iter_noval, bstc_iter_noput, bstc_iter_noswap)
 #endif
 /// \}
 
@@ -245,5 +245,18 @@
 # ifdef BSTC_HAS_VARIADIC_MACROS
 #  define bstc_iter_isa(tpl, _t, _f) BSTC_EXPAND(bstc_ctuple_isa(tpl, bstc_ctuple_hasN(tpl, 6, _t, _f), _f))
 # endif
+#endif
+/// \}
+
+
+/** Uses the BSTC iterator interface to apply a foreach based off of a perdicate.
+ * \param iters The iterator ctuple to extract the iterator interface from.
+ * \param iter A reference to the iterator to apply the functions to and will be updated with the location.
+ * \param end A reference to the iterator representing the end of the linear search.
+ */
+/// \{
+#ifndef bstc_iter_foreach
+# define bstc_iter_foreach(iters, iter, end) \
+    for(; !(bstc_iter_eq(iters)(iter, end)); bstc_iter_nxt(iters)(iter))
 #endif
 /// \}

@@ -10,8 +10,8 @@
 
 /** Ensure that the parameters are packed into a tuple. */
 /// \{
-#ifndef bstc_alloc
-# define bstc_alloc(f, m, r) (f, m, r)
+#ifndef bstc_alloc_traits
+# define bstc_alloc_traits(f, m, r) (f, m, r)
 #endif
 /// \}
 
@@ -72,7 +72,7 @@
 #ifndef bstc_alloc_set_free
 # define bstc_dtl_alloc_set_free(tpl, free) bstc_dtl_alloc_set_free_expand(BSTC_LAYOUT3 tpl, free)
 # define bstc_dtl_alloc_set_free_expand(L, free) BSTC_EXPAND(bstc_dtl_alloc_set_free_expand1(L, free))
-# define bstc_dtl_alloc_set_free_expand1(f, m, r, free) bstc_alloc(free, m, r)
+# define bstc_dtl_alloc_set_free_expand1(f, m, r, free) bstc_alloc_traits(free, m, r)
 # define bstc_alloc_set_free(tpl, free) BSTC_EXPAND(bstc_dtl_alloc_set_free(tpl, free))
 #endif
 /// \}
@@ -83,7 +83,7 @@
 #ifndef bstc_alloc_set_malloc
 # define bstc_dtl_alloc_set_malloc(tpl, malloc) bstc_dtl_alloc_set_malloc_expand(BSTC_LAYOUT3 tpl, malloc)
 # define bstc_dtl_alloc_set_malloc_expand(L, malloc) BSTC_EXPAND(bstc_dtl_alloc_set_malloc_expand1(L, malloc))
-# define bstc_dtl_alloc_set_malloc_expand1(f, m, r, malloc) bstc_alloc(f, malloc, r)
+# define bstc_dtl_alloc_set_malloc_expand1(f, m, r, malloc) bstc_alloc_traits(f, malloc, r)
 # define bstc_alloc_set_malloc(tpl, malloc) BSTC_EXPAND(bstc_dtl_alloc_set_malloc(tpl, malloc))
 #endif
 /// \}
@@ -94,7 +94,7 @@
 #ifndef bstc_alloc_set_realloc
 # define bstc_dtl_alloc_set_realloc(tpl, realloc) bstc_dtl_alloc_set_realloc_expand(BSTC_LAYOUT3 tpl, realloc)
 # define bstc_dtl_alloc_set_realloc_expand(L, realloc) BSTC_EXPAND(bstc_dtl_alloc_set_realloc_expand1(L, realloc))
-# define bstc_dtl_alloc_set_realloc_expand1(f, m, r, realloc) bstc_alloc(f, m, realloc)
+# define bstc_dtl_alloc_set_realloc_expand1(f, m, r, realloc) bstc_alloc_traits(f, m, realloc)
 # define bstc_alloc_set_realloc(tpl, realloc) BSTC_EXPAND(bstc_dtl_alloc_set_realloc(tpl, realloc))
 #endif
 /// \}
@@ -103,7 +103,7 @@
 /** Default allocator ctuple that use the stdlib memory managers. */
 /// \{
 #ifndef bstc_alloc_stdlib
-# define bstc_alloc_stdlib bstc_alloc(bstc_free, bstc_malloc, bstc_realloc)
+# define bstc_alloc_stdlib bstc_alloc_traits(bstc_free, bstc_malloc, bstc_realloc)
 #endif
 /// \}
 
@@ -111,7 +111,7 @@
 /** Default allocator ctuple that uses the no-op memory manager functions. */
 /// \{
 #ifndef bstc_alloc_defaults
-# define bstc_alloc_defaults bstc_alloc(bstc_alloc_nofree, bstc_alloc_nomalloc, bstc_alloc_norealloc)
+# define bstc_alloc_defaults bstc_alloc_traits(bstc_alloc_nofree, bstc_alloc_nomalloc, bstc_alloc_norealloc)
 #endif
 /// \}
 

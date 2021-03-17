@@ -44,12 +44,12 @@ int main(int argc, char *argv[])
 #endif
 
     //--------------------------------------------------------------------------------------------------------
-    #define iterA bstc_iter((++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
-    #define iterB bstc_iter((++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
-    #define iterC bstc_iter((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
-    #define iterD bstc_iter((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
-    #define iterE bstc_iter((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")))
-    #define iterF bstc_iter((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")))
+    #define iterA bstc_iter_traits((++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
+    #define iterB bstc_iter_traits((++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
+    #define iterC bstc_iter_traits((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
+    #define iterD bstc_iter_traits((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
+    #define iterE bstc_iter_traits((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")))
+    #define iterF bstc_iter_traits((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")))
 
     //--------------------------------------------------------------------------------------------------------
     printf("bstc_iter_t(tpl):\n");
@@ -64,6 +64,31 @@ int main(int argc, char *argv[])
     bstc_iter_put(iterE);
     printf("bstc_iter_swap(tpl):\n");
     bstc_iter_swap(iterF);
+
+    //--------------------------------------------------------------------------------------------------------
+    {
+        #define int_iter_nxt(iter) (++iter)
+        #define int_iter_eq(l, r) (l == r)
+        #define int_iter bstc_iter_traits(int*, int_iter_nxt, int_iter_eq, bstc_iter_noval, bstc_iter_noput, bstc_iter_noswap)
+        int array[5] = {1, 2, 3, 4, 5};
+        int* iter = (int*)array;
+        int* end = (int*)(array + 5);
+        int cnt = 0;
+        bstc_iter_foreach(int_iter, iter, end)
+        {
+            printf("iterator array[%i] = %i:\n", cnt++, *iter);
+            if(*iter == cnt)
+            {
+                ++num_pass;
+                printf("    passed\n");
+            }
+            else
+            {
+                ++num_fail;
+                printf("    failed\n");
+            }
+        }
+    }
 
     //--------------------------------------------------------------------------------------------------------
     printf("-----------------------------\n");

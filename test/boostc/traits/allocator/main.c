@@ -37,9 +37,9 @@ int main(int argc, char *argv[])
 #endif
 
     //--------------------------------------------------------------------------------------------------------
-    #define alloc5 bstc_alloc((++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
-    #define alloc6 bstc_alloc((++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")))
-    #define alloc7 bstc_alloc((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")))
+    #define alloc5 bstc_alloc_traits((++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
+    #define alloc6 bstc_alloc_traits((++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")))
+    #define alloc7 bstc_alloc_traits((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")))
 
     //--------------------------------------------------------------------------------------------------------
     printf("bstc_alloc_free(tpl):\n");
