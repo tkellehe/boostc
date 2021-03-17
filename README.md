@@ -65,12 +65,12 @@ int main(int argc, char *argv[])
 
 The vector API provides a C++ like iterator interface for accessing elements in the vector.
 The current generic iterator API provides the following functionalities for forward and reverse iterators:
- * `bstc_*iter_t` : A function that represents the type declaration of the iterator.
- * `bstc_*iter_nxt` : A function that moves the iterator to the next position.
- * `bstc_*iter_eq` : A function that compares if two iterators represent the same element.
- * `bstc_*iter_val` : A function to get the current value of the iterator.
- * `bstc_*iter_set` : A function to set the current value of the iterator.
- * `bstc_*iter_swap` : A function to swap the contents of two iterators.
+ * `bstc_(r?)iter_t` : A function that represents the type declaration of the iterator.
+ * `bstc_(r?)iter_nxt` : A function that moves the iterator to the next position.
+ * `bstc_(r?)iter_eq` : A function that compares if two iterators represent the same element.
+ * `bstc_(r?)iter_val` : A function to get the current value of the iterator.
+ * `bstc_(r?)iter_set` : A function to set the current value of the iterator.
+ * `bstc_(r?)iter_swap` : A function to swap the contents of two iterators.
 
 ```c
 #include <boostc/vector.h>

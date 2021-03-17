@@ -22,8 +22,8 @@ bstc_noreturn void stop_now()
 
 int main(int argc, char *argv[])
 {
-    (void)argc;
-    (void)argv;
+    bstc_unused_param(argc);;
+    bstc_unused_param(argv);;
 
     //--------------------------------------------------------------------------------------------------------
     stop_now();

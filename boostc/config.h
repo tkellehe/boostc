@@ -154,16 +154,21 @@
 #endif
 
 
-#ifndef BSTC_INLINE
+#ifndef bstc_inline
 # if defined(BSTC_LEAST_C99) || defined(__cplusplus)
-#  define BSTC_INLINE inline
+#  define bstc_inline inline
 # elif defined(BSTC_COMPILER_GCC) || defined(BSTC_COMPILER_TCC) || defined(BSTC_COMPILER_CLANG)
-#  define BSTC_INLINE __inline__
+#  define bstc_inline __inline__
 # elif defined(BSTC_COMPILER_VISUALC)
-#  define BSTC_INLINE __inline
+#  define bstc_inline __inline
 # else
-#  define BSTC_INLINE
+#  define bstc_inline
 # endif
+#endif
+
+
+#ifndef bstc_unused_param
+# define bstc_unused_param(P) (void)(P);
 #endif
 /// \}
 

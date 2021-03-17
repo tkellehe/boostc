@@ -93,7 +93,7 @@ struct _bstc_timespec
 #ifndef bstc_timespec_get
 # ifndef TIME_UTC
 #  ifdef BSTC_OSAPI_WINDOWS
-    static BSTC_INLINE int _bstc_timespec_get(struct bstc_timespec *ts, int base)
+    static bstc_inline int _bstc_timespec_get(struct bstc_timespec *ts, int base)
     {
         struct _timeb tb;
 
@@ -107,7 +107,7 @@ struct _bstc_timespec
     }
 #   define bstc_timespec_get _bstc_timespec_get
 #  elif BSTC_OSAPI_POSIX
-    static BSTC_INLINE int _bstc_timespec_get(struct bstc_timespec *ts, int base)
+    static bstc_inline int _bstc_timespec_get(struct bstc_timespec *ts, int base)
     {
     #if !defined(bstc_clock_realtime)
         struct timeval tv;
