@@ -12,7 +12,7 @@ So, the interface can be checked if it could not be resolved.
 ## `bstc_noreturn`
 
 Defined per the compiler and language support, prioritizing what is provided in the language.
-Description and standard overview can be found here: https://en.cppreference.com/w/c/language/_Noreturn
+Standard and description overview can be found here: https://en.cppreference.com/w/c/language/_Noreturn
 
 ```c
 #include <boostc/stdlib.h>
@@ -25,8 +25,8 @@ bstc_noreturn void stop_now()
 
 int main(int argc, char *argv[])
 {
-    (void)argc;
-    (void)argv;
+    bstc_unused_param(argc);
+    bstc_unused_param(argv);
 
     stop_now();
 
