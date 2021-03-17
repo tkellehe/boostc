@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
     
     // Can loop over the contents.
     {
-        int i;
+        bstc_size_t i;
         for(i = 0; i < bstc_vect_len(vect); ++i)
             printf("%i\n", vect[i]);
     }
@@ -187,7 +187,7 @@ int main(int argc, char *argv[])
     
     // Can loop over the contents where the template is not necessary, but recommended for consistency.
     {
-        int i;
+        bstc_size_t i;
         for(i = 0; i < bstc_vect_len(vect_int, vect); ++i)
             printf("%i\n", vect[i]);
     }

@@ -47,10 +47,10 @@
 
 
 #define bstc_dtl_vect_len(tmplt, vect) BSTC_CALL(bstc_dtl_vect_get_len(tmplt), tmplt, vect)
-#define bstc_dtl_vect_default_len(tmplt, vect) ((vect) ? (int)bstc_dtl_vect_len_(vect) : 0)
+#define bstc_dtl_vect_default_len(tmplt, vect) ((vect) ? (bstc_size_t)bstc_dtl_vect_len_(vect) : 0)
 
 #define bstc_dtl_vect_cap(tmplt, vect) BSTC_CALL(bstc_dtl_vect_get_cap(tmplt), tmplt, vect)
-#define bstc_dtl_vect_default_cap(tmplt, vect) ((vect) ? (int)bstc_dtl_vect_cap_(vect) : 0)
+#define bstc_dtl_vect_default_cap(tmplt, vect) ((vect) ? (bstc_size_t)bstc_dtl_vect_cap_(vect) : 0)
 
 #define bstc_dtl_vect_rsz(tmplt, vect, nsz) BSTC_CALL(bstc_dtl_vect_get_rsz(tmplt), tmplt, vect, nsz)
 #define bstc_dtl_vect_default_rsz(tmplt, vect, nsz) \

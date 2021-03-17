@@ -6,6 +6,7 @@
 #include <boostc/config.h>
 #include <boostc/assert.h>
 #include <boostc/ctuple.h>
+#include <boostc/stddef.h>
 #include <boostc/stdint.h>
 #include <boostc/string.h>
 #include <boostc/traits/template.h>

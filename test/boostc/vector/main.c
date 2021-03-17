@@ -239,12 +239,12 @@ int main(int argc, char *argv[])
         if(vect[3] == 11 && vect[2] == 3) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
 
         {
-            int i = 0;
-            int c = 0;
+            bstc_size_t i = 0;
+            bstc_size_t c = 0;
             printf("bstc_alg_foreach(iter):\n");
             iter = bstc_vect_begin(vect);
             bstc_alg_foreach(bstc_tmplt_iter(vtmplt1), iter, bstc_vect_end(vect),
-                printf("    vext[%i]: %i\n", i, bstc_vect_iter_val(iter));
+                printf("    vext[%i]: %i\n", (int)i, bstc_vect_iter_val(iter));
                 c += vect[i] == bstc_vect_iter_val(iter);
                 ++i;
             )
@@ -252,13 +252,13 @@ int main(int argc, char *argv[])
         }
 
         {
-            int i = bstc_vect_len(vect);
-            int c = 0;
+            bstc_size_t i = bstc_vect_len(vect);
+            bstc_size_t c = 0;
             printf("bstc_alg_foreach(riter):\n");
             riter = bstc_vect_rbegin(vect);
             bstc_alg_foreach(bstc_tmplt_riter(vtmplt1), riter, bstc_vect_rend(vect),
                 --i;
-                printf("    vext[%i]: %i\n", i, bstc_vect_riter_val(riter));
+                printf("    vext[%i]: %i\n", (int)i, bstc_vect_riter_val(riter));
                 c += vect[i] == bstc_vect_riter_val(riter);
             )
             if(c == bstc_vect_len(vect))  ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
