@@ -31,8 +31,8 @@ Provides compile time decisions to create a _C++_ like vector in _C_. Uses the _
 
 int main(int argc, char *argv[])
 {
-    (void)argc;
-    (void)argv;
+    bstc_unused_param(argc);
+    bstc_unused_param(argv);
     // Note: It is recommended to do as typedef because there is no guarantee that the types will be the same.
     //       This problem is more relevant when the underlying structure is a more complex data structure.
     bstc_vect_t(int) vect;
@@ -78,8 +78,8 @@ The current generic iterator API provides the following functionalities for forw
 
 int main(int argc, char *argv[])
 {
-    (void)argc;
-    (void)argv;
+    bstc_unused_param(argc);
+    bstc_unused_param(argv);
     // Declare a vector that contains type 'int'.
     bstc_vect_t(int) vect;
     // Also declare a forward and reverse iterator for a vector of type 'int'.
@@ -159,8 +159,8 @@ void* my_realloc(void* mem, int sz)
 
 int main(int argc, char *argv[])
 {
-    (void)argc;
-    (void)argv;
+    bstc_unused_param(argc);
+    bstc_unused_param(argv);
     // It is recommended to create a definition for the macro type to make it more readable.
     // The type provided first is the underlying type of the vector.
     // The symbol tuple is merely indicated by parentheses and the three symbols provided.
