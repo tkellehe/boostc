@@ -12,8 +12,8 @@ int main(int argc, char *argv[])
     bstc_unused_param(argv);
     bstc_vect_t(int) v;
     bstc_vect_init(v);
-    bstc_vect_push(v, 11);
-    bstc_vect_push(v, 12);
+    bstc_vect_pushb(v, 11);
+    bstc_vect_pushb(v, 12);
     {
         bstc_size_t i;
         for(i = 0; i < bstc_vect_len(v); ++i)
