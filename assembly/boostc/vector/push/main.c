@@ -8,14 +8,14 @@
 
 int main(int argc, char *argv[])
 {
-    (void)argc;
-    (void)argv;
+    bstc_unused_param(argc);
+    bstc_unused_param(argv);
     bstc_vect_t(int) v;
     bstc_vect_init(v);
     bstc_vect_push(v, 11);
     bstc_vect_push(v, 12);
     {
-        int i;
+        bstc_size_t i;
         for(i = 0; i < bstc_vect_len(v); ++i)
             printf("%i\n", v[i]);
     }
