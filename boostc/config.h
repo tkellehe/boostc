@@ -52,11 +52,30 @@
 /// \}
 
 
+/* Ensure macros are defined */
+/// \{
+#if !defined(BSTC_HAS_VARIADIC_MACROS) && !defined(BSTC_NO_VARIADIC_MACROS)
+# if defined(BSTC_LEAST_C99) || defined(BSTC_LEAST_CPP98)
+#  define BSTC_HAS_VARIADIC_MACROS
+# else
+#  define BSTC_NO_VARIADIC_MACROS
+# endif
+#endif
+
+
+#if !defined(BSTC_HAS_VA_ARGS_PASTE) && !defined(BSTC_NO_VA_ARGS_PASTE)
+# define BSTC_NO_VA_ARGS_PASTE
+#endif
+
+
+#if !defined(BSTC_HAS_STRING_PASTE) && !defined(BSTC_NO_STRING_PASTE)
+# define BSTC_NO_STRING_PASTE
+#endif
+
+
 #include <boostc/config/macros.h>
 
 
-/* Ensure macros are defined */
-/// \{
 // Note that the processors typically handle branch prediction better for the likely case.
 // Therein, the best time to use these is when you are dealing with the unlikely case.
 // https://medium.com/software-design/likely-unlikely-directives-802c09bd5232
@@ -130,25 +149,6 @@
 #   define BSTC_NO_LONG_LONG
 # endif
 #endif
-
-
-#if !defined(BSTC_HAS_VA_ARGS_PASTE) && !defined(BSTC_NO_VA_ARGS_PASTE)
-# define BSTC_NO_VA_ARGS_PASTE
-#endif
-
-
-#if !defined(BSTC_HAS_STRING_PASTE) && !defined(BSTC_NO_STRING_PASTE)
-# define BSTC_NO_STRING_PASTE
-#endif
-
-
-#if !defined(BSTC_HAS_VARIADIC_MACROS) && !defined(BSTC_NO_VARIADIC_MACROS)
-# if defined(BSTC_LEAST_C99) || defined(BSTC_LEAST_CPP98)
-#  define BSTC_HAS_VARIADIC_MACROS
-# else
-#  define BSTC_NO_VARIADIC_MACROS
-# endif
-#endif
 /// \}
 
 
@@ -199,58 +199,64 @@
 
 /* Provide a way to unpack tuples */
 /// \{
-#ifndef BSTC_UNPACK
-# define BSTC_UNPACK(...) __VA_ARGS__
+#ifdef BSTC_HAS_VARIADIC_MACROS
+# ifndef BSTC_UNPACK
+#  define BSTC_UNPACK(...) __VA_ARGS__
+# endif
 #endif
 /// \}
 
 
 /* Provide a way to detect if a tuple */
 /// \{
-#ifndef BSTC_ISA_TUPLE
-# define BSTC_ISA_TUPLE(tpl, _t, _f) BSTC_DTL_ISA_TUPLE_CALL(BSTC_DTL_ISA_TUPLE_SELECT(tpl,unused), _t, _f)
-# define BSTC_DTL_ISA_TUPLE_CALL(F, _t, _f) F(_t, _f)
-# define BSTC_DTL_ISA_TUPLE_SELECT(tpl,U) BSTC_JOIN2(BSTC_DTL_ISA_TUPLE, BSTC_DTL_ISA_TUPLE_SELECT_(tpl, unused))
-# define BSTC_DTL_ISA_TUPLE_SELECT_(tpl,U) BSTC_ARGCNT(0, BSTC_DTL_ISA_TUPLE_EXPAND tpl)
-# define BSTC_DTL_ISA_TUPLE2(_t, _f) _f
-# define BSTC_DTL_ISA_TUPLE3(_t, _f) _t
-# define BSTC_DTL_ISA_TUPLE_EXPAND(...) 0, 0
+#if defined(BSTC_HAS_VARIADIC_MACROS) && defined(BSTC_ARGCNT)
+# ifndef BSTC_ISA_TUPLE
+#  define BSTC_ISA_TUPLE(tpl, _t, _f) BSTC_DTL_ISA_TUPLE_CALL(BSTC_DTL_ISA_TUPLE_SELECT(tpl,unused), _t, _f)
+#  define BSTC_DTL_ISA_TUPLE_CALL(F, _t, _f) F(_t, _f)
+#  define BSTC_DTL_ISA_TUPLE_SELECT(tpl,U) BSTC_JOIN2(BSTC_DTL_ISA_TUPLE, BSTC_DTL_ISA_TUPLE_SELECT_(tpl, unused))
+#  define BSTC_DTL_ISA_TUPLE_SELECT_(tpl,U) BSTC_ARGCNT(0, BSTC_DTL_ISA_TUPLE_EXPAND tpl)
+#  define BSTC_DTL_ISA_TUPLE2(_t, _f) _f
+#  define BSTC_DTL_ISA_TUPLE3(_t, _f) _t
+#  define BSTC_DTL_ISA_TUPLE_EXPAND(...) 0, 0
+# endif
 #endif
 /// \}
 
 
 /* Provide a way to detect if-empty character is first */
 /// \{
-#ifndef BSTC_IF_ARG0_EMPTY
-# ifdef BSTC_HAS_VA_ARGS_PASTE
-#  define BSTC_IF_ARG0_EMPTY(tpl, _t, _f) BSTC_EXPAND(BSTC_IFEQ(BSTC_DTL_IF_ARG0_EMPTY1(tpl), BSTC_DTL_IF_ARG0_EMPTY2(tpl), _f, _t))
-#  define BSTC_DTL_IF_ARG0_EMPTY1(tpl) BSTC_EXPAND(BSTC_DTL_IF_ARG0_EMPTY1_ tpl)
-#  define BSTC_DTL_IF_ARG0_EMPTY1_(...) BSTC_DTL_IF_ARG0_EMPTY1__(__VA_ARGS__)
-#  define BSTC_DTL_IF_ARG0_EMPTY1__(A, ...) BSTC_DTL_IF_ARG0_EMPTY1___(A)
-#  define BSTC_DTL_IF_ARG0_EMPTY1___(...) BSTC_ARGCNT(0, __VA_ARGS__)
-#  define BSTC_DTL_IF_ARG0_EMPTY2(tpl) BSTC_EXPAND(BSTC_DTL_IF_ARG0_EMPTY2_ tpl)
-#  define BSTC_DTL_IF_ARG0_EMPTY2_(...) BSTC_DTL_IF_ARG0_EMPTY2__(__VA_ARGS__)
-#  define BSTC_DTL_IF_ARG0_EMPTY2__(A, ...) BSTC_DTL_IF_ARG0_EMPTY2___(A)
-#  define BSTC_DTL_IF_ARG0_EMPTY2___(...) BSTC_ARGCNT(0, ##__VA_ARGS__)
-# else
-#  define BSTC_IF_ARG0_EMPTY(tpl, _t, _f) BSTC_EXPAND(BSTC_DTL_IF_ARG0_EMPTY(_t, _f, BSTC_DTL_IF_ARG0_EMPTY_DETECT(tpl)))
-#  define BSTC_DTL_IF_ARG0_EMPTY(_t, _f, tpl) BSTC_EXPAND(BSTC_IFEQ(BSTC_ARGCNT tpl, 2, _t, _f))
-#  define BSTC_DTL_IF_ARG0_EMPTY_DETECT(tpl) BSTC_EXPAND(BSTC_DTL_IF_ARG0_EMPTY_DETECT1(unused, BSTC_UNPACK tpl, unused))
-#  define BSTC_DTL_IF_ARG0_EMPTY_DETECT1(U,...) BSTC_EXPAND(BSTC_DTL_IF_ARG0_EMPTY_DETECT2(__VA_ARGS__))
-#  define BSTC_DTL_IF_ARG0_EMPTY_DETECT2(A,...) (BSTC_CALL(BSTC_DTL_IF_ARG0_EMPTY_DETECT3(A, unused), A, unused))
-#  define BSTC_DTL_IF_ARG0_EMPTY_DETECT3(A, U) BSTC_ISA_TUPLE(A, BSTC_DTL_IF_ARG0_EMPTY_DETECT4, BSTC_DTL_IF_ARG0_EMPTY_DETECT5)
-#  define BSTC_DTL_IF_ARG0_EMPTY_DETECT4(A, U) A
-#  define BSTC_DTL_IF_ARG0_EMPTY_DETECT5(A, U) BSTC_DTL_IF_ARG0_EMPTY_DETECT6(A, U) ()
+#ifdef BSTC_HAS_VARIADIC_MACROS
+# ifndef BSTC_IF_ARG0_EMPTY
+#  ifdef BSTC_HAS_VA_ARGS_PASTE
+#   define BSTC_IF_ARG0_EMPTY(tpl, _t, _f) BSTC_EXPAND(BSTC_IFEQ(BSTC_DTL_IF_ARG0_EMPTY1(tpl), BSTC_DTL_IF_ARG0_EMPTY2(tpl), _f, _t))
+#   define BSTC_DTL_IF_ARG0_EMPTY1(tpl) BSTC_EXPAND(BSTC_DTL_IF_ARG0_EMPTY1_ tpl)
+#   define BSTC_DTL_IF_ARG0_EMPTY1_(...) BSTC_DTL_IF_ARG0_EMPTY1__(__VA_ARGS__)
+#   define BSTC_DTL_IF_ARG0_EMPTY1__(A, ...) BSTC_DTL_IF_ARG0_EMPTY1___(A)
+#   define BSTC_DTL_IF_ARG0_EMPTY1___(...) BSTC_ARGCNT(0, __VA_ARGS__)
+#   define BSTC_DTL_IF_ARG0_EMPTY2(tpl) BSTC_EXPAND(BSTC_DTL_IF_ARG0_EMPTY2_ tpl)
+#   define BSTC_DTL_IF_ARG0_EMPTY2_(...) BSTC_DTL_IF_ARG0_EMPTY2__(__VA_ARGS__)
+#   define BSTC_DTL_IF_ARG0_EMPTY2__(A, ...) BSTC_DTL_IF_ARG0_EMPTY2___(A)
+#   define BSTC_DTL_IF_ARG0_EMPTY2___(...) BSTC_ARGCNT(0, ##__VA_ARGS__)
+#  else
+#   define BSTC_IF_ARG0_EMPTY(tpl, _t, _f) BSTC_EXPAND(BSTC_DTL_IF_ARG0_EMPTY(_t, _f, BSTC_DTL_IF_ARG0_EMPTY_DETECT(tpl)))
+#   define BSTC_DTL_IF_ARG0_EMPTY(_t, _f, tpl) BSTC_EXPAND(BSTC_IFEQ(BSTC_ARGCNT tpl, 2, _t, _f))
+#   define BSTC_DTL_IF_ARG0_EMPTY_DETECT(tpl) BSTC_EXPAND(BSTC_DTL_IF_ARG0_EMPTY_DETECT1(unused, BSTC_UNPACK tpl, unused))
+#   define BSTC_DTL_IF_ARG0_EMPTY_DETECT1(U,...) BSTC_EXPAND(BSTC_DTL_IF_ARG0_EMPTY_DETECT2(__VA_ARGS__))
+#   define BSTC_DTL_IF_ARG0_EMPTY_DETECT2(A,...) (BSTC_CALL(BSTC_DTL_IF_ARG0_EMPTY_DETECT3(A, unused), A, unused))
+#   define BSTC_DTL_IF_ARG0_EMPTY_DETECT3(A, U) BSTC_ISA_TUPLE(A, BSTC_DTL_IF_ARG0_EMPTY_DETECT4, BSTC_DTL_IF_ARG0_EMPTY_DETECT5)
+#   define BSTC_DTL_IF_ARG0_EMPTY_DETECT4(A, U) A
+#   define BSTC_DTL_IF_ARG0_EMPTY_DETECT5(A, U) BSTC_DTL_IF_ARG0_EMPTY_DETECT6(A, U) ()
 
 // If does not have symbol string pasting, then we need to potentially mess up string literals.
-#  ifdef BSTC_HAS_STRING_PASTE
-#   define BSTC_DTL_IF_ARG0_EMPTY_PREFIX() 0, 0
-#   define BSTC_DTL_IF_ARG0_EMPTY_DETECT6(A, U) BSTC_DTL_IF_ARG0_EMPTY_PREFIX ## A
-#  else
-#   define L() 0, 0
-#   define BSTC_DTL_IF_ARG0_EMPTY_DETECT6(A, U) L ## A
-#  endif
+#   ifdef BSTC_HAS_STRING_PASTE
+#    define BSTC_DTL_IF_ARG0_EMPTY_PREFIX() 0, 0
+#    define BSTC_DTL_IF_ARG0_EMPTY_DETECT6(A, U) BSTC_DTL_IF_ARG0_EMPTY_PREFIX ## A
+#   else
+#    define L() 0, 0
+#    define BSTC_DTL_IF_ARG0_EMPTY_DETECT6(A, U) L ## A
+#   endif
 
+#  endif
 # endif
 #endif
 /// \}

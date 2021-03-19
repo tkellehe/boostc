@@ -13,14 +13,14 @@
 /** Declares the vector vector traits.
  * \param T The type of the data in the vector.
  * \param alloc An optional argument which is the allocator for the vector traits.
- * \param fns An optional argument which is the content functions for the vector traits.
+ * \param subtraits An optional argument which is the subtraits for the type provided.
  */
 /// \{
 #ifndef bstc_vect_traits
 # if defined(BSTC_HAS_VARIADIC_MACROS)
 #  define bstc_vect_traits(...) BSTC_EXPAND(bstc_ctuple_call(bstc_dtl_vect_traits_select(bstc_ctuple(__VA_ARGS__)), bstc_ctuple(__VA_ARGS__)))
 # else
-#  define bstc_vect_traits(T, alloc, fns) bstc_dtl_vect_traits3(T, alloc, fns)
+#  define bstc_vect_traits(T, alloc, subtraits) bstc_dtl_vect_traits3(T, alloc, subtraits)
 # endif
 #endif
 /// \}
@@ -34,7 +34,7 @@
 # ifdef bstc_container_isa
 #  define bstc_vect_t(T) bstc_container_isa(T, bstc_container_t(T), T*)
 # else
-#  define bstc_vect_t(T) bstc_container_t(T)
+#  define bstc_vect_t(traits) bstc_container_t(traits)
 # endif
 #endif
 /// \}
@@ -269,10 +269,10 @@
  */
 /// \{
 #ifndef bstc_vect_iter_t
-# ifndef bstc_container_isa
+# ifdef bstc_container_isa
 #  define bstc_vect_iter_t(T) bstc_container_isa(T, bstc_iter_t(bstc_container_iter(T)), bstc_dtl_vect_default_iter_t(T))
 # else
-#  define bstc_vect_iter_t(T) bstc_iter_t(bstc_container_iter(T))
+#  define bstc_vect_iter_t(traits) bstc_iter_t(bstc_container_iter(traits))
 # endif
 #endif
 /// \}
@@ -359,7 +359,7 @@
 # ifdef bstc_container_isa
 #  define bstc_vect_riter_t(T) bstc_container_isa(T, bstc_iter_t(bstc_container_riter(T)), bstc_dtl_vect_default_riter_t(T))
 # else
-#  define bstc_vect_riter_t(T) bstc_iter_t(bstc_container_riter(T))
+#  define bstc_vect_riter_t(traits) bstc_iter_t(bstc_container_riter(traits))
 # endif
 #endif
 /// \}

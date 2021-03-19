@@ -11,7 +11,7 @@
 
 /** Provide operations on bstc container types.
  * type: The actual type for the container.
- * info: A ctuple of the information about the type.
+ * subtraits: A ctuple of the information about the type.
  * fns: A ctuple of the functions for the type.
  * iter: The bstc iterator calls as a ctuple for the type.
  * riter: The bstc reverse iterator calls as a ctuple for the type.
@@ -22,7 +22,7 @@
 /** Ensure that the parameters are packed into a tuple. */
 /// \{
 #ifndef bstc_container_traits
-# define bstc_container_traits(t, info, fns, iter, riter, alloc) (t, info, fns, iter, riter, alloc)
+# define bstc_container_traits(t, subtraits, fns, iter, riter, alloc) (t, subtraits, fns, iter, riter, alloc)
 #endif
 /// \}
 
@@ -35,13 +35,13 @@
 /// \}
 
 
-/** Creates a ctuple with the defaults set except for the info ctuple provided. */
+/** Creates a ctuple with the defaults set except for the subtraits ctuple provided. */
 /// \{
-#ifndef bstc_container_pack_info
+#ifndef bstc_container_pack_subtraits
 # if defined(bstc_ctuple_isa)
-#  define bstc_container_pack_info(info) bstc_ctuple_isa(info, bstc_container_set_info(bstc_container_defaults, info), BSTC_TMPLT_NOT_CREATED_ERROR)
+#  define bstc_container_pack_subtraits(subtraits) bstc_ctuple_isa(subtraits, bstc_container_set_subtraits(bstc_container_defaults, subtraits), BSTC_TMPLT_NOT_CREATED_ERROR)
 # else
-#  define bstc_container_pack_info(info)bstc_container_set_info(bstc_container_defaults, info)
+#  define bstc_container_pack_subtraits(subtraits)bstc_container_set_subtraits(bstc_container_defaults, subtraits)
 # endif
 #endif
 /// \}
@@ -106,17 +106,17 @@
 /** Get the container type that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_container_t
-# define bstc_dtl_container_t(t, info, fns, iter, riter, alloc) t
+# define bstc_dtl_container_t(t, subtraits, fns, iter, riter, alloc) t
 # define bstc_container_t(tpl) BSTC_EXPAND(bstc_dtl_container_t tpl)
 #endif
 /// \}
 
 
-/** Get the container info ctuple that has been packed into the ctuple. */
+/** Get the container subtraits ctuple that has been packed into the ctuple. */
 /// \{
-#ifndef bstc_container_info
-# define bstc_dtl_container_info(t, info, fns, iter, riter, alloc) info
-# define bstc_container_info(tpl) BSTC_EXPAND(bstc_dtl_container_info tpl)
+#ifndef bstc_container_subtraits
+# define bstc_dtl_container_subtraits(t, subtraits, fns, iter, riter, alloc) subtraits
+# define bstc_container_subtraits(tpl) BSTC_EXPAND(bstc_dtl_container_subtraits tpl)
 #endif
 /// \}
 
@@ -124,7 +124,7 @@
 /** Get the container functions ctuple that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_container_fns
-# define bstc_dtl_container_fns(t, info, fns, iter, riter, alloc) fns
+# define bstc_dtl_container_fns(t, subtraits, fns, iter, riter, alloc) fns
 # define bstc_container_fns(tpl) BSTC_EXPAND(bstc_dtl_container_fns tpl)
 #endif
 /// \}
@@ -133,7 +133,7 @@
 /** Get the container iterator ctuple that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_container_iter
-# define bstc_dtl_container_iter(t, info, fns, iter, riter, alloc) iter
+# define bstc_dtl_container_iter(t, subtraits, fns, iter, riter, alloc) iter
 # define bstc_container_iter(tpl) BSTC_EXPAND(bstc_dtl_container_iter tpl)
 #endif
 /// \}
@@ -142,7 +142,7 @@
 /** Get the container reverse iterator ctuple that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_container_riter
-# define bstc_dtl_container_riter(t, info, fns, iter, riter, alloc) riter
+# define bstc_dtl_container_riter(t, subtraits, fns, iter, riter, alloc) riter
 # define bstc_container_riter(tpl) BSTC_EXPAND(bstc_dtl_container_riter tpl)
 #endif
 /// \}
@@ -151,18 +151,28 @@
 /** Get the container allocator ctuple that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_container_alloc
-# define bstc_dtl_container_alloc(t, info, fns, iter, riter, alloc) alloc
+# define bstc_dtl_container_alloc(t, subtraits, fns, iter, riter, alloc) alloc
 # define bstc_container_alloc(tpl) BSTC_EXPAND(bstc_dtl_container_alloc tpl)
 #endif
 /// \}
 
 
-/** Get the first item in the container functions ctuple that has been packed into the ctuple. */
+/** Get the container functions ctuple then get the constructor. */
 /// \{
-#ifndef bstc_container_fn
-# ifdef bstc_ctuple_getI
-#  define bstc_container_fn(tpl) bstc_ctuple_getI(bstc_container_fns(tpl), 0)
-# endif
+#ifndef bstc_container_ctor
+# define bstc_dtl_container_ctor1(ctor, dtor) ctor
+# define bstc_dtl_container_ctor(t, subtraits, fns, iter, riter, alloc) BSTC_EXPAND(bstc_dtl_container_ctor1 fns)
+# define bstc_container_ctor(tpl) BSTC_EXPAND(bstc_dtl_container_ctor tpl)
+#endif
+/// \}
+
+
+/** Get the container functions ctuple then get the destructor. */
+/// \{
+#ifndef bstc_container_dtor
+# define bstc_dtl_container_dtor1(ctor, dtor) ctor
+# define bstc_dtl_container_dtor(t, subtraits, fns, iter, riter, alloc) BSTC_EXPAND(bstc_dtl_container_dtor1 fns)
+# define bstc_container_dtor(tpl) BSTC_EXPAND(bstc_dtl_container_dtor tpl)
 #endif
 /// \}
 
@@ -172,19 +182,19 @@
 #ifndef bstc_container_set_t
 # define bstc_dtl_container_set_t(tpl, p) bstc_dtl_container_set_t_expand(BSTC_LAYOUT6 tpl, p)
 # define bstc_dtl_container_set_t_expand(L, p) BSTC_EXPAND(bstc_dtl_container_set_t_expand1(L, p))
-# define bstc_dtl_container_set_t_expand1(t, info, fns, iter, riter, alloc, p) bstc_container_traits(p, info, fns, iter, riter, alloc)
+# define bstc_dtl_container_set_t_expand1(t, subtraits, fns, iter, riter, alloc, p) bstc_container_traits(p, subtraits, fns, iter, riter, alloc)
 # define bstc_container_set_t(tpl, t) BSTC_EXPAND(bstc_dtl_container_set_t(tpl, t))
 #endif
 /// \}
 
 
-/** Create a copy of the ctuple as a container with the container info ctuple changed to what is provided. */
+/** Create a copy of the ctuple as a container with the container subtraits ctuple changed to what is provided. */
 /// \{
-#ifndef bstc_container_set_info
-# define bstc_dtl_container_set_info(tpl, p) bstc_dtl_container_set_info_expand(BSTC_LAYOUT6 tpl, p)
-# define bstc_dtl_container_set_info_expand(L, p) BSTC_EXPAND(bstc_dtl_container_set_info_expand1(L, p))
-# define bstc_dtl_container_set_info_expand1(t, info, fns, iter, riter, alloc, p) bstc_container_traits(t, p, fns, iter, riter, alloc)
-# define bstc_container_set_info(tpl, info) BSTC_EXPAND(bstc_dtl_container_set_info(tpl, info))
+#ifndef bstc_container_set_subtraits
+# define bstc_dtl_container_set_subtraits(tpl, p) bstc_dtl_container_set_subtraits_expand(BSTC_LAYOUT6 tpl, p)
+# define bstc_dtl_container_set_subtraits_expand(L, p) BSTC_EXPAND(bstc_dtl_container_set_subtraits_expand1(L, p))
+# define bstc_dtl_container_set_subtraits_expand1(t, subtraits, fns, iter, riter, alloc, p) bstc_container_traits(t, p, fns, iter, riter, alloc)
+# define bstc_container_set_subtraits(tpl, subtraits) BSTC_EXPAND(bstc_dtl_container_set_subtraits(tpl, subtraits))
 #endif
 /// \}
 
@@ -194,7 +204,7 @@
 #ifndef bstc_container_set_fns
 # define bstc_dtl_container_set_fns(tpl, p) bstc_dtl_container_set_fns_expand(BSTC_LAYOUT6 tpl, p)
 # define bstc_dtl_container_set_fns_expand(L, p) BSTC_EXPAND(bstc_dtl_container_set_fns_expand1(L, p))
-# define bstc_dtl_container_set_fns_expand1(t, info, fns, iter, riter, alloc, p) bstc_container_traits(t, info, p, iter, riter, alloc)
+# define bstc_dtl_container_set_fns_expand1(t, subtraits, fns, iter, riter, alloc, p) bstc_container_traits(t, subtraits, p, iter, riter, alloc)
 # define bstc_container_set_fns(tpl, fns) BSTC_EXPAND(bstc_dtl_container_set_fns(tpl, fns))
 #endif
 /// \}
@@ -205,7 +215,7 @@
 #ifndef bstc_container_set_iter
 # define bstc_dtl_container_set_iter(tpl, p) bstc_dtl_container_set_iter_expand(BSTC_LAYOUT6 tpl, p)
 # define bstc_dtl_container_set_iter_expand(L, p) BSTC_EXPAND(bstc_dtl_container_set_iter_expand1(L, p))
-# define bstc_dtl_container_set_iter_expand1(t, info, fns, iter, riter, alloc, p) bstc_container_traits(t, info, fns, p, riter, alloc)
+# define bstc_dtl_container_set_iter_expand1(t, subtraits, fns, iter, riter, alloc, p) bstc_container_traits(t, subtraits, fns, p, riter, alloc)
 # define bstc_container_set_iter(tpl, iter) BSTC_EXPAND(bstc_dtl_container_set_iter(tpl, iter))
 #endif
 /// \}
@@ -216,7 +226,7 @@
 #ifndef bstc_container_set_riter
 # define bstc_dtl_container_set_riter(tpl, p) bstc_dtl_container_set_riter_expand(BSTC_LAYOUT6 tpl, p)
 # define bstc_dtl_container_set_riter_expand(L, p) BSTC_EXPAND(bstc_dtl_container_set_riter_expand1(L, p))
-# define bstc_dtl_container_set_riter_expand1(t, info, fns, iter, riter, alloc, p) bstc_container_traits(t, info, fns, iter, p, alloc)
+# define bstc_dtl_container_set_riter_expand1(t, subtraits, fns, iter, riter, alloc, p) bstc_container_traits(t, subtraits, fns, iter, p, alloc)
 # define bstc_container_set_riter(tpl, riter) BSTC_EXPAND(bstc_dtl_container_set_riter(tpl, riter))
 #endif
 /// \}
@@ -227,28 +237,48 @@
 #ifndef bstc_container_set_alloc
 # define bstc_dtl_container_set_alloc(tpl, p) bstc_dtl_container_set_alloc_expand(BSTC_LAYOUT6 tpl, p)
 # define bstc_dtl_container_set_alloc_expand(L, p) BSTC_EXPAND(bstc_dtl_container_set_alloc_expand1(L, p))
-# define bstc_dtl_container_set_alloc_expand1(t, info, fns, iter, riter, alloc, p) bstc_container_traits(t, info, fns, iter, riter, p)
+# define bstc_dtl_container_set_alloc_expand1(t, subtraits, fns, iter, riter, alloc, p) bstc_container_traits(t, subtraits, fns, iter, riter, p)
 # define bstc_container_set_alloc(tpl, alloc) BSTC_EXPAND(bstc_dtl_container_set_alloc(tpl, alloc))
 #endif
 /// \}
 
 
-/** Default container function that does nothing. */
+/** Default constructor function that does nothing. */
 /// \{
-#ifndef bstc_container_fn_default
-# ifdef BSTC_HAS_VARIADIC_MACROS
-#  define bstc_container_fn_default(...) ((void)0)
-# else
-#  define bstc_container_fn_default() ((void)0)
-# endif
+#ifndef bstc_container_noctor
+# define bstc_container_noctor(traits, item) ((void)0)
 #endif
 /// \}
 
 
-/** Default container ctuple that uses the default iterators, allocator, info, type, and functions. */
+/** Default destructor function that does nothing. */
+/// \{
+#ifndef bstc_container_nodtor
+# define bstc_container_nodtor(traits, item) ((void)0)
+#endif
+/// \}
+
+
+/** Default container functions. */
+/// \{
+#ifndef bstc_container_default_fns
+# define bstc_container_default_fns BSTC_CTUPLE2(bstc_container_noctor, bstc_container_nodtor)
+#endif
+/// \}
+
+
+/** Default container subtraits. */
+/// \{
+#ifndef bstc_container_default_subtraits
+# define bstc_container_default_subtraits bstc_container_traits(int, BSTC_CTUPLE1(0), bstc_container_default_fns, bstc_iter_defaults, bstc_iter_defaults, bstc_alloc_defaults)
+#endif
+/// \}
+
+
+/** Default container ctuple that uses the default iterators, allocator, subtraits, type, and functions. */
 /// \{
 #ifndef bstc_container_defaults
-# define bstc_container_defaults bstc_container_traits(int, bstc_ctuple(0), bstc_ctuple(bstc_container_fn_default), bstc_iter_defaults, bstc_iter_defaults, bstc_alloc_defaults)
+# define bstc_container_defaults bstc_container_traits(int, bstc_container_default_subtraits, bstc_container_default_fns, bstc_iter_defaults, bstc_iter_defaults, bstc_alloc_defaults)
 #endif
 /// \}
 
@@ -263,7 +293,7 @@
             bstc_iter_isa(bstc_container_iter(tpl),\
                 bstc_iter_isa(bstc_container_riter(tpl),\
                     bstc_alloc_isa(bstc_container_alloc(tpl),\
-                        bstc_ctuple_isa(bstc_container_info(tpl), bstc_ctuple_isa(bstc_container_fns(tpl), _t, _f), _f),\
+                        bstc_ctuple_isa(bstc_container_subtraits(tpl), bstc_ctuple_hasN(bstc_container_fns(tpl), 2, _t, _f), _f),\
                         _f\
                     ),\
                     _f\
