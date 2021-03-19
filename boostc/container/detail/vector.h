@@ -9,22 +9,42 @@
 
 /* Details for vector */
 /// \{
-#define bstc_dtl_vect_tmplt_t_select(tpl) bstc_ctuple_hasN(tpl, 1, bstc_dtl_vect_tmplt_t1, bstc_dtl_vect_tmplt_t2)
+#define bstc_dtl_vect_traits_select(tpl) \
+    bstc_ctuple_hasN(tpl, 1,\
+        bstc_dtl_vect_traits1,\
+        bstc_ctuple_hasN(tpl, 2,\
+            bstc_dtl_vect_traits2,\
+            bstc_dtl_vect_traits3\
+        )\
+    )
 
-#define bstc_dtl_vect_tmplt_t1(T) \
+#define bstc_dtl_vect_traits1(T) \
     bstc_ctuple(\
         T*,\
-        bstc_ctuple(T),\
+        bstc_ctuple(T, bstc_dtl_vect_default_objtraits),\
         bstc_dtl_vect_default_fns,\
         bstc_dtl_vect_iter_defaults(T),\
         bstc_dtl_vect_riter_defaults(T),\
         bstc_alloc_stdlib\
     )
 
-#define bstc_dtl_vect_tmplt_t2(T, alloc) \
+#define bstc_dtl_vect_traits2(T, alloc) \
     bstc_ctuple(\
         T*,\
-        bstc_ctuple(T),\
+        bstc_ctuple(T, bstc_dtl_vect_default_objtraits),\
+        bstc_dtl_vect_default_fns,\
+        bstc_dtl_vect_iter_defaults(T),\
+        bstc_dtl_vect_riter_defaults(T),\
+        bstc_alloc_isa(alloc,\
+            alloc,\
+            BSTC_VECT_BAD_ALLOC_PROVIDED\
+        )\
+    )
+
+#define bstc_dtl_vect_traits3(T, alloc, objtraits) \
+    bstc_ctuple(\
+        T*,\
+        bstc_ctuple(T, objtraits),\
         bstc_dtl_vect_default_fns,\
         bstc_dtl_vect_iter_defaults(T),\
         bstc_dtl_vect_riter_defaults(T),\
@@ -35,7 +55,7 @@
     )
 
 
-#define bstc_dtl_vect_add_tmplt(tpl) bstc_tmplt_isa(bstc_ctuple_getI(tpl, 0), tpl, bstc_ctuple_prepend(tpl, bstc_dtl_vect_tmplt_t1(void)))
+#define bstc_dtl_vect_add_tmplt(tpl) bstc_tmplt_isa(bstc_ctuple_getI(tpl, 0), tpl, bstc_ctuple_prepend(tpl, bstc_dtl_vect_traits1(void)))
 
 
 #define bstc_dtl_vect_init(tmplt, vect) BSTC_CALL(bstc_dtl_vect_get_init(tmplt), tmplt, vect)
@@ -43,7 +63,13 @@
 
 
 #define bstc_dtl_vect_destroy(tmplt, vect) BSTC_CALL(bstc_dtl_vect_get_destroy(tmplt), tmplt, vect)
-#define bstc_dtl_vect_default_destroy(tmplt, vect) ((vect) ? bstc_alloc_free(bstc_tmplt_alloc(tmplt))(bstc_dtl_vect_raw_(vect)),*((void**)&(vect))=bstc_nullptr : bstc_nullptr)
+#define bstc_dtl_vect_default_destroy(tmplt, vect) \
+    if((vect))\
+    {\
+        bstc_dtl_vect_get_objtraits_dtors(tmplt)(bstc_dtl_vect_begin(tmplt, vect), bstc_dtl_vect_end(tmplt, vect));\
+        bstc_alloc_free(bstc_tmplt_alloc(tmplt))(bstc_dtl_vect_raw_(vect));\
+        *((void**)&(vect)) = bstc_nullptr;\
+    }
 
 
 #define bstc_dtl_vect_len(tmplt, vect) BSTC_CALL(bstc_dtl_vect_get_len(tmplt), tmplt, vect)
@@ -162,6 +188,11 @@
 #define bstc_dtl_vect_rend(tmplt, vect) BSTC_CALL(bstc_dtl_vect_get_rend(tmplt), tmplt, vect)
 #define bstc_dtl_vect_default_rend(tmplt, vect) (vect)
 
+#define bstc_dtl_vect_get_objtraits_ctors1(objtraits) BSTC_GET_ARG0 objtraits
+#define bstc_dtl_vect_get_objtraits_ctors(tmplt) bstc_dtl_vect_get_objtraits_ctors1(BSTC_GET_ARG1 bstc_tmplt_info(tmplt))
+#define bstc_dtl_vect_get_objtraits_dtors1(objtraits) BSTC_GET_ARG1 objtraits
+#define bstc_dtl_vect_get_objtraits_dtors(tmplt) bstc_dtl_vect_get_objtraits_dtors1(BSTC_GET_ARG1 bstc_tmplt_info(tmplt))
+
 #define bstc_dtl_vect_get_init(tmplt) BSTC_GET_ARG0 bstc_tmplt_fns(tmplt)
 #define bstc_dtl_vect_get_destroy(tmplt) BSTC_GET_ARG1 bstc_tmplt_fns(tmplt)
 #define bstc_dtl_vect_get_len(tmplt) BSTC_GET_ARG2 bstc_tmplt_fns(tmplt)
@@ -204,6 +235,15 @@
         bstc_dtl_vect_default_end,\
         bstc_dtl_vect_default_rbegin,\
         bstc_dtl_vect_default_rend\
+    )
+
+
+#define bstc_dtl_vect_default_objtraits_ctors(begin, end) ((void)0)
+#define bstc_dtl_vect_default_objtraits_dtors(begin, end) ((void)0)
+#define bstc_dtl_vect_default_objtraits \
+    bstc_ctuple(\
+        bstc_dtl_vect_default_objtraits_ctors,\
+        bstc_dtl_vect_default_objtraits_dtors\
     )
 
 

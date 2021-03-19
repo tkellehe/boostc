@@ -13,19 +13,19 @@
 #include <boostc/detail/vector.h>
 
 
-/** Declares the vector template type.
+/** Declares the vector vector traits.
  * \param T The type of the data in the vector.
- * \param alloc An optional argument which is the allocator for the template type.
+ * \param alloc An optional argument which is the allocator for the vector traits.
  */
 /// \{
-#ifndef bstc_vect_tmplt_t
-# define bstc_vect_tmplt_t(...) BSTC_EXPAND(bstc_ctuple_call(bstc_dtl_vect_tmplt_t_select(bstc_ctuple(__VA_ARGS__)), bstc_ctuple(__VA_ARGS__)))
+#ifndef bstc_vect_traits
+# define bstc_vect_traits(...) BSTC_EXPAND(bstc_ctuple_call(bstc_dtl_vect_traits_select(bstc_ctuple(__VA_ARGS__)), bstc_ctuple(__VA_ARGS__)))
 #endif
 /// \}
 
 
 /** Declares the vector type.
- * \param T The template type of the vector or the type of the vector.
+ * \param T The vector traits or the template type of the vector.
  */
 /// \{
 #ifndef bstc_vect_t
@@ -46,7 +46,6 @@
 
 /** Destroys and frees any memory allocated for the vector.
  * \param vect Reference to the vector.
- * \return Returns one when successful and zero otherwise.
  */
 /// \{
 #ifndef bstc_vect_destroy
@@ -80,7 +79,6 @@
 /** Resizes the vector to be able to hold the new size.
  * \param vect Reference to the vector.
  * \param nsz The new size for the vector.
- * \return Returns the new size.
  */
 /// \{
 #ifndef bstc_vect_rsz
@@ -92,7 +90,6 @@
 /** Reserves the requested capacity for the vector by only reserving more.
  * \param vect Reference to the vector.
  * \param ncap The new capacity for the vector.
- * \return Returns the new capacity.
  */
 /// \{
 #ifndef bstc_vect_rsv
@@ -149,7 +146,6 @@
 /** Pushes a single value onto the back of the vector and resizes if needed.
  * \param vect Reference to the vector.
  * \param val The value to push on.
- * \return Returns the new value pushed on.
  */
 /// \{
 #ifndef bstc_vect_pushb
