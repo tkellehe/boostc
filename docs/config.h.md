@@ -36,13 +36,6 @@ Note that the _C_ group will not be provided if _C++_ is used, and vice versa.
  * `BSTC_LEAST_CPP17` : Present if using a compiler that supports at least _C++17_ features.
  * `BSTC_LEAST_CPP20` : Present if using a compiler that supports at least _C++20_ features.
 
-### Note
-
- > `BSTC_LEAST_C95` and `BSTC_LEAST_C99` are always present in the current supported version.
- > The same goes for `BSTC_LEAST_CPP98` if using _C++_.
- > This is because _boostc_ utilizes variadic macros which is a _C99_ feature.
- > There are some designs for a non-variadic interface, but not much push at this time.
-
 ## Compiler Detection
 The following are macros defined depending on the compiler detected.
 The lists are organized based off of the level of support.
