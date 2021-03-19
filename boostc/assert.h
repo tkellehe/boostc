@@ -3,6 +3,10 @@
 //  Distributed under the Boost Software License, Version 1.0. (See
 //  accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
+#ifndef BOOSTC__ASSERT_H
+#define BOOSTC__ASSERT_H
+
+
 #include <boostc/config.h>
 
 
@@ -37,3 +41,6 @@
 # define bstc_assert_msg(expr, msg) bstc_assert((expr)&&(msg))
 #endif
 /// \}
+
+
+#endif // BOOSTC__ASSERT_H

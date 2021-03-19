@@ -3,6 +3,10 @@
 //  Distributed under the Boost Software License, Version 1.0. (See
 //  accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
+#ifndef BOOSTC__CTYPE_H
+#define BOOSTC__CTYPE_H
+
+
 #include <boostc/config.h>
 
 
@@ -73,3 +77,6 @@
 # define bstc_toupper toupper
 #endif
 /// \}
+
+
+#endif // BOOSTC__CTYPE_H

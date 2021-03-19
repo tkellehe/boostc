@@ -3,23 +3,25 @@
 //  Distributed under the Boost Software License, Version 1.0. (See
 //  accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
-#include <boostc/config.h>
-#include <boostc/assert.h>
-#include <boostc/ctuple.h>
-#include <boostc/stddef.h>
-#include <boostc/stdint.h>
-#include <boostc/string.h>
-#include <boostc/traits/template.h>
-#include <boostc/detail/vector.h>
+#ifndef BOOSTC__CONTAINER__VECTOR_H
+#define BOOSTC__CONTAINER__VECTOR_H
+
+
+#include <boostc/container/detail/vector.h>
 
 
 /** Declares the vector vector traits.
  * \param T The type of the data in the vector.
  * \param alloc An optional argument which is the allocator for the vector traits.
+ * \param fns An optional argument which is the content functions for the vector traits.
  */
 /// \{
 #ifndef bstc_vect_traits
-# define bstc_vect_traits(...) BSTC_EXPAND(bstc_ctuple_call(bstc_dtl_vect_traits_select(bstc_ctuple(__VA_ARGS__)), bstc_ctuple(__VA_ARGS__)))
+# if defined(BSTC_HAS_VARIADIC_MACROS)
+#  define bstc_vect_traits(...) BSTC_EXPAND(bstc_ctuple_call(bstc_dtl_vect_traits_select(bstc_ctuple(__VA_ARGS__)), bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_traits(T, alloc, fns) bstc_dtl_vect_traits3(T, alloc, fns)
+# endif
 #endif
 /// \}
 
@@ -29,7 +31,11 @@
  */
 /// \{
 #ifndef bstc_vect_t
-# define bstc_vect_t(T) bstc_tmplt_isa(T, bstc_tmplt_t(T), T*)
+# ifdef bstc_container_isa
+#  define bstc_vect_t(T) bstc_container_isa(T, bstc_container_t(T), T*)
+# else
+#  define bstc_vect_t(T) bstc_container_t(T)
+# endif
 #endif
 /// \}
 
@@ -39,7 +45,11 @@
  */
 /// \{
 #ifndef bstc_vect_init
-# define bstc_vect_init(...) bstc_ctuple_call(bstc_dtl_vect_init, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_init(...) bstc_ctuple_call(bstc_dtl_vect_init, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_init(traits, vect) bstc_dtl_vect_init(traits, vect)
+# endif
 #endif
 /// \}
 
@@ -49,7 +59,11 @@
  */
 /// \{
 #ifndef bstc_vect_destroy
-# define bstc_vect_destroy(...) bstc_ctuple_call(bstc_dtl_vect_destroy, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_destroy(...) bstc_ctuple_call(bstc_dtl_vect_destroy, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_destroy(traits, vect) bstc_dtl_vect_destroy(traits, vect)
+# endif
 #endif
 /// \}
 
@@ -60,7 +74,11 @@
  */
 /// \{
 #ifndef bstc_vect_len
-# define bstc_vect_len(...) bstc_ctuple_call(bstc_dtl_vect_len, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_len(...) bstc_ctuple_call(bstc_dtl_vect_len, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_len(traits, vect) bstc_dtl_vect_len(traits, vect)
+# endif
 #endif
 /// \}
 
@@ -71,7 +89,11 @@
  */
 /// \{
 #ifndef bstc_vect_cap
-# define bstc_vect_cap(...) bstc_ctuple_call(bstc_dtl_vect_cap, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_cap(...) bstc_ctuple_call(bstc_dtl_vect_cap, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_cap(traits, vect) bstc_dtl_vect_cap(traits, vect)
+# endif
 #endif
 /// \}
 
@@ -82,7 +104,11 @@
  */
 /// \{
 #ifndef bstc_vect_rsz
-# define bstc_vect_rsz(...) bstc_ctuple_call(bstc_dtl_vect_rsz, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_rsz(...) bstc_ctuple_call(bstc_dtl_vect_rsz, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_rsz(traits, vect, nsz) bstc_dtl_vect_rsz(traits, vect, nsz)
+# endif
 #endif
 /// \}
 
@@ -93,7 +119,11 @@
  */
 /// \{
 #ifndef bstc_vect_rsv
-# define bstc_vect_rsv(...) bstc_ctuple_call(bstc_dtl_vect_rsv, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_rsv(...) bstc_ctuple_call(bstc_dtl_vect_rsv, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_rsv(traits, vect, ncap) bstc_dtl_vect_rsv(traits, vect, ncap)
+# endif
 #endif
 /// \}
 
@@ -105,7 +135,11 @@
  */
 /// \{
 #ifndef bstc_vect_at
-# define bstc_vect_at(...) bstc_ctuple_call(bstc_dtl_vect_at, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_at(...) bstc_ctuple_call(bstc_dtl_vect_at, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_at(traits, vect, i) bstc_dtl_vect_at(traits, vect, i)
+# endif
 #endif
 /// \}
 
@@ -116,7 +150,11 @@
  */
 /// \{
 #ifndef bstc_vect_empty
-# define bstc_vect_empty(...) bstc_ctuple_call(bstc_dtl_vect_empty, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_empty(...) bstc_ctuple_call(bstc_dtl_vect_empty, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_empty(traits, vect) bstc_dtl_vect_empty(traits, vect)
+# endif
 #endif
 /// \}
 
@@ -127,7 +165,11 @@
  */
 /// \{
 #ifndef bstc_vect_front
-# define bstc_vect_front(...) bstc_ctuple_call(bstc_dtl_vect_front, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_front(...) bstc_ctuple_call(bstc_dtl_vect_front, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_front(traits, vect) bstc_dtl_vect_front(traits, vect)
+# endif
 #endif
 /// \}
 
@@ -138,7 +180,11 @@
  */
 /// \{
 #ifndef bstc_vect_back
-# define bstc_vect_back(...) bstc_ctuple_call(bstc_dtl_vect_back, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_back(...) bstc_ctuple_call(bstc_dtl_vect_back, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_back(traits, vect) bstc_dtl_vect_back(traits, vect)
+# endif
 #endif
 /// \}
 
@@ -149,7 +195,11 @@
  */
 /// \{
 #ifndef bstc_vect_pushb
-# define bstc_vect_pushb(...) bstc_ctuple_call(bstc_dtl_vect_pushb, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_pushb(...) bstc_ctuple_call(bstc_dtl_vect_pushb, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_pushb(traits, vect, val) bstc_dtl_vect_pushb(traits, vect, val)
+# endif
 #endif
 /// \}
 
@@ -160,7 +210,11 @@
  */
 /// \{
 #ifndef bstc_vect_begin
-# define bstc_vect_begin(...) bstc_ctuple_call(bstc_dtl_vect_begin, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_begin(...) bstc_ctuple_call(bstc_dtl_vect_begin, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_begin(traits, vect) bstc_dtl_vect_begin(traits, vect)
+# endif
 #endif
 /// \}
 
@@ -171,7 +225,11 @@
  */
 /// \{
 #ifndef bstc_vect_end
-# define bstc_vect_end(...) bstc_ctuple_call(bstc_dtl_vect_end, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_end(...) bstc_ctuple_call(bstc_dtl_vect_end, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_end(traits, vect) bstc_dtl_vect_end(traits, vect)
+# endif
 #endif
 /// \}
 
@@ -182,7 +240,11 @@
  */
 /// \{
 #ifndef bstc_vect_rbegin
-# define bstc_vect_rbegin(...) bstc_ctuple_call(bstc_dtl_vect_rbegin, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_rbegin(...) bstc_ctuple_call(bstc_dtl_vect_rbegin, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_rbegin(traits, vect) bstc_dtl_vect_rbegin(traits, vect)
+# endif
 #endif
 /// \}
 
@@ -193,7 +255,11 @@
  */
 /// \{
 #ifndef bstc_vect_rend
-# define bstc_vect_rend(...) bstc_ctuple_call(bstc_dtl_vect_rend, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_rend(...) bstc_ctuple_call(bstc_dtl_vect_rend, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_rend(traits, vect) bstc_dtl_vect_rend(traits, vect)
+# endif
 #endif
 /// \}
 
@@ -203,7 +269,11 @@
  */
 /// \{
 #ifndef bstc_vect_iter_t
-# define bstc_vect_iter_t(T) bstc_tmplt_isa(T, bstc_iter_t(bstc_tmplt_iter(T)), bstc_dtl_vect_default_iter_t(T))
+# ifndef bstc_container_isa
+#  define bstc_vect_iter_t(T) bstc_container_isa(T, bstc_iter_t(bstc_container_iter(T)), bstc_dtl_vect_default_iter_t(T))
+# else
+#  define bstc_vect_iter_t(T) bstc_iter_t(bstc_container_iter(T))
+# endif
 #endif
 /// \}
 
@@ -213,7 +283,11 @@
  */
 /// \{
 #ifndef bstc_vect_iter_nxt
-# define bstc_vect_iter_nxt(...) bstc_ctuple_call(bstc_dtl_vect_iter_nxt, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_iter_nxt(...) bstc_ctuple_call(bstc_dtl_vect_iter_nxt, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_iter_nxt(traits, iter) bstc_dtl_vect_iter_nxt(traits, iter)
+# endif
 #endif
 /// \}
 
@@ -224,7 +298,11 @@
  */
 /// \{
 #ifndef bstc_vect_iter_eq
-# define bstc_vect_iter_eq(...) bstc_ctuple_call(bstc_dtl_vect_iter_eq, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_iter_eq(...) bstc_ctuple_call(bstc_dtl_vect_iter_eq, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_iter_eq(traits, left, right) bstc_dtl_vect_iter_eq(traits, left, right)
+# endif
 #endif
 /// \}
 
@@ -234,7 +312,11 @@
  */
 /// \{
 #ifndef bstc_vect_iter_val
-# define bstc_vect_iter_val(...) bstc_ctuple_call(bstc_dtl_vect_iter_val, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_iter_val(...) bstc_ctuple_call(bstc_dtl_vect_iter_val, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_iter_val(traits, iter) bstc_dtl_vect_iter_val(traits, iter)
+# endif
 #endif
 /// \}
 
@@ -245,7 +327,11 @@
  */
 /// \{
 #ifndef bstc_vect_iter_put
-# define bstc_vect_iter_put(...) bstc_ctuple_call(bstc_dtl_vect_iter_put, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_iter_put(...) bstc_ctuple_call(bstc_dtl_vect_iter_put, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_iter_put(traits, iter, val) bstc_dtl_vect_iter_put(traits, iter, val)
+# endif
 #endif
 /// \}
 
@@ -256,7 +342,11 @@
  */
 /// \{
 #ifndef bstc_vect_iter_swap
-# define bstc_vect_iter_swap(...) bstc_ctuple_call(bstc_dtl_vect_iter_swap, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_iter_swap(...) bstc_ctuple_call(bstc_dtl_vect_iter_swap, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_iter_swap(traits, left, right) bstc_dtl_vect_iter_swap(traits, left, right)
+# endif
 #endif
 /// \}
 
@@ -266,7 +356,11 @@
  */
 /// \{
 #ifndef bstc_vect_riter_t
-# define bstc_vect_riter_t(T) bstc_tmplt_isa(T, bstc_iter_t(bstc_tmplt_riter(T)), bstc_dtl_vect_default_riter_t(T))
+# ifdef bstc_container_isa
+#  define bstc_vect_riter_t(T) bstc_container_isa(T, bstc_iter_t(bstc_container_riter(T)), bstc_dtl_vect_default_riter_t(T))
+# else
+#  define bstc_vect_riter_t(T) bstc_iter_t(bstc_container_riter(T))
+# endif
 #endif
 /// \}
 
@@ -276,7 +370,11 @@
  */
 /// \{
 #ifndef bstc_vect_riter_nxt
-# define bstc_vect_riter_nxt(...) bstc_ctuple_call(bstc_dtl_vect_riter_nxt, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_riter_nxt(...) bstc_ctuple_call(bstc_dtl_vect_riter_nxt, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_riter_nxt(traits, iter) bstc_dtl_vect_riter_nxt(traits, iter)
+# endif
 #endif
 /// \}
 
@@ -287,7 +385,11 @@
  */
 /// \{
 #ifndef bstc_vect_riter_eq
-# define bstc_vect_riter_eq(...) bstc_ctuple_call(bstc_dtl_vect_riter_eq, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_riter_eq(...) bstc_ctuple_call(bstc_dtl_vect_riter_eq, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_riter_eq(traits, left, right) bstc_dtl_vect_riter_eq(traits, left, right)
+# endif
 #endif
 /// \}
 
@@ -297,7 +399,11 @@
  */
 /// \{
 #ifndef bstc_vect_riter_val
-# define bstc_vect_riter_val(...) bstc_ctuple_call(bstc_dtl_vect_riter_val, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_riter_val(...) bstc_ctuple_call(bstc_dtl_vect_riter_val, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_riter_val(traits, iter) bstc_dtl_vect_riter_val(traits, iter)
+# endif
 #endif
 /// \}
 
@@ -308,7 +414,11 @@
  */
 /// \{
 #ifndef bstc_vect_riter_put
-# define bstc_vect_riter_put(...) bstc_ctuple_call(bstc_dtl_vect_riter_put, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_riter_put(...) bstc_ctuple_call(bstc_dtl_vect_riter_put, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_riter_put(traits, iter, val) bstc_dtl_vect_riter_put(traits, iter, val)
+# endif
 #endif
 /// \}
 
@@ -319,6 +429,13 @@
  */
 /// \{
 #ifndef bstc_vect_riter_swap
-# define bstc_vect_riter_swap(...) bstc_ctuple_call(bstc_dtl_vect_riter_swap, bstc_dtl_vect_add_tmplt(bstc_ctuple(__VA_ARGS__)))
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_riter_swap(...) bstc_ctuple_call(bstc_dtl_vect_riter_swap, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_riter_swap(traits, left, right) bstc_dtl_vect_riter_swap(traits, left, right)
+# endif
 #endif
 /// \}
+
+
+#endif // BOOSTC__CONTAINER__VECTOR_H

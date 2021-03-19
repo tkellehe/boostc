@@ -3,6 +3,10 @@
 //  Distributed under the Boost Software License, Version 1.0. (See
 //  accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
+#ifndef BOOSTC__STDLIB_H
+#define BOOSTC__STDLIB_H
+
+
 #include <boostc/config.h>
 
 
@@ -195,3 +199,6 @@
 # define bstc_bsearch bsearch
 #endif
 /// \}
+
+
+#endif // BOOSTC__STDLIB_H
