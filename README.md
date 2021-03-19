@@ -26,7 +26,7 @@ Then the compiler will treat it as a single function and potentially reducing th
 Provides compile time decisions to create a _C++_ like vector in _C_. Uses the _template_ interface.
 
 ```c
-#include <boostc/vector.h>
+#include <boostc/container/vector.h>
 #include <stdio.h>
 
 int main(int argc, char *argv[])
@@ -41,8 +41,10 @@ int main(int argc, char *argv[])
     bstc_vect_init(vect);
     
     // Default is to use stdlib allocator.
-    bstc_vect_pushb(vect, 11);
+    bstc_vect_pushb(vect, 1);
     bstc_vect_pushb(vect, 12);
+    bstc_vect_pushb(vect, 13);
+    bstc_vect_pushb(vect, 14);
     
     // Can use basic array operator on the data.
     vect[0] += 10;
@@ -73,7 +75,7 @@ The current generic iterator API provides the following functionalities for forw
  * `bstc_(r?)iter_swap` : A function to swap the contents of two iterators.
 
 ```c
-#include <boostc/vector.h>
+#include <boostc/container/vector.h>
 #include <stdio.h>
 
 int main(int argc, char *argv[])
@@ -136,7 +138,7 @@ The default layout of this pattern can be generated using the template vector ma
 Then you can do things like changing the default allocator.
 
 ```c
-#include <boostc/vector.h>
+#include <boostc/container/vector.h>
 #include <stdio.h>
 
 // This is a simple allocator that is not the best, but provides as a simple example.
@@ -150,7 +152,7 @@ void* my_malloc(int sz)
 }
 void* my_realloc(void* mem, int sz)
 {
-    (void)mem;
+    bstc_unused_param(mem);
     int* res = &_memory[_pos];
     _pos += sz / sizeof(int);
     return (void*)res;
@@ -165,7 +167,7 @@ int main(int argc, char *argv[])
     // The type provided first is the underlying type of the vector.
     // The symbol tuple is merely indicated by parentheses and the three symbols provided.
     // They must be provided in the following order: free, malloc, realloc.
-    #define vect_int bstc_vect_tmplt_t(int, (bstc_alloc_nofree, my_malloc, my_realloc))
+    #define vect_int bstc_vect_traits(int, (bstc_alloc_nofree, my_malloc, my_realloc))
 
     // You can print out what was actually encoded into the symbol tuple:
     printf("vect_int: %s\n", BSTC_TOSTRING(vect_int));
@@ -174,13 +176,13 @@ int main(int argc, char *argv[])
     bstc_vect_t(vect_int) vect;
     
     // Initializes the state by extracting the symbol encoded representing the init function.
-    // It is not required to use the template here since the default behavior does not change when changing the allocators.
-    // But, it is recommended for consistency.
     bstc_vect_init(vect_int, vect);
     
     // Uses the allocator encoded into the template to realloc and malloc the memory.
-    bstc_vect_pushb(vect_int, vect, 11);
+    bstc_vect_pushb(vect_int, vect, 1);
     bstc_vect_pushb(vect_int, vect, 12);
+    bstc_vect_pushb(vect_int, vect, 13);
+    bstc_vect_pushb(vect_int, vect, 14);
     
     // Can still use basic array operator on the data.
     vect[0] += 10;
