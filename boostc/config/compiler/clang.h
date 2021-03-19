@@ -9,7 +9,9 @@
 
 /* Provide a way to detect the version of CLANG. */
 /// \{
-#define BSTC_CLANG_VER __clang_version__
+#ifndef BSTC_CLANG_VER
+# define BSTC_CLANG_VER __clang_version__
+#endif
 /// \}
 
 
@@ -17,8 +19,12 @@
 /// \{
 #if defined(__has_builtin)
 # if __has_builtin(__builtin_expect)
-#  define BSTC_LIKELY(x) __builtin_expect(x, 1)
-#  define BSTC_UNLIKELY(x) __builtin_expect(x, 0)
+#  ifndef BSTC_LIKELY
+#   define BSTC_LIKELY(x) __builtin_expect(x, 1)
+#  endif
+#  ifndef BSTC_UNLIKELY
+#   define BSTC_UNLIKELY(x) __builtin_expect(x, 0)
+#  endif
 # endif
 #endif
 /// \}
@@ -26,7 +32,9 @@
 
 /* Pulled from Boost <boost/config/compiler/clang.hpp>. */
 /// \{
-#define BSTC_HAS_LONG_LONG
+#if !defined(BSTC_HAS_LONG_LONG) && !defined(BSTC_NO_LONG_LONG)
+# define BSTC_HAS_LONG_LONG
+#endif
 /// \}
 
 

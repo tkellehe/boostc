@@ -9,20 +9,24 @@
 
 /* Provide a way to detect the version of WATCOM. */
 /// \{
-#define BSTC_WATCOM_VER __WATCOMC__
+#ifndef BSTC_WATCOM_VER
+# define BSTC_WATCOM_VER __WATCOMC__
+#endif
 /// \}
 
 
 /* Detect if has int64 support. */
 /// \{
-#if defined(__WATCOM_INT64__)
-# define BSTC_HAS_64BIT
-# define bstc_uint64_t unsigned __int64
-# define bstc_int64_t __int64
-# define bstc_uint64_c(v) v ## UI64
-# define bstc_int64_t(v) v ## I64
-#else
-# define BSTC_NO_64BIT
+#if !defined(BSTC_HAS_64BIT) && !defined(BSTC_NO_64BIT)
+# if defined(__WATCOM_INT64__)
+#  define BSTC_HAS_64BIT
+#  define bstc_uint64_t unsigned __int64
+#  define bstc_int64_t __int64
+#  define bstc_uint64_c(v) v ## UI64
+#  define bstc_int64_t(v) v ## I64
+# else
+#  define BSTC_NO_64BIT
+# endif
 #endif
 /// \}
 

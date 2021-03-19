@@ -9,47 +9,59 @@
 
 /* Provide a way to detect the version of VISUALC. */
 /// \{
-#if _MSC_FULL_VER > 100000000
-# define BSTC_VISUALC_VER _MSC_FULL_VER
-#else
-# define BSTC_VISUALC_VER (_MSC_FULL_VER * 10)
+#ifndef BSTC_VISUALC_VER
+# if _MSC_FULL_VER > 100000000
+#  define BSTC_VISUALC_VER _MSC_FULL_VER
+# else
+#  define BSTC_VISUALC_VER (_MSC_FULL_VER * 10)
+# endif
 #endif
 /// \}
 
 
 /* Add branch predictors. */
 /// \{
-#define BSTC_LIKELY(x) __builtin_expect(x, 1)
-#define BSTC_UNLIKELY(x) __builtin_expect(x, 0)
+#ifndef BSTC_LIKELY
+# define BSTC_LIKELY(x) __builtin_expect(x, 1)
+#endif
+#ifndef BSTC_UNLIKELY
+# define BSTC_UNLIKELY(x) __builtin_expect(x, 0)
+#endif
 /// \}
 
 
 /* Pulled from Boost <boost/config/compiler/visualc.hpp>. */
 /// \{
-#if defined(_MSC_EXTENSIONS) || (_MSC_VER >= 1400)
-# define BOOST_HAS_LONG_LONG
-#else
-# define BOOST_NO_LONG_LONG
+#if !defined(BSTC_HAS_LONG_LONG) && !defined(BSTC_NO_LONG_LONG)
+# if defined(_MSC_EXTENSIONS) || (_MSC_VER >= 1400)
+#  define BSTC_HAS_LONG_LONG
+# else
+#  define BSTC_NO_LONG_LONG
+# endif
 #endif
 /// \}
 
 
 /* Indicate visualc allows pasting symbols to strings. */
 /// \{
-#define BSTC_HAS_STRING_PASTE
+#if !defined(BSTC_HAS_STRING_PASTE) && !defined(BSTC_NO_STRING_PASTE)
+# define BSTC_HAS_STRING_PASTE
+#endif
 /// \}
 
 
 /* Detect the max number of integral bits. */
 /// \{
-#if defined(_INTEGRAL_MAX_BITS) && _INTEGRAL_MAX_BITS >= 64
-# define BSTC_HAS_64BIT
-# define bstc_uint64_t unsigned __int64
-# define bstc_int64_t __int64
-# define bstc_uint64_c(v) v ## UI64
-# define bstc_int64_c(v) v ## I64
-#else
-# define BSTC_NO_64BIT
+#if !defined(BSTC_HAS_64BIT) && !defined(BSTC_NO_64BIT)
+# if defined(_INTEGRAL_MAX_BITS) && _INTEGRAL_MAX_BITS >= 64
+#  define BSTC_HAS_64BIT
+#  define bstc_uint64_t unsigned __int64
+#  define bstc_int64_t __int64
+#  define bstc_uint64_c(v) v ## UI64
+#  define bstc_int64_c(v) v ## I64
+# else
+#  define BSTC_NO_64BIT
+# endif
 #endif
 /// \}
 

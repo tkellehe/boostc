@@ -12,8 +12,6 @@
 #if defined(__cplusplus)
 # if __cplusplus >= 199711L
 #  define BSTC_LEAST_CPP98
-# else
-#  error "BOOSTC compiler does not support at least C++98 features."
 # endif
 # if __cplusplus >= 201103L
 #  define BSTC_LEAST_CPP11
@@ -33,17 +31,15 @@
 
 /* Determine the C standard version provided by the compiler. */
 /// \{
-#if !defined(__cplusplus) && defined(__STDC_VERSION__)
-# if defined(__STDC__) && __STDC__ == 1 
+# if !defined(__cplusplus) && (defined(__STDC__) && __STDC__ == 1 || defined(__STDC_VERSION__)) 
 #  define BSTC_LEAST_C89
 # endif
+#if !defined(__cplusplus) && defined(__STDC_VERSION__)
 # if __STDC_VERSION__ >= 199409L
 #  define BSTC_LEAST_C95
 # endif
 # if __STDC_VERSION__ >= 199901L
 #  define BSTC_LEAST_C99
-# else
-#  error "BOOSTC compiler does not support at least C99 features."
 # endif
 # if __STDC_VERSION__ >= 201112L
 #  define BSTC_LEAST_C11

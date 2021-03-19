@@ -9,28 +9,38 @@
 
 /* Provide a way to detect the version of GCC. */
 /// \{
-#define BSTC_GCC_VER (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__)
+#ifndef BSTC_GCC_VER
+# define BSTC_GCC_VER (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__)
+#endif
 /// \}
 
 
 /* Add branch predictors. */
 /// \{
-#define BSTC_LIKELY(x) __builtin_expect(x, 1)
-#define BSTC_UNLIKELY(x) __builtin_expect(x, 0)
+#ifndef BSTC_LIKELY
+# define BSTC_LIKELY(x) __builtin_expect(x, 1)
+#endif
+#ifndef BSTC_UNLIKELY
+# define BSTC_UNLIKELY(x) __builtin_expect(x, 0)
+#endif
 /// \}
 
 
 /* Pulled from Boost <boost/config/compiler/gcc.hpp>. */
 /// \{
-#if !defined(__DARWIN_NO_LONG_LONG)
-# define BSTC_HAS_LONG_LONG
+#if !defined(BSTC_HAS_LONG_LONG) && !defined(BSTC_NO_LONG_LONG)
+# if !defined(__DARWIN_NO_LONG_LONG)
+#  define BSTC_HAS_LONG_LONG
+# endif
 #endif
 /// \}
 
 
 /* Indicate that null concat with __VA_ARGS__ works. */
 /// \{
-#define BSTC_HAS_VA_ARGS_PASTE
+#if !defined(BSTC_HAS_VA_ARGS_PASTE) && !defined(BSTC_NO_VA_ARGS_PASTE)
+# define BSTC_HAS_VA_ARGS_PASTE
+#endif
 /// \}
 
 

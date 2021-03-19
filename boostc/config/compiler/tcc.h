@@ -9,19 +9,25 @@
 
 /* Provide a way to detect the version of TCC. */
 /// \{
-#define BSTC_TCC_VER __TINYC__
+#ifndef BSTC_TCC_VER
+# define BSTC_TCC_VER __TINYC__
+#endif
 /// \}
 
 
 /* Not 100% if always has this... */
 /// \{
-#define BSTC_HAS_LONG_LONG
+#if !defined(BSTC_HAS_LONG_LONG) && !defined(BSTC_NO_LONG_LONG)
+# define BSTC_HAS_LONG_LONG
+#endif
 /// \}
 
 
 /* Indicate that null concat with __VA_ARGS__ works. Turns out does not work the exact same as gcc. */
 /// \{
-// #define BSTC_HAS_VA_ARGS_PASTE
+// #if !defined(BSTC_HAS_VA_ARGS_PASTE) && !defined(BSTC_NO_VA_ARGS_PASTE)
+// # define BSTC_HAS_VA_ARGS_PASTE
+// #endif
 /// \}
 
 

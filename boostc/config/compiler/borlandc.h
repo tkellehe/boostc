@@ -9,7 +9,9 @@
 
 /* Provide a way to detect the version of BORLAND. */
 /// \{
-#define BSTC_BORLAND_VER __BORLANDC__
+#ifndef BSTC_BORLAND_VER
+# define BSTC_BORLAND_VER __BORLANDC__
+#endif
 /// \}
 
 

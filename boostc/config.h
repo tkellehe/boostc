@@ -16,19 +16,16 @@
 #include <boostc/config/version.h>
 
 
-#include <boostc/config/macros.h>
-
-
 /* Make sure that macros are available for stdint. */
 /// \{
-#if !defined(BSTC_NO_FORMAT_MACROS) || defined(BSTC_HAS_FORMAT_MACROS)
+#if !defined(BSTC_HAS_FORMAT_MACROS) && !defined(BSTC_NO_FORMAT_MACROS)
+# define BSTC_HAS_FORMAT_MACROS
+#endif
+#ifdef BSTC_HAS_FORMAT_MACROS
 # ifdef __STDC_FORMAT_MACROS
 #  undef __STDC_FORMAT_MACROS
 # endif
 # define __STDC_FORMAT_MACROS 1
-# ifndef BSTC_HAS_FORMAT_MACROS
-#  define BSTC_HAS_FORMAT_MACROS
-# endif
 #endif
 /// \}
 
@@ -53,6 +50,9 @@
 # include BSTC_PLATFORM_CONFIG
 #endif
 /// \}
+
+
+#include <boostc/config/macros.h>
 
 
 /* Ensure macros are defined */
@@ -118,7 +118,7 @@
 #endif
 
 
-#if !defined(BSTC_HAS_LONG_LONG) && !defined(BSTC_NO_LONG_LONG) && !defined(BSTC_MSVC) && !defined(__BORLANDC__)
+#if !defined(BSTC_HAS_LONG_LONG) && !defined(BSTC_NO_LONG_LONG)
 # ifdef __cplusplus
 #  include <climits>
 # else
@@ -149,11 +149,11 @@
 #  define BSTC_NO_VARIADIC_MACROS
 # endif
 #endif
-#if defined(BSTC_HAS_VARIADIC_MACROS) && defined(BSTC_NO_VARIADIC_MACROS)
-# undef BSTC_HAS_VARIADIC_MACROS
-#endif
+/// \}
 
 
+/* Provide an inline specific to C style */
+/// \{
 #ifndef bstc_inline
 # if defined(BSTC_LEAST_C99) || defined(__cplusplus)
 #  define bstc_inline inline
@@ -165,8 +165,11 @@
 #  define bstc_inline
 # endif
 #endif
+/// \}
 
 
+/* Provide a way to mark a parameter as unused */
+/// \{
 #ifndef bstc_unused_param
 # define bstc_unused_param(P) (void)(P);
 #endif
