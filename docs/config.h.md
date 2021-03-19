@@ -9,7 +9,7 @@ These decisions include compiler, platform, and language versions.
 
 ## Version
 
- * `BSTC` : Assigned an integer value presenting the current version of __boostc__ included.
+ * `BSTC` : Assigned an integer value representing the current version of __boostc__ included.
 
 | version |description|
 |:-------:|:----------|
