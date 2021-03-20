@@ -290,6 +290,38 @@ int main(int argc, char *argv[])
     }
 
     //--------------------------------------------------------------------------------------------------------
+    {
+        // #define vect_vect_int bstc_vect_traits(bstc_vect_t(int), bstc_vect_traits(int))
+        // bstc_vect_t(vect_vect_int) vects;
+
+        // bst_vect_init(vect_vect_int, vects);
+
+        // printf("bstc_vect_cap(vects): %i\n", (int)bstc_vect_cap(vect_vect_int, vects));
+        // if(bstc_vect_cap(vect_vect_int, vects) == 2) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+
+        // {
+        //     bstc_size_t i;
+        //     bstc_vect_rsz(vect_vect_int, vects, 3);
+
+        //     printf("bstc_vect_cap(vects): %i\n", (int)bstc_vect_cap(vect_vect_int, vects));
+        //     if(bstc_vect_cap(vect_vect_int, vects) >= 3) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+
+        //     printf("bstc_vect_len(vects): %i\n", (int)bstc_vect_len(vect_vect_int, vects));
+        //     if(bstc_vect_len(vect_vect_int, vects) == 3) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+
+        //     for(i = 0; i < bstc_vect_len(vect_vect_int, vects); ++i)
+        //     {
+        //         printf("bstc_vect_cap(vect[%i]): %i\n", (int)i, (int)bstc_vect_cap(vects[i]));
+        //         if(bstc_vect_cap(vects[i]) == 2) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+        //         printf("bstc_vect_len(vect[%i]): %i\n", (int)i, (int)bstc_vect_len(vects[i]));
+        //         if(bstc_vect_len(vects[i]) == 0) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+        //     }
+        // }
+
+        // bst_vect_destroy(vect_vect_int, vects);
+    }
+
+    //--------------------------------------------------------------------------------------------------------
     printf("-----------------------------\n");
     printf("     pass     |     fail     \n");
     printf("     %04i     |     %04i     \n", num_pass, num_fail);
