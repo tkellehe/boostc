@@ -25,7 +25,7 @@
         bstc_dtl_vect_traits1,\
         bstc_ctuple_hasN(tpl, 2,\
             bstc_dtl_vect_traits2,\
-            bstc_dtl_vect_traits3\
+            bstc_dtl_vect_traits3_\
         )\
     )
 
@@ -39,7 +39,24 @@
         bstc_alloc_stdlib\
     )
 
-#define bstc_dtl_vect_traits2(T, alloc) \
+#define bstc_dtl_vect_traits2(x, y) \
+    bstc_alloc_isa(x,\
+        /* The first argument is an allocator traits so the other has to be the type. */\
+        bstc_dtl_vect_traits2_alloc(y, x),\
+        bstc_container_isa(x,\
+            /* The first argument is a container traits so the other has to be the type. */\
+            bstc_dtl_vect_traits2_subtraits(y, x),\
+            /* The first argument is the type, so now we check y. */\
+            bstc_alloc_isa(y,\
+                /* First argument is the type and the second is the allocator traits. */\
+                bstc_dtl_vect_traits2_alloc(x, y),\
+                /* First argument is the type and the second is the container traits. */\
+                bstc_dtl_vect_traits2_subtraits(x, y)\
+            )\
+        )\
+    )
+
+#define bstc_dtl_vect_traits2_alloc(T, alloc) \
     (\
         T*,\
         bstc_container_pack_t(T),\
@@ -47,6 +64,34 @@
         bstc_dtl_vect_iter_defaults(T),\
         bstc_dtl_vect_riter_defaults(T),\
         alloc\
+    )
+
+#define bstc_dtl_vect_traits2_subtraits(T, subtraits) \
+    (\
+        T*,\
+        subtraits,\
+        bstc_dtl_vect_default_fns,\
+        bstc_dtl_vect_iter_defaults(T),\
+        bstc_dtl_vect_riter_defaults(T),\
+        bstc_alloc_stdlib\
+    )
+
+#define bstc_dtl_vect_traits3_(x, y, z) \
+    bstc_alloc_isa(x,\
+        bstc_container_isa(y,\
+            bstc_dtl_vect_traits3(z, x, y),\
+            bstc_dtl_vect_traits3(y, x, z)\
+        ),\
+        bstc_container_isa(x,\
+            bstc_alloc_isa(y,\
+                bstc_dtl_vect_traits3(z, y, x),\
+                bstc_dtl_vect_traits3(y, z, x)\
+            ),\
+            bstc_alloc_isa(y,\
+                bstc_dtl_vect_traits3(x, y, z),\
+                bstc_dtl_vect_traits3(x, z, y)\
+            )\
+        )\
     )
 #endif
 
