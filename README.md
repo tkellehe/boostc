@@ -23,7 +23,7 @@ A simple solution is to instantiate your own function to wrap the _boostc_ funct
 Then the compiler will treat it as a single function and potentially reducing the size of binaries.
 
 # vector
-Provides compile time decisions to create a _C++_ like vector in _C_. Uses the _template_ interface.
+Provides compile time decisions to create a _C++_ like vector in _C_. Uses the _container traits_ interface.
 
 ```c
 #include <boostc/container/vector.h>
@@ -130,11 +130,11 @@ int main(int argc, char *argv[])
 }
 ```
 
-## Changing Templates
+## Changing Allocators
 
-The basic implementation works by taking the default template if the first parameter does not syntactically appear as a template.
-A template is basically a tuple of symbols that follows a particular pattern.
-The default layout of this pattern can be generated using the template vector macro.
+The basic implementation works by taking the default traits if the first parameter does not syntactically appear as a container trait.
+A container trait is basically a tuple of symbols that follows a particular pattern that makes it look like a boostc container.
+The default layout of this pattern can be generated using the trait vector macro.
 Then you can do things like changing the default allocator.
 
 ```c
@@ -167,7 +167,7 @@ int main(int argc, char *argv[])
     // The type provided first is the underlying type of the vector.
     // The symbol tuple is merely indicated by parentheses and the three symbols provided.
     // They must be provided in the following order: free, malloc, realloc.
-    #define vect_int bstc_vect_traits(int, (bstc_alloc_nofree, my_malloc, my_realloc))
+    #define vect_int bstc_vect_traits(int, bstc_alloc_traits(bstc_alloc_nofree, my_malloc, my_realloc))
 
     // You can print out what was actually encoded into the symbol tuple:
     printf("vect_int: %s\n", BSTC_TOSTRING(vect_int));
