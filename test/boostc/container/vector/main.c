@@ -289,37 +289,58 @@ int main(int argc, char *argv[])
         bstc_vect_destroy(vect);
     }
 
-    //--------------------------------------------------------------------------------------------------------
-    {
-        // #define vect_vect_int bstc_vect_traits(bstc_vect_t(int), bstc_vect_traits(int))
-        // bstc_vect_t(vect_vect_int) vects;
+//     //--------------------------------------------------------------------------------------------------------
+//     {
+//         #define vect_vect_int bstc_vect_traits(bstc_vect_t(int), bstc_vect_traits(int))
+//         bstc_vect_t(vect_vect_int) vects;
 
-        // bst_vect_init(vect_vect_int, vects);
+//         bstc_vect_init(vect_vect_int, vects);
 
-        // printf("bstc_vect_cap(vects): %i\n", (int)bstc_vect_cap(vect_vect_int, vects));
-        // if(bstc_vect_cap(vect_vect_int, vects) == 2) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+//         // printf("bstc_vect_cap(vects): %i\n", (int)bstc_vect_cap(vect_vect_int, vects));
+//         // if(bstc_vect_cap(vect_vect_int, vects) == 2) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
 
-        // {
-        //     bstc_size_t i;
-        //     bstc_vect_rsz(vect_vect_int, vects, 3);
+//         // {
+//         //     bstc_size_t i;
+//         //     bstc_vect_rsz(vect_vect_int, vects, 3);
 
-        //     printf("bstc_vect_cap(vects): %i\n", (int)bstc_vect_cap(vect_vect_int, vects));
-        //     if(bstc_vect_cap(vect_vect_int, vects) >= 3) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+//         //     printf("bstc_vect_cap(vects): %i\n", (int)bstc_vect_cap(vect_vect_int, vects));
+//         //     if(bstc_vect_cap(vect_vect_int, vects) >= 3) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
 
-        //     printf("bstc_vect_len(vects): %i\n", (int)bstc_vect_len(vect_vect_int, vects));
-        //     if(bstc_vect_len(vect_vect_int, vects) == 3) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+//         //     printf("bstc_vect_len(vects): %i\n", (int)bstc_vect_len(vect_vect_int, vects));
+//         //     if(bstc_vect_len(vect_vect_int, vects) == 3) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
 
-        //     for(i = 0; i < bstc_vect_len(vect_vect_int, vects); ++i)
-        //     {
-        //         printf("bstc_vect_cap(vect[%i]): %i\n", (int)i, (int)bstc_vect_cap(vects[i]));
-        //         if(bstc_vect_cap(vects[i]) == 2) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
-        //         printf("bstc_vect_len(vect[%i]): %i\n", (int)i, (int)bstc_vect_len(vects[i]));
-        //         if(bstc_vect_len(vects[i]) == 0) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
-        //     }
-        // }
-
-        // bst_vect_destroy(vect_vect_int, vects);
-    }
+//         //     for(i = 0; i < bstc_vect_len(vect_vect_int, vects); ++i)
+//         //     {
+//         //         printf("bstc_vect_cap(vect[%i]): %i\n", (int)i, (int)bstc_vect_cap(vects[i]));
+//         //         if(bstc_vect_cap(vects[i]) == 2) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+//         //         printf("bstc_vect_len(vect[%i]): %i\n", (int)i, (int)bstc_vect_len(vects[i]));
+//         //         if(bstc_vect_len(vects[i]) == 0) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+//         //     }
+//         // }
+// // This works? but then bstc_vect_destroy does not... most likely some sort of resolving issue.
+// do {
+//     intptr_t __bstc_dtl_i;
+//     for(__bstc_dtl_i = (((intptr_t*)(void*)(vects) - 2)[1]); __bstc_dtl_i--;)
+//         bstc_dtl_vect_destroy((
+//             int*,
+//             (int, (int, (0), (bstc_container_noctor, bstc_container_nodtor),
+//                 (int, bstc_iter_nonxt, bstc_iter_noeq, bstc_iter_noval, bstc_iter_noput, bstc_iter_noswap),
+//                 (int, bstc_iter_nonxt, bstc_iter_noeq, bstc_iter_noval, bstc_iter_noput, bstc_iter_noswap),
+//                 (bstc_alloc_nofree, bstc_alloc_nomalloc, bstc_alloc_norealloc)),
+//                 (bstc_container_noctor, bstc_container_nodtor),
+//                 (int, bstc_iter_nonxt, bstc_iter_noeq, bstc_iter_noval, bstc_iter_noput, bstc_iter_noswap),
+//                 (int, bstc_iter_nonxt, bstc_iter_noeq, bstc_iter_noval, bstc_iter_noput, bstc_iter_noswap),
+//                 (bstc_alloc_nofree, bstc_alloc_nomalloc, bstc_alloc_norealloc)),
+//             (bstc_dtl_vect_init, bstc_dtl_vect_destroy),
+//             ( int*, bstc_dtl_vect_default_iter_nxt, bstc_dtl_vect_default_iter_eq, bstc_dtl_vect_default_iter_val, bstc_dtl_vect_default_iter_put, bstc_dtl_vect_default_iter_swap ),
+//             ( int*, bstc_dtl_vect_default_riter_nxt, bstc_dtl_vect_default_riter_eq, bstc_dtl_vect_default_riter_val, bstc_dtl_vect_default_riter_put, bstc_dtl_vect_default_riter_swap ),
+//             (free, malloc, realloc) ),
+//         (vects)[__bstc_dtl_i]);
+//     free(((intptr_t*)(void*)(vects) - 2));
+//     *((void**)&(vects)) = ((void *)0);
+// } while(0);
+//         // bstc_vect_destroy(vect_vect_int, vects);
+//     }
 
     //--------------------------------------------------------------------------------------------------------
     printf("-----------------------------\n");

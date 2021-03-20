@@ -31,7 +31,7 @@
 
 #define bstc_dtl_vect_traits1(T) \
     (\
-        (T)*,\
+        T*,\
         bstc_container_pack_t(T),\
         bstc_dtl_vect_default_fns,\
         bstc_dtl_vect_iter_defaults(T),\
@@ -58,7 +58,7 @@
 
 #define bstc_dtl_vect_traits2_alloc(T, alloc) \
     (\
-        (T)*,\
+        T*,\
         bstc_container_pack_t(T),\
         bstc_dtl_vect_default_fns,\
         bstc_dtl_vect_iter_defaults(T),\
@@ -68,7 +68,7 @@
 
 #define bstc_dtl_vect_traits2_subtraits(T, subtraits) \
     (\
-        (T)*,\
+        T*,\
         subtraits,\
         bstc_dtl_vect_default_fns,\
         bstc_dtl_vect_iter_defaults(T),\
@@ -97,18 +97,12 @@
 
 #define bstc_dtl_vect_traits3(T, alloc, subtraits) \
     (\
-        (T)*,\
+        T*,\
         subtraits,\
         bstc_dtl_vect_default_fns,\
         bstc_dtl_vect_iter_defaults(T),\
         bstc_dtl_vect_riter_defaults(T),\
         alloc\
-    )
-
-#define bstc_dtl_vect_default_fns \
-    BSTC_CTUPLE2(\
-        bstc_dtl_vect_default_init,\
-        bstc_dtl_vect_default_destroy\
     )
 
 
@@ -124,11 +118,16 @@
     do {\
         bstc_intptr_t __bstc_dtl_i;\
         for(__bstc_dtl_i = bstc_dtl_vect_len_(vect); __bstc_dtl_i--;)\
-            bstc_container_dtor(bstc_container_subtraits(traits))(bstc_container_subtraits(traits), vect[i]);\
+            bstc_container_dtor(bstc_container_subtraits(traits))(bstc_container_subtraits(traits), (vect)[__bstc_dtl_i]);\
         bstc_alloc_free(bstc_container_alloc(traits))(bstc_dtl_vect_raw_(vect));\
         *((void**)&(vect)) = bstc_nullptr;\
     } while(0)
 
+#define bstc_dtl_vect_default_fns \
+    BSTC_CTUPLE2(\
+        bstc_dtl_vect_init,\
+        bstc_dtl_vect_destroy\
+    )
 
 #define bstc_dtl_vect_len(traits, vect) (bstc_size_t)bstc_dtl_vect_len_(vect)
 #define bstc_dtl_vect_cap(traits, vect) (bstc_size_t)bstc_dtl_vect_cap_(vect)
@@ -161,10 +160,10 @@
         /* If new size is bigger then we need to construct the new parts else we need to destruct. */\
         if(bstc_dtl_vect_len_(vect) > __bstc_dtl_nsz)\
             for(__bstc_dtl_i = __bstc_dtl_nsz; __bstc_dtl_i < bstc_dtl_vect_len_(vect); ++__bstc_dtl_i)\
-                bstc_container_dtor(bstc_container_subtraits(traits))(bstc_container_subtraits(traits), vect[i]);\
+                bstc_container_dtor(bstc_container_subtraits(traits))(bstc_container_subtraits(traits), (vect)[__bstc_dtl_i]);\
         else\
             for(__bstc_dtl_i = bstc_dtl_vect_len_(vect); __bstc_dtl_i < __bstc_dtl_nsz; ++__bstc_dtl_i)\
-                bstc_container_ctor(bstc_container_subtraits(traits))(bstc_container_subtraits(traits), vect[i]);\
+                bstc_container_ctor(bstc_container_subtraits(traits))(bstc_container_subtraits(traits), (vect)[__bstc_dtl_i]);\
         bstc_dtl_vect_len_(vect) = __bstc_dtl_nsz;\
     } while(0)
 
@@ -221,7 +220,7 @@
     )
 
 
-#define bstc_dtl_vect_default_iter_t(T) (T)*
+#define bstc_dtl_vect_default_iter_t(T) T*
 
 #define bstc_dtl_vect_iter_nxt(traits, iter) bstc_iter_nxt(bstc_container_iter(traits))(iter)
 #define bstc_dtl_vect_default_iter_nxt(iter) (++(iter))
@@ -255,7 +254,7 @@
     )
 
 
-#define bstc_dtl_vect_default_riter_t(T) (T)*
+#define bstc_dtl_vect_default_riter_t(T) T*
 
 #define bstc_dtl_vect_riter_nxt(traits, riter) bstc_iter_nxt(bstc_container_riter(traits))(riter)
 #define bstc_dtl_vect_default_riter_nxt(riter) (--(riter))

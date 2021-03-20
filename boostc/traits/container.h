@@ -170,7 +170,7 @@
 /** Get the container functions ctuple then get the destructor. */
 /// \{
 #ifndef bstc_container_dtor
-# define bstc_dtl_container_dtor1(ctor, dtor) ctor
+# define bstc_dtl_container_dtor1(ctor, dtor) dtor
 # define bstc_dtl_container_dtor(t, subtraits, fns, iter, riter, alloc) BSTC_EXPAND(bstc_dtl_container_dtor1 fns)
 # define bstc_container_dtor(tpl) BSTC_EXPAND(bstc_dtl_container_dtor tpl)
 #endif
