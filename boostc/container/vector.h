@@ -41,7 +41,7 @@
 
 
 /** Initializes the vector structure.
- * \param vect Reference to the vector.
+ * \param vect Pointer to the vector.
  */
 /// \{
 #ifndef bstc_vect_init
@@ -55,7 +55,7 @@
 
 
 /** Destroys and frees any memory allocated for the vector.
- * \param vect Reference to the vector.
+ * \param vect Pointer to the vector.
  */
 /// \{
 #ifndef bstc_vect_destroy
@@ -69,7 +69,7 @@
 
 
 /** Gets the number of items that have been added or resized to.
- * \param vect Reference to the vector.
+ * \param vect Pointer to the vector.
  * \return Returns the number of items.
  */
 /// \{
@@ -84,7 +84,7 @@
 
 
 /** Gets the capacity that the vector has been allocated for.
- * \param vect Reference to the vector.
+ * \param vect Pointer to the vector.
  * \return Returns the capacity for the vector.
  */
 /// \{
@@ -98,8 +98,23 @@
 /// \}
 
 
+/** Gets the data array that the vector has been allocated with.
+ * \param vect Pointer to the vector.
+ * \return Returns the data array for the vector.
+ */
+/// \{
+#ifndef bstc_vect_data
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_data(...) bstc_ctuple_call(bstc_dtl_vect_data, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_data(traits, vect) bstc_dtl_vect_data(traits, vect)
+# endif
+#endif
+/// \}
+
+
 /** Resizes the vector to be able to hold the new size.
- * \param vect Reference to the vector.
+ * \param vect Pointer to the vector.
  * \param nsz The new size for the vector.
  */
 /// \{
@@ -114,7 +129,7 @@
 
 
 /** Reserves the requested capacity for the vector by only reserving more.
- * \param vect Reference to the vector.
+ * \param vect Pointer to the vector.
  * \param ncap The new capacity for the vector.
  */
 /// \{
@@ -129,7 +144,7 @@
 
 
 /** Assert at the index provided then read the value in the array.
- * \param vect Reference to the vector.
+ * \param vect Pointer to the vector.
  * \param i The index to access.
  * \return Returns the value at the index.
  */
@@ -145,7 +160,7 @@
 
 
 /** Checks to see if the vector is empty.
- * \param vect Reference to the vector.
+ * \param vect Pointer to the vector.
  * \return Returns one if empty and zero otherwise.
  */
 /// \{
@@ -160,7 +175,7 @@
 
 
 /** Get the front value of the vector.
- * \param vect Reference to the vector.
+ * \param vect Pointer to the vector.
  * \return Returns the value at the first index.
  */
 /// \{
@@ -175,7 +190,7 @@
 
 
 /** Get the back value of the vector.
- * \param vect Reference to the vector.
+ * \param vect Pointer to the vector.
  * \return Returns the value at the last index.
  */
 /// \{
@@ -190,7 +205,7 @@
 
 
 /** Pushes a single value onto the back of the vector and resizes if needed.
- * \param vect Reference to the vector.
+ * \param vect Pointer to the vector.
  * \param val The value to push on.
  */
 /// \{
@@ -205,7 +220,7 @@
 
 
 /** Get a forward iterator referencing the first item.
- * \param vect Reference to the vector.
+ * \param vect Pointer to the vector.
  * \return Returns the forward iterator to the first item.
  */
 /// \{
@@ -220,7 +235,7 @@
 
 
 /** Get a forward iterator referencing the end of the vector.
- * \param vect Reference to the vector.
+ * \param vect Pointer to the vector.
  * \return Returns the forward iterator to the end of the vector.
  */
 /// \{
@@ -235,7 +250,7 @@
 
 
 /** Get a reverse iterator referencing the first item.
- * \param vect Reference to the vector.
+ * \param vect Pointer to the vector.
  * \return Returns the reverse iterator to the first item.
  */
 /// \{
@@ -250,7 +265,7 @@
 
 
 /** Get a reverse iterator referencing the end of the vector.
- * \param vect Reference to the vector.
+ * \param vect Pointer to the vector.
  * \return Returns the reverse iterator to the end of the vector.
  */
 /// \{
@@ -279,7 +294,7 @@
 
 
 /** Moves the forward iterator to the next iterator.
- * \param iter Reference to the vector.
+ * \param iter The iterator.
  */
 /// \{
 #ifndef bstc_vect_iter_nxt
@@ -293,8 +308,8 @@
 
 
 /** Detects if two forward iterators are referencing the same location.
- * \param left Reference to the vector.
- * \param right Reference to the vector.
+ * \param left The left iterator.
+ * \param right The right iteratir.
  */
 /// \{
 #ifndef bstc_vect_iter_eq
@@ -308,7 +323,7 @@
 
 
 /** Accesses the value of the forward iterator.
- * \param iter Reference to the vector.
+ * \param iter The iterator.
  */
 /// \{
 #ifndef bstc_vect_iter_val
@@ -322,7 +337,7 @@
 
 
 /** Accesses the value of the forward iterator.
- * \param iter Reference to the vector.
+ * \param iter The iterator.
  * \param val The value to assign to where the iterator is referencing.
  */
 /// \{
@@ -337,8 +352,8 @@
 
 
 /** Swaps the contents of to forward iterators.
- * \param left Reference to the vector.
- * \param right Reference to the vector.
+ * \param left The left iterator.
+ * \param right The right iteratir.
  */
 /// \{
 #ifndef bstc_vect_iter_swap
@@ -366,7 +381,7 @@
 
 
 /** Moves the reverse iterator to the next iterator.
- * \param iter Reference to the vector.
+ * \param iter The iterator.
  */
 /// \{
 #ifndef bstc_vect_riter_nxt
@@ -380,8 +395,8 @@
 
 
 /** Detects if two reverse iterators are referencing the same location.
- * \param left Reference to the vector.
- * \param right Reference to the vector.
+ * \param left The left iterator.
+ * \param right The right iteratir.
  */
 /// \{
 #ifndef bstc_vect_riter_eq
@@ -395,7 +410,7 @@
 
 
 /** Accesses the value of the reverse iterator.
- * \param iter Reference to the vector.
+ * \param iter The iterator.
  */
 /// \{
 #ifndef bstc_vect_riter_val
@@ -409,7 +424,7 @@
 
 
 /** Accesses the value of the reverse iterator.
- * \param iter Reference to the vector.
+ * \param iter The iterator.
  * \param val The value to assign to where the iterator is referencing.
  */
 /// \{
@@ -424,8 +439,8 @@
 
 
 /** Swaps the contents of to reverse iterators.
- * \param left Reference to the vector.
- * \param right Reference to the vector.
+ * \param left The left iterator.
+ * \param right The right iteratir.
  */
 /// \{
 #ifndef bstc_vect_riter_swap

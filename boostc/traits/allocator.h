@@ -43,8 +43,12 @@
 /** Get the free function that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_alloc_free
-# define bstc_dtl_alloc_free(f, m, r) f
-# define bstc_alloc_free(tpl) BSTC_EXPAND(bstc_dtl_alloc_free tpl)
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_alloc_free(tpl) BSTC_EXPAND(BSTC_GET_ARG0 tpl)
+# else
+#  define bstc_dtl_alloc_free(f, m, r) f
+#  define bstc_alloc_free(tpl) BSTC_EXPAND(bstc_dtl_alloc_free tpl)
+# endif
 #endif
 /// \}
 
@@ -52,8 +56,12 @@
 /** Get the malloc function that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_alloc_malloc
-# define bstc_dtl_alloc_malloc(f, m, r) m
-# define bstc_alloc_malloc(tpl) BSTC_EXPAND(bstc_dtl_alloc_malloc tpl)
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_alloc_malloc(tpl) BSTC_EXPAND(BSTC_GET_ARG1 tpl)
+# else
+#  define bstc_dtl_alloc_malloc(f, m, r) m
+#  define bstc_alloc_malloc(tpl) BSTC_EXPAND(bstc_dtl_alloc_malloc tpl)
+# endif
 #endif
 /// \}
 
@@ -61,8 +69,12 @@
 /** Get the realloc function that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_alloc_realloc
-# define bstc_dtl_alloc_realloc(f, m, r) r
-# define bstc_alloc_realloc(tpl) BSTC_EXPAND(bstc_dtl_alloc_realloc tpl)
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_alloc_realloc(tpl) BSTC_EXPAND(BSTC_GET_ARG2 tpl)
+# else
+#  define bstc_dtl_alloc_realloc(f, m, r) r
+#  define bstc_alloc_realloc(tpl) BSTC_EXPAND(bstc_dtl_alloc_realloc tpl)
+# endif
 #endif
 /// \}
 

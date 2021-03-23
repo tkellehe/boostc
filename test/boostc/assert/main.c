@@ -8,8 +8,8 @@
 
 int main(int argc, char *argv[])
 {
-    bstc_unused_param(argc);;
-    bstc_unused_param(argv);;
+    bstc_unused_param(argc);
+    bstc_unused_param(argv);
     printf("passed\n");
     return 0;
 }

@@ -66,8 +66,12 @@
 /** Get the iterator type that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_iter_t
-# define bstc_dtl_iter_t(t, nxt, eq, val, put, swap) t
-# define bstc_iter_t(tpl) BSTC_EXPAND(bstc_dtl_iter_t tpl)
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_iter_t(tpl) BSTC_EXPAND(BSTC_GET_ARG0 tpl)
+# else
+#  define bstc_dtl_iter_t(t, nxt, eq, val, put, swap) t
+#  define bstc_iter_t(tpl) BSTC_EXPAND(bstc_dtl_iter_t tpl)
+# endif
 #endif
 /// \}
 
@@ -75,8 +79,12 @@
 /** Get the nxt function that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_iter_nxt
-# define bstc_dtl_iter_nxt(t, nxt, eq, val, put, swap) nxt
-# define bstc_iter_nxt(tpl) BSTC_EXPAND(bstc_dtl_iter_nxt tpl)
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_iter_nxt(tpl) BSTC_EXPAND(BSTC_GET_ARG1 tpl)
+# else
+#  define bstc_dtl_iter_nxt(t, nxt, eq, val, put, swap) nxt
+#  define bstc_iter_nxt(tpl) BSTC_EXPAND(bstc_dtl_iter_nxt tpl)
+# endif
 #endif
 /// \}
 
@@ -84,8 +92,12 @@
 /** Get the eq function that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_iter_eq
-# define bstc_dtl_iter_eq(t, nxt, eq, val, put, swap) eq
-# define bstc_iter_eq(tpl) BSTC_EXPAND(bstc_dtl_iter_eq tpl)
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_iter_eq(tpl) BSTC_EXPAND(BSTC_GET_ARG2 tpl)
+# else
+#  define bstc_dtl_iter_eq(t, nxt, eq, val, put, swap) eq
+#  define bstc_iter_eq(tpl) BSTC_EXPAND(bstc_dtl_iter_eq tpl)
+# endif
 #endif
 /// \}
 
@@ -93,8 +105,12 @@
 /** Get the val function that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_iter_val
-# define bstc_dtl_iter_val(t, nxt, eq, val, put, swap) val
-# define bstc_iter_val(tpl) BSTC_EXPAND(bstc_dtl_iter_val tpl)
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_iter_val(tpl) BSTC_EXPAND(BSTC_GET_ARG3 tpl)
+# else
+#  define bstc_dtl_iter_val(t, nxt, eq, val, put, swap) val
+#  define bstc_iter_val(tpl) BSTC_EXPAND(bstc_dtl_iter_val tpl)
+# endif
 #endif
 /// \}
 
@@ -102,8 +118,12 @@
 /** Get the set function that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_iter_put
-# define bstc_dtl_iter_put(t, nxt, eq, val, put, swap) put
-# define bstc_iter_put(tpl) BSTC_EXPAND(bstc_dtl_iter_put tpl)
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_iter_put(tpl) BSTC_EXPAND(BSTC_GET_ARG4 tpl)
+# else
+#  define bstc_dtl_iter_put(t, nxt, eq, val, put, swap) put
+#  define bstc_iter_put(tpl) BSTC_EXPAND(bstc_dtl_iter_put tpl)
+# endif
 #endif
 /// \}
 
@@ -111,8 +131,12 @@
 /** Get the swap function that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_iter_swap
-# define bstc_dtl_iter_swap(t, nxt, eq, val, put, swap) swap
-# define bstc_iter_swap(tpl) BSTC_EXPAND(bstc_dtl_iter_swap tpl)
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_iter_swap(tpl) BSTC_EXPAND(BSTC_GET_ARG5 tpl)
+# else
+#  define bstc_dtl_iter_swap(t, nxt, eq, val, put, swap) swap
+#  define bstc_iter_swap(tpl) BSTC_EXPAND(bstc_dtl_iter_swap tpl)
+# endif
 #endif
 /// \}
 

@@ -69,7 +69,9 @@
 /// \{
 #ifndef bstc_ctuple_size
 # if defined(bstc_ctuple_isa) && defined(BSTC_IF_ARG0_EMPTY) && defined(BSTC_IFEQ) && defined(BSTC_ARGCNT)
-#  define bstc_ctuple_size(tpl) bstc_ctuple_isa(tpl, BSTC_IF_ARG0_EMPTY(tpl, BSTC_IFEQ(BSTC_ARGCNT tpl, 1, 0, BSTC_ARGCNT tpl), BSTC_ARGCNT tpl), 0)
+#  define bstc_dtl_ctuple_size_isa(tpl) BSTC_IF_ARG0_EMPTY(tpl, BSTC_IFEQ(BSTC_ARGCNT tpl, 1, 0, BSTC_ARGCNT tpl), BSTC_ARGCNT tpl)
+#  define bstc_dtl_ctuple_size_nope(tpl) 0
+#  define bstc_ctuple_size(tpl) bstc_ctuple_isa(tpl, bstc_dtl_ctuple_size_isa, bstc_dtl_ctuple_size_nope) (tpl)
 # endif
 #endif
 /// \}
