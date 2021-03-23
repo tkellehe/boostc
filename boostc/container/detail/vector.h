@@ -302,10 +302,10 @@ typedef struct { bstc_size_t cap_; bstc_size_t len_; } bstc_dtl_vect_header_t;
     } while(0)
 
 
-#define bstc_dtl_vect_begin(traits, vect) (vect)
-#define bstc_dtl_vect_end(traits, vect) ((vect)+bstc_dtl_vect_len(traits, vect))
-#define bstc_dtl_vect_rbegin(traits, vect) ((vect)+bstc_dtl_vect_len(traits, vect))
-#define bstc_dtl_vect_rend(traits, vect) (vect)
+#define bstc_dtl_vect_begin(traits, vect) (*(vect))
+#define bstc_dtl_vect_end(traits, vect) ((*(vect))+bstc_dtl_vect_len(traits, vect))
+#define bstc_dtl_vect_rbegin(traits, vect) ((*(vect))+bstc_dtl_vect_len(traits, vect))
+#define bstc_dtl_vect_rend(traits, vect) (*(vect))
 
 
 #define bstc_dtl_vect_iter_defaults(T) \

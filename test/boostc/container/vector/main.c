@@ -318,7 +318,6 @@ int main(int argc, char *argv[])
     //     //     }
     //     // }
     //     bstc_vect_destroy(vect_vect_int, &vects);
-    //     // printf("%s\n", bstc_ctuple_tostring(bstc_container_dtor(bstc_container_subtraits(vect_vect_int))(bstc_container_subtraits(vect_vect_int), (vects)[0])));
     // }
 
     //--------------------------------------------------------------------------------------------------------
