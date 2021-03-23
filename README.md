@@ -38,13 +38,13 @@ int main(int argc, char *argv[])
     bstc_vect_t(int) vect;
     
     // Initialize the state of the vector.
-    bstc_vect_init(vect);
+    bstc_vect_init(&vect);
     
     // Default is to use stdlib allocator.
-    bstc_vect_pushb(vect, 1);
-    bstc_vect_pushb(vect, 12);
-    bstc_vect_pushb(vect, 13);
-    bstc_vect_pushb(vect, 14);
+    bstc_vect_pushb(&vect, 1);
+    bstc_vect_pushb(&vect, 12);
+    bstc_vect_pushb(&vect, 13);
+    bstc_vect_pushb(&vect, 14);
     
     // Can use basic array operator on the data.
     vect[0] += 10;
@@ -52,12 +52,12 @@ int main(int argc, char *argv[])
     // Can loop over the contents.
     {
         bstc_size_t i;
-        for(i = 0; i < bstc_vect_len(vect); ++i)
+        for(i = 0; i < bstc_vect_len(&vect); ++i)
             printf("%i\n", vect[i]);
     }
     
     // Deallocate any memory.
-    bstc_vect_destroy(vect);
+    bstc_vect_destroy(&vect);
     
     return 0;
 }
@@ -89,27 +89,27 @@ int main(int argc, char *argv[])
     bstc_vect_riter_t(int) riter;
     
     // Initialize the state of the vector.
-    bstc_vect_init(vect);
+    bstc_vect_init(&vect);
     
     // Add some elements to the vector.
-    bstc_vect_pushb(vect, 1);
-    bstc_vect_pushb(vect, 2);
-    bstc_vect_pushb(vect, 3);
+    bstc_vect_pushb(&vect, 1);
+    bstc_vect_pushb(&vect, 2);
+    bstc_vect_pushb(&vect, 3);
     
     // Can loop over the contents and check if reached the end.
     {
         printf("forward iterator:\n");
-        for(iter = bstc_vect_begin(vect); iter != bstc_vect_end(vect); ++iter)
+        for(iter = bstc_vect_begin(&vect); iter != bstc_vect_end(&vect); ++iter)
             printf("    %i\n", *iter);
     }
     // Can also use the functions provided to be more explicit.
     {
         printf("forward iterator & vector functions:\n");
-        for(iter = bstc_vect_begin(vect); !bstc_vect_iter_eq(iter, bstc_vect_end(vect)); bstc_vect_iter_nxt(iter))
+        for(iter = bstc_vect_begin(&vect); !bstc_vect_iter_eq(iter, bstc_vect_end(&vect)); bstc_vect_iter_nxt(iter))
             printf("    %i\n", bstc_vect_iter_val(iter));
     }
 
-    iter = bstc_vect_begin(vect);
+    iter = bstc_vect_begin(&vect);
     // The recommended way is to use the functions provided to access elements.
     bstc_vect_iter_set(iter, bstc_vect_iter_val(iter) + 10);
     // But, the vector iterator interface provides both.
@@ -119,12 +119,12 @@ int main(int argc, char *argv[])
     {
         printf("reverse iterator & vector functions:\n");
         // Note: That you can use 'riter != bstc_vect_rend(vect)' if it is more readable.
-        for(riter = bstc_vect_rbegin(vect); !bstc_vect_riter_eq(riter, bstc_vect_rend(vect)); bstc_vect_riter_nxt(riter))
+        for(riter = bstc_vect_rbegin(&vect); !bstc_vect_riter_eq(riter, bstc_vect_rend(&vect)); bstc_vect_riter_nxt(riter))
             printf("    %i\n", bstc_vect_riter_val(riter));
     }
     
     // Deallocate any memory.
-    bstc_vect_destroy(vect);
+    bstc_vect_destroy(&vect);
     
     return 0;
 }
@@ -176,13 +176,13 @@ int main(int argc, char *argv[])
     bstc_vect_t(vect_int) vect;
     
     // Initializes the state by extracting the symbol encoded representing the init function.
-    bstc_vect_init(vect_int, vect);
+    bstc_vect_init(vect_int, &vect);
     
     // Uses the allocator encoded into the template to realloc and malloc the memory.
-    bstc_vect_pushb(vect_int, vect, 1);
-    bstc_vect_pushb(vect_int, vect, 12);
-    bstc_vect_pushb(vect_int, vect, 13);
-    bstc_vect_pushb(vect_int, vect, 14);
+    bstc_vect_pushb(vect_int, &vect, 1);
+    bstc_vect_pushb(vect_int, &vect, 12);
+    bstc_vect_pushb(vect_int, &vect, 13);
+    bstc_vect_pushb(vect_int, &vect, 14);
     
     // Can still use basic array operator on the data.
     vect[0] += 10;
@@ -190,12 +190,12 @@ int main(int argc, char *argv[])
     // Can loop over the contents where the template is not necessary, but recommended for consistency.
     {
         bstc_size_t i;
-        for(i = 0; i < bstc_vect_len(vect_int, vect); ++i)
+        for(i = 0; i < bstc_vect_len(vect_int, &vect); ++i)
             printf("%i\n", vect[i]);
     }
     
     // Deallocates any memory allocated using what is encoded in the template.
-    bstc_vect_destroy(vect_int, vect);
+    bstc_vect_destroy(vect_int, &vect);
     
     return 0;
 }
