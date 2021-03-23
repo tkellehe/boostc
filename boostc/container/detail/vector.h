@@ -17,34 +17,46 @@
 
 #ifdef BSTC_HAS_VARIADIC_MACROS
 
+/** Adds the default vector traits if they are not provided. */
+/// {
 # define bstc_dtl_vect_add_traits_prepend2(...) bstc_ctuple(__VA_ARGS__)
 # define bstc_dtl_vect_add_traits_prepend1(L, R) BSTC_EXPAND(bstc_dtl_vect_add_traits_prepend2(L, R))
 # define bstc_dtl_vect_add_traits_prepend(tpl) BSTC_EXPAND(bstc_dtl_vect_add_traits_prepend1(bstc_dtl_vect_traits1(void), bstc_ctuple_layout tpl))
 # define bstc_dtl_vect_add_traits_no(tpl) tpl
 # define bstc_dtl_vect_add_traits_select(tpl) bstc_container_isa(BSTC_GET_ARG0 tpl, bstc_dtl_vect_add_traits_no, bstc_dtl_vect_add_traits_prepend)
 # define bstc_dtl_vect_add_traits(tpl) bstc_dtl_vect_add_traits_select(tpl) (tpl)
+/// }
 
+
+/** Selects the correct function based off of the number of arguments provided. */
+/// {
 # define bstc_dtl_vect_traits_select(tpl) \
     bstc_ctuple_hasN(tpl, 1,\
         bstc_dtl_vect_traits1,\
         bstc_ctuple_hasN(tpl, 2,\
-            bstc_dtl_vect_traits2,\
-            bstc_dtl_vect_traits3_\
+            bstc_dtl_vect_traits2_select,\
+            bstc_dtl_vect_traits3_select\
         )\
     )
+/// }
 
+
+/** Creates the vector traits given only the type. */
+/// {
 # define bstc_dtl_vect_traits1(T) \
     (\
         T*,\
         T,\
         BSTC_CTUPLE1(T),\
         bstc_dtl_vect_obj_defaults(T),\
-        bstc_dtl_vect_iter_defaults(T),\
-        bstc_dtl_vect_riter_defaults(T),\
         bstc_alloc_stdlib\
     )
+/// }
 
-# define bstc_dtl_vect_traits2(x, y) \
+
+/** Selects the correct function and order of the parameters provided. */
+/// {
+# define bstc_dtl_vect_traits2_select(x, y) \
     bstc_alloc_isa(x,\
         /* The first argument is an allocator traits so the other has to be the type. */\
         bstc_dtl_vect_traits2_alloc(y, x),\
@@ -60,15 +72,17 @@
             )\
         )\
     )
+/// }
 
+
+/** Creates the traits with the type and either the allocator traits or the sub-traits. */
+/// {
 # define bstc_dtl_vect_traits2_alloc(T, alloc) \
     (\
         T*,\
         T,\
         BSTC_CTUPLE1(T),\
         bstc_dtl_vect_obj_defaults(T),\
-        bstc_dtl_vect_iter_defaults(T),\
-        bstc_dtl_vect_riter_defaults(T),\
         alloc\
     )
 
@@ -78,12 +92,14 @@
         T,\
         subtraits,\
         bstc_dtl_vect_obj_defaults(T),\
-        bstc_dtl_vect_iter_defaults(T),\
-        bstc_dtl_vect_riter_defaults(T),\
         bstc_alloc_stdlib\
     )
+/// }
 
-# define bstc_dtl_vect_traits3_(x, y, z) \
+
+/** Selects the correct order for the parameters provided. */
+/// {
+# define bstc_dtl_vect_traits3_select(x, y, z) \
     bstc_alloc_isa(x,\
         bstc_container_isa(y,\
             bstc_dtl_vect_traits3(z, x, y),\
@@ -100,22 +116,42 @@
             )\
         )\
     )
+/// }
 #endif // BSTC_HAS_VARIADIC_MACROS
 
+
+/** The object like functions supported by the vector. */
+/// {
+#define bstc_dtl_vect_obj_defaults(T) \
+    bstc_obj_traits(\
+        T*,\
+        bstc_dtl_vect_init,\
+        bstc_dtl_vect_destroy,\
+        bstc_obj_nocptor,\
+        bstc_obj_noassign\
+    )
+/// }
+
+
+/** Takes in all templated parts of the vector. */
+/// {
 #define bstc_dtl_vect_traits3(T, alloc, subtraits) \
     (\
         T*,\
         T,\
         subtraits,\
         bstc_dtl_vect_obj_defaults(T),\
-        bstc_dtl_vect_iter_defaults(T),\
-        bstc_dtl_vect_riter_defaults(T),\
         alloc\
     )
+/// }
 
 
+/** The header structure to the fat pointer. */
+/// {
 typedef struct { bstc_size_t cap_; bstc_size_t len_; } bstc_dtl_vect_header_t;
 #define bstc_dtl_vect_header(vect) (((bstc_dtl_vect_header_t*)(*(vect))) - 1)
+/// }
+
 
 
 /** Provides the implementation for the ctor selection. */
@@ -196,26 +232,27 @@ typedef struct { bstc_size_t cap_; bstc_size_t len_; } bstc_dtl_vect_header_t;
 /// }
 
 
+/** Initializes the vector to null which makes it easier given that we are using fat pointers. */
+/// {
 #define bstc_dtl_vect_init(traits, vect) *(vect) = bstc_nullptr
+/// }
 
+
+/** Reclaims all of the memory that has been allocated where if BSTC_HAS_VARIADIC_MACROS is defined then it will call the destructor (if possible).
+ * The `do-while` is added to force users to end with a semicolon.
+ */
+/// {
 #define bstc_dtl_vect_destroy(traits, vect) \
     do {if(*(vect)) {\
         bstc_dtl_vect_dtor(traits, (*(vect)), bstc_dtl_vect_header(vect)->len_);\
         bstc_alloc_free(bstc_container_alloc(traits))(bstc_dtl_vect_header(vect));\
         *(vect) = bstc_nullptr;}\
     } while(0)
+/// }
 
 
-#define bstc_dtl_vect_obj_defaults(T) \
-    bstc_obj_traits(\
-        T*,\
-        bstc_dtl_vect_init,\
-        bstc_dtl_vect_destroy,\
-        bstc_obj_nocptor,\
-        bstc_obj_noassign\
-    )
-
-
+/** The simple basic access functions. */
+/// {
 #define bstc_dtl_vect_len(traits, vect) ((*(vect)) ? bstc_dtl_vect_header(vect)->len_ : 0)
 #define bstc_dtl_vect_cap(traits, vect) ((*(vect)) ? bstc_dtl_vect_header(vect)->cap_ : 0)
 #define bstc_dtl_vect_data(traits, vect) (*(vect))
@@ -223,7 +260,11 @@ typedef struct { bstc_size_t cap_; bstc_size_t len_; } bstc_dtl_vect_header_t;
 #define bstc_dtl_vect_at(traits, vect, i) ((*(vect))[(i)])
 #define bstc_dtl_vect_front(traits, vect) ((*(vect))[0])
 #define bstc_dtl_vect_back(traits, vect) ((*(vect))[bstc_dtl_vect_header(vect)->len_-1])
+/// }
 
+
+/** Implements the resize function with dtor and ctor calls depending on how the size changes. */
+/// {
 #define bstc_dtl_vect_rsz(traits, vect, nsz) \
     do {\
         bstc_size_t __bstc_dtl_nsz = (bstc_size_t)(nsz);\
@@ -257,7 +298,11 @@ typedef struct { bstc_size_t cap_; bstc_size_t len_; } bstc_dtl_vect_header_t;
             bstc_dtl_vect_ctor(traits, ((*(vect)) + (bstc_dtl_vect_header(vect)->len_ - __bstc_dtl_nsz)), (bstc_dtl_vect_header(vect)->len_ - __bstc_dtl_nsz));\
         bstc_dtl_vect_header(vect)->len_ = __bstc_dtl_nsz;\
     } while(0)
+/// }
 
+
+/** Implements the reserve function which merely ensures enough memory is allocated for the request and never shrinks. */
+/// {
 #define bstc_dtl_vect_rsv(traits, vect, ncap) \
     do {\
         /* Check to see if the new capacity already fits. */\
@@ -278,7 +323,11 @@ typedef struct { bstc_size_t cap_; bstc_size_t len_; } bstc_dtl_vect_header_t;
             bstc_dtl_vect_header(vect)->cap_ = __bstc_dtl_ncap;\
         }\
     } while(0)
+/// }
 
+
+/** Implements the push back function that applies the copy constructor if it is available. */
+/// {
 #define bstc_dtl_vect_pushb(traits, vect, val) \
     do {\
         if(*(vect)){\
@@ -300,81 +349,7 @@ typedef struct { bstc_size_t cap_; bstc_size_t len_; } bstc_dtl_vect_header_t;
         bstc_dtl_vect_cptor(traits, ((*(vect)) + bstc_dtl_vect_header(vect)->len_), (val));\
         bstc_dtl_vect_header(vect)->len_ += 1;\
     } while(0)
-
-
-#define bstc_dtl_vect_begin(traits, vect) (*(vect))
-#define bstc_dtl_vect_end(traits, vect) ((*(vect))+bstc_dtl_vect_len(traits, vect))
-#define bstc_dtl_vect_rbegin(traits, vect) ((*(vect))+bstc_dtl_vect_len(traits, vect))
-#define bstc_dtl_vect_rend(traits, vect) (*(vect))
-
-
-#define bstc_dtl_vect_iter_defaults(T) \
-    (\
-        bstc_dtl_vect_default_iter_t(T),\
-        bstc_dtl_vect_default_iter_nxt,\
-        bstc_dtl_vect_default_iter_eq,\
-        bstc_dtl_vect_default_iter_val,\
-        bstc_dtl_vect_default_iter_put,\
-        bstc_dtl_vect_default_iter_swap\
-    )
-
-
-#define bstc_dtl_vect_default_iter_t(T) T*
-
-#define bstc_dtl_vect_iter_nxt(traits, iter) bstc_iter_nxt(bstc_container_iter(traits))(iter)
-#define bstc_dtl_vect_default_iter_nxt(iter) (++(iter))
-
-#define bstc_dtl_vect_iter_eq(traits, left, right) bstc_iter_eq(bstc_container_iter(traits))(left, right)
-#define bstc_dtl_vect_default_iter_eq(left, right) ((left) == (right))
-
-#define bstc_dtl_vect_iter_val(traits, iter) bstc_iter_val(bstc_container_iter(traits))(iter)
-#define bstc_dtl_vect_default_iter_val(iter) *(iter)
-
-#define bstc_dtl_vect_iter_put(traits, iter, val) bstc_iter_put(bstc_container_iter(traits))(iter, val)
-#define bstc_dtl_vect_default_iter_put(iter, val) (*(iter) = (val))
-
-#define bstc_dtl_vect_iter_swap(traits, left, right) bstc_iter_swap(bstc_container_iter(traits))(left, right)
-#define bstc_dtl_vect_default_iter_swap(left, right) \
-    {\
-        char __bstc_dtl_swap[sizeof(*(left))];\
-        memcpy((void*)__bstc_dtl_swap, (void*)(left), sizeof(*(left)));\
-        memcpy((void*)(left), (void*)(right), sizeof(*(left)));\
-        memcpy((void*)(right), (void*)__bstc_dtl_swap, sizeof(*(left)));\
-    }
-
-#define bstc_dtl_vect_riter_defaults(T) \
-    (\
-        bstc_dtl_vect_default_riter_t(T),\
-        bstc_dtl_vect_default_riter_nxt,\
-        bstc_dtl_vect_default_riter_eq,\
-        bstc_dtl_vect_default_riter_val,\
-        bstc_dtl_vect_default_riter_put,\
-        bstc_dtl_vect_default_riter_swap\
-    )
-
-
-#define bstc_dtl_vect_default_riter_t(T) T*
-
-#define bstc_dtl_vect_riter_nxt(traits, riter) bstc_iter_nxt(bstc_container_riter(traits))(riter)
-#define bstc_dtl_vect_default_riter_nxt(riter) (--(riter))
-
-#define bstc_dtl_vect_riter_eq(traits, left, right) bstc_iter_eq(bstc_container_riter(traits))(left, right)
-#define bstc_dtl_vect_default_riter_eq(left, right) ((left) == (right))
-
-#define bstc_dtl_vect_riter_val(traits, riter) bstc_iter_val(bstc_container_riter(traits))(riter)
-#define bstc_dtl_vect_default_riter_val(riter) *((riter)-1)
-
-#define bstc_dtl_vect_riter_put(traits, riter, val) bstc_iter_put(bstc_container_riter(traits))(riter, val)
-#define bstc_dtl_vect_default_riter_put(riter, val) (*((riter)-1) = (val))
-
-#define bstc_dtl_vect_riter_swap(traits, left, right) bstc_iter_swap(bstc_container_riter(traits))(left, right)
-#define bstc_dtl_vect_default_riter_swap(left, right) \
-    {\
-        char __bstc_dtl_swap[sizeof(*(left))];\
-        memcpy((void*)__bstc_dtl_swap, (void*)((left)-1), sizeof(*(left)));\
-        memcpy((void*)((left)-1), (void*)((right)-1), sizeof(*(left)));\
-        memcpy((void*)((right)-1), (void*)__bstc_dtl_swap, sizeof(*(left)));\
-    }
+/// }
 
 
 #endif // BOOSTC__CONTAINER__DETAIL__VECTOR_H

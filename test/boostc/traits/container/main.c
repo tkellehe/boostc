@@ -17,13 +17,11 @@ int main(int argc, char *argv[])
 #ifdef bstc_container_isa
     //--------------------------------------------------------------------------------------------------------
     #define container1 bstc_container_pack_t(A)
-    #define container2 bstc_container_pack_subtraits(bstc_ctuple(B, BB, BBB))
-    #define container3 bstc_container_pack_obj(bstc_obj_pack_t(C))
-    #define container4 bstc_container_pack_iter(bstc_iter_pack_t(D))
-    #define container5 bstc_container_pack_riter(bstc_iter_pack_t(E))
-    #define container6 bstc_container_pack_alloc(bstc_alloc_pack_free(F))
-    #define container7 bstc_container_pack_info((G))
-    #define containerN bstc_ctuple(1, 2, 3, 4, 5, 6)
+    #define container2 bstc_container_pack_info((B))
+    #define container3 bstc_container_pack_subtraits(bstc_ctuple(C, CC, CCC))
+    #define container4 bstc_container_pack_obj(bstc_obj_pack_t(D))
+    #define container5 bstc_container_pack_alloc(bstc_alloc_pack_free(E))
+    #define containerN bstc_ctuple(1, 2, 3, 4)
 
     //--------------------------------------------------------------------------------------------------------
     printf("bstc_container_isa(%s)\n", bstc_ctuple_tostring(container1));
@@ -36,10 +34,6 @@ int main(int argc, char *argv[])
     bstc_container_isa(container4, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
     printf("bstc_container_isa(%s)\n", bstc_ctuple_tostring(container5));
     bstc_container_isa(container5, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("bstc_container_isa(%s)\n", bstc_ctuple_tostring(container6));
-    bstc_container_isa(container6, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
-    printf("bstc_container_isa(%s)\n", bstc_ctuple_tostring(container7));
-    bstc_container_isa(container7, (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")));
     printf("bstc_container_isa(%s)\n", bstc_ctuple_tostring(containerN));
     bstc_container_isa(containerN, (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
     printf("bstc_container_isa(%s)\n", bstc_ctuple_tostring(bstc_container_defaults));
@@ -47,13 +41,11 @@ int main(int argc, char *argv[])
 #endif
 
     //--------------------------------------------------------------------------------------------------------
-    #define containerA bstc_container_traits((++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
-    #define containerB bstc_container_traits((++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
-    #define containerC bstc_container_traits((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
-    #define containerD bstc_container_traits((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
-    #define containerE bstc_container_traits((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
-    #define containerF bstc_container_traits((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")))
-    #define containerG bstc_container_traits((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")))
+    #define containerA bstc_container_traits((++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
+    #define containerB bstc_container_traits((++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
+    #define containerC bstc_container_traits((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
+    #define containerD bstc_container_traits((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")))
+    #define containerE bstc_container_traits((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")))
 
     //--------------------------------------------------------------------------------------------------------
     printf("bstc_container_t(tpl):\n");
@@ -64,12 +56,8 @@ int main(int argc, char *argv[])
     bstc_container_subtraits(containerC);
     printf("bstc_container_obj(tpl):\n");
     bstc_container_obj(containerD);
-    printf("bstc_container_iter(tpl):\n");
-    bstc_container_iter(containerE);
-    printf("bstc_container_riter(tpl):\n");
-    bstc_container_riter(containerF);
     printf("bstc_container_alloc(tpl):\n");
-    bstc_container_alloc(containerG);
+    bstc_container_alloc(containerE);
 
     //--------------------------------------------------------------------------------------------------------
     printf("-----------------------------\n");
