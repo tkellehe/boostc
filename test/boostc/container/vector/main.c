@@ -177,7 +177,6 @@ int main(int argc, char *argv[])
         printf("bstc_vect_clone(%p, %p):\n", (void*)bstc_vect_data(&vect1), (void*)bstc_vect_data(&vect2));
         if(vect2 == bstc_nullptr) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
 
-
         bstc_vect_destroy(&vect2);
 
         bstc_vect_pushb(&vect1, 1.2);
@@ -199,27 +198,45 @@ int main(int argc, char *argv[])
 
         bstc_vect_init(vect_vect_int, &vects);
 
-        // printf("bstc_vect_cap(vects): %i\n", (int)bstc_vect_cap(vect_vect_int, vects));
-        // if(bstc_vect_cap(vect_vect_int, vects) == 0) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+        printf("bstc_vect_cap(vects): %i\n", (int)bstc_vect_cap(vect_vect_int, &vects));
+        if(bstc_vect_cap(vect_vect_int, &vects) == 0) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
 
-        // {
-        //     bstc_size_t i;
-        //     bstc_vect_rsz(vect_vect_int, vects, 3);
+        {
+            bstc_size_t i;
+            bstc_vect_rsz(vect_vect_int, &vects, 3);
 
-        //     printf("bstc_vect_cap(vects): %i\n", (int)bstc_vect_cap(vect_vect_int, vects));
-        //     if(bstc_vect_cap(vect_vect_int, vects) >= 3) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+            printf("bstc_vect_cap(vects): %i\n", (int)bstc_vect_cap(vect_vect_int, &vects));
+            if(bstc_vect_cap(vect_vect_int, &vects) >= 3) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
 
-        //     printf("bstc_vect_len(vects): %i\n", (int)bstc_vect_len(vect_vect_int, vects));
-        //     if(bstc_vect_len(vect_vect_int, vects) == 3) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+            printf("bstc_vect_len(vects): %i\n", (int)bstc_vect_len(vect_vect_int, &vects));
+            if(bstc_vect_len(vect_vect_int, &vects) == 3) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
 
-        //     for(i = 0; i < bstc_vect_len(vect_vect_int, vects); ++i)
-        //     {
-        //         printf("bstc_vect_cap(vect[%i]): %i\n", (int)i, (int)bstc_vect_cap(vects[i]));
-        //         if(bstc_vect_cap(vects[i]) == 2) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
-        //         printf("bstc_vect_len(vect[%i]): %i\n", (int)i, (int)bstc_vect_len(vects[i]));
-        //         if(bstc_vect_len(vects[i]) == 0) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
-        //     }
-        // }
+            for(i = 0; i < bstc_vect_len(vect_vect_int, &vects); ++i)
+            {
+                bstc_vect_init(vect_vect_int, vects + i);
+                printf("bstc_vect_init(vects[%i]): %p\n", (int)i, (void*)bstc_vect_data(vects + i));
+                if(bstc_vect_data(vects + i) == bstc_nullptr) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+            }
+
+            for(i = 0; i < bstc_vect_len(vect_vect_int, &vects); ++i)
+            {
+                bstc_vect_rsz(vect_vect_int, vects + i, 10);
+                printf("bstc_vect_rsz(vects[%i]): %p\n", (int)i, (void*)bstc_vect_data(vects + i));
+                if(bstc_vect_data(vects + i) != bstc_nullptr) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+                printf("bstc_vect_cap(vects[%i]): %i\n", (int)i, (int)bstc_vect_cap(vect_vect_int, vects + i));
+                if(bstc_vect_cap(vect_vect_int, vects + i) >= 10) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+
+                printf("bstc_vect_len(vects[%i]): %i\n", (int)i, (int)bstc_vect_len(vect_vect_int, vects + i));
+                if(bstc_vect_len(vect_vect_int, vects + i) == 10) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+            }
+
+            for(i = 0; i < bstc_vect_len(vect_vect_int, &vects); ++i)
+            {
+                bstc_vect_destroy(vect_vect_int, vects + i);
+                printf("bstc_vect_destroy(vects[%i]): %p\n", (int)i, (void*)bstc_vect_data(vects + i));
+                if(bstc_vect_data(vects + i) == bstc_nullptr) ++num_pass, printf("    passed\n"); else ++num_fail, printf("    failed\n");
+            }
+        }
 
         bstc_vect_destroy(vect_vect_int, &vects);
     }
