@@ -54,6 +54,66 @@
 /// \}
 
 
+/** Initializes the vector structure from another vector as an exact clone.
+ * \param vect Pointer to the vector.
+ * \param other Pointer to the vector to copy.
+ */
+/// \{
+#ifndef bstc_vect_clone
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_clone(...) bstc_ctuple_call(bstc_dtl_vect_clone, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_clone(traits, vect, other) bstc_dtl_vect_clone(traits, vect, other)
+# endif
+#endif
+/// \}
+
+
+/** Initializes the vector structure from another vector as a move potentially invalidating the copied vector.
+ * \param vect Pointer to the vector.
+ * \param other Reference to the vector to move.
+ */
+/// \{
+#ifndef bstc_vect_move
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_move(...) bstc_ctuple_call(bstc_dtl_vect_move, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_move(traits, vect, other) bstc_dtl_vect_move(traits, vect, other)
+# endif
+#endif
+/// \}
+
+
+/** Copies the other vector structure provided assuming both vectors have been initialized.
+ * \param vect Pointer to the vector.
+ * \param other Pointer to the vector to copy.
+ */
+/// \{
+#ifndef bstc_vect_copy
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_copy(...) bstc_ctuple_call(bstc_dtl_vect_copy, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_copy(traits, vect, other) bstc_dtl_vect_copy(traits, vect, other)
+# endif
+#endif
+/// \}
+
+
+/** Shallow copies the other vector structure provided assuming both vectors have been initialized.
+ * \param vect Pointer to the vector.
+ * \param other Reference to the vector to copy.
+ */
+/// \{
+#ifndef bstc_vect_assign
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_vect_assign(...) bstc_ctuple_call(bstc_dtl_vect_assign, bstc_dtl_vect_add_traits(bstc_ctuple(__VA_ARGS__)))
+# else
+#  define bstc_vect_assign(traits, vect, other) bstc_dtl_vect_assign(traits, vect, other)
+# endif
+#endif
+/// \}
+
+
 /** Destroys and frees any memory allocated for the vector.
  * \param vect Pointer to the vector.
  */

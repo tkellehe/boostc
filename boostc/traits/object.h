@@ -11,7 +11,7 @@
 /** Ensure that the parameters are packed into a tuple. */
 /// \{
 #ifndef bstc_obj_traits
-# define bstc_obj_traits(t, ctor, dtor, cptor, assign) (t, ctor, dtor, cptor, assign)
+# define bstc_obj_traits(t, init, destroy, clone, copy, move, assign, extend) (t, init, destroy, clone, copy, move, assign, extend)
 #endif
 /// \}
 
@@ -24,26 +24,42 @@
 /// \}
 
 
-/** Creates a ctuple with the defaults set except for the ctor function provided. */
+/** Creates a ctuple with the defaults set except for the init function provided. */
 /// \{
-#ifndef bstc_obj_pack_ctor
-# define bstc_obj_pack_ctor(ctor) bstc_obj_set_ctor(bstc_obj_defaults, ctor)
+#ifndef bstc_obj_pack_init
+# define bstc_obj_pack_init(init) bstc_obj_set_init(bstc_obj_defaults, init)
 #endif
 /// \}
 
 
-/** Creates a ctuple with the defaults set except for the dtor function provided. */
+/** Creates a ctuple with the defaults set except for the destroy function provided. */
 /// \{
-#ifndef bstc_obj_pack_dtor
-# define bstc_obj_pack_dtor(dtor) bstc_obj_set_dtor(bstc_obj_defaults, dtor)
+#ifndef bstc_obj_pack_destroy
+# define bstc_obj_pack_destroy(destroy) bstc_obj_set_destroy(bstc_obj_defaults, destroy)
 #endif
 /// \}
 
 
-/** Creates a ctuple with the defaults set except for the cptor function provided. */
+/** Creates a ctuple with the defaults set except for the clone function provided. */
 /// \{
-#ifndef bstc_obj_pack_cptor
-# define bstc_obj_pack_cptor(cptor) bstc_obj_set_cptor(bstc_obj_defaults, cptor)
+#ifndef bstc_obj_pack_clone
+# define bstc_obj_pack_clone(clone) bstc_obj_set_clone(bstc_obj_defaults, clone)
+#endif
+/// \}
+
+
+/** Creates a ctuple with the defaults set except for the copy function provided. */
+/// \{
+#ifndef bstc_obj_pack_copy
+# define bstc_obj_pack_copy(copy) bstc_obj_set_copy(bstc_obj_defaults, copy)
+#endif
+/// \}
+
+
+/** Creates a ctuple with the defaults set except for the move function provided. */
+/// \{
+#ifndef bstc_obj_pack_move
+# define bstc_obj_pack_move(move) bstc_obj_set_move(bstc_obj_defaults, move)
 #endif
 /// \}
 
@@ -56,53 +72,87 @@
 /// \}
 
 
+/** Creates a ctuple with the defaults set except for the extend ctuple provided. */
+/// \{
+#ifndef bstc_obj_pack_extend
+# define bstc_obj_pack_extend(extend) bstc_obj_set_extend(bstc_obj_defaults, extend)
+#endif
+/// \}
+
+
 /** Get the type that has been packed into the ctuple. */
 /// \{
 #ifndef bstc_obj_t
 # ifdef BSTC_HAS_VARIADIC_MACROS
 #  define bstc_obj_t(tpl) BSTC_EXPAND(BSTC_GET_ARG0 tpl)
 # else
-#  define bstc_dtl_obj_t(t, ctor, dtor, cptor, assign) t
+#  define bstc_dtl_obj_t(t, init, destroy, clone, copy, move, assign, extend) t
 #  define bstc_obj_t(tpl) BSTC_EXPAND(bstc_dtl_obj_t tpl)
 # endif
 #endif
 /// \}
 
 
-/** Get the ctor function that has been packed into the ctuple. */
+/** Get the init function that has been packed into the ctuple. */
 /// \{
-#ifndef bstc_obj_ctor
+#ifndef bstc_obj_init
 # ifdef BSTC_HAS_VARIADIC_MACROS
-#  define bstc_obj_ctor(tpl) BSTC_EXPAND(BSTC_GET_ARG1 tpl)
+#  define bstc_obj_init(tpl) BSTC_EXPAND(BSTC_GET_ARG1 tpl)
 # else
-#  define bstc_dtl_obj_ctor(t, ctor, dtor, cptor, assign) ctor
-#  define bstc_obj_ctor(tpl) BSTC_EXPAND(bstc_dtl_obj_ctor tpl)
+#  define bstc_dtl_obj_init(t, init, destroy, clone, copy, move, assign, extend) init
+#  define bstc_obj_init(tpl) BSTC_EXPAND(bstc_dtl_obj_init tpl)
 # endif
 #endif
 /// \}
 
 
-/** Get the dtor function that has been packed into the ctuple. */
+/** Get the destroy function that has been packed into the ctuple. */
 /// \{
-#ifndef bstc_obj_dtor
+#ifndef bstc_obj_destroy
 # ifdef BSTC_HAS_VARIADIC_MACROS
-#  define bstc_obj_dtor(tpl) BSTC_EXPAND(BSTC_GET_ARG2 tpl)
+#  define bstc_obj_destroy(tpl) BSTC_EXPAND(BSTC_GET_ARG2 tpl)
 # else
-#  define bstc_dtl_obj_dtor(t, ctor, dtor, cptor, assign) dtor
-#  define bstc_obj_dtor(tpl) BSTC_EXPAND(bstc_dtl_obj_dtor tpl)
+#  define bstc_dtl_obj_destroy(t, init, destroy, clone, copy, move, assign, extend) destroy
+#  define bstc_obj_destroy(tpl) BSTC_EXPAND(bstc_dtl_obj_destroy tpl)
 # endif
 #endif
 /// \}
 
 
-/** Get the cptor function that has been packed into the ctuple. */
+/** Get the clone function that has been packed into the ctuple. */
 /// \{
-#ifndef bstc_obj_cptor
+#ifndef bstc_obj_clone
 # ifdef BSTC_HAS_VARIADIC_MACROS
-#  define bstc_obj_cptor(tpl) BSTC_EXPAND(BSTC_GET_ARG3 tpl)
+#  define bstc_obj_clone(tpl) BSTC_EXPAND(BSTC_GET_ARG3 tpl)
 # else
-#  define bstc_dtl_obj_cptor(t, ctor, dtor, cptor, assign) cptor
-#  define bstc_obj_cptor(tpl) BSTC_EXPAND(bstc_dtl_obj_cptor tpl)
+#  define bstc_dtl_obj_clone(t, init, destroy, clone, copy, move, assign, extend) clone
+#  define bstc_obj_clone(tpl) BSTC_EXPAND(bstc_dtl_obj_clone tpl)
+# endif
+#endif
+/// \}
+
+
+/** Get the copy function that has been packed into the ctuple. */
+/// \{
+#ifndef bstc_obj_copy
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_obj_copy(tpl) BSTC_EXPAND(BSTC_GET_ARG4 tpl)
+# else
+#  define bstc_dtl_obj_copy(t, init, destroy, clone, copy, move, assign, extend) copy
+#  define bstc_obj_copy(tpl) BSTC_EXPAND(bstc_dtl_obj_copy tpl)
+# endif
+#endif
+/// \}
+
+
+/** Get the move function that has been packed into the ctuple. */
+/// \{
+#ifndef bstc_obj_move
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_obj_move(tpl) BSTC_EXPAND(BSTC_GET_ARG5 tpl)
+# else
+#  define bstc_dtl_obj_move(t, init, destroy, clone, copy, move, assign, extend) move
+#  define bstc_obj_move(tpl) BSTC_EXPAND(bstc_dtl_obj_move tpl)
 # endif
 #endif
 /// \}
@@ -112,10 +162,23 @@
 /// \{
 #ifndef bstc_obj_assign
 # ifdef BSTC_HAS_VARIADIC_MACROS
-#  define bstc_obj_assign(tpl) BSTC_EXPAND(BSTC_GET_ARG4 tpl)
+#  define bstc_obj_assign(tpl) BSTC_EXPAND(BSTC_GET_ARG6 tpl)
 # else
-#  define bstc_dtl_obj_assign(t, ctor, dtor, cptor, assign) assign
+#  define bstc_dtl_obj_assign(t, init, destroy, clone, copy, move, assign, extend) assign
 #  define bstc_obj_assign(tpl) BSTC_EXPAND(bstc_dtl_obj_assign tpl)
+# endif
+#endif
+/// \}
+
+
+/** Get the extend ctuple that has been packed into the ctuple. */
+/// \{
+#ifndef bstc_obj_extend
+# ifdef BSTC_HAS_VARIADIC_MACROS
+#  define bstc_obj_extend(tpl) BSTC_EXPAND(BSTC_GET_ARG7 tpl)
+# else
+#  define bstc_dtl_obj_extend(t, init, destroy, clone, copy, move, assign, extend) extend
+#  define bstc_obj_extend(tpl) BSTC_EXPAND(bstc_dtl_obj_extend tpl)
 # endif
 #endif
 /// \}
@@ -124,43 +187,65 @@
 /** Create a copy of the ctuple as an object with the type changed to what is provided. */
 /// \{
 #ifndef bstc_obj_set_t
-# define bstc_dtl_obj_set_t(tpl, p) bstc_dtl_obj_set_t_expand(BSTC_LAYOUT5 tpl, p)
+# define bstc_dtl_obj_set_t(tpl, p) bstc_dtl_obj_set_t_expand(BSTC_LAYOUT8 tpl, p)
 # define bstc_dtl_obj_set_t_expand(L, p) BSTC_EXPAND(bstc_dtl_obj_set_t_expand1(L, p))
-# define bstc_dtl_obj_set_t_expand1(t, ctor, dtor, cptor, assign, p) bstc_obj_traits(p, ctor, dtor, cptor, assign)
+# define bstc_dtl_obj_set_t_expand1(t, init, destroy, clone, copy, move, assign, extend, p) bstc_obj_traits(p, init, destroy, clone, copy, move, assign, extend)
 # define bstc_obj_set_t(tpl, t) BSTC_EXPAND(bstc_dtl_obj_set_t(tpl, t))
 #endif
 /// \}
 
 
-/** Create a copy of the ctuple as an object with the ctor function changed to what is provided. */
+/** Create a copy of the ctuple as an object with the init function changed to what is provided. */
 /// \{
-#ifndef bstc_obj_set_ctor
-# define bstc_dtl_obj_set_ctor(tpl, p) bstc_dtl_obj_set_ctor_expand(BSTC_LAYOUT5 tpl, p)
-# define bstc_dtl_obj_set_ctor_expand(L, p) BSTC_EXPAND(bstc_dtl_obj_set_ctor_expand1(L, p))
-# define bstc_dtl_obj_set_ctor_expand1(t, ctor, dtor, cptor, assign, p) bstc_obj_traits(t, p, dtor, cptor, assign)
-# define bstc_obj_set_ctor(tpl, ctor) BSTC_EXPAND(bstc_dtl_obj_set_ctor(tpl, ctor))
+#ifndef bstc_obj_set_init
+# define bstc_dtl_obj_set_init(tpl, p) bstc_dtl_obj_set_init_expand(BSTC_LAYOUT8 tpl, p)
+# define bstc_dtl_obj_set_init_expand(L, p) BSTC_EXPAND(bstc_dtl_obj_set_init_expand1(L, p))
+# define bstc_dtl_obj_set_init_expand1(t, init, destroy, clone, copy, move, assign, extend, p) bstc_obj_traits(t, p, destroy, clone, copy, move, assign, extend)
+# define bstc_obj_set_init(tpl, init) BSTC_EXPAND(bstc_dtl_obj_set_init(tpl, init))
 #endif
 /// \}
 
 
-/** Create a copy of the ctuple as an object with the dtor function changed to what is provided. */
+/** Create a copy of the ctuple as an object with the destroy function changed to what is provided. */
 /// \{
-#ifndef bstc_obj_set_dtor
-# define bstc_dtl_obj_set_dtor(tpl, p) bstc_dtl_obj_set_dtor_expand(BSTC_LAYOUT5 tpl, p)
-# define bstc_dtl_obj_set_dtor_expand(L, p) BSTC_EXPAND(bstc_dtl_obj_set_dtor_expand1(L, p))
-# define bstc_dtl_obj_set_dtor_expand1(t, ctor, dtor, cptor, assign, p) bstc_obj_traits(t, ctor, p, cptor, assign)
-# define bstc_obj_set_dtor(tpl, dtor) BSTC_EXPAND(bstc_dtl_obj_set_dtor(tpl, dtor))
+#ifndef bstc_obj_set_destroy
+# define bstc_dtl_obj_set_destroy(tpl, p) bstc_dtl_obj_set_destroy_expand(BSTC_LAYOUT8 tpl, p)
+# define bstc_dtl_obj_set_destroy_expand(L, p) BSTC_EXPAND(bstc_dtl_obj_set_destroy_expand1(L, p))
+# define bstc_dtl_obj_set_destroy_expand1(t, init, destroy, clone, copy, move, assign, extend, p) bstc_obj_traits(t, init, p, clone, copy, move, assign, extend)
+# define bstc_obj_set_destroy(tpl, destroy) BSTC_EXPAND(bstc_dtl_obj_set_destroy(tpl, destroy))
 #endif
 /// \}
 
 
-/** Create a copy of the ctuple as an object with the cptor function changed to what is provided. */
+/** Create a copy of the ctuple as an object with the clone function changed to what is provided. */
 /// \{
-#ifndef bstc_obj_set_cptor
-# define bstc_dtl_obj_set_cptor(tpl, p) bstc_dtl_obj_set_cptor_expand(BSTC_LAYOUT5 tpl, p)
-# define bstc_dtl_obj_set_cptor_expand(L, p) BSTC_EXPAND(bstc_dtl_obj_set_cptor_expand1(L, p))
-# define bstc_dtl_obj_set_cptor_expand1(t, ctor, dtor, cptor, assign, p) bstc_obj_traits(t, ctor, dtor, p, assign)
-# define bstc_obj_set_cptor(tpl, cptor) BSTC_EXPAND(bstc_dtl_obj_set_cptor(tpl, cptor))
+#ifndef bstc_obj_set_clone
+# define bstc_dtl_obj_set_clone(tpl, p) bstc_dtl_obj_set_clone_expand(BSTC_LAYOUT8 tpl, p)
+# define bstc_dtl_obj_set_clone_expand(L, p) BSTC_EXPAND(bstc_dtl_obj_set_clone_expand1(L, p))
+# define bstc_dtl_obj_set_clone_expand1(t, init, destroy, clone, copy, move, assign, extend, p) bstc_obj_traits(t, init, destroy, p, copy, move, assign, extend)
+# define bstc_obj_set_clone(tpl, clone) BSTC_EXPAND(bstc_dtl_obj_set_clone(tpl, clone))
+#endif
+/// \}
+
+
+/** Create a copy of the ctuple as an object with the copy function changed to what is provided. */
+/// \{
+#ifndef bstc_obj_set_copy
+# define bstc_dtl_obj_set_copy(tpl, p) bstc_dtl_obj_set_copy_expand(BSTC_LAYOUT8 tpl, p)
+# define bstc_dtl_obj_set_copy_expand(L, p) BSTC_EXPAND(bstc_dtl_obj_set_copy_expand1(L, p))
+# define bstc_dtl_obj_set_copy_expand1(t, init, destroy, clone, copy, move, assign, extend, p) bstc_obj_traits(t, init, destroy, clone, p, move, assign, extend)
+# define bstc_obj_set_copy(tpl, copy) BSTC_EXPAND(bstc_dtl_obj_set_copy(tpl, copy))
+#endif
+/// \}
+
+
+/** Create a copy of the ctuple as an object with the move function changed to what is provided. */
+/// \{
+#ifndef bstc_obj_set_move
+# define bstc_dtl_obj_set_move(tpl, p) bstc_dtl_obj_set_move_expand(BSTC_LAYOUT8 tpl, p)
+# define bstc_dtl_obj_set_move_expand(L, p) BSTC_EXPAND(bstc_dtl_obj_set_move_expand1(L, p))
+# define bstc_dtl_obj_set_move_expand1(t, init, destroy, clone, copy, move, assign, extend, p) bstc_obj_traits(t, init, destroy, clone, copy, p, assign, extend)
+# define bstc_obj_set_move(tpl, move) BSTC_EXPAND(bstc_dtl_obj_set_move(tpl, move))
 #endif
 /// \}
 
@@ -168,10 +253,21 @@
 /** Create a copy of the ctuple as an object with the assign function changed to what is provided. */
 /// \{
 #ifndef bstc_obj_set_assign
-# define bstc_dtl_obj_set_assign(tpl, p) bstc_dtl_obj_set_assign_expand(BSTC_LAYOUT5 tpl, p)
+# define bstc_dtl_obj_set_assign(tpl, p) bstc_dtl_obj_set_assign_expand(BSTC_LAYOUT8 tpl, p)
 # define bstc_dtl_obj_set_assign_expand(L, p) BSTC_EXPAND(bstc_dtl_obj_set_assign_expand1(L, p))
-# define bstc_dtl_obj_set_assign_expand1(t, ctor, dtor, cptor, assign, p) bstc_obj_traits(t, ctor, dtor, cptor, p)
+# define bstc_dtl_obj_set_assign_expand1(t, init, destroy, clone, copy, move, assign, extend, p) bstc_obj_traits(t, init, destroy, clone, copy, move, p, extend)
 # define bstc_obj_set_assign(tpl, assign) BSTC_EXPAND(bstc_dtl_obj_set_assign(tpl, assign))
+#endif
+/// \}
+
+
+/** Create a copy of the ctuple as an object with the extend ctuple changed to what is provided. */
+/// \{
+#ifndef bstc_obj_set_extend
+# define bstc_dtl_obj_set_extend(tpl, p) bstc_dtl_obj_set_extend_expand(BSTC_LAYOUT8 tpl, p)
+# define bstc_dtl_obj_set_extend_expand(L, p) BSTC_EXPAND(bstc_dtl_obj_set_extend_expand1(L, p))
+# define bstc_dtl_obj_set_extend_expand1(t, init, destroy, clone, copy, move, assign, extend, p) bstc_obj_traits(t, init, destroy, clone, copy, move, assign, p)
+# define bstc_obj_set_extend(tpl, extend) BSTC_EXPAND(bstc_dtl_obj_set_extend(tpl, extend))
 #endif
 /// \}
 
@@ -179,7 +275,7 @@
 /** Default object ctuple that uses the no-op object functions. */
 /// \{
 #ifndef bstc_obj_defaults
-# define bstc_obj_defaults bstc_obj_traits(bstc_obj_no_t, bstc_obj_noctor, bstc_obj_nodtor, bstc_obj_nocptor, bstc_obj_noassign)
+# define bstc_obj_defaults bstc_obj_traits(bstc_obj_no_t, bstc_obj_noinit, bstc_obj_nodestroy, bstc_obj_noclone, bstc_obj_nocopy, bstc_obj_nomove, bstc_obj_noassign, bstc_obj_noextend)
 #endif
 /// \}
 
@@ -187,31 +283,47 @@
 /** Default object type that is just int. */
 /// \{
 #ifndef bstc_obj_no_t
-# define bstc_obj_no_t(traits, ptr) int
+# define bstc_obj_no_t int
 #endif
 /// \}
 
 
-/** Default ctor function that does nothing. */
+/** Default init function that does nothing. */
 /// \{
-#ifndef bstc_obj_noctor
-# define bstc_obj_noctor(traits, ptr) ((void)0)
+#ifndef bstc_obj_noinit
+# define bstc_obj_noinit(traits, ptr) ((void)0)
 #endif
 /// \}
 
 
-/** Default dtor function that does nothing. */
+/** Default destroy function that does nothing. */
 /// \{
-#ifndef bstc_obj_nodtor
-# define bstc_obj_nodtor(traits, ptr) ((void)0)
+#ifndef bstc_obj_nodestroy
+# define bstc_obj_nodestroy(traits, ptr) ((void)0)
 #endif
 /// \}
 
 
-/** Default cptor function that works for basic types. */
+/** Default clone function that works for basic types. */
 /// \{
-#ifndef bstc_obj_nocptor
-# define bstc_obj_nocptor(traits, ptr, other) *(ptr) = (other)
+#ifndef bstc_obj_noclone
+# define bstc_obj_noclone(traits, ptr, other) *(ptr) = *(other)
+#endif
+/// \}
+
+
+/** Default copy function that works for basic types. */
+/// \{
+#ifndef bstc_obj_nocopy
+# define bstc_obj_nocopy(traits, ptr, other) *(ptr) = *(other)
+#endif
+/// \}
+
+
+/** Default move function that works for basic types. */
+/// \{
+#ifndef bstc_obj_nomove
+# define bstc_obj_nomove(traits, ptr, other) *(ptr) = (other)
 #endif
 /// \}
 
@@ -224,11 +336,19 @@
 /// \}
 
 
+/** Default extend attributes that holds nothing. */
+/// \{
+#ifndef bstc_obj_noextend
+# define bstc_obj_noextend BSTC_CTUPLE1(0)
+#endif
+/// \}
+
+
 /** Detects if the ctuple provided could be a valid object ctuple. */
 /// \{
 #ifndef bstc_object_isa
 # ifdef BSTC_HAS_VARIADIC_MACROS
-#  define bstc_obj_isa(tpl, _t, _f) bstc_ctuple_isa(tpl, bstc_ctuple_hasN(tpl, 5, _t, _f), _f)
+#  define bstc_obj_isa(tpl, _t, _f) bstc_ctuple_isa(tpl, bstc_ctuple_hasN(tpl, 8, _t, _f), _f)
 # endif
 #endif
 /// \}
