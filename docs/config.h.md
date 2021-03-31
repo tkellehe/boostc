@@ -135,7 +135,7 @@ These are list of macros defined for detecting features about the language/envir
  * `bstc_inline` : Provides _C_ style inline keyword insert if available else it will be empty.
  * `BSTC_INTPTR_NBITS` : A constant macro defined as the number of bits that `intptr_t` is.
  * `bstc_nullptr` : A macro to represent `NULL` and `nullptr` depending on what is supported.
- * `bstc_unused_param(P)` : Marks a function parameter as being unused.
+ * `bstc_unused(P)` : Marks a function parameter as being unused.
 
 ### Macro Helpers
 The following are macros provided to assist with creating the _boostc_ library.

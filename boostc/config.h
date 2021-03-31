@@ -170,8 +170,8 @@
 
 /* Provide a way to mark a parameter as unused */
 /// \{
-#ifndef bstc_unused_param
-# define bstc_unused_param(P) (void)(P);
+#ifndef bstc_unused
+# define bstc_unused(P) (void)(P);
 #endif
 /// \}
 

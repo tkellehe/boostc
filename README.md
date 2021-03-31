@@ -31,8 +31,8 @@ Provides compile time decisions to create a _C++_ like vector in _C_. Uses the _
 
 int main(int argc, char *argv[])
 {
-    bstc_unused_param(argc);
-    bstc_unused_param(argv);
+    bstc_unused(argc);
+    bstc_unused(argv);
     // Note: It is recommended to do as typedef because there is no guarantee that the types will be the same.
     //       This problem is more relevant when the underlying structure is a more complex data structure.
     bstc_vect_t(int) vect;
@@ -85,7 +85,7 @@ void* my_malloc(int sz)
 }
 void* my_realloc(void* mem, int sz)
 {
-    bstc_unused_param(mem);
+    bstc_unused(mem);
     int* res = &_memory[_pos];
     _pos += sz / sizeof(int);
     return (void*)res;
@@ -94,8 +94,8 @@ void* my_realloc(void* mem, int sz)
 
 int main(int argc, char *argv[])
 {
-    bstc_unused_param(argc);
-    bstc_unused_param(argv);
+    bstc_unused(argc);
+    bstc_unused(argv);
     // It is recommended to create a definition for the macro type to make it more readable.
     // The type provided first is the underlying type of the vector.
     // The symbol tuple is merely indicated by parentheses and the three symbols provided.
