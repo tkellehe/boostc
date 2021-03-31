@@ -85,8 +85,8 @@ void* my_malloc(int sz)
 }
 void* my_realloc(void* mem, int sz)
 {
-    bstc_unused(mem);
     int* res = &_memory[_pos];
+    bstc_memcpy((void*)res, mem, sz);
     _pos += sz / sizeof(int);
     return (void*)res;
 }
