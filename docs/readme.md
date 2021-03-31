@@ -4,8 +4,8 @@
 
 The files listed here are part of the interface. Any other files not included are subject to change.
 
- * [`boostc/assert.h`](https://tkellehe.github.io/boostc/docs/assert.h.html)
- * [`boostc/config.h`](https://tkellehe.github.io/boostc/docs/config.h.html)
- * [`boostc/ctype.h`](https://tkellehe.github.io/boostc/docs/ctype.h.html)
- * [`boostc/stdbool.h`](https://tkellehe.github.io/boostc/docs/stdbool.h.html)
- * [`boostc/stdnoreturn.h`](https://tkellehe.github.io/boostc/docs/stdnoreturn.h.html)
+ * [`boostc/assert.h`](https://tkellehe.github.io/boostc/docs/boostc/assert.h.html)
+ * [`boostc/config.h`](https://tkellehe.github.io/boostc/docs/boostc/config.h.html)
+ * [`boostc/ctype.h`](https://tkellehe.github.io/boostc/docs/boostc/ctype.h.html)
+ * [`boostc/stdbool.h`](https://tkellehe.github.io/boostc/docs/boostc/stdbool.h.html)
+ * [`boostc/stdnoreturn.h`](https://tkellehe.github.io/boostc/docs/boostc/stdnoreturn.h.html)
