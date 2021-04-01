@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     // int error;
 
     // //--------------------------------------------------------------------------------------------------------
-    // error = ETIME;
+    // error = EDOM;
     // printf("bstc_set_errno & bstc_get_errno\n");
     // bstc_set_errno(error);
     // if(bstc_get_errno() == error)
@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
     // }
 
     // //--------------------------------------------------------------------------------------------------------
-    // error = EPROTO;
+    // error = ERANGE;
     // printf("errno\n");
     // bstc_errno = error;
     // if((int)bstc_errno == error)
