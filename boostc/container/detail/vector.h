@@ -44,12 +44,17 @@
 /** Creates the vector traits given only the type. */
 /// {
 # define bstc_dtl_vect_traits1(T) \
-    (\
+    bstc_container_traits(\
         T*,\
         T,\
-        bstc_container_pack_t(T),\
-        bstc_dtl_vect_obj_defaults(T),\
-        bstc_alloc_stdlib\
+        bstc_obj_pack_t(T),\
+        bstc_alloc_stdlib,\
+        bstc_dtl_vect_init,\
+        bstc_dtl_vect_destroy,\
+        bstc_dtl_vect_clone,\
+        bstc_dtl_vect_copy,\
+        bstc_dtl_vect_move,\
+        bstc_dtl_vect_assign\
     )
 /// }
 
@@ -60,7 +65,7 @@
     bstc_alloc_isa(x,\
         /* The first argument is an allocator traits so the other has to be the type. */\
         bstc_dtl_vect_traits2_alloc(y, x),\
-        bstc_container_isa(x,\
+        bstc_obj_isa(x,\
             /* The first argument is a container traits so the other has to be the type. */\
             bstc_dtl_vect_traits2_subtraits(y, x),\
             /* The first argument is the type, so now we check y. */\
@@ -78,21 +83,31 @@
 /** Creates the traits with the type and either the allocator traits or the sub-traits. */
 /// {
 # define bstc_dtl_vect_traits2_alloc(T, alloc) \
-    (\
+    bstc_container_traits(\
         T*,\
         T,\
-        bstc_container_pack_t(T),\
-        bstc_dtl_vect_obj_defaults(T),\
-        alloc\
+        bstc_obj_pack_t(T),\
+        alloc,\
+        bstc_dtl_vect_init,\
+        bstc_dtl_vect_destroy,\
+        bstc_dtl_vect_clone,\
+        bstc_dtl_vect_copy,\
+        bstc_dtl_vect_move,\
+        bstc_dtl_vect_assign\
     )
 
 # define bstc_dtl_vect_traits2_subtraits(T, subtraits) \
-    (\
+    bstc_container_traits(\
         T*,\
         T,\
         subtraits,\
-        bstc_dtl_vect_obj_defaults(T),\
-        bstc_alloc_stdlib\
+        bstc_alloc_stdlib,\
+        bstc_dtl_vect_init,\
+        bstc_dtl_vect_destroy,\
+        bstc_dtl_vect_clone,\
+        bstc_dtl_vect_copy,\
+        bstc_dtl_vect_move,\
+        bstc_dtl_vect_assign\
     )
 /// }
 
@@ -101,11 +116,11 @@
 /// {
 # define bstc_dtl_vect_traits3_select(x, y, z) \
     bstc_alloc_isa(x,\
-        bstc_container_isa(y,\
+        bstc_obj_isa(y,\
             bstc_dtl_vect_traits3(z, x, y),\
             bstc_dtl_vect_traits3(y, x, z)\
         ),\
-        bstc_container_isa(x,\
+        bstc_obj_isa(x,\
             bstc_alloc_isa(y,\
                 bstc_dtl_vect_traits3(z, y, x),\
                 bstc_dtl_vect_traits3(y, z, x)\
@@ -120,31 +135,20 @@
 #endif // BSTC_HAS_VARIADIC_MACROS
 
 
-/** The object like functions supported by the vector. */
+/** Takes in all templated parts of the vector. */
 /// {
-#define bstc_dtl_vect_obj_defaults(T) \
-    bstc_obj_traits(\
+#define bstc_dtl_vect_traits3(T, alloc, subtraits) \
+    bstc_container_traits(\
         T*,\
+        T,\
+        subtraits,\
+        alloc,\
         bstc_dtl_vect_init,\
         bstc_dtl_vect_destroy,\
         bstc_dtl_vect_clone,\
         bstc_dtl_vect_copy,\
         bstc_dtl_vect_move,\
-        bstc_dtl_vect_assign,\
-        (0)\
-    )
-/// }
-
-
-/** Takes in all templated parts of the vector. */
-/// {
-#define bstc_dtl_vect_traits3(T, alloc, subtraits) \
-    (\
-        T*,\
-        T,\
-        subtraits,\
-        bstc_dtl_vect_obj_defaults(T),\
-        alloc\
+        bstc_dtl_vect_assign\
     )
 /// }
 
@@ -175,7 +179,7 @@ typedef struct { bstc_size_t cap_; bstc_size_t len_; } bstc_dtl_vect_header_t;
             bstc_dtl_vect_header(vect)->cap_ = bstc_dtl_vect_header(other)->cap_;\
             for(__bstc_dtl_i = 0; __bstc_dtl_i < bstc_dtl_vect_header(other)->len_; ++__bstc_dtl_i) {\
                 /* This code assumes that the copy function properly handles its arguments to prevent macro problems. */\
-                bstc_obj_clone(bstc_container_obj(bstc_container_subtraits(traits)))(bstc_container_subtraits(traits), ((*(vect)) + __bstc_dtl_i), ((*(other)) + __bstc_dtl_i));\
+                bstc_obj_clone(bstc_container_subtraits(traits))(bstc_container_subtraits(traits), ((*(vect)) + __bstc_dtl_i), ((*(other)) + __bstc_dtl_i));\
             }\
         } else { *(vect) = bstc_nullptr; }\
     } while(0)
@@ -209,7 +213,7 @@ typedef struct { bstc_size_t cap_; bstc_size_t len_; } bstc_dtl_vect_header_t;
             bstc_dtl_vect_header(vect)->len_ = bstc_dtl_vect_header(other)->len_;\
             for(__bstc_dtl_i = 0; __bstc_dtl_i < bstc_dtl_vect_header(other)->len_; ++__bstc_dtl_i) {\
                 /* This code assumes that the copy function properly handles its arguments to prevent macro problems. */\
-                bstc_obj_copy(bstc_container_obj(bstc_container_subtraits(traits)))(bstc_container_subtraits(traits), ((*(vect)) + __bstc_dtl_i), ((*(other)) + __bstc_dtl_i));\
+                bstc_obj_copy(bstc_container_subtraits(traits))(bstc_container_subtraits(traits), ((*(vect)) + __bstc_dtl_i), ((*(other)) + __bstc_dtl_i));\
             }\
         } else if(*(vect)) { bstc_dtl_vect_header(vect)->len_ = 0; }\
     } while(0)

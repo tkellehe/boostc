@@ -11,8 +11,8 @@
 
 /** Provide operations on bstc container types.
  * type: The actual type for the container.
- * subtraits: A ctuple of the information about the type.
- * obj: A ctuple of the object traits for the type.
+ * info: A ctuple of the information about the type.
+ * subtraits: A object traits representing what it contains.
  * alloc: The bstc allocator calls as a ctuple for the type.
  */
 
@@ -20,19 +20,7 @@
 /** Ensure that the parameters are packed into a tuple. */
 /// \{
 #ifndef bstc_container_traits
-# define bstc_container_traits(t, info, subtraits, obj, alloc) (t, info, subtraits, obj, alloc)
-#endif
-/// \}
-
-
-/** Creates a ctuple with the defaults set except for the functions ctuple provided. */
-/// \{
-#ifndef bstc_container_wrap_obj
-# if defined(bstc_ctuple_isa)
-#  define bstc_container_wrap_obj(obj) bstc_ctuple_isa(obj, bstc_container_set_t(bstc_container_set_obj(bstc_container_defaults, obj), bstc_obj_t(obj)), BSTC_CONTAINER_NOT_CREATED_ERROR)
-# else
-#  define bstc_container_wrap_obj(obj) bstc_container_set_t(bstc_container_set_obj(bstc_container_defaults, obj), bstc_obj_t(obj))
-# endif
+# define bstc_container_traits(t, info, subtraits, alloc, init, destroy, clone, copy, move, assign) bstc_obj_traits(t, init, destroy, clone, copy, move, assign, (info, subtraits, alloc))
 #endif
 /// \}
 
@@ -69,18 +57,6 @@
 /// \}
 
 
-/** Creates a ctuple with the defaults set except for the functions ctuple provided. */
-/// \{
-#ifndef bstc_container_pack_obj
-# if defined(bstc_ctuple_isa)
-#  define bstc_container_pack_obj(obj) bstc_ctuple_isa(obj, bstc_container_set_obj(bstc_container_defaults, obj), BSTC_CONTAINER_NOT_CREATED_ERROR)
-# else
-#  define bstc_container_pack_obj(obj) bstc_container_set_obj(bstc_container_defaults, obj)
-# endif
-#endif
-/// \}
-
-
 /** Creates a ctuple with the defaults set except for the allocator ctuple provided. */
 /// \{
 #ifndef bstc_container_pack_alloc
@@ -99,8 +75,7 @@
 # ifdef BSTC_HAS_VARIADIC_MACROS
 #  define bstc_container_t(tpl) BSTC_EXPAND(BSTC_GET_ARG0 tpl)
 # else
-#  define bstc_dtl_container_t(t, info, subtraits, obj, alloc) t
-#  define bstc_container_t(tpl) BSTC_EXPAND(bstc_dtl_container_t tpl)
+#  define bstc_container_t(tpl) bstc_obj_t(tpl)
 # endif
 #endif
 /// \}
@@ -110,10 +85,12 @@
 /// \{
 #ifndef bstc_container_info
 # ifdef BSTC_HAS_VARIADIC_MACROS
-#  define bstc_container_info(tpl) BSTC_EXPAND(BSTC_GET_ARG1 tpl)
+#  define bstc_dtl_container_info(tpl) BSTC_EXPAND(BSTC_GET_ARG0 tpl)
+#  define bstc_container_info(tpl) bstc_dtl_container_info(bstc_obj_extend(tpl))
 # else
-#  define bstc_dtl_container_info(t, info, subtraits, obj, alloc) info
-#  define bstc_container_info(tpl) BSTC_EXPAND(bstc_dtl_container_info tpl)
+#  define bstc_dtl_container_info(tpl) BSTC_EXPAND(bstc_dtl_container_info_expand tpl)
+#  define bstc_dtl_container_info_expand(info, subtraits, alloc) info
+#  define bstc_container_info(tpl) bstc_dtl_container_info(bstc_obj_extend(tpl))
 # endif
 #endif
 /// \}
@@ -123,23 +100,12 @@
 /// \{
 #ifndef bstc_container_subtraits
 # ifdef BSTC_HAS_VARIADIC_MACROS
-#  define bstc_container_subtraits(tpl) BSTC_EXPAND(BSTC_GET_ARG2 tpl)
+#  define bstc_dtl_container_subtraits(tpl) BSTC_EXPAND(BSTC_GET_ARG1 tpl)
+#  define bstc_container_subtraits(tpl) bstc_dtl_container_subtraits(bstc_obj_extend(tpl))
 # else
-#  define bstc_dtl_container_subtraits(t, info, subtraits, obj, alloc) subtraits
-#  define bstc_container_subtraits(tpl) BSTC_EXPAND(bstc_dtl_container_subtraits tpl)
-# endif
-#endif
-/// \}
-
-
-/** Get the container functions ctuple that has been packed into the ctuple. */
-/// \{
-#ifndef bstc_container_obj
-# ifdef BSTC_HAS_VARIADIC_MACROS
-#  define bstc_container_obj(tpl) BSTC_EXPAND(BSTC_GET_ARG3 tpl)
-# else
-#  define bstc_dtl_container_obj(t, info, subtraits, obj, alloc) obj
-#  define bstc_container_obj(tpl) BSTC_EXPAND(bstc_dtl_container_obj tpl)
+#  define bstc_dtl_container_subtraits(tpl) BSTC_EXPAND(bstc_dtl_container_subtraits_expand tpl)
+#  define bstc_dtl_container_subtraits_expand(info, subtraits, alloc) subtraits
+#  define bstc_container_subtraits(tpl) bstc_dtl_container_subtraits(bstc_obj_extend(tpl))
 # endif
 #endif
 /// \}
@@ -149,10 +115,12 @@
 /// \{
 #ifndef bstc_container_alloc
 # ifdef BSTC_HAS_VARIADIC_MACROS
-#  define bstc_container_alloc(tpl) BSTC_EXPAND(BSTC_GET_ARG4 tpl)
+#  define bstc_dtl_container_alloc(tpl) BSTC_EXPAND(BSTC_GET_ARG2 tpl)
+#  define bstc_container_alloc(tpl) bstc_dtl_container_alloc(bstc_obj_extend(tpl))
 # else
-#  define bstc_dtl_container_alloc(t, info, subtraits, obj, alloc) alloc
-#  define bstc_container_alloc(tpl) BSTC_EXPAND(bstc_dtl_container_alloc tpl)
+#  define bstc_dtl_container_alloc(tpl) BSTC_EXPAND(bstc_dtl_container_alloc_expand tpl)
+#  define bstc_dtl_container_alloc_expand(info, subtraits, alloc) alloc
+#  define bstc_container_alloc(tpl) bstc_dtl_container_alloc(bstc_obj_extend(tpl))
 # endif
 #endif
 /// \}
@@ -161,10 +129,7 @@
 /** Create a copy of the ctuple as a container with the container type changed to what is provided. */
 /// \{
 #ifndef bstc_container_set_t
-# define bstc_dtl_container_set_t(tpl, p) bstc_dtl_container_set_t_expand(BSTC_LAYOUT5 tpl, p)
-# define bstc_dtl_container_set_t_expand(L, p) BSTC_EXPAND(bstc_dtl_container_set_t_expand1(L, p))
-# define bstc_dtl_container_set_t_expand1(t, info, subtraits, obj, alloc, p) bstc_container_traits(p, info, subtraits, obj, alloc)
-# define bstc_container_set_t(tpl, t) BSTC_EXPAND(bstc_dtl_container_set_t(tpl, t))
+# define bstc_container_set_t(tpl, t) bstc_obj_set_t(tpl, t)
 #endif
 /// \}
 
@@ -172,10 +137,10 @@
 /** Create a copy of the ctuple as a container with the container info changed to what is provided. */
 /// \{
 #ifndef bstc_container_set_info
-# define bstc_dtl_container_set_info(tpl, p) bstc_dtl_container_set_info_expand(BSTC_LAYOUT5 tpl, p)
+# define bstc_dtl_container_set_info(tpl, p) bstc_dtl_container_set_info_expand(BSTC_LAYOUT3 tpl, p)
 # define bstc_dtl_container_set_info_expand(L, p) BSTC_EXPAND(bstc_dtl_container_set_info_expand1(L, p))
-# define bstc_dtl_container_set_info_expand1(t, info, subtraits, obj, alloc, p) bstc_container_traits(t, p, subtraits, obj, alloc)
-# define bstc_container_set_info(tpl, info) BSTC_EXPAND(bstc_dtl_container_set_info(tpl, info))
+# define bstc_dtl_container_set_info_expand1(info, subtraits, alloc, p) BSTC_CTUPLE3(p, subtraits, alloc)
+# define bstc_container_set_info(tpl, info) BSTC_EXPAND(bstc_obj_set_extend(tpl, bstc_dtl_container_set_info(bstc_obj_extend(tpl), info)))
 #endif
 /// \}
 
@@ -183,21 +148,10 @@
 /** Create a copy of the ctuple as a container with the container subtraits ctuple changed to what is provided. */
 /// \{
 #ifndef bstc_container_set_subtraits
-# define bstc_dtl_container_set_subtraits(tpl, p) bstc_dtl_container_set_subtraits_expand(BSTC_LAYOUT5 tpl, p)
+# define bstc_dtl_container_set_subtraits(tpl, p) bstc_dtl_container_set_subtraits_expand(BSTC_LAYOUT3 tpl, p)
 # define bstc_dtl_container_set_subtraits_expand(L, p) BSTC_EXPAND(bstc_dtl_container_set_subtraits_expand1(L, p))
-# define bstc_dtl_container_set_subtraits_expand1(t, info, subtraits, obj, alloc, p) bstc_container_traits(t, info, p, obj, alloc)
-# define bstc_container_set_subtraits(tpl, subtraits) BSTC_EXPAND(bstc_dtl_container_set_subtraits(tpl, subtraits))
-#endif
-/// \}
-
-
-/** Create a copy of the ctuple as a container with the container functions ctuple changed to what is provided. */
-/// \{
-#ifndef bstc_container_set_obj
-# define bstc_dtl_container_set_obj(tpl, p) bstc_dtl_container_set_obj_expand(BSTC_LAYOUT5 tpl, p)
-# define bstc_dtl_container_set_obj_expand(L, p) BSTC_EXPAND(bstc_dtl_container_set_obj_expand1(L, p))
-# define bstc_dtl_container_set_obj_expand1(t, info, subtraits, obj, alloc, p) bstc_container_traits(t, info, subtraits, p, alloc)
-# define bstc_container_set_obj(tpl, obj) BSTC_EXPAND(bstc_dtl_container_set_obj(tpl, obj))
+# define bstc_dtl_container_set_subtraits_expand1(info, subtraits, alloc, p) BSTC_CTUPLE3(info, p, alloc)
+# define bstc_container_set_subtraits(tpl, subtraits) BSTC_EXPAND(bstc_obj_set_extend(tpl, bstc_dtl_container_set_subtraits(bstc_obj_extend(tpl), subtraits)))
 #endif
 /// \}
 
@@ -205,18 +159,10 @@
 /** Create a copy of the ctuple as a container with the container allocator ctuple changed to what is provided. */
 /// \{
 #ifndef bstc_container_set_alloc
-# define bstc_dtl_container_set_alloc(tpl, p) bstc_dtl_container_set_alloc_expand(BSTC_LAYOUT5 tpl, p)
+# define bstc_dtl_container_set_alloc(tpl, p) bstc_dtl_container_set_alloc_expand(BSTC_LAYOUT3 tpl, p)
 # define bstc_dtl_container_set_alloc_expand(L, p) BSTC_EXPAND(bstc_dtl_container_set_alloc_expand1(L, p))
-# define bstc_dtl_container_set_alloc_expand1(t, info, subtraits, obj, alloc, p) bstc_container_traits(t, info, subtraits, obj, p)
-# define bstc_container_set_alloc(tpl, alloc) BSTC_EXPAND(bstc_dtl_container_set_alloc(tpl, alloc))
-#endif
-/// \}
-
-
-/** Default container subtraits. */
-/// \{
-#ifndef bstc_container_default_subtraits
-# define bstc_container_default_subtraits bstc_container_traits(int, 0, BSTC_CTUPLE1(0), bstc_obj_defaults, bstc_alloc_defaults)
+# define bstc_dtl_container_set_alloc_expand1(info, subtraits, alloc, p) BSTC_CTUPLE3(info, subtraits, p)
+# define bstc_container_set_alloc(tpl, alloc) BSTC_EXPAND(bstc_obj_set_extend(tpl, bstc_dtl_container_set_alloc(bstc_obj_extend(tpl), alloc)))
 #endif
 /// \}
 
@@ -224,7 +170,7 @@
 /** Default container ctuple that uses the default allocator, subtraits, type, and functions. */
 /// \{
 #ifndef bstc_container_defaults
-# define bstc_container_defaults bstc_container_traits(int, 0, bstc_container_default_subtraits, bstc_obj_defaults, bstc_alloc_defaults)
+# define bstc_container_defaults bstc_container_traits(int, (0), bstc_obj_defaults, bstc_alloc_defaults, bstc_obj_noinit, bstc_obj_nodestroy, bstc_obj_noclone, bstc_obj_nocopy, bstc_obj_nomove, bstc_obj_noassign)
 #endif
 /// \}
 
@@ -233,7 +179,7 @@
 /// \{
 #ifndef bstc_container_isa
 # ifdef BSTC_HAS_VARIADIC_MACROS
-#  define bstc_container_isa(tpl, _t, _f) bstc_ctuple_isa(tpl, bstc_ctuple_hasN(tpl, 5, _t, _f), _f)
+#  define bstc_container_isa(tpl, _t, _f) bstc_obj_isa(tpl, _t, _f)
 # endif
 #endif
 /// \}
