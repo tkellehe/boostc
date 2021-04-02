@@ -4,6 +4,7 @@
 //  accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
 #include <boostc/errno.h>
+#include <boostc/stdlib.h>
 #include <stdio.h>
 
 int main(int argc, char *argv[])
@@ -50,5 +51,6 @@ int main(int argc, char *argv[])
     printf("     pass     |     fail     \n");
     printf("     %04i     |     %04i     \n", num_pass, num_fail);
     printf("-----------------------------\n");
-    return 0;
+    
+    return num_fail ? bstc_exit_failure : bstc_exit_success;
 }
