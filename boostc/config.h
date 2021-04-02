@@ -35,9 +35,6 @@
 #if !defined(BSTC_COMPILER_CONFIG) && !defined(BSTC_NO_COMPILER_CONFIG) && !defined(BSTC_NO_CONFIG)
 # include <boostc/config/select_compiler.h>
 #endif
-#ifdef BSTC_COMPILER_CONFIG
-# include BSTC_COMPILER_CONFIG
-#endif
 /// \}
 
 
@@ -45,9 +42,6 @@
 /// \{
 #if !defined(BSTC_PLATFORM_CONFIG) && !defined(BSTC_NO_PLATFORM_CONFIG) && !defined(BSTC_NO_CONFIG)
 # include <boostc/config/select_platform.h>
-#endif
-#ifdef BSTC_PLATFORM_CONFIG
-# include BSTC_PLATFORM_CONFIG
 #endif
 /// \}
 
