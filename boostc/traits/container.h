@@ -36,11 +36,7 @@
 /** Creates a ctuple with the defaults set except for the info provided. */
 /// \{
 #ifndef bstc_container_pack_info
-# if defined(bstc_ctuple_isa)
-#  define bstc_container_pack_info(info) bstc_ctuple_isa(info, bstc_container_set_info(bstc_container_defaults, info), BSTC_CONTAINER_NOT_CREATED_ERROR)
-# else
-#  define bstc_container_pack_info(info) bstc_container_set_info(bstc_container_defaults, info)
-# endif
+# define bstc_container_pack_info(info) bstc_container_set_info(bstc_container_defaults, info)
 #endif
 /// \}
 
@@ -48,11 +44,7 @@
 /** Creates a ctuple with the defaults set except for the subtraits ctuple provided. */
 /// \{
 #ifndef bstc_container_pack_subtraits
-# if defined(bstc_ctuple_isa)
-#  define bstc_container_pack_subtraits(subtraits) bstc_ctuple_isa(subtraits, bstc_container_set_subtraits(bstc_container_defaults, subtraits), BSTC_CONTAINER_NOT_CREATED_ERROR)
-# else
-#  define bstc_container_pack_subtraits(subtraits) bstc_container_set_subtraits(bstc_container_defaults, subtraits)
-# endif
+# define bstc_container_pack_subtraits(subtraits) bstc_container_set_subtraits(bstc_container_defaults, subtraits)
 #endif
 /// \}
 
@@ -60,11 +52,7 @@
 /** Creates a ctuple with the defaults set except for the allocator ctuple provided. */
 /// \{
 #ifndef bstc_container_pack_alloc
-# if defined(bstc_alloc_isa)
-#  define bstc_container_pack_alloc(alloc) bstc_alloc_isa(alloc, bstc_container_set_alloc(bstc_container_defaults, alloc), BSTC_CONTAINER_NOT_CREATED_ERROR)
-# else
-#  define bstc_container_pack_alloc(alloc) bstc_container_set_alloc(bstc_container_defaults, alloc)
-# endif
+# define bstc_container_pack_alloc(alloc) bstc_container_set_alloc(bstc_container_defaults, alloc)
 #endif
 /// \}
 
