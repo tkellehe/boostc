@@ -77,10 +77,10 @@
 // It is only better in the case where the most common case is not first.
 // https://stackoverflow.com/questions/35938249/optimizing-a-branch-for-a-known-more-common-path/35940041#35940041
 #ifndef BSTC_LIKELY
-# define BSTC_LIKELY(x) x
+# define BSTC_LIKELY(x) (x)
 #endif
 #ifndef BSTC_UNLIKELY
-# define BSTC_UNLIKELY(x) x
+# define BSTC_UNLIKELY(x) (x)
 #endif
 
 

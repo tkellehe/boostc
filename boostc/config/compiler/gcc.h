@@ -18,10 +18,18 @@
 /* Add branch predictors. */
 /// \{
 #ifndef BSTC_LIKELY
-# define BSTC_LIKELY(x) __builtin_expect(x, 1)
+# ifdef __builtin_expect
+#  define BSTC_LIKELY(x) __builtin_expect(x, 1)
+# else
+#  define BSTC_LIKELY(x) (x)
+# endif
 #endif
 #ifndef BSTC_UNLIKELY
-# define BSTC_UNLIKELY(x) __builtin_expect(x, 0)
+# ifdef __builtin_expect
+#  define BSTC_UNLIKELY(x) __builtin_expect(x, 0)
+# else
+#  define BSTC_UNLIKELY(x) (x)
+# endif
 #endif
 /// \}
 

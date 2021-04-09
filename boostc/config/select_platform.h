@@ -117,12 +117,14 @@
 
 /* Determine the basic type of APIs that are available */
 /// \{
-#if defined(unix) || defined(__unix) || defined(_XOPEN_SOURCE) || defined(_POSIX_SOURCE) || defined(BSTC_PLATFORM_LINUX)
-# define BSTC_OSAPI_POSIX
-#elif defined(BSTC_PLATFORM_WIN32) || defined(BSTC_PLATFORM_WIN64) || defined(__WINDOWS__)
-# define BSTC_OSAPI_WINDOWS
-#else
-# error "BOOSTC platform API could not be determined."
+#if !defined(BSTC_OSAPI_POSIX) && !defined(BSTC_OSAPI_WINDOWS)
+# if defined(unix) || defined(__unix) || defined(_XOPEN_SOURCE) || defined(_POSIX_SOURCE)
+#  define BSTC_OSAPI_POSIX
+# elif defined(__WINDOWS__)
+#  define BSTC_OSAPI_WINDOWS
+# else
+#  error "BOOSTC platform API could not be determined."
+# endif
 #endif
 /// \}
 

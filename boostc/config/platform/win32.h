@@ -5,4 +5,10 @@
 //  http://www.boost.org/LICENSE_1_0.txt)
 #ifndef BOOSTC__CONFIG__PLATFORM__WIN32_H
 #define BOOSTC__CONFIG__PLATFORM__WIN32_H
+
+
+#if !defined(BSTC_OSAPI_POSIX) && !defined(BSTC_OSAPI_WINDOWS)
+# define BSTC_OSAPI_WINDOWS
+#endif
+
 #endif // BOOSTC__CONFIG__PLATFORM__WIN32_H
