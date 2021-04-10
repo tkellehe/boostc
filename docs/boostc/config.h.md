@@ -73,9 +73,6 @@ These should be detecting correctly but have nothing laid out.
 * `BSTC_COMPILER_MINGW64` : Present if the _MINGW64_ compiler is used.
 
 ## Platform Detection
-
-BSTC_PLATFORM_UNKNOWN
-BSTC_PLATFORM_CONFIG
 The following are macros defined depending on the compiler detected.
 The lists are organized based off of the level of support.
 Some compilers have been tested hands on, some have been estimated, and others can be detected but will not work.
