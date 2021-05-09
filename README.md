@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
     // Deallocate any memory.
     bstc_vect_destroy(&vect);
     
-    return 0;
+    return bstc_exit_success;
 }
 ```
 
@@ -130,6 +130,6 @@ int main(int argc, char *argv[])
     // Deallocates any memory allocated using what is encoded in the template.
     bstc_vect_destroy(vect_int, &vect);
     
-    return 0;
+    return bstc_exit_success;
 }
 ```
