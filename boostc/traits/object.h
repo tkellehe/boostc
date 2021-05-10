@@ -346,7 +346,7 @@
 
 /** Detects if the ctuple provided could be a valid object ctuple. */
 /// \{
-#ifndef bstc_object_isa
+#ifndef bstc_obj_isa
 # ifdef BSTC_HAS_VARIADIC_MACROS
 #  define bstc_obj_isa(tpl, _t, _f) bstc_ctuple_isa(tpl, bstc_ctuple_hasN(tpl, 8, _t, _f), _f)
 # endif
