@@ -5,7 +5,6 @@
 //  http://www.boost.org/LICENSE_1_0.txt)
 #include <boostc/config.h>
 #include <boostc/ctuple.h>
-#include <boostc/stdlib.h>
 
 
 /** Ensure that the parameters are packed into a tuple. */
