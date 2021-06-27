@@ -5,13 +5,6 @@ A library like [Boost _C++_](https://github.com/boostorg), but for C.
 Provides compile time decisions similar to templating in a simple API.
 Also has polyfills for C standards. Documentation can be viewed [here](https://tkellehe.github.io/boostc/docs/).
 
-## Why Make This?
-I began to write my own variation of _Boost C++_ to get better at _C++_.
-I was able to write a lot of parts that competed well with Boost, but overall useless.
-Therein, I began to wonder if I could take this and get it into a _C_ library.
-
-So, this library is my attempt to make a _C_ version without copying _Boost C++_ directly for my own learning experience.
-
 ### Compile Time Requirement
 Currently, the goal is to write all of the library as compile time insertions of the code.
 This allows more flexibility and makes it closer to _Boost C++_.
