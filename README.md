@@ -75,16 +75,19 @@ Then you can do things like changing the default allocator.
 #include <stdio.h>
 
 // This is a simple allocator that is not the best, but provides as a simple example.
+// The "id" portion is used within macros allowing variables to be declared without naming conflicts.
 int _memory[1024];
 int _pos = 0;
-void* my_malloc(int sz)
+bstc_inline void* my_malloc(int sz, int id)
 {
+    bstc_unused(id);
     int* res = &_memory[_pos];
     _pos += sz / sizeof(int);
     return (void*)res;
 }
-void* my_realloc(void* mem, int sz)
+bstc_inline void* my_realloc(void* mem, int sz, int id)
 {
+    bstc_unused(id);
     int* res = &_memory[_pos];
     bstc_memcpy((void*)res, mem, sz);
     _pos += sz / sizeof(int);

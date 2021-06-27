@@ -7,18 +7,21 @@
 #include <boostc/container/vector.h>
 #include <stdio.h>
 
-void my_free(void *mem)
+void my_free(void *mem, int _)
 {
+    bstc_unused(_);
     bstc_free(mem);
 }
 
-void *my_malloc(int size)
+void *my_malloc(int size, int _)
 {
+    bstc_unused(_);
     return bstc_malloc(size);
 }
 
-void *my_realloc(void *mem, int size)
+void *my_realloc(void *mem, int size, int _)
 {
+    bstc_unused(_);
     return bstc_realloc(mem, size);
 }
 

@@ -8,15 +8,15 @@
 
 /** Create a variable name with the id. */
 /// \{
-#ifndef bstc_macroid_var
-# define bstc_macroid_var(name, id) BSTC_JOIN2(name, id)
+#ifndef bstc_var
+# define bstc_var(name, id) BSTC_JOIN2(name, id)
 #endif
 /// \}
 
 
 /** Takes a constant and moves the id to the next value. */
 /// \{
-#ifndef bstc_macroid_nxt
-# define bstc_macroid_nxt(id) BSTC_CONST_ADD1(id)
+#ifndef bstc_nxtid
+# define bstc_nxtid(id) BSTC_CONST_ADD1(id)
 #endif
 /// \}

@@ -4,7 +4,7 @@
 //  accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
 #include <boostc/stdlib.h>
-#include <boostc/traits/macroid.h>
+#include <boostc/traits/id.h>
 #include <stdio.h>
 
 int main(int argc, char *argv[])
@@ -16,18 +16,18 @@ int main(int argc, char *argv[])
 
     //--------------------------------------------------------------------------------------------------------
     #define id 0
-    #define nxt bstc_macroid_nxt(id)
+    #define nxt bstc_nxtid(id)
 
-    printf("bstc_macroid_nxt == 1:\n");
+    printf("bstc_nxtid == 1:\n");
     if(nxt == 1)
         (++num_pass, printf("    passed\n"));
     else
         (++num_fail, printf("    failed\n"));
 
     //--------------------------------------------------------------------------------------------------------
-    int bstc_macroid_var(var, nxt) = 1;
-    num_pass += bstc_macroid_var(var, nxt);
-    printf("bstc_macroid_var(var, 1) == %s:\n", BSTC_TOSTRING(bstc_macroid_var(var, nxt)));
+    int bstc_var(var, nxt) = 1;
+    num_pass += bstc_var(var, nxt);
+    printf("bstc_var(var, 1) == %s:\n", BSTC_TOSTRING(bstc_var(var, nxt)));
     printf("    passed\n");
 
 

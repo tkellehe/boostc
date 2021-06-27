@@ -114,8 +114,17 @@
 
 /** Default allocator ctuple that use the stdlib memory managers. */
 /// \{
+#ifndef bstc_alloc_stdlib_free
+# define bstc_alloc_stdlib_free(memory, id) bstc_free(memory)
+#endif
+#ifndef bstc_alloc_stdlib_malloc
+# define bstc_alloc_stdlib_malloc(size, id) bstc_malloc(size)
+#endif
+#ifndef bstc_alloc_stdlib_realloc
+# define bstc_alloc_stdlib_realloc(memory, size, id) bstc_realloc(memory, size)
+#endif
 #ifndef bstc_alloc_stdlib
-# define bstc_alloc_stdlib bstc_alloc_traits(bstc_free, bstc_malloc, bstc_realloc)
+# define bstc_alloc_stdlib bstc_alloc_traits(bstc_alloc_stdlib_free, bstc_alloc_stdlib_malloc, bstc_alloc_stdlib_realloc)
 #endif
 /// \}
 
@@ -131,7 +140,7 @@
 /** Default free function that does nothing. */
 /// \{
 #ifndef bstc_alloc_nofree
-# define bstc_alloc_nofree(memory) ((void)0)
+# define bstc_alloc_nofree(memory, id) ((void)0)
 #endif
 /// \}
 
@@ -139,7 +148,7 @@
 /** Default malloc function that does nothing. */
 /// \{
 #ifndef bstc_alloc_nomalloc
-# define bstc_alloc_nomalloc(size) ((void*)bstc_nullptr)
+# define bstc_alloc_nomalloc(size, id) ((void*)bstc_nullptr)
 #endif
 /// \}
 
@@ -147,7 +156,7 @@
 /** Default realloc function that does nothing. */
 /// \{
 #ifndef bstc_alloc_norealloc
-# define bstc_alloc_norealloc(memory, size) ((void*)bstc_nullptr)
+# define bstc_alloc_norealloc(memory, size, id) ((void*)bstc_nullptr)
 #endif
 /// \}
 

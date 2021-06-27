@@ -13,9 +13,11 @@
 #include <boostc/stdint.h>
 #include <boostc/string.h>
 #include <boostc/traits/container.h>
+#include <boostc/traits/id.h>
 
 
 #ifdef BSTC_HAS_VARIADIC_MACROS
+
 
 /** Adds the default vector traits if they are not provided. */
 /// \{
@@ -25,6 +27,17 @@
 # define bstc_dtl_vect_add_traits_no(tpl) tpl
 # define bstc_dtl_vect_add_traits_select(tpl) bstc_container_isa(BSTC_GET_ARG0 tpl, bstc_dtl_vect_add_traits_no, bstc_dtl_vect_add_traits_prepend)
 # define bstc_dtl_vect_add_traits(tpl) bstc_dtl_vect_add_traits_select(tpl) (tpl)
+/// \}
+
+
+/** Adds the default macro id to all the calls. */
+/// \{
+# define bstc_dtl_vect_add_id_append2(...) bstc_ctuple(__VA_ARGS__)
+# define bstc_dtl_vect_add_id_append1(L, R) BSTC_EXPAND(bstc_dtl_vect_add_id_append2(L, R))
+# define bstc_dtl_vect_add_id_append(tpl) BSTC_EXPAND(bstc_dtl_vect_add_id_append1(bstc_ctuple_layout tpl, 0))
+# define bstc_dtl_vect_add_id_no(tpl) tpl
+# define bstc_dtl_vect_add_id_select(cnt, tpl) bstc_ctuple_hasN(tpl, cnt, bstc_dtl_vect_add_id_append, bstc_dtl_vect_add_id_no)
+# define bstc_dtl_vect_add_id(cnt, tpl) bstc_dtl_vect_add_id_select(cnt, tpl) (tpl)
 /// \}
 
 
@@ -162,24 +175,25 @@ typedef struct { bstc_size_t cap_; bstc_size_t len_; } bstc_dtl_vect_header_t;
 
 /** Initializes the vector to null which makes it easier given that we are using fat pointers. */
 /// \{
-#define bstc_dtl_vect_init(traits, vect) *(vect) = bstc_nullptr
+#define bstc_dtl_vect_init(traits, vect, id) *(vect) = bstc_nullptr
 /// \}
 
 
 /** Initializes the vector structure from another vector as an exact clone. */
 /// \{
-#define bstc_dtl_vect_clone(traits, vect, other) \
+#define bstc_dtl_vect_clone(traits, vect, other, id) \
     do {\
-        bstc_size_t __bstc_dtl_i;\
+        bstc_size_t bstc_var(__bstc_dtl_i, id);\
         if(*(other)) {\
             (*((void**)(vect))) = (void*)(((bstc_dtl_vect_header_t*)(bstc_alloc_malloc(bstc_container_alloc(traits))(\
-                sizeof(*(*(vect)))*(bstc_dtl_vect_header(other)->cap_) + sizeof(bstc_dtl_vect_header_t)\
+                sizeof(*(*(vect)))*(bstc_dtl_vect_header(other)->cap_) + sizeof(bstc_dtl_vect_header_t),\
+                bstc_nxtid(id)\
             )))+1);\
             bstc_dtl_vect_header(vect)->len_ = bstc_dtl_vect_header(other)->len_;\
             bstc_dtl_vect_header(vect)->cap_ = bstc_dtl_vect_header(other)->cap_;\
-            for(__bstc_dtl_i = 0; __bstc_dtl_i < bstc_dtl_vect_header(other)->len_; ++__bstc_dtl_i) {\
+            for(bstc_var(__bstc_dtl_i, id) = 0; bstc_var(__bstc_dtl_i, id) < bstc_dtl_vect_header(other)->len_; ++bstc_var(__bstc_dtl_i, id)) {\
                 /* This code assumes that the copy function properly handles its arguments to prevent macro problems. */\
-                bstc_obj_clone(bstc_container_subtraits(traits))(bstc_container_subtraits(traits), ((*(vect)) + __bstc_dtl_i), ((*(other)) + __bstc_dtl_i));\
+                bstc_obj_clone(bstc_container_subtraits(traits))(bstc_container_subtraits(traits), ((*(vect)) + bstc_var(__bstc_dtl_i, id)), ((*(other)) + bstc_var(__bstc_dtl_i, id)), bstc_nxtid(id));\
             }\
         } else { *(vect) = bstc_nullptr; }\
     } while(0)
@@ -188,32 +202,34 @@ typedef struct { bstc_size_t cap_; bstc_size_t len_; } bstc_dtl_vect_header_t;
 
 /** Moves by merely assigning to the same spot. */
 /// \{
-#define bstc_dtl_vect_move(traits, vect, other) *(vect) = (other)
+#define bstc_dtl_vect_move(traits, vect, other, id) *(vect) = (other)
 /// \}
 
 
 /** Copies the other vector structure provided assuming both vectors have been initialized. */
 /// \{
-#define bstc_dtl_vect_copy(traits, vect, other) \
+#define bstc_dtl_vect_copy(traits, vect, other, id) \
     do {\
-        bstc_size_t __bstc_dtl_i;\
+        bstc_size_t bstc_var(__bstc_dtl_i, id);\
         if(*(other)) {\
             if(!(*(vect))) {\
                 (*((void**)(vect))) = (void*)(((bstc_dtl_vect_header_t*)(bstc_alloc_malloc(bstc_container_alloc(traits))(\
-                    sizeof(*(*(vect)))*(bstc_dtl_vect_header(other)->cap_) + sizeof(bstc_dtl_vect_header_t)\
+                    sizeof(*(*(vect)))*(bstc_dtl_vect_header(other)->cap_) + sizeof(bstc_dtl_vect_header_t),\
+                    bstc_nxtid(id)\
                 )))+1);\
                 bstc_dtl_vect_header(vect)->cap_ = bstc_dtl_vect_header(other)->cap_;\
             } else if(bstc_dtl_vect_header(vect)->cap_ < bstc_dtl_vect_header(other)->cap_) {\
                 (*((void**)(vect))) = (void*)(((bstc_dtl_vect_header_t*)(bstc_alloc_realloc(bstc_container_alloc(traits))(\
                     (void*)(*(vect)),\
-                    sizeof(*(*(vect)))*(bstc_dtl_vect_header(other)->cap_) + sizeof(bstc_dtl_vect_header_t)\
+                    sizeof(*(*(vect)))*(bstc_dtl_vect_header(other)->cap_) + sizeof(bstc_dtl_vect_header_t),\
+                    bstc_nxtid(id)\
                 )))+1);\
                 bstc_dtl_vect_header(vect)->cap_ = bstc_dtl_vect_header(other)->cap_;\
             }\
             bstc_dtl_vect_header(vect)->len_ = bstc_dtl_vect_header(other)->len_;\
-            for(__bstc_dtl_i = 0; __bstc_dtl_i < bstc_dtl_vect_header(other)->len_; ++__bstc_dtl_i) {\
+            for(bstc_var(__bstc_dtl_i, id) = 0; bstc_var(__bstc_dtl_i, id) < bstc_dtl_vect_header(other)->len_; ++bstc_var(__bstc_dtl_i, id)) {\
                 /* This code assumes that the copy function properly handles its arguments to prevent macro problems. */\
-                bstc_obj_copy(bstc_container_subtraits(traits))(bstc_container_subtraits(traits), ((*(vect)) + __bstc_dtl_i), ((*(other)) + __bstc_dtl_i));\
+                bstc_obj_copy(bstc_container_subtraits(traits))(bstc_container_subtraits(traits), ((*(vect)) + bstc_var(__bstc_dtl_i, id)), ((*(other)) + bstc_var(__bstc_dtl_i, id)), bstc_nxtid(id));\
             }\
         } else if(*(vect)) { bstc_dtl_vect_header(vect)->len_ = 0; }\
     } while(0)
@@ -222,19 +238,21 @@ typedef struct { bstc_size_t cap_; bstc_size_t len_; } bstc_dtl_vect_header_t;
 
 /** Shallow copies the other vector structure provided assuming both vectors have been initialized. */
 /// \{
-#define bstc_dtl_vect_assign(traits, vect, other) \
+#define bstc_dtl_vect_assign(traits, vect, other, id) \
     do {\
-        bstc_size_t __bstc_dtl_i;\
+        bstc_size_t bstc_var(__bstc_dtl_i, id);\
         if(*(other)) {\
             if(!(*(vect))) {\
                 (*((void**)(vect))) = (void*)(((bstc_dtl_vect_header_t*)(bstc_alloc_malloc(bstc_container_alloc(traits))(\
-                    sizeof(*(*(vect)))*(((bstc_dtl_vect_header_t*)(other))->cap_) + sizeof(bstc_dtl_vect_header_t)\
+                    sizeof(*(*(vect)))*(((bstc_dtl_vect_header_t*)(other))->cap_) + sizeof(bstc_dtl_vect_header_t),\
+                    bstc_nxtid(id)\
                 )))+1);\
                 bstc_dtl_vect_header(vect)->cap_ = ((bstc_dtl_vect_header_t*)(other))->cap_;\
             } else if(bstc_dtl_vect_header(vect)->cap_ < ((bstc_dtl_vect_header_t*)(other))->cap_) {\
                 (*((void**)(vect))) = (void*)(((bstc_dtl_vect_header_t*)(bstc_alloc_realloc(bstc_container_alloc(traits))(\
                     (void*)(*(vect)),\
-                    sizeof(*(*(vect)))*(((bstc_dtl_vect_header_t*)(other))->cap_) + sizeof(bstc_dtl_vect_header_t)\
+                    sizeof(*(*(vect)))*(((bstc_dtl_vect_header_t*)(other))->cap_) + sizeof(bstc_dtl_vect_header_t),\
+                    bstc_nxtid(id)\
                 )))+1);\
                 bstc_dtl_vect_header(vect)->cap_ = ((bstc_dtl_vect_header_t*)(other))->cap_;\
             }\
@@ -249,9 +267,9 @@ typedef struct { bstc_size_t cap_; bstc_size_t len_; } bstc_dtl_vect_header_t;
  * The `do-while` is added to force users to end with a semicolon.
  */
 /// \{
-#define bstc_dtl_vect_destroy(traits, vect) \
+#define bstc_dtl_vect_destroy(traits, vect, id) \
     do {if(*(vect)) {\
-        bstc_alloc_free(bstc_container_alloc(traits))(bstc_dtl_vect_header(vect));\
+        bstc_alloc_free(bstc_container_alloc(traits))(bstc_dtl_vect_header(vect), bstc_nxtid(id));\
         *(vect) = bstc_nullptr;}\
     } while(0)
 /// \}
@@ -259,70 +277,75 @@ typedef struct { bstc_size_t cap_; bstc_size_t len_; } bstc_dtl_vect_header_t;
 
 /** The simple basic access functions. */
 /// \{
-#define bstc_dtl_vect_len(traits, vect) ((*(vect)) ? bstc_dtl_vect_header(vect)->len_ : 0)
-#define bstc_dtl_vect_cap(traits, vect) ((*(vect)) ? bstc_dtl_vect_header(vect)->cap_ : 0)
-#define bstc_dtl_vect_data(traits, vect) (*(vect))
-#define bstc_dtl_vect_empty(traits, vect) (bstc_dtl_vect_len(traits, vect) == 0)
-#define bstc_dtl_vect_at(traits, vect, i) ((*(vect))[(i)])
-#define bstc_dtl_vect_front(traits, vect) ((*(vect))[0])
-#define bstc_dtl_vect_back(traits, vect) ((*(vect))[bstc_dtl_vect_header(vect)->len_-1])
+#define bstc_dtl_vect_len(traits, vect, id) ((*(vect)) ? bstc_dtl_vect_header(vect)->len_ : 0)
+#define bstc_dtl_vect_cap(traits, vect, id) ((*(vect)) ? bstc_dtl_vect_header(vect)->cap_ : 0)
+#define bstc_dtl_vect_data(traits, vect, id) (*(vect))
+#define bstc_dtl_vect_empty(traits, vect, id) (bstc_dtl_vect_len(traits, vect, id) == 0)
+#define bstc_dtl_vect_at(traits, vect, i, id) ((*(vect))[(i)])
+#define bstc_dtl_vect_front(traits, vect, id) ((*(vect))[0])
+#define bstc_dtl_vect_back(traits, vect, id) ((*(vect))[bstc_dtl_vect_header(vect)->len_-1])
 /// \}
 
 
 /** Implements the resize function with dtor and ctor calls depending on how the size changes. */
 /// \{
-#define bstc_dtl_vect_rsz(traits, vect, nsz) \
+#define bstc_dtl_vect_rsz(traits, vect, nsz, id) \
     do {\
-        bstc_size_t __bstc_dtl_nsz = (bstc_size_t)(nsz);\
+        bstc_size_t bstc_var(__bstc_dtl_nsz, id) = (bstc_size_t)(nsz);\
         if(*(vect)) {\
             /* Check to see if the new size already fits. */\
-            if(bstc_dtl_vect_header(vect)->cap_ < __bstc_dtl_nsz) {\
+            if(bstc_dtl_vect_header(vect)->cap_ < bstc_var(__bstc_dtl_nsz, id)) {\
                 /* Since it does not fit, check to see if twice the current size will hold the new size. */\
-                if(bstc_dtl_vect_header(vect)->cap_*2 > __bstc_dtl_nsz) {\
+                if(bstc_dtl_vect_header(vect)->cap_*2 > bstc_var(__bstc_dtl_nsz, id)) {\
                     (*((void**)(vect))) = (void*)(((bstc_dtl_vect_header_t*)(bstc_alloc_realloc(bstc_container_alloc(traits))(\
                         (void*)(*(vect)),\
-                        sizeof(*(*(vect)))*(bstc_dtl_vect_header(vect)->cap_*2) + sizeof(bstc_dtl_vect_header_t)\
+                        sizeof(*(*(vect)))*(bstc_dtl_vect_header(vect)->cap_*2) + sizeof(bstc_dtl_vect_header_t),\
+                        bstc_nxtid(id)\
                     )))+1);\
                     bstc_dtl_vect_header(vect)->cap_ = (bstc_dtl_vect_header(vect)->cap_*2);\
                 }else{\
                      (*((void**)(vect))) = (void*)(((bstc_dtl_vect_header_t*)(bstc_alloc_realloc(bstc_container_alloc(traits))(\
                         (void*)(*(vect)),\
-                        sizeof(*(*(vect)))*(__bstc_dtl_nsz) + sizeof(bstc_dtl_vect_header_t)\
+                        sizeof(*(*(vect)))*(bstc_var(__bstc_dtl_nsz, id)) + sizeof(bstc_dtl_vect_header_t),\
+                        bstc_nxtid(id)\
                     )))+1);\
-                    bstc_dtl_vect_header(vect)->cap_ = __bstc_dtl_nsz;\
+                    bstc_dtl_vect_header(vect)->cap_ = bstc_var(__bstc_dtl_nsz, id);\
                 }\
             }\
         } else { \
              (*((void**)(vect))) = (void*)(((bstc_dtl_vect_header_t*)(bstc_alloc_malloc(bstc_container_alloc(traits))(\
-                sizeof(*(*(vect)))*(__bstc_dtl_nsz) + sizeof(bstc_dtl_vect_header_t)\
+                sizeof(*(*(vect)))*(bstc_var(__bstc_dtl_nsz, id)) + sizeof(bstc_dtl_vect_header_t),\
+                bstc_nxtid(id)\
             )))+1);\
-            bstc_dtl_vect_header(vect)->cap_ = __bstc_dtl_nsz;\
+            bstc_dtl_vect_header(vect)->cap_ = bstc_var(__bstc_dtl_nsz, id);\
         }\
-        bstc_dtl_vect_header(vect)->len_ = __bstc_dtl_nsz;\
+        bstc_dtl_vect_header(vect)->len_ = bstc_var(__bstc_dtl_nsz, id);\
     } while(0)
 /// \}
 
 
 /** Implements the reserve function which merely ensures enough memory is allocated for the request and never shrinks. */
 /// \{
-#define bstc_dtl_vect_rsv(traits, vect, ncap) \
+#define bstc_dtl_vect_rsv(traits, vect, ncap, id) \
     do {\
         /* Check to see if the new capacity already fits. */\
-        bstc_size_t __bstc_dtl_ncap = (bstc_size_t)(ncap);\
+        bstc_size_t bstc_var(__bstc_dtl_ncap, id) = (bstc_size_t)(ncap);\
         if(*(vect)){\
-            if(bstc_dtl_vect_header(vect)->cap_ < __bstc_dtl_ncap) {\
+            if(bstc_dtl_vect_header(vect)->cap_ < bstc_var(__bstc_dtl_ncap, id)) {\
                  (*((void**)(vect))) = (void*)(((bstc_dtl_vect_header_t*)(bstc_alloc_realloc(bstc_container_alloc(traits))(\
                     (void*)(*(vect)),\
-                    sizeof(*(*(vect)))*(__bstc_dtl_ncap) + sizeof(bstc_dtl_vect_header_t)\
+                    sizeof(*(*(vect)))*(bstc_var(__bstc_dtl_ncap, id)) + sizeof(bstc_dtl_vect_header_t),\
+                    bstc_nxtid(id)\
                 )))+1);\
-                bstc_dtl_vect_header(vect)->cap_ = __bstc_dtl_ncap;\
+                bstc_dtl_vect_header(vect)->cap_ = bstc_var(__bstc_dtl_ncap, id);\
             }\
         } else {\
              (*((void**)(vect))) = (void*)(((bstc_dtl_vect_header_t*)(bstc_alloc_malloc(bstc_container_alloc(traits))(\
-                sizeof(*(*(vect)))*(__bstc_dtl_ncap) + sizeof(bstc_dtl_vect_header_t)\
+                sizeof(*(*(vect)))*(bstc_var(__bstc_dtl_ncap, id)) + sizeof(bstc_dtl_vect_header_t),\
+                bstc_nxtid(id)\
             )))+1);\
             bstc_dtl_vect_header(vect)->len_ = 0;\
-            bstc_dtl_vect_header(vect)->cap_ = __bstc_dtl_ncap;\
+            bstc_dtl_vect_header(vect)->cap_ = bstc_var(__bstc_dtl_ncap, id);\
         }\
     } while(0)
 /// \}
@@ -330,25 +353,27 @@ typedef struct { bstc_size_t cap_; bstc_size_t len_; } bstc_dtl_vect_header_t;
 
 /** Implements the push back function that applies the copy constructor if it is available. */
 /// \{
-#define bstc_dtl_vect_pushb(traits, vect, val) \
+#define bstc_dtl_vect_pushb(traits, vect, val, id) \
     do {\
         if(*(vect)){\
             if(bstc_dtl_vect_header(vect)->cap_ < (bstc_dtl_vect_header(vect)->len_+1))\
             {\
                 (*((void**)(vect))) = (void*)(((bstc_dtl_vect_header_t*)(bstc_alloc_realloc(bstc_container_alloc(traits))(\
                     (void*)(*(vect)),\
-                    sizeof(*(*(vect)))*(bstc_dtl_vect_header(vect)->cap_*2) + sizeof(bstc_dtl_vect_header_t)\
+                    sizeof(*(*(vect)))*(bstc_dtl_vect_header(vect)->cap_*2) + sizeof(bstc_dtl_vect_header_t),\
+                    bstc_nxtid(id)\
                 )))+1);\
                 bstc_dtl_vect_header(vect)->cap_ *= 2;\
             }\
         } else {\
              (*((void**)(vect))) = (void*)(((bstc_dtl_vect_header_t*)(bstc_alloc_malloc(bstc_container_alloc(traits))(\
-                sizeof(*(*(vect)))*(2) + sizeof(bstc_dtl_vect_header_t)\
+                sizeof(*(*(vect)))*(2) + sizeof(bstc_dtl_vect_header_t),\
+                bstc_nxtid(id)\
             )))+1);\
             bstc_dtl_vect_header(vect)->len_ = 0;\
             bstc_dtl_vect_header(vect)->cap_ = 2;\
         }\
-        bstc_dtl_vect_move(traits, ((*(vect)) + bstc_dtl_vect_header(vect)->len_), (val));\
+        bstc_dtl_vect_move(traits, ((*(vect)) + bstc_dtl_vect_header(vect)->len_), (val), bstc_nxtid(id));\
         bstc_dtl_vect_header(vect)->len_ += 1;\
     } while(0)
 /// \}

@@ -290,7 +290,7 @@
 /** Default init function that does nothing. */
 /// \{
 #ifndef bstc_obj_noinit
-# define bstc_obj_noinit(traits, ptr) ((void)0)
+# define bstc_obj_noinit(traits, ptr, id) ((void)0)
 #endif
 /// \}
 
@@ -298,7 +298,7 @@
 /** Default destroy function that does nothing. */
 /// \{
 #ifndef bstc_obj_nodestroy
-# define bstc_obj_nodestroy(traits, ptr) ((void)0)
+# define bstc_obj_nodestroy(traits, ptr, id) ((void)0)
 #endif
 /// \}
 
@@ -306,7 +306,7 @@
 /** Default clone function that works for basic types. */
 /// \{
 #ifndef bstc_obj_noclone
-# define bstc_obj_noclone(traits, ptr, other) *(ptr) = *(other)
+# define bstc_obj_noclone(traits, ptr, other, id) *(ptr) = *(other)
 #endif
 /// \}
 
@@ -314,7 +314,7 @@
 /** Default copy function that works for basic types. */
 /// \{
 #ifndef bstc_obj_nocopy
-# define bstc_obj_nocopy(traits, ptr, other) *(ptr) = *(other)
+# define bstc_obj_nocopy(traits, ptr, other, id) *(ptr) = *(other)
 #endif
 /// \}
 
@@ -322,7 +322,7 @@
 /** Default move function that works for basic types. */
 /// \{
 #ifndef bstc_obj_nomove
-# define bstc_obj_nomove(traits, ptr, other) *(ptr) = (other)
+# define bstc_obj_nomove(traits, ptr, other, id) *(ptr) = (other)
 #endif
 /// \}
 
@@ -330,7 +330,7 @@
 /** Default assign function that works for basic types. */
 /// \{
 #ifndef bstc_obj_noassign
-# define bstc_obj_noassign(traits, ptr, other) *(ptr) = (other)
+# define bstc_obj_noassign(traits, ptr, other, id) *(ptr) = (other)
 #endif
 /// \}
 
