@@ -35,8 +35,6 @@
 #endif
 
 
-/* Add namespaced version. */
-/// \{
 #ifndef bstc_clockid_t
 # define bstc_clockid_t clockid_t
 #endif
@@ -137,7 +135,6 @@ struct _bstc_timespec
 #  define bstc_timespec_get timespec_get
 # endif
 #endif
-/// \}
 
 
 #endif // BOOSTC__TIME_H
