@@ -19,91 +19,91 @@
 
 /* Add namespaced version. */
 /// \{
-#ifdef bstc_memcpy 
+#ifndef bstc_memcpy
 # define bstc_memcpy memcpy
 #endif
 
-#ifdef bstc_memmove 
+#ifndef bstc_memmove
 # define bstc_memmove memmove
 #endif
 
-#ifdef bstc_strcpy 
+#ifndef bstc_strcpy
 # define bstc_strcpy strcpy
 #endif
 
-#ifdef bstc_strncpy 
+#ifndef bstc_strncpy
 # define bstc_strncpy strncpy
 #endif
 
-#ifdef bstc_strcat 
+#ifndef bstc_strcat
 # define bstc_strcat strcat
 #endif
 
-#ifdef bstc_strncat 
+#ifndef bstc_strncat
 # define bstc_strncat strncat
 #endif
 
-#ifdef bstc_memcmp 
+#ifndef bstc_memcmp
 # define bstc_memcmp memcmp
 #endif
 
-#ifdef bstc_strcmp 
+#ifndef bstc_strcmp
 # define bstc_strcmp strcmp
 #endif
 
-#ifdef bstc_strcoll 
+#ifndef bstc_strcoll
 # define bstc_strcoll strcoll
 #endif
 
-#ifdef bstc_strncmp 
+#ifndef bstc_strncmp
 # define bstc_strncmp strncmp
 #endif
 
-#ifdef bstc_strxfrm 
+#ifndef bstc_strxfrm
 # define bstc_strxfrm strxfrm
 #endif
 
-#ifdef bstc_memchr 
+#ifndef bstc_memchr
 # define bstc_memchr memchr
 #endif
 
-#ifdef bstc_strchr 
+#ifndef bstc_strchr
 # define bstc_strchr strchr
 #endif
 
-#ifdef bstc_strcspn 
+#ifndef bstc_strcsp
 # define bstc_strcspn strcspn
 #endif
 
-#ifdef bstc_strpbrk 
+#ifndef bstc_strpbrk
 # define bstc_strpbrk strpbrk
 #endif
 
-#ifdef bstc_strrchr 
+#ifndef bstc_strrchr
 # define bstc_strrchr strrchr
 #endif
 
-#ifdef bstc_strspn 
+#ifndef bstc_strspn
 # define bstc_strspn strspn
 #endif
 
-#ifdef bstc_strstr 
+#ifndef bstc_strstr
 # define bstc_strstr strstr
 #endif
 
-#ifdef bstc_strtok 
+#ifndef bstc_strtok
 # define bstc_strtok strtok
 #endif
 
-#ifdef bstc_memset 
+#ifndef bstc_memset
 # define bstc_memset memset
 #endif
 
-#ifdef bstc_strerror 
+#ifndef bstc_strerror
 # define bstc_strerror strerror
 #endif
 
-#ifdef bstc_strlen 
+#ifndef bstc_strlen
 # define bstc_strlen strlen
 #endif
 /// \}

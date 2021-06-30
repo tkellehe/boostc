@@ -16,6 +16,14 @@
 /// \}
 
 
+/** Ensure that the parameters are packed into a tuple. */
+/// \{
+#ifndef bstc_alloc_wrap_traits
+# define bstc_alloc_wrap_traits(f, m, r) (bstc_alloc_wrap_free(f), bstc_alloc_wrap_malloc(m), bstc_alloc_wrap_realloc(r))
+#endif
+/// \}
+
+
 /** Creates a ctuple with the defaults set except for the free function provided. */
 /// \{
 #ifndef bstc_alloc_pack_free
@@ -112,19 +120,27 @@
 /// \}
 
 
+/** Wrappers for non-id functions. */
+/// \{
+#ifndef bstc_alloc_wrap_free
+# define bstc_dtl_alloc_wrap_free(memory, id) BSTC_CTUPLE1(memory)
+# define bstc_alloc_wrap_free(f) BSTC_CTUPLE1(f) bstc_dtl_alloc_wrap_free
+#endif
+#ifndef bstc_alloc_wrap_malloc
+# define bstc_dtl_alloc_wrap_malloc(size, id) BSTC_CTUPLE1(size)
+# define bstc_alloc_wrap_malloc(f) BSTC_CTUPLE1(f) bstc_dtl_alloc_wrap_malloc
+#endif
+#ifndef bstc_alloc_wrap_realloc
+# define bstc_dtl_alloc_wrap_realloc(memory, size, id) BSTC_CTUPLE2(memory, size)
+# define bstc_alloc_wrap_realloc(f) BSTC_CTUPLE1(f) bstc_dtl_alloc_wrap_realloc
+#endif
+/// \}
+
+
 /** Default allocator ctuple that use the stdlib memory managers. */
 /// \{
-#ifndef bstc_alloc_stdlib_free
-# define bstc_alloc_stdlib_free(memory, id) bstc_free(memory)
-#endif
-#ifndef bstc_alloc_stdlib_malloc
-# define bstc_alloc_stdlib_malloc(size, id) bstc_malloc(size)
-#endif
-#ifndef bstc_alloc_stdlib_realloc
-# define bstc_alloc_stdlib_realloc(memory, size, id) bstc_realloc(memory, size)
-#endif
 #ifndef bstc_alloc_stdlib
-# define bstc_alloc_stdlib bstc_alloc_traits(bstc_alloc_stdlib_free, bstc_alloc_stdlib_malloc, bstc_alloc_stdlib_realloc)
+# define bstc_alloc_stdlib bstc_alloc_wrap_traits(bstc_free, bstc_malloc, bstc_realloc)
 #endif
 /// \}
 
