@@ -35,11 +35,6 @@
 #endif
 
 
-#ifndef bstc_clockid_t
-# define bstc_clockid_t clockid_t
-#endif
-
-
 #if defined(CLOCK_MONOTONIC) && !defined(bstc_clock_monotonic)
 # define bstc_clock_monotonic CLOCK_MONOTONIC
 #endif
@@ -54,26 +49,26 @@
 #endif
 
 
-#ifndef bstc_clock_gettime
-# define bstc_clock_gettime clock_gettime
-#endif
-
-
-#ifndef bstc_gettimeofday
-# define bstc_gettimeofday gettimeofday
-#endif
-
-
 #ifndef bstc_time_t
 # define bstc_time_t time_t
 #endif
 
 
+#ifndef bstc_tm
+# define bstc_tm tm
+#endif
+
+
+#ifndef bstc_clock_t
+# define bstc_clock_t clock_t
+#endif
+
+
 #ifndef bstc_time_utc
 # ifdef TIME_UTC
-#  define bstc_time_utc 1
-# else
 #  define bstc_time_utc TIME_UTC
+# else
+#  define bstc_time_utc 1
 # endif
 #endif
 
@@ -108,7 +103,7 @@ struct _bstc_timespec
         return base;
     }
 #   define bstc_timespec_get _bstc_timespec_get
-#  elif BSTC_OSAPI_POSIX
+#  elif defined(BSTC_OSAPI_POSIX)
     static bstc_inline int _bstc_timespec_get(struct bstc_timespec *ts, int base)
     {
     #if !defined(bstc_clock_realtime)
@@ -118,9 +113,9 @@ struct _bstc_timespec
         if(base != bstc_time_utc) return 0;
 
     #if defined(bstc_clock_realtime)
-        base = (bstc_clock_gettime(bstc_clock_realtime, ts) == 0) ? base : 0;
+        base = (clock_gettime(bstc_clock_realtime, ts) == 0) ? base : 0;
     #else
-        bstc_gettimeofday(&tv, bstc_nullptr);
+        gettimeofday(&tv, bstc_nullptr);
         ts->tv_sec = (bstc_time_t)tv.tv_sec;
         ts->tv_nsec = 1000L * (long)tv.tv_usec;
     #endif
@@ -133,6 +128,58 @@ struct _bstc_timespec
 #  endif
 # else
 #  define bstc_timespec_get timespec_get
+# endif
+#endif
+
+
+#ifndef bstc_difftime
+# define bstc_difftime difftime
+#endif
+
+
+#ifndef bstc_time
+# define bstc_time time
+#endif
+
+
+#ifndef bstc_clock
+# define bstc_clock clock
+#endif
+
+
+#ifndef bstc_asctime
+# define bstc_asctime asctime
+#endif
+
+
+#ifndef bstc_ctime
+# define bstc_ctime ctime
+#endif
+
+
+#ifndef bstc_strftime
+# define bstc_strftime strftime
+#endif
+
+
+#ifndef bstc_gmtime
+# define bstc_gmtime gmtime
+#endif
+
+
+#ifndef bstc_localtime
+# define bstc_localtime localtime
+#endif
+
+
+#ifndef bstc_mktime
+# define bstc_mktime mktime
+#endif
+
+
+#ifdef CLOCKS_PER_SEC
+# ifndef bstc_clocks_per_sec
+#  define bstc_clocks_per_sec CLOCKS_PER_SEC
 # endif
 #endif
 

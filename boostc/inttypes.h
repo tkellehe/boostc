@@ -458,7 +458,7 @@
 #  ifdef PRId64
 #   define bstc_prid64 PRId64
 #  else
-#   if defined(BSTC_COMPILER_TCC) || defined(BSTC_COMPILER_WATCOM) || defined(BSTC_COMPILER_BORLAND)
+#   if defined(BSTC_COMPILER_TCC) || defined(BSTC_COMPILER_WATCOM) || defined(BSTC_COMPILER_BORLAND) || defined(BSTC_COMPILER_VISUALC)
 #    define  bstc_prid64 "I64d"
 #   else
 #    if defined(bstc_ullong_max) && bstc_ullong_max == bstc_uint64_max
@@ -475,7 +475,7 @@
 #  ifdef PRIi64
 #   define bstc_prii64 PRIi64
 #  else
-#   if defined(BSTC_COMPILER_TCC) || defined(BSTC_COMPILER_WATCOM) || defined(BSTC_COMPILER_BORLAND)
+#   if defined(BSTC_COMPILER_TCC) || defined(BSTC_COMPILER_WATCOM) || defined(BSTC_COMPILER_BORLAND) || defined(BSTC_COMPILER_VISUALC)
 #    define  bstc_prii64 "I64i"
 #   else
 #    if defined(bstc_ullong_max) && bstc_ullong_max == bstc_uint64_max
@@ -492,7 +492,7 @@
 #  ifdef PRIu64
 #   define bstc_priu64 PRIu64
 #  else
-#   if defined(BSTC_COMPILER_TCC) || defined(BSTC_COMPILER_WATCOM) || defined(BSTC_COMPILER_BORLAND)
+#   if defined(BSTC_COMPILER_TCC) || defined(BSTC_COMPILER_WATCOM) || defined(BSTC_COMPILER_BORLAND) || defined(BSTC_COMPILER_VISUALC)
 #    define  bstc_priu64 "I64u"
 #   else
 #    if defined(bstc_ullong_max) && bstc_ullong_max == bstc_uint64_max
@@ -509,7 +509,7 @@
 #  ifdef PRIo64
 #   define bstc_prio64 PRIo64
 #  else
-#   if defined(BSTC_COMPILER_TCC) || defined(BSTC_COMPILER_WATCOM) || defined(BSTC_COMPILER_BORLAND)
+#   if defined(BSTC_COMPILER_TCC) || defined(BSTC_COMPILER_WATCOM) || defined(BSTC_COMPILER_BORLAND) || defined(BSTC_COMPILER_VISUALC)
 #    define  bstc_prio64 "I64o"
 #   else
 #    if defined(bstc_ullong_max) && bstc_ullong_max == bstc_uint64_max
@@ -526,7 +526,7 @@
 #  ifdef PRIx64
 #   define bstc_prix64 PRIx64
 #  else
-#   if defined(BSTC_COMPILER_TCC) || defined(BSTC_COMPILER_WATCOM) || defined(BSTC_COMPILER_BORLAND)
+#   if defined(BSTC_COMPILER_TCC) || defined(BSTC_COMPILER_WATCOM) || defined(BSTC_COMPILER_BORLAND) || defined(BSTC_COMPILER_VISUALC)
 #    define  bstc_prix64 "I64x"
 #   else
 #    if defined(bstc_ullong_max) && bstc_ullong_max == bstc_uint64_max
@@ -543,7 +543,7 @@
 #  ifdef PRIX64
 #   define bstc_priX64 PRIX64
 #  else
-#   if defined(BSTC_COMPILER_TCC) || defined(BSTC_COMPILER_WATCOM) || defined(BSTC_COMPILER_BORLAND)
+#   if defined(BSTC_COMPILER_TCC) || defined(BSTC_COMPILER_WATCOM) || defined(BSTC_COMPILER_BORLAND) || defined(BSTC_COMPILER_VISUALC)
 #    define  bstc_priX64 "I64X"
 #   else
 #    if defined(bstc_ullong_max) && bstc_ullong_max == bstc_uint64_max
@@ -560,7 +560,7 @@
 #  ifdef SCNd64
 #   define bstc_scnd64 SCNd64
 #  else
-#   if defined(BSTC_COMPILER_TCC) || defined(BSTC_COMPILER_WATCOM) || defined(BSTC_COMPILER_BORLAND)
+#   if defined(BSTC_COMPILER_TCC) || defined(BSTC_COMPILER_WATCOM) || defined(BSTC_COMPILER_BORLAND) || defined(BSTC_COMPILER_VISUALC)
 #    define  bstc_scnd64 "I64d"
 #   else
 #    if defined(bstc_ullong_max) && bstc_ullong_max == bstc_uint64_max
@@ -577,7 +577,7 @@
 #  ifdef SCNi64
 #   define bstc_scni64 SCNi64
 #  else
-#   if defined(BSTC_COMPILER_TCC) || defined(BSTC_COMPILER_WATCOM) || defined(BSTC_COMPILER_BORLAND)
+#   if defined(BSTC_COMPILER_TCC) || defined(BSTC_COMPILER_WATCOM) || defined(BSTC_COMPILER_BORLAND) || defined(BSTC_COMPILER_VISUALC)
 #    define  bstc_scni64 "I64i"
 #   else
 #    if defined(bstc_ullong_max) && bstc_ullong_max == bstc_uint64_max
@@ -594,7 +594,7 @@
 #  ifdef SCNu64
 #   define bstc_scnu64 SCNu64
 #  else
-#   if defined(BSTC_COMPILER_TCC) || defined(BSTC_COMPILER_WATCOM) || defined(BSTC_COMPILER_BORLAND)
+#   if defined(BSTC_COMPILER_TCC) || defined(BSTC_COMPILER_WATCOM) || defined(BSTC_COMPILER_BORLAND) || defined(BSTC_COMPILER_VISUALC)
 #    define  bstc_scnu64 "I64u"
 #   else
 #    if defined(bstc_ullong_max) && bstc_ullong_max == bstc_uint64_max
@@ -611,7 +611,7 @@
 #  ifdef SCNo64
 #   define bstc_scno64 SCNo64
 #  else
-#   if defined(BSTC_COMPILER_TCC) || defined(BSTC_COMPILER_WATCOM) || defined(BSTC_COMPILER_BORLAND)
+#   if defined(BSTC_COMPILER_TCC) || defined(BSTC_COMPILER_WATCOM) || defined(BSTC_COMPILER_BORLAND) || defined(BSTC_COMPILER_VISUALC)
 #    define  bstc_scno64 "I64o"
 #   else
 #    if defined(bstc_ullong_max) && bstc_ullong_max == bstc_uint64_max
@@ -628,7 +628,7 @@
 #  ifdef SCNx64
 #   define bstc_scnx64 SCNx64
 #  else
-#   if defined(BSTC_COMPILER_TCC) || defined(BSTC_COMPILER_WATCOM) || defined(BSTC_COMPILER_BORLAND)
+#   if defined(BSTC_COMPILER_TCC) || defined(BSTC_COMPILER_WATCOM) || defined(BSTC_COMPILER_BORLAND) || defined(BSTC_COMPILER_VISUALC)
 #    define  bstc_scnx64 "I64x"
 #   else
 #    if defined(bstc_ullong_max) && bstc_ullong_max == bstc_uint64_max
