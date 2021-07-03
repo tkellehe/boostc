@@ -116,6 +116,38 @@ int main(int argc, char *argv[])
     BSTC_IF_ARG0_EMPTY((ARG0_EMPTY_TEST), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")));
 
     //--------------------------------------------------------------------------------------------------------
+    printf("BSTC_GCD(4, 8): %i\n", (int)BSTC_GCD(4, 8));
+    #if BSTC_GCD(4, 8) == 4
+    (++num_pass, printf("    passed\n"));
+    #else
+    (++num_fail, printf("    failed\n"));
+    #endif
+    printf("BSTC_GCD(2000, 100): %i\n", (int)BSTC_GCD(2000, 100));
+    #if BSTC_GCD(2000, 100) == 100
+    (++num_pass, printf("    passed\n"));
+    #else
+    (++num_fail, printf("    failed\n"));
+    #endif
+    printf("BSTC_GCD(101, 31): %i\n", (int)BSTC_GCD(101, 31));
+    #if BSTC_GCD(101, 31) == 1
+    (++num_pass, printf("    passed\n"));
+    #else
+    (++num_fail, printf("    failed\n"));
+    #endif
+    printf("BSTC_GCD(2*3*4*5+5, 5): %i\n", (int)BSTC_GCD(2*3*4*5+5, 5));
+    #if BSTC_GCD(2*3*4*5+5, 5) == 5
+    (++num_pass, printf("    passed\n"));
+    #else
+    (++num_fail, printf("    failed\n"));
+    #endif
+    printf("BSTC_GCD(2746409537, 411147833): %i\n", (int)BSTC_GCD(2746409537, 411147833));
+    #if BSTC_GCD(2746409537, 411147833) == 1
+    (++num_pass, printf("    passed\n"));
+    #else
+    (++num_fail, printf("    failed\n"));
+    #endif
+
+    //--------------------------------------------------------------------------------------------------------
     printf("-----------------------------\n");
     printf("     pass     |     fail     \n");
     printf("     %04i     |     %04i     \n", num_pass, num_fail);

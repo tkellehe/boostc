@@ -150,3 +150,5 @@ The following are macros provided to assist with creating the _boostc_ library.
  * `BSTC_GET_ARG[0-101](...)` : Gets the `Nth` argument provided.
  * `BSTC_CONST_ADD1(N)` : Adds one to a literal in `[0-100]`.
  * `BSTC_CONST_SUB1(N)` : Subs one to a literal in `[1-101]`.
+ * `BSTC_GCD(T, a, b)` : Compile time produces the GCD of two contants based on the type provided.
+ * `BSTC_LCM(T, a, b)` : Compile time produces the LCM of two contants based on the type provided.

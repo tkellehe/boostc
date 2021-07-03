@@ -256,4 +256,51 @@
 /// \}
 
 
+/** Compile time GCD and LCM.
+ * Based on: https://stackoverflow.com/a/76746/5407843
+ * 32bit numbers could require up to 45 steps.
+ * VISUALC runs out of heap around 8. In order to get 13 steps, the macro is already embedded in itself.
+ * 
+ * # define BSTC_GCD(a, b) (((a) >= (b)) * BSTC_DTL_GCD_1(a, b) + ((a) < (b)) * BSTC_DTL_GCD_1(b, a))
+ * # define BSTC_DTL_GCD_1(a, b) (((((b) == 0))*(a)) + ((b) != 0) * BSTC_DTL_GCD_2((b), (a) % ((b) + ((b) == 0))))
+ * # define BSTC_DTL_GCD_2(a, b) (((((b) == 0))*(a)) + ((b) != 0) * BSTC_DTL_GCD_N((b), (a) % ((b) + ((b) == 0))))
+ * # define BSTC_DTL_GCD_N(a, b) (a)
+ */
+/// \{
+#ifndef BSTC_GCD
+# define BSTC_GCD(a, b) (((a) >= (b)) * BSTC_DTL_GCD_1(a, b) + ((a) < (b)) * BSTC_DTL_GCD_1(b, a))
+# define BSTC_DTL_GCD_1(a, b) (\
+    ((((b) == 0))*(a)) + ((b) != 0) * \
+    ((((((a) % ((b) + ((b) == 0))) == 0))*(b)) + (((a) % ((b) + ((b) == 0))) != 0) * BSTC_DTL_GCD_2(((a) % ((b) + ((b) == 0))), ((b) % (((a) % ((b) + ((b) == 0))) + (((a) % ((b) + ((b) == 0))) == 0)))))\
+    )
+# define BSTC_DTL_GCD_2(a, b) (\
+    ((((b) == 0))*(a)) + ((b) != 0) * \
+    ((((((a) % ((b) + ((b) == 0))) == 0))*(b)) + (((a) % ((b) + ((b) == 0))) != 0) * BSTC_DTL_GCD_3(((a) % ((b) + ((b) == 0))), ((b) % (((a) % ((b) + ((b) == 0))) + (((a) % ((b) + ((b) == 0))) == 0)))))\
+    )
+# define BSTC_DTL_GCD_3(a, b) (\
+    ((((b) == 0))*(a)) + ((b) != 0) * \
+    ((((((a) % ((b) + ((b) == 0))) == 0))*(b)) + (((a) % ((b) + ((b) == 0))) != 0) * BSTC_DTL_GCD_4(((a) % ((b) + ((b) == 0))), ((b) % (((a) % ((b) + ((b) == 0))) + (((a) % ((b) + ((b) == 0))) == 0)))))\
+    )
+# define BSTC_DTL_GCD_4(a, b) (\
+    ((((b) == 0))*(a)) + ((b) != 0) * \
+    ((((((a) % ((b) + ((b) == 0))) == 0))*(b)) + (((a) % ((b) + ((b) == 0))) != 0) * BSTC_DTL_GCD_5(((a) % ((b) + ((b) == 0))), ((b) % (((a) % ((b) + ((b) == 0))) + (((a) % ((b) + ((b) == 0))) == 0)))))\
+    )
+# define BSTC_DTL_GCD_5(a, b) (\
+    ((((b) == 0))*(a)) + ((b) != 0) * \
+    ((((((a) % ((b) + ((b) == 0))) == 0))*(b)) + (((a) % ((b) + ((b) == 0))) != 0) * BSTC_DTL_GCD_6(((a) % ((b) + ((b) == 0))), ((b) % (((a) % ((b) + ((b) == 0))) + (((a) % ((b) + ((b) == 0))) == 0)))))\
+    )
+# define BSTC_DTL_GCD_6(a, b) (\
+    ((((b) == 0))*(a)) + ((b) != 0) * \
+    ((((((a) % ((b) + ((b) == 0))) == 0))*(b)) + (((a) % ((b) + ((b) == 0))) != 0) * BSTC_DTL_GCD_7(((a) % ((b) + ((b) == 0))), ((b) % (((a) % ((b) + ((b) == 0))) + (((a) % ((b) + ((b) == 0))) == 0)))))\
+    )
+# define BSTC_DTL_GCD_7(a, b) (a)
+#endif
+
+
+#ifndef BSTC_LCM
+# define BSTC_LCM(a,b) (((a)*(b))/BSTC_GCD(a,b))
+#endif
+/// \}
+
+
 #endif // BOOSTC__CONFIG_H
