@@ -25,12 +25,12 @@ int main(int argc, char *argv[])
     #define two_thirds bstc_ratio(2, 3)
     #define one_sixth bstc_ratio(1, 6)
 
-    #define add bstc_ratio_reduce(bstc_ratio_add(one_sixth, one_half))
-    #define div bstc_ratio_reduce(bstc_ratio_div(two_thirds, two))
-    #define mul bstc_ratio_reduce(bstc_ratio_mul(two_thirds, one_half))
-    #define sub bstc_ratio_reduce(bstc_ratio_sub(two_thirds, one_sixth))
+    #define add bstc_ratio_reduce4(bstc_ratio_add(one_sixth, one_half))
+    #define div bstc_ratio_reduce4(bstc_ratio_div(two_thirds, two))
+    #define mul bstc_ratio_reduce4(bstc_ratio_mul(two_thirds, one_half))
+    #define sub bstc_ratio_reduce4(bstc_ratio_sub(two_thirds, one_sixth))
 
-    #define centi bstc_ratio_reduce(bstc_centi)
+    #define centi bstc_ratio_reduce4(bstc_centi)
     
     //--------------------------------------------------------------------------------------------------------
     printf("one_half   => %" bstc_priratio "/%" bstc_priratio "\n", bstc_ratio_num(one_half), bstc_ratio_den(one_half));
@@ -166,7 +166,7 @@ int main(int argc, char *argv[])
     #endif
     
     //--------------------------------------------------------------------------------------------------------
-    printf("bstc_ratio_reduce(bstc_centi): %" bstc_priratio "/%" bstc_priratio "\n", bstc_ratio_num(centi), bstc_ratio_den(centi));
+    printf("bstc_ratio_reduce4(bstc_centi): %" bstc_priratio "/%" bstc_priratio "\n", bstc_ratio_num(centi), bstc_ratio_den(centi));
     #if bstc_ratio_eq(centi, bstc_centi)
     {
         ++num_pass;

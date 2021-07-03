@@ -265,40 +265,123 @@
  * # define BSTC_DTL_GCD_1(a, b) (((((b) == 0))*(a)) + ((b) != 0) * BSTC_DTL_GCD_2((b), (a) % ((b) + ((b) == 0))))
  * # define BSTC_DTL_GCD_2(a, b) (((((b) == 0))*(a)) + ((b) != 0) * BSTC_DTL_GCD_N((b), (a) % ((b) + ((b) == 0))))
  * # define BSTC_DTL_GCD_N(a, b) (a)
+ * 
+ * # define BSTC_GCD(a, b) (((a) >= (b)) ? BSTC_DTL_GCD_1(a, b) : BSTC_DTL_GCD_1(b, a))
+ * # define BSTC_DTL_GCD_1(a, b) (((b) == 0) ? (a) : (BSTC_DTL_GCD_2((b), (a) % ((b) + ((b) == 0))))
+ * # define BSTC_DTL_GCD_2(a, b) (((b) == 0) ? (a) : (BSTC_DTL_GCD_N((b), (a) % ((b) + ((b) == 0))))
+ * # define BSTC_DTL_GCD_N(a, b) (((b) == 0) ? (a) : (b))
  */
 /// \{
 #ifndef BSTC_GCD
-# define BSTC_GCD(a, b) (((a) >= (b)) * BSTC_DTL_GCD_1(a, b) + ((a) < (b)) * BSTC_DTL_GCD_1(b, a))
-# define BSTC_DTL_GCD_1(a, b) (\
-    ((((b) == 0))*(a)) + ((b) != 0) * \
-    ((((((a) % ((b) + ((b) == 0))) == 0))*(b)) + (((a) % ((b) + ((b) == 0))) != 0) * BSTC_DTL_GCD_2(((a) % ((b) + ((b) == 0))), ((b) % (((a) % ((b) + ((b) == 0))) + (((a) % ((b) + ((b) == 0))) == 0)))))\
+# ifdef BSTC_COMPILER_VISUALC
+#  define BSTC_GCD(a, b) BSTC_DTL_GCD(BSTC_DTL_GCD_12, a, b)
+# else
+#  define BSTC_GCD(a, b) BSTC_DTL_GCD(BSTC_DTL_GCD_16, a, b)
+# endif
+# define BSTC_DTL_GCD(S, a, b) (((a) >= (b)) ? S(a, b) : S(b, a))
+# define BSTC_DTL_GCD_16(a, b) (\
+    ((b) == 0) ? (a) :\
+    ((((((a) % ((b) + ((b) == 0))) == 0))*(b)) + (((a) % ((b) + ((b) == 0))) != 0) * BSTC_DTL_GCD_14(((a) % ((b) + ((b) == 0))), ((b) % (((a) % ((b) + ((b) == 0))) + (((a) % ((b) + ((b) == 0))) == 0)))))\
     )
-# define BSTC_DTL_GCD_2(a, b) (\
-    ((((b) == 0))*(a)) + ((b) != 0) * \
-    ((((((a) % ((b) + ((b) == 0))) == 0))*(b)) + (((a) % ((b) + ((b) == 0))) != 0) * BSTC_DTL_GCD_3(((a) % ((b) + ((b) == 0))), ((b) % (((a) % ((b) + ((b) == 0))) + (((a) % ((b) + ((b) == 0))) == 0)))))\
+# define BSTC_DTL_GCD_14(a, b) (\
+    ((b) == 0) ? (a) :\
+    ((((((a) % ((b) + ((b) == 0))) == 0))*(b)) + (((a) % ((b) + ((b) == 0))) != 0) * BSTC_DTL_GCD_12(((a) % ((b) + ((b) == 0))), ((b) % (((a) % ((b) + ((b) == 0))) + (((a) % ((b) + ((b) == 0))) == 0)))))\
     )
-# define BSTC_DTL_GCD_3(a, b) (\
-    ((((b) == 0))*(a)) + ((b) != 0) * \
+# define BSTC_DTL_GCD_12(a, b) (\
+    ((b) == 0) ? (a) :\
+    ((((((a) % ((b) + ((b) == 0))) == 0))*(b)) + (((a) % ((b) + ((b) == 0))) != 0) * BSTC_DTL_GCD_10(((a) % ((b) + ((b) == 0))), ((b) % (((a) % ((b) + ((b) == 0))) + (((a) % ((b) + ((b) == 0))) == 0)))))\
+    )
+# define BSTC_DTL_GCD_10(a, b) (\
+    ((b) == 0) ? (a) :\
+    ((((((a) % ((b) + ((b) == 0))) == 0))*(b)) + (((a) % ((b) + ((b) == 0))) != 0) * BSTC_DTL_GCD_8(((a) % ((b) + ((b) == 0))), ((b) % (((a) % ((b) + ((b) == 0))) + (((a) % ((b) + ((b) == 0))) == 0)))))\
+    )
+# define BSTC_DTL_GCD_8(a, b) (\
+    ((b) == 0) ? (a) :\
+    ((((((a) % ((b) + ((b) == 0))) == 0))*(b)) + (((a) % ((b) + ((b) == 0))) != 0) * BSTC_DTL_GCD_6(((a) % ((b) + ((b) == 0))), ((b) % (((a) % ((b) + ((b) == 0))) + (((a) % ((b) + ((b) == 0))) == 0)))))\
+    )
+# define BSTC_DTL_GCD_6(a, b) (\
+    ((b) == 0) ? (a) :\
     ((((((a) % ((b) + ((b) == 0))) == 0))*(b)) + (((a) % ((b) + ((b) == 0))) != 0) * BSTC_DTL_GCD_4(((a) % ((b) + ((b) == 0))), ((b) % (((a) % ((b) + ((b) == 0))) + (((a) % ((b) + ((b) == 0))) == 0)))))\
     )
 # define BSTC_DTL_GCD_4(a, b) (\
-    ((((b) == 0))*(a)) + ((b) != 0) * \
-    ((((((a) % ((b) + ((b) == 0))) == 0))*(b)) + (((a) % ((b) + ((b) == 0))) != 0) * BSTC_DTL_GCD_5(((a) % ((b) + ((b) == 0))), ((b) % (((a) % ((b) + ((b) == 0))) + (((a) % ((b) + ((b) == 0))) == 0)))))\
+    ((b) == 0) ? (a) :\
+    ((((((a) % ((b) + ((b) == 0))) == 0))*(b)) + (((a) % ((b) + ((b) == 0))) != 0) * BSTC_DTL_GCD_2(((a) % ((b) + ((b) == 0))), ((b) % (((a) % ((b) + ((b) == 0))) + (((a) % ((b) + ((b) == 0))) == 0)))))\
     )
-# define BSTC_DTL_GCD_5(a, b) (\
+# define BSTC_DTL_GCD_2(a, b) (\
+    ((b) == 0) ? (a) :\
+    ((((((a) % ((b) + ((b) == 0))) == 0))*(b)) + (((a) % ((b) + ((b) == 0))) != 0) * ((a) % ((b) + ((b) == 0))))\
+    )
+/*
+# define BSTC_DTL_GCD(S, a, b) (((a) >= (b)) * S(a, b) + ((a) < (b)) * S(b, a))
+# define BSTC_DTL_GCD_16(a, b) (\
+    ((((b) == 0))*(a)) + ((b) != 0) * \
+    ((((((a) % ((b) + ((b) == 0))) == 0))*(b)) + (((a) % ((b) + ((b) == 0))) != 0) * BSTC_DTL_GCD_14(((a) % ((b) + ((b) == 0))), ((b) % (((a) % ((b) + ((b) == 0))) + (((a) % ((b) + ((b) == 0))) == 0)))))\
+    )
+# define BSTC_DTL_GCD_14(a, b) (\
+    ((((b) == 0))*(a)) + ((b) != 0) * \
+    ((((((a) % ((b) + ((b) == 0))) == 0))*(b)) + (((a) % ((b) + ((b) == 0))) != 0) * BSTC_DTL_GCD_12(((a) % ((b) + ((b) == 0))), ((b) % (((a) % ((b) + ((b) == 0))) + (((a) % ((b) + ((b) == 0))) == 0)))))\
+    )
+# define BSTC_DTL_GCD_12(a, b) (\
+    ((((b) == 0))*(a)) + ((b) != 0) * \
+    ((((((a) % ((b) + ((b) == 0))) == 0))*(b)) + (((a) % ((b) + ((b) == 0))) != 0) * BSTC_DTL_GCD_10(((a) % ((b) + ((b) == 0))), ((b) % (((a) % ((b) + ((b) == 0))) + (((a) % ((b) + ((b) == 0))) == 0)))))\
+    )
+# define BSTC_DTL_GCD_10(a, b) (\
+    ((((b) == 0))*(a)) + ((b) != 0) * \
+    ((((((a) % ((b) + ((b) == 0))) == 0))*(b)) + (((a) % ((b) + ((b) == 0))) != 0) * BSTC_DTL_GCD_8(((a) % ((b) + ((b) == 0))), ((b) % (((a) % ((b) + ((b) == 0))) + (((a) % ((b) + ((b) == 0))) == 0)))))\
+    )
+# define BSTC_DTL_GCD_8(a, b) (\
     ((((b) == 0))*(a)) + ((b) != 0) * \
     ((((((a) % ((b) + ((b) == 0))) == 0))*(b)) + (((a) % ((b) + ((b) == 0))) != 0) * BSTC_DTL_GCD_6(((a) % ((b) + ((b) == 0))), ((b) % (((a) % ((b) + ((b) == 0))) + (((a) % ((b) + ((b) == 0))) == 0)))))\
     )
 # define BSTC_DTL_GCD_6(a, b) (\
     ((((b) == 0))*(a)) + ((b) != 0) * \
-    ((((((a) % ((b) + ((b) == 0))) == 0))*(b)) + (((a) % ((b) + ((b) == 0))) != 0) * BSTC_DTL_GCD_7(((a) % ((b) + ((b) == 0))), ((b) % (((a) % ((b) + ((b) == 0))) + (((a) % ((b) + ((b) == 0))) == 0)))))\
+    ((((((a) % ((b) + ((b) == 0))) == 0))*(b)) + (((a) % ((b) + ((b) == 0))) != 0) * BSTC_DTL_GCD_4(((a) % ((b) + ((b) == 0))), ((b) % (((a) % ((b) + ((b) == 0))) + (((a) % ((b) + ((b) == 0))) == 0)))))\
     )
-# define BSTC_DTL_GCD_7(a, b) (a)
+# define BSTC_DTL_GCD_4(a, b) (\
+    ((((b) == 0))*(a)) + ((b) != 0) * \
+    ((((((a) % ((b) + ((b) == 0))) == 0))*(b)) + (((a) % ((b) + ((b) == 0))) != 0) * BSTC_DTL_GCD_2(((a) % ((b) + ((b) == 0))), ((b) % (((a) % ((b) + ((b) == 0))) + (((a) % ((b) + ((b) == 0))) == 0)))))\
+    )
+# define BSTC_DTL_GCD_2(a, b) (\
+    ((((b) == 0))*(a)) + ((b) != 0) * \
+    ((((((a) % ((b) + ((b) == 0))) == 0))*(b)) + (((a) % ((b) + ((b) == 0))) != 0) * ((a) % ((b) + ((b) == 0))))\
+    )
+*/
 #endif
 
+#ifndef BSTC_GCD_X16
+# ifndef BSTC_COMPILER_VISUALC
+#  define BSTC_GCD_X16(a, b) BSTC_DTL_GCD(BSTC_DTL_GCD_16, a, b)
+# endif
+#endif
 
-#ifndef BSTC_LCM
-# define BSTC_LCM(a,b) (((a)*(b))/BSTC_GCD(a,b))
+#ifndef BSTC_GCD_X14
+# ifndef BSTC_COMPILER_VISUALC
+#  define BSTC_GCD_X14(a, b) BSTC_DTL_GCD(BSTC_DTL_GCD_14, a, b)
+# endif
+#endif
+
+#ifndef BSTC_GCD_X12
+# define BSTC_GCD_X12(a, b) BSTC_DTL_GCD(BSTC_DTL_GCD_12, a, b)
+#endif
+
+#ifndef BSTC_GCD_X10
+# define BSTC_GCD_X10(a, b) BSTC_DTL_GCD(BSTC_DTL_GCD_10, a, b)
+#endif
+
+#ifndef BSTC_GCD_X8
+# define BSTC_GCD_X8(a, b) BSTC_DTL_GCD(BSTC_DTL_GCD_8, a, b)
+#endif
+
+#ifndef BSTC_GCD_X6
+# define BSTC_GCD_X6(a, b) BSTC_DTL_GCD(BSTC_DTL_GCD_6, a, b)
+#endif
+
+#ifndef BSTC_GCD_X4
+# define BSTC_GCD_X4(a, b) BSTC_DTL_GCD(BSTC_DTL_GCD_4, a, b)
+#endif
+
+#ifndef BSTC_GCD_X2
+# define BSTC_GCD_X2(a, b) BSTC_DTL_GCD(BSTC_DTL_GCD_2, a, b)
 #endif
 /// \}
 

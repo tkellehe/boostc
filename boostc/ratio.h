@@ -169,7 +169,33 @@
 
 /** Reduce the ratio such that it is a fully reduced fraction. */
 /// \{
-#define bstc_ratio_reduce(r) BSTC_CTUPLE2((bstc_ratio_num(r) / BSTC_GCD(bstc_ratio_num(r), bstc_ratio_den(r))), (bstc_ratio_den(r) / BSTC_GCD(bstc_ratio_num(r), bstc_ratio_den(r))))
+#ifndef bstc_ratio_reduce
+# define bstc_ratio_reduce(r) BSTC_CTUPLE2((bstc_ratio_num(r) / BSTC_GCD(bstc_ratio_num(r), bstc_ratio_den(r))), (bstc_ratio_den(r) / BSTC_GCD(bstc_ratio_num(r), bstc_ratio_den(r))))
+#endif
+#if !defined(bstc_ratio_reduce2) && defined(BSTC_GCD_X2)
+# define bstc_ratio_reduce2(r) BSTC_CTUPLE2((bstc_ratio_num(r) / BSTC_GCD_X2(bstc_ratio_num(r), bstc_ratio_den(r))), (bstc_ratio_den(r) / BSTC_GCD_X2(bstc_ratio_num(r), bstc_ratio_den(r))))
+#endif
+#if !defined(bstc_ratio_reduce4) && defined(BSTC_GCD_X4)
+# define bstc_ratio_reduce4(r) BSTC_CTUPLE2((bstc_ratio_num(r) / BSTC_GCD_X4(bstc_ratio_num(r), bstc_ratio_den(r))), (bstc_ratio_den(r) / BSTC_GCD_X4(bstc_ratio_num(r), bstc_ratio_den(r))))
+#endif
+#if !defined(bstc_ratio_reduce6) && defined(BSTC_GCD_X6)
+# define bstc_ratio_reduce6(r) BSTC_CTUPLE2((bstc_ratio_num(r) / BSTC_GCD_X6(bstc_ratio_num(r), bstc_ratio_den(r))), (bstc_ratio_den(r) / BSTC_GCD_X6(bstc_ratio_num(r), bstc_ratio_den(r))))
+#endif
+#if !defined(bstc_ratio_reduce8) && defined(BSTC_GCD_X8)
+# define bstc_ratio_reduce8(r) BSTC_CTUPLE2((bstc_ratio_num(r) / BSTC_GCD_X8(bstc_ratio_num(r), bstc_ratio_den(r))), (bstc_ratio_den(r) / BSTC_GCD_X8(bstc_ratio_num(r), bstc_ratio_den(r))))
+#endif
+#if !defined(bstc_ratio_reduce10) && defined(BSTC_GCD_X10)
+# define bstc_ratio_reduce10(r) BSTC_CTUPLE2((bstc_ratio_num(r) / BSTC_GCD_X10(bstc_ratio_num(r), bstc_ratio_den(r))), (bstc_ratio_den(r) / BSTC_GCD_X10(bstc_ratio_num(r), bstc_ratio_den(r))))
+#endif
+#if !defined(bstc_ratio_reduce12) && defined(BSTC_GCD_X12)
+# define bstc_ratio_reduce12(r) BSTC_CTUPLE2((bstc_ratio_num(r) / BSTC_GCD_X12(bstc_ratio_num(r), bstc_ratio_den(r))), (bstc_ratio_den(r) / BSTC_GCD_X12(bstc_ratio_num(r), bstc_ratio_den(r))))
+#endif
+#if !defined(bstc_ratio_reduce14) && defined(BSTC_GCD_X14)
+# define bstc_ratio_reduce14(r) BSTC_CTUPLE2((bstc_ratio_num(r) / BSTC_GCD_X14(bstc_ratio_num(r), bstc_ratio_den(r))), (bstc_ratio_den(r) / BSTC_GCD_X14(bstc_ratio_num(r), bstc_ratio_den(r))))
+#endif
+#if !defined(bstc_ratio_reduce16) && defined(BSTC_GCD_X16)
+# define bstc_ratio_reduce16(r) BSTC_CTUPLE2((bstc_ratio_num(r) / BSTC_GCD_X16(bstc_ratio_num(r), bstc_ratio_den(r))), (bstc_ratio_den(r) / BSTC_GCD_X16(bstc_ratio_num(r), bstc_ratio_den(r))))
+#endif
 /// \}
 
 

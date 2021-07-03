@@ -19,7 +19,7 @@ Then the compiler will treat it as a single function and potentially reducing th
 Provides compile time decisions to create a _C++_ like vector in _C_. Uses the _container traits_ interface.
 
 ```c
-#include <boostc/container/vector.h>
+#include <boostc/container/pod_vector.h>
 #include <stdio.h>
 
 int main(int argc, char *argv[])
@@ -28,16 +28,16 @@ int main(int argc, char *argv[])
     bstc_unused(argv);
     // Note: It is recommended to do as typedef because there is no guarantee that the types will be the same.
     //       This problem is more relevant when the underlying structure is a more complex data structure.
-    bstc_vect_t(int) vect;
+    bstc_podvect_t(int) vect;
     
     // Initialize the state of the vector.
-    bstc_vect_init(&vect);
+    bstc_podvect_init(&vect);
     
     // Default is to use stdlib allocator.
-    bstc_vect_pushb(&vect, 1);
-    bstc_vect_pushb(&vect, 12);
-    bstc_vect_pushb(&vect, 13);
-    bstc_vect_pushb(&vect, 14);
+    bstc_podvect_pushb(&vect, 1);
+    bstc_podvect_pushb(&vect, 12);
+    bstc_podvect_pushb(&vect, 13);
+    bstc_podvect_pushb(&vect, 14);
     
     // Can use basic array operator on the data.
     vect[0] += 10;
@@ -45,12 +45,12 @@ int main(int argc, char *argv[])
     // Can loop over the contents.
     {
         bstc_size_t i;
-        for(i = 0; i < bstc_vect_len(&vect); ++i)
+        for(i = 0; i < bstc_podvect_len(&vect); ++i)
             printf("%i\n", vect[i]);
     }
     
     // Deallocate any memory.
-    bstc_vect_destroy(&vect);
+    bstc_podvect_destroy(&vect);
     
     return bstc_exit_success;
 }
@@ -64,7 +64,7 @@ The default layout of this pattern can be generated using the trait vector macro
 Then you can do things like changing the default allocator.
 
 ```c
-#include <boostc/container/vector.h>
+#include <boostc/container/pod_vector.h>
 #include <stdio.h>
 
 // This is a simple allocator that is not the best, but provides as a simple example.
@@ -93,22 +93,22 @@ int main(int argc, char *argv[])
     // The type provided first is the underlying type of the vector.
     // The symbol tuple is merely indicated by parentheses and the three symbols provided.
     // They must be provided in the following order: free, malloc, realloc.
-    #define vect_int bstc_vect_traits(int, bstc_alloc_traits(bstc_alloc_nofree, bstc_alloc_wrap_malloc(my_malloc), bstc_alloc_wrap_realloc(my_realloc)))
+    #define vect_int bstc_podvect_traits(int, bstc_alloc_traits(bstc_alloc_nofree, bstc_alloc_wrap_malloc(my_malloc), bstc_alloc_wrap_realloc(my_realloc)))
 
     // You can print out what was actually encoded into the symbol tuple:
     printf("vect_int: %s\n", BSTC_TOSTRING(vect_int));
 
     // Passing it into a vector function will cause it to extract the symbol representing the type.
-    bstc_vect_t(vect_int) vect;
+    bstc_podvect_t(vect_int) vect;
     
     // Initializes the state by extracting the symbol encoded representing the init function.
-    bstc_vect_init(vect_int, &vect);
+    bstc_podvect_init(vect_int, &vect);
     
     // Uses the allocator encoded into the template to realloc and malloc the memory.
-    bstc_vect_pushb(vect_int, &vect, 1);
-    bstc_vect_pushb(vect_int, &vect, 12);
-    bstc_vect_pushb(vect_int, &vect, 13);
-    bstc_vect_pushb(vect_int, &vect, 14);
+    bstc_podvect_pushb(vect_int, &vect, 1);
+    bstc_podvect_pushb(vect_int, &vect, 12);
+    bstc_podvect_pushb(vect_int, &vect, 13);
+    bstc_podvect_pushb(vect_int, &vect, 14);
     
     // Can still use basic array operator on the data.
     vect[0] += 10;
@@ -116,12 +116,12 @@ int main(int argc, char *argv[])
     // Can loop over the contents where the template is not necessary, but recommended for consistency.
     {
         bstc_size_t i;
-        for(i = 0; i < bstc_vect_len(vect_int, &vect); ++i)
+        for(i = 0; i < bstc_podvect_len(vect_int, &vect); ++i)
             printf("%i\n", vect[i]);
     }
     
     // Deallocates any memory allocated using what is encoded in the template.
-    bstc_vect_destroy(vect_int, &vect);
+    bstc_podvect_destroy(vect_int, &vect);
     
     return bstc_exit_success;
 }
