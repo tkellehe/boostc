@@ -151,4 +151,4 @@ The following are macros provided to assist with creating the _boostc_ library.
  * `BSTC_CONST_ADD1(N)` : Adds one to a literal in `[0-100]`.
  * `BSTC_CONST_SUB1(N)` : Subs one to a literal in `[1-101]`.
  * `BSTC_GCD(a, b)` : Compile time produces the GCD of two compile time expressions.
- * `BSTC_GCD_X[2|4|6|...|14](a, b)` : Compile time produces the GCD of two compile time expressions with max steps specified in the name.
+ * `BSTC_GCD_X[2|4|6|...|16](a, b)` : Compile time produces the GCD of two compile time expressions with max steps specified in the name.

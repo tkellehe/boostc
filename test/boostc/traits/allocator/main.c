@@ -16,9 +16,9 @@ int main(int argc, char *argv[])
 
 #ifdef bstc_alloc_isa
     //--------------------------------------------------------------------------------------------------------
-    #define alloc1 bstc_alloc_pack_free(bstc_free)
-    #define alloc2 bstc_alloc_pack_malloc(bstc_malloc)
-    #define alloc3 bstc_alloc_pack_realloc(bstc_realloc)
+    #define alloc1 bstc_alloc_pack_free(bstc_alloc_mk_free(bstc_free))
+    #define alloc2 bstc_alloc_pack_malloc(bstc_alloc_mk_malloc(bstc_malloc))
+    #define alloc3 bstc_alloc_pack_realloc(bstc_alloc_mk_realloc(bstc_realloc))
     #define alloc4 bstc_ctuple(1, 2, 3, 4)
 
     //--------------------------------------------------------------------------------------------------------
@@ -37,9 +37,9 @@ int main(int argc, char *argv[])
 #endif
 
     //--------------------------------------------------------------------------------------------------------
-    #define alloc5 bstc_alloc_traits((++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
-    #define alloc6 bstc_alloc_traits((++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")))
-    #define alloc7 bstc_alloc_traits((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")))
+    #define alloc5 BSTC_CTUPLE3((++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")))
+    #define alloc6 BSTC_CTUPLE3((++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")), (++num_fail, printf("    failed\n")))
+    #define alloc7 BSTC_CTUPLE3((++num_fail, printf("    failed\n")), (++num_fail, printf("    failed\n")), (++num_pass, printf("    passed\n")))
 
     //--------------------------------------------------------------------------------------------------------
     printf("bstc_alloc_free(tpl):\n");

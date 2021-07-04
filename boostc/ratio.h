@@ -25,10 +25,10 @@
 #  define bstc_dtl_ratio_no(tpl) bstc_dtl_ratio_wrap tpl
 #  define bstc_dtl_ratio_select(tpl) bstc_ctuple_hasN(tpl, 2, bstc_dtl_ratio_no, bstc_dtl_ratio_append)
 #  define bstc_dtl_ratio(tpl) bstc_dtl_ratio_select(tpl) (tpl)
-#  define bstc_dtl_ratio_wrap(numerator, denominator) BSTC_CTUPLE2(bstc_ratio_t(numerator), bstc_ratio_t(denominator))
+#  define bstc_dtl_ratio_wrap(numerator, denominator) BSTC_CTUPLE2(bstc_ratio_c(numerator), bstc_ratio_c(denominator))
 #  define bstc_ratio(...) bstc_dtl_ratio(bstc_ctuple(__VA_ARGS__))
 # else
-#  define bstc_ratio(numerator, denominator) BSTC_CTUPLE2(bstc_ratio_t(numerator), bstc_ratio_t(denominator))
+#  define bstc_ratio(numerator, denominator) BSTC_CTUPLE2(bstc_ratio_c(numerator), bstc_ratio_c(denominator))
 # endif
 #endif
 /// \}
@@ -36,8 +36,16 @@
 
 /** Declares a constant into the proper integer type. */
 /// \{
+#ifndef bstc_ratio_c
+# define bstc_ratio_c(N) (bstc_intmax_c(N))
+#endif
+/// \}
+
+
+/** The integer type for ratio numerator and denominator. */
+/// \{
 #ifndef bstc_ratio_t
-# define bstc_ratio_t(N) (bstc_intmax_c(N))
+# define bstc_ratio_t bstc_intmax_t
 #endif
 /// \}
 
@@ -107,61 +115,61 @@
 /// \{
 #ifndef bstc_nano
 # if bstc_intmax_max >= bstc_uint32_max
-#  define bstc_nano BSTC_CTUPLE2(bstc_ratio_t(1), bstc_ratio_t(1000000000))
+#  define bstc_nano BSTC_CTUPLE2(bstc_ratio_c(1), bstc_ratio_c(1000000000))
 # endif
 #endif
 
 #ifndef bstc_micro
 # if bstc_intmax_max >= bstc_uint32_max
-#  define bstc_micro BSTC_CTUPLE2(bstc_ratio_t(1), bstc_ratio_t(1000000))
+#  define bstc_micro BSTC_CTUPLE2(bstc_ratio_c(1), bstc_ratio_c(1000000))
 # endif
 #endif
 
 #ifndef bstc_milli
 # if bstc_intmax_max >= bstc_uint16_max
-#  define bstc_milli BSTC_CTUPLE2(bstc_ratio_t(1), bstc_ratio_t(1000))
+#  define bstc_milli BSTC_CTUPLE2(bstc_ratio_c(1), bstc_ratio_c(1000))
 # endif
 #endif
 
 #ifndef bstc_centi
 # if bstc_intmax_max >= bstc_uint8_max
-#  define bstc_centi BSTC_CTUPLE2(bstc_ratio_t(1), bstc_ratio_t(100))
+#  define bstc_centi BSTC_CTUPLE2(bstc_ratio_c(1), bstc_ratio_c(100))
 # endif
 #endif
 
 #ifndef bstc_deci
 # if bstc_intmax_max >= bstc_uint8_max
-#  define bstc_deci BSTC_CTUPLE2(bstc_ratio_t(1), bstc_ratio_t(10))
+#  define bstc_deci BSTC_CTUPLE2(bstc_ratio_c(1), bstc_ratio_c(10))
 # endif
 #endif
 
 #ifndef bstc_deca
 # if bstc_intmax_max >= bstc_uint8_max
-#  define bstc_deca BSTC_CTUPLE2(bstc_ratio_t(10), bstc_ratio_t(1))
+#  define bstc_deca BSTC_CTUPLE2(bstc_ratio_c(10), bstc_ratio_c(1))
 # endif
 #endif
 
 #ifndef bstc_hecto
 # if bstc_intmax_max >= bstc_uint8_max
-#  define bstc_hecto BSTC_CTUPLE2(bstc_ratio_t(100), bstc_ratio_t(1))
+#  define bstc_hecto BSTC_CTUPLE2(bstc_ratio_c(100), bstc_ratio_c(1))
 # endif
 #endif
 
 #ifndef bstc_killo
 # if bstc_intmax_max >= bstc_uint16_max
-#  define bstc_killo BSTC_CTUPLE2(bstc_ratio_t(1000), bstc_ratio_t(1))
+#  define bstc_killo BSTC_CTUPLE2(bstc_ratio_c(1000), bstc_ratio_c(1))
 # endif
 #endif
 
 #ifndef bstc_mega
 # if bstc_intmax_max >= bstc_uint32_max
-#  define bstc_mega BSTC_CTUPLE2(bstc_ratio_t(1000000), bstc_ratio_t(1))
+#  define bstc_mega BSTC_CTUPLE2(bstc_ratio_c(1000000), bstc_ratio_c(1))
 # endif
 #endif
 
 #ifndef bstc_giga
 # if bstc_intmax_max >= bstc_uint32_max
-#  define bstc_giga BSTC_CTUPLE2(bstc_ratio_t(1000000000), bstc_ratio_t(1))
+#  define bstc_giga BSTC_CTUPLE2(bstc_ratio_c(1000000000), bstc_ratio_c(1))
 # endif
 #endif
 /// \}

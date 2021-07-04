@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     //--------------------------------------------------------------------------------------------------------
     #define vtraits1 bstc_podvect_traits(int)
     #define vtraits2 bstc_podvect_traits(float, bstc_alloc_defaults)
-    #define vtraits3 bstc_podvect_traits(float, bstc_alloc_wrap_traits(my_free, my_malloc, my_realloc))
+    #define vtraits3 bstc_podvect_traits(float, bstc_alloc_traits(my_free, my_malloc, my_realloc))
 
     //--------------------------------------------------------------------------------------------------------
     printf("bstc_podvect_traits(int): %s\n", bstc_ctuple_tostring(vtraits1));

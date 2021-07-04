@@ -11,15 +11,7 @@
 /** Ensure that the parameters are packed into a tuple. */
 /// \{
 #ifndef bstc_alloc_traits
-# define bstc_alloc_traits(f, m, r) (f, m, r)
-#endif
-/// \}
-
-
-/** Ensure that the parameters are packed into a tuple. */
-/// \{
-#ifndef bstc_alloc_wrap_traits
-# define bstc_alloc_wrap_traits(f, m, r) (bstc_alloc_wrap_free(f), bstc_alloc_wrap_malloc(m), bstc_alloc_wrap_realloc(r))
+# define bstc_alloc_traits(f, m, r) (bstc_alloc_mk_free(f), bstc_alloc_mk_malloc(m), bstc_alloc_mk_realloc(r))
 #endif
 /// \}
 
@@ -122,17 +114,17 @@
 
 /** Wrappers for non-id functions. */
 /// \{
-#ifndef bstc_alloc_wrap_free
-# define bstc_dtl_alloc_wrap_free(memory, id) BSTC_CTUPLE1(memory)
-# define bstc_alloc_wrap_free(f) BSTC_CTUPLE1(f) bstc_dtl_alloc_wrap_free
+#ifndef bstc_alloc_mk_free
+# define bstc_dtl_alloc_mk_free(memory, id) BSTC_CTUPLE1(memory)
+# define bstc_alloc_mk_free(f) BSTC_CTUPLE1(f) bstc_dtl_alloc_mk_free
 #endif
-#ifndef bstc_alloc_wrap_malloc
-# define bstc_dtl_alloc_wrap_malloc(size, id) BSTC_CTUPLE1(size)
-# define bstc_alloc_wrap_malloc(f) BSTC_CTUPLE1(f) bstc_dtl_alloc_wrap_malloc
+#ifndef bstc_alloc_mk_malloc
+# define bstc_dtl_alloc_mk_malloc(size, id) BSTC_CTUPLE1(size)
+# define bstc_alloc_mk_malloc(f) BSTC_CTUPLE1(f) bstc_dtl_alloc_mk_malloc
 #endif
-#ifndef bstc_alloc_wrap_realloc
-# define bstc_dtl_alloc_wrap_realloc(memory, size, id) BSTC_CTUPLE2(memory, size)
-# define bstc_alloc_wrap_realloc(f) BSTC_CTUPLE1(f) bstc_dtl_alloc_wrap_realloc
+#ifndef bstc_alloc_mk_realloc
+# define bstc_dtl_alloc_mk_realloc(memory, size, id) BSTC_CTUPLE2(memory, size)
+# define bstc_alloc_mk_realloc(f) BSTC_CTUPLE1(f) bstc_dtl_alloc_mk_realloc
 #endif
 /// \}
 
@@ -140,7 +132,7 @@
 /** Default allocator ctuple that use the stdlib memory managers. */
 /// \{
 #ifndef bstc_alloc_stdlib
-# define bstc_alloc_stdlib bstc_alloc_wrap_traits(bstc_free, bstc_malloc, bstc_realloc)
+# define bstc_alloc_stdlib bstc_alloc_traits(bstc_free, bstc_malloc, bstc_realloc)
 #endif
 /// \}
 
@@ -156,7 +148,7 @@
 /** Default free function that does nothing. */
 /// \{
 #ifndef bstc_alloc_nofree
-# define bstc_alloc_nofree(memory, id) ((void)0)
+# define bstc_alloc_nofree(memory) ((void)0)
 #endif
 /// \}
 
@@ -164,7 +156,7 @@
 /** Default malloc function that does nothing. */
 /// \{
 #ifndef bstc_alloc_nomalloc
-# define bstc_alloc_nomalloc(size, id) ((void*)bstc_nullptr)
+# define bstc_alloc_nomalloc(size) ((void*)bstc_nullptr)
 #endif
 /// \}
 
@@ -172,7 +164,7 @@
 /** Default realloc function that does nothing. */
 /// \{
 #ifndef bstc_alloc_norealloc
-# define bstc_alloc_norealloc(memory, size, id) ((void*)bstc_nullptr)
+# define bstc_alloc_norealloc(memory, size) ((void*)bstc_nullptr)
 #endif
 /// \}
 

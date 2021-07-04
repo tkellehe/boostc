@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
     // The type provided first is the underlying type of the vector.
     // The symbol tuple is merely indicated by parentheses and the three symbols provided.
     // They must be provided in the following order: free, malloc, realloc.
-    #define vect_int bstc_podvect_traits(int, bstc_alloc_traits(bstc_alloc_nofree, bstc_alloc_wrap_malloc(my_malloc), bstc_alloc_wrap_realloc(my_realloc)))
+    #define vect_int bstc_podvect_traits(int, bstc_alloc_traits(bstc_alloc_nofree, my_malloc, my_realloc))
 
     // You can print out what was actually encoded into the symbol tuple:
     printf("vect_int: %s\n", BSTC_TOSTRING(vect_int));
