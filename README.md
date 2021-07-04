@@ -18,8 +18,8 @@ Then the compiler will treat it as a single function and potentially reducing th
 # ratio
 
 This interface provides a compile time `std::ratio` like interface but in _C_.
-The fractions do not naturally reduce through GCD calls.
-However, there are compile time GCD calls where the number of recursion calls are required.
+The fractions do not naturally reduce.
+However, there are compile time GCD calls where the amount to recurse must be specified.
 Note that some compilers cannot support these calls because of the heap requirements or some compilers may take several minutes just to compile.
 
 ```c
