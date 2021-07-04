@@ -15,7 +15,46 @@ Since most interfaces are inlined code, this can cause binaries to be quite larg
 A simple solution is to instantiate your own function to wrap the _boostc_ functions.
 Then the compiler will treat it as a single function and potentially reducing the size of binaries.
 
+# ratio
+
+This interface provides a compile time `std::ratio` like interface but in _C_.
+The fractions do not naturally reduce through GCD calls.
+However, there are compile time GCD calls where the number of recursion calls are required.
+Note that some compilers cannot support these calls because of the heap requirements or some compilers may take several minutes just to compile.
+
+```c
+#include <boostc/ratio.h>
+#include <stdio.h>
+
+int main(int argc, char *argv[])
+{
+    bstc_unused(argc);
+    bstc_unused(argv);
+    
+    // Since they are compile time, they must be declared as a macro.
+    #define one_half bstc_ratio(1, 2)
+    #define two bstc_ratio(2)
+    #define one bstc_ratio(one)
+
+    // The values can be accessed and printed using similar "pri" string macros.
+    printf("one_half => %" bstc_priratio "/%" bstc_priimax "\n", bstc_ratio_num(one_half), bstc_ratio_den(one_half));
+    printf("two      => %" bstc_priratio "/%" bstc_priimax "\n", bstc_ratio_num(two), bstc_ratio_den(two));
+    printf("one      => %" bstc_priratio "/%" bstc_priimax "\n", bstc_ratio_num(one), bstc_ratio_den(one));
+    
+    // Can be used in a macro if-statement or a regular if-statement.
+    // Also, the reduce call has a general form `bstc_ratio_reduce` which uses way more steps than what is needed here.
+    #if bstc_ratio_eq(one, bstc_ratio_reduce2(bstc_ratio_mul(one_half, two)))
+    printf("(two * one_half) == one\n");
+    #else
+    printf("(two * one_half) != one\n");
+    #endif
+
+    return bstc_exit_success;
+}
+```
+
 # vector
+
 Provides compile time decisions to create a _C++_ like vector in _C_. Uses the _container traits_ interface.
 
 ```c
