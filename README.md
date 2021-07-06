@@ -49,6 +49,12 @@ int main(int argc, char *argv[])
     printf("(two * one_half) != one\n");
     #endif
 
+    // Note that it is not required to reduce in order to check if two ratios are equal.
+    if(bstc_ratio_eq(one, bstc_ratio_mul(one_half, two)))
+        printf("(two * one_half) == one\n");
+    else
+        printf("(two * one_half) != one\n");
+
     return bstc_exit_success;
 }
 ```
