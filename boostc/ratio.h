@@ -91,10 +91,10 @@
 /** Comparison operations at compile time. */
 /// \{
 #ifndef bstc_ratio_eq
-# define bstc_ratio_eq(r1, r2) (((bstc_ratio_num(r1)) == (bstc_ratio_num(r2))) && ((bstc_ratio_den(r1)) == (bstc_ratio_den(r2))))
+# define bstc_ratio_eq(r1, r2) (((bstc_ratio_num(r1)) * (bstc_ratio_den(r2))) == ((bstc_ratio_den(r1)) * (bstc_ratio_num(r2))))
 #endif
 #ifndef bstc_ratio_neq
-# define bstc_ratio_neq(r1, r2) (((bstc_ratio_num(r1)) != (bstc_ratio_num(r2))) || ((bstc_ratio_den(r1)) != (bstc_ratio_den(r2))))
+# define bstc_ratio_neq(r1, r2) (((bstc_ratio_num(r1)) * (bstc_ratio_den(r2))) != ((bstc_ratio_den(r1)) * (bstc_ratio_num(r2))))
 #endif
 #ifndef bstc_ratio_lt
 # define bstc_ratio_lt(r1, r2) (((bstc_ratio_num(r1)) * (bstc_ratio_den(r2))) < ((bstc_ratio_den(r1)) * (bstc_ratio_num(r2))))

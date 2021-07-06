@@ -25,10 +25,10 @@ int main(int argc, char *argv[])
     #define two_thirds bstc_ratio(2, 3)
     #define one_sixth bstc_ratio(1, 6)
 
-    #define add bstc_ratio_reduce4(bstc_ratio_add(one_sixth, one_half))
-    #define div bstc_ratio_reduce4(bstc_ratio_div(two_thirds, two))
-    #define mul bstc_ratio_reduce4(bstc_ratio_mul(two_thirds, one_half))
-    #define sub bstc_ratio_reduce4(bstc_ratio_sub(two_thirds, one_sixth))
+    #define add bstc_ratio_add(one_sixth, one_half)
+    #define div bstc_ratio_div(two_thirds, two)
+    #define mul bstc_ratio_mul(two_thirds, one_half)
+    #define sub bstc_ratio_sub(two_thirds, one_sixth)
 
     #define centi bstc_ratio_reduce4(bstc_centi)
     
@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 
     //--------------------------------------------------------------------------------------------------------
     printf("one_half: %" bstc_priratio "/%" bstc_priratio "\n", bstc_ratio_num(one_half), bstc_ratio_den(one_half));
-    #if (bstc_ratio_t(1) == bstc_ratio_num(one_half) && bstc_ratio_t(2) == bstc_ratio_den(one_half))
+    #if (bstc_ratio_c(1) == bstc_ratio_num(one_half) && bstc_ratio_c(2) == bstc_ratio_den(one_half))
     {
         ++num_pass;
         printf("    passed\n");
@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
     
     //--------------------------------------------------------------------------------------------------------
     printf("two: %" bstc_priratio "/%" bstc_priratio "\n", bstc_ratio_num(two), bstc_ratio_den(two));
-    #if (bstc_ratio_t(2) == bstc_ratio_num(two) && bstc_ratio_t(1) == bstc_ratio_den(two))
+    #if (bstc_ratio_c(2) == bstc_ratio_num(two) && bstc_ratio_c(1) == bstc_ratio_den(two))
     {
         ++num_pass;
         printf("    passed\n");
