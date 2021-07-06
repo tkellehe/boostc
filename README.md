@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
     // Since they are compile time, they must be declared as a macro.
     #define one_half bstc_ratio(1, 2)
     #define two bstc_ratio(2)
-    #define one bstc_ratio(one)
+    #define one bstc_ratio(1)
 
     // The values can be accessed and printed using similar "pri" string macros.
     printf("one_half => %" bstc_priratio "/%" bstc_priimax "\n", bstc_ratio_num(one_half), bstc_ratio_den(one_half));
