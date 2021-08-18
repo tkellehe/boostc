@@ -119,17 +119,20 @@
 # endif
 #endif
 
+
 #ifndef bstc_micro
 # if bstc_intmax_max >= bstc_uint32_max
 #  define bstc_micro BSTC_CTUPLE2(bstc_ratio_c(1), bstc_ratio_c(1000000))
 # endif
 #endif
 
+
 #ifndef bstc_milli
 # if bstc_intmax_max >= bstc_uint16_max
 #  define bstc_milli BSTC_CTUPLE2(bstc_ratio_c(1), bstc_ratio_c(1000))
 # endif
 #endif
+
 
 #ifndef bstc_centi
 # if bstc_intmax_max >= bstc_uint8_max
@@ -143,11 +146,13 @@
 # endif
 #endif
 
+
 #ifndef bstc_deca
 # if bstc_intmax_max >= bstc_uint8_max
 #  define bstc_deca BSTC_CTUPLE2(bstc_ratio_c(10), bstc_ratio_c(1))
 # endif
 #endif
+
 
 #ifndef bstc_hecto
 # if bstc_intmax_max >= bstc_uint8_max
@@ -155,17 +160,20 @@
 # endif
 #endif
 
+
 #ifndef bstc_killo
 # if bstc_intmax_max >= bstc_uint16_max
 #  define bstc_killo BSTC_CTUPLE2(bstc_ratio_c(1000), bstc_ratio_c(1))
 # endif
 #endif
 
+
 #ifndef bstc_mega
 # if bstc_intmax_max >= bstc_uint32_max
 #  define bstc_mega BSTC_CTUPLE2(bstc_ratio_c(1000000), bstc_ratio_c(1))
 # endif
 #endif
+
 
 #ifndef bstc_giga
 # if bstc_intmax_max >= bstc_uint32_max
