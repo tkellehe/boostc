@@ -66,7 +66,8 @@ int main(int argc, char *argv[])
     
         hrs = bstc_chrono_dur_cast(hrsf, bstc_chrono_ms, ms);
         printf("bstc_chrono_hrs_cnt(hrs): %f\n", (float)bstc_chrono_dur_cnt(hrsf, hrs));
-        if((0.000028 - 0.000001) <= bstc_chrono_dur_cnt(hrsf, hrs) || bstc_chrono_dur_cnt(hrsf, hrs) <= (0.000028 + 0.000001))
+        if((0.000028 - 0.000001) <= bstc_chrono_dur_cnt(hrsf, hrs) ||
+            bstc_chrono_dur_cnt(hrsf, hrs) <= (0.000028 + 0.000001))
         {
             ++num_pass;
             printf("    passed\n");
