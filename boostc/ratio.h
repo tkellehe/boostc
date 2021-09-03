@@ -114,69 +114,69 @@
 /** Constant ratio values. */
 /// \{
 #ifndef bstc_nano
-# if bstc_intmax_max >= bstc_uint32_max
+# if bstc_intmax_max >= bstc_int64_max
 #  define bstc_nano BSTC_CTUPLE2(bstc_ratio_c(1), bstc_ratio_c(1000000000))
 # endif
 #endif
 
 
 #ifndef bstc_micro
-# if bstc_intmax_max >= bstc_uint32_max
+# if bstc_intmax_max >= bstc_int32_max
 #  define bstc_micro BSTC_CTUPLE2(bstc_ratio_c(1), bstc_ratio_c(1000000))
 # endif
 #endif
 
 
 #ifndef bstc_milli
-# if bstc_intmax_max >= bstc_uint16_max
+# if bstc_intmax_max >= bstc_int16_max
 #  define bstc_milli BSTC_CTUPLE2(bstc_ratio_c(1), bstc_ratio_c(1000))
 # endif
 #endif
 
 
 #ifndef bstc_centi
-# if bstc_intmax_max >= bstc_uint8_max
+# if bstc_intmax_max >= bstc_int8_max
 #  define bstc_centi BSTC_CTUPLE2(bstc_ratio_c(1), bstc_ratio_c(100))
 # endif
 #endif
 
 #ifndef bstc_deci
-# if bstc_intmax_max >= bstc_uint8_max
+# if bstc_intmax_max >= bstc_int8_max
 #  define bstc_deci BSTC_CTUPLE2(bstc_ratio_c(1), bstc_ratio_c(10))
 # endif
 #endif
 
 
 #ifndef bstc_deca
-# if bstc_intmax_max >= bstc_uint8_max
+# if bstc_intmax_max >= bstc_int8_max
 #  define bstc_deca BSTC_CTUPLE2(bstc_ratio_c(10), bstc_ratio_c(1))
 # endif
 #endif
 
 
 #ifndef bstc_hecto
-# if bstc_intmax_max >= bstc_uint8_max
+# if bstc_intmax_max >= bstc_int8_max
 #  define bstc_hecto BSTC_CTUPLE2(bstc_ratio_c(100), bstc_ratio_c(1))
 # endif
 #endif
 
 
 #ifndef bstc_killo
-# if bstc_intmax_max >= bstc_uint16_max
+# if bstc_intmax_max >= bstc_int16_max
 #  define bstc_killo BSTC_CTUPLE2(bstc_ratio_c(1000), bstc_ratio_c(1))
 # endif
 #endif
 
 
 #ifndef bstc_mega
-# if bstc_intmax_max >= bstc_uint32_max
+# if bstc_intmax_max >= bstc_int32_max
 #  define bstc_mega BSTC_CTUPLE2(bstc_ratio_c(1000000), bstc_ratio_c(1))
 # endif
 #endif
 
 
 #ifndef bstc_giga
-# if bstc_intmax_max >= bstc_uint32_max
+# if bstc_intmax_max >= bstc_int32_max
 #  define bstc_giga BSTC_CTUPLE2(bstc_ratio_c(1000000000), bstc_ratio_c(1))
 # endif
 #endif

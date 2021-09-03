@@ -90,7 +90,28 @@
  */
 /// \{
 #ifndef bstc_chrono_dur_cast
-# define bstc_chrono_dur_cast(to_dur_tpl, dur_tpl, dur) \
+// These compilers do not properly optimize the constants, so there must be a check to reduce precision loss.
+# if defined(BSTC_COMPILER_VISUALC) || defined(BSTC_COMPILER_TCC)
+#  define bstc_chrono_dur_cast(to_dur_tpl, dur_tpl, dur) \
+    ((((bstc_ratio_den(bstc_chrono_dur_per(dur_tpl))) * (bstc_ratio_num(bstc_chrono_dur_per(to_dur_tpl)))) <= ((bstc_chrono_dur_rep(to_dur_tpl))((bstc_ratio_num(bstc_chrono_dur_per(dur_tpl))) * (bstc_ratio_den(bstc_chrono_dur_per(to_dur_tpl)))))) ?\
+        ((bstc_chrono_dur_rep(to_dur_tpl))(\
+            (\
+                ((bstc_chrono_dur_rep(to_dur_tpl))((bstc_ratio_num(bstc_chrono_dur_per(dur_tpl))) * (bstc_ratio_den(bstc_chrono_dur_per(to_dur_tpl)))))\
+                / ((bstc_ratio_den(bstc_chrono_dur_per(dur_tpl))) * (bstc_ratio_num(bstc_chrono_dur_per(to_dur_tpl))))\
+            ) * \
+            (dur)\
+        ))\
+    :\
+        ((bstc_chrono_dur_rep(to_dur_tpl))(\
+            (\
+                (dur) * \
+                ((bstc_chrono_dur_rep(to_dur_tpl))((bstc_ratio_num(bstc_chrono_dur_per(dur_tpl))) * (bstc_ratio_den(bstc_chrono_dur_per(to_dur_tpl)))))\
+            ) / \
+            ((bstc_ratio_den(bstc_chrono_dur_per(dur_tpl))) * (bstc_ratio_num(bstc_chrono_dur_per(to_dur_tpl))))\
+        ))\
+    )
+# else
+#  define bstc_chrono_dur_cast(to_dur_tpl, dur_tpl, dur) \
     ((bstc_chrono_dur_rep(to_dur_tpl))(\
         (\
             (dur) * \
@@ -98,6 +119,7 @@
         ) / \
         ((bstc_ratio_den(bstc_chrono_dur_per(dur_tpl))) * (bstc_ratio_num(bstc_chrono_dur_per(to_dur_tpl))))\
     ))
+# endif
 #endif
 /// \}
 
@@ -110,21 +132,21 @@
  */
 /// \{
 #ifndef bstc_chrono_ns
-# if bstc_intmax_max >= bstc_int32_max && defined(bstc_nano)
+# if defined(bstc_int_least64_t) && defined(bstc_nano)
 #  define bstc_chrono_ns BSTC_CTUPLE2(bstc_int_least64_t, bstc_nano)
 # endif
 #endif
 
 
 #ifndef bstc_chrono_us
-# if bstc_intmax_max >= bstc_int32_max && defined(bstc_micro)
+# if defined(bstc_int_least64_t) && defined(bstc_micro)
 #  define bstc_chrono_us BSTC_CTUPLE2(bstc_int_least64_t, bstc_micro)
 # endif
 #endif
 
 
 #ifndef bstc_chrono_ms
-# if bstc_intmax_max >= bstc_int16_max && defined(bstc_milli)
+# if defined(bstc_int_least64_t) && defined(bstc_milli)
 #  define bstc_chrono_ms BSTC_CTUPLE2(bstc_int_least64_t, bstc_milli)
 # endif
 #endif

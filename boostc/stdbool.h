@@ -14,7 +14,7 @@
 // The `stdbool.h` was added in C99 before C++11 which is when it was added to C++.
 #ifdef BSTC_LEAST_CPP11
 # include <cstdbool>
-#elif BSTC_LEAST_C99
+#elif defined(BSTC_LEAST_C99)
 # include <stdbool.h>
 #endif
 
@@ -43,9 +43,16 @@
 #   endif
 #   define __bool_true_false_are_defined 1
 #  endif
-# else
+# elif !(defined(__bool_true_false_are_defined) && __bool_true_false_are_defined == 1)
 // This most likely will need to be resolved in the config area.
-#  error "BOOSTC system does not support bool."
+#  ifdef BSTC_COMPILER_VISUALC
+#   define bool char
+#   define false 0
+#   define true 1
+#   define __bool_true_false_are_defined 1
+#  else
+#   error "BOOSTC system does not support bool."
+#  endif
 # endif
 #endif
 /// \}
