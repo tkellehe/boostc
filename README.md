@@ -15,6 +15,35 @@ Since most interfaces are inlined code, this can cause binaries to be quite larg
 A simple solution is to instantiate your own function to wrap the _boostc_ functions.
 Then the compiler will treat it as a single function and potentially reducing the size of binaries.
 
+# system_clock
+
+This interface provides a `std::chrono::system_clock` like interface but in _C_.
+The `std::chrono::time_point<std::chrono::system_clock>` interface is provided because `bstc_chrono_dur` provides the same level of control.
+
+```c
+#include <boostc/chrono/system_clock.h>
+#include <boostc/inttypes.h>
+#include <boostc/stdlib.h>
+
+#include <stdio.h>
+
+int main(int argc, char *argv[])
+{
+    bstc_unused(argc);
+    bstc_unused(argv);
+    
+    bstc_chrono_sysclk_dur_t tp;
+    bstc_time_t tt;
+
+    tp = bstc_chrono_sysclk_now();
+    tt = bstc_chrono_sysclk_to_time_t(tp);
+
+    printf("%s\n", bstc_ctime(&tt));
+
+    return bstc_exit_success;
+}
+```
+
 # ratio
 
 This interface provides a compile time `std::ratio` like interface but in _C_.
@@ -23,7 +52,10 @@ However, there are compile time GCD calls where the amount to recurse must be sp
 Note that some compilers cannot support these calls because of the heap requirements or some compilers may take several minutes just to compile.
 
 ```c
+#include <boostc/inttypes.h>
 #include <boostc/ratio.h>
+#include <boostc/stdlib.h>
+
 #include <stdio.h>
 
 int main(int argc, char *argv[])
