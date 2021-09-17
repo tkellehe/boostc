@@ -9,7 +9,8 @@
 
 #include <boostc/config.h>
 #include <boostc/chrono/duration.h>
-#include <boostc/chrono/steady_clock.h>
+#include <boostc/chrono/high_resolution_clock.h>
+#include <boostc/chrono/system_clock.h>
 #include <boostc/chrono/system_clock.h>
 
 

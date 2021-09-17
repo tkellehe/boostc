@@ -22,6 +22,7 @@
 // If we do not have bstc_clock_monotonic, we cannot build the POSIX version.
 #if !defined(BSTC_OSAPI_POSIX) || defined(bstc_clock_monotonic)
 
+
 /// The duration type for the steady clock.
 /// Instead of having a time_point type, it was simpler to just have it be the same as the duration type.
 /// \{
@@ -49,14 +50,14 @@
 /// \}
 
 
-/// Gets the current steady time.
+/// Gets the current time that has moved in a steady manor.
 /// 
 /// Logic pulled from:
 ///       boost/chrono/detail/inlined/mac/chrono.hpp (currently not implemented)
 ///       boost/chrono/detail/inlined/posix/chrono.hpp
 ///       boost/chrono/detail/inlined/win/chrono.hpp
 /// 
-/// \return Returns a steady clock duration representing the current time.
+/// \return Returns a steady clock duration representing the current time passed.
 /// \{
 #ifndef bstc_chrono_stdyclk_now
 # ifdef BSTC_OSAPI_WINDOWS
