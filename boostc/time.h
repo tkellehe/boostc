@@ -35,6 +35,11 @@
 #endif
 
 
+#if defined(BSTC_OSAPI_POSIX) && defined(BSTC_PLATFORM_MACOS)
+# include <sys/time.h>
+#endif
+
+
 #if defined(CLOCK_MONOTONIC) && !defined(bstc_clock_monotonic)
 # define bstc_clock_monotonic CLOCK_MONOTONIC
 #endif

@@ -87,20 +87,14 @@ static bstc_inline bstc_chrono_sysclk_dur_t _bstc_chrono_sysclk_from_time_t(bstc
 #ifndef bstc_chrono_sysclk_now
 static bstc_inline bstc_chrono_sysclk_dur_t _bstc_chrono_sysclk_now()
 {
-# ifdef BSTC_OSAPI_WINDOWS
+# if defined(BSTC_OSAPI_WINDOWS) || (defined(BSTC_OSAPI_POSIX) && !defined(BSTC_PLATFORM_MACOS))
     struct bstc_timespec ts;
     bstc_timespec_get(&ts, bstc_time_utc);
     return ((bstc_int_least64_t)ts.tv_sec) * 1000000000 + (bstc_int_least64_t)ts.tv_nsec;
-# elif defined BSTC_OSAPI_POSIX
-#  ifdef BSTC_PLATFORM_MACOS
+# else
     timeval tv;
     gettimeofday(&tv, 0);
     return (((bstc_int_least64_t)tv.tv_sec) * 1000000000) + ((bstc_int_least64_t)(tv.tv_usec) * 1000);
-#  else
-    struct bstc_timespec ts;
-    bstc_timespec_get(&ts, bstc_time_utc);
-    return ((bstc_int_least64_t)ts.tv_sec) * 1000000000 + (bstc_int_least64_t)ts.tv_nsec;
-#  endif
 # endif
 }
 # define bstc_chrono_sysclk_now _bstc_chrono_sysclk_now

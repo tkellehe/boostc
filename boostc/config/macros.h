@@ -864,6 +864,7 @@
 
 
 /* Provides a helpers for non-variadic macros to create a ctuple of a specified size. */
+/// {
 #define BSTC_CTUPLE0() ()
 #define BSTC_CTUPLE1(_0) (_0)
 #define BSTC_CTUPLE2(_0, _1) (_0, _1)
