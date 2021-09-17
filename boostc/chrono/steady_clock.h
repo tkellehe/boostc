@@ -50,7 +50,7 @@
 /// Gets the current steady time.
 /// 
 /// Logic pulled from:
-///       boost/chrono/detail/inlined/mac/chrono.hpp
+///       boost/chrono/detail/inlined/mac/chrono.hpp (currently not implemented)
 ///       boost/chrono/detail/inlined/posix/chrono.hpp
 ///       boost/chrono/detail/inlined/win/chrono.hpp
 /// 
