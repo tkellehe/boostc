@@ -15,6 +15,39 @@ Since most interfaces are inlined code, this can cause binaries to be quite larg
 A simple solution is to instantiate your own function to wrap the _boostc_ functions.
 Then the compiler will treat it as a single function and potentially reducing the size of binaries.
 
+# high_resolution_clock
+
+This interface provides a `std::chrono::high_resolution_clock` like interface but in _C_.
+The `std::chrono::time_point<std::chrono::high_resolution_clock>` interface is provided because `bstc_chrono_dur` provides the same level of control.
+
+```c
+#include <boostc/chrono.h>
+#include <boostc/inttypes.h>
+#include <boostc/stdlib.h>
+
+#include <stdio.h>
+
+int main(int argc, char *argv[])
+{
+    bstc_unused(argc);
+    bstc_unused(argv);
+    
+    bstc_chrono_hiresclk_dur_t start;
+    bstc_chrono_hiresclk_dur_t end;
+    bstc_chrono_ns_t ns;
+
+    start = bstc_chrono_hiresclk_now();
+    print("...\n");
+    end = bstc_chrono_hiresclk_now();
+
+    ns = bstc_chrono_dur_cast(bstc_chrono_ns, bstc_chrono_hiresclk_dur, (end - start));
+
+    printf("%" bstc_priimax "\n", (bstc_intmax_t)bstc_chrono_ns_cnt(ns));
+
+    return bstc_exit_success;
+}
+```
+
 # system_clock
 
 This interface provides a `std::chrono::system_clock` like interface but in _C_.
@@ -22,7 +55,6 @@ The `std::chrono::time_point<std::chrono::system_clock>` interface is provided b
 
 ```c
 #include <boostc/chrono/system_clock.h>
-#include <boostc/inttypes.h>
 #include <boostc/stdlib.h>
 
 #include <stdio.h>
