@@ -16,8 +16,9 @@ int main(int argc, char *argv[])
     int num_fail = 0;
 
     //--------------------------------------------------------------------------------------------------------
+#ifdef bstc_chrono_stdyclk_isstdy
     {
-        printf("bstc_chrono_stdyclk_isstdy:");
+        printf("bstc_chrono_stdyclk_isstdy: %s\n", bstc_chrono_stdyclk_isstdy ? "true" : "false");
         if(bstc_chrono_stdyclk_isstdy)
         {
             ++num_pass;
@@ -29,8 +30,10 @@ int main(int argc, char *argv[])
             printf("    failed\n");
         }
     }
+#endif
 
     //--------------------------------------------------------------------------------------------------------
+#if defined(bstc_chrono_stdyclk_now) && defined(bstc_chrono_stdyclk_dur_t) && defined(bstc_chrono_stdyclk_dur_cnt)
     {
         bstc_chrono_stdyclk_dur_t tp;
         bstc_chrono_ns_t ns;
@@ -54,6 +57,7 @@ int main(int argc, char *argv[])
             printf("    failed\n");
         }
     }
+#endif
 
     //--------------------------------------------------------------------------------------------------------
     printf("-----------------------------\n");

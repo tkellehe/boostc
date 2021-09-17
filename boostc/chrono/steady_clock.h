@@ -19,6 +19,8 @@
 #endif
 
 
+// If we do not have bstc_clock_monotonic, we cannot build the POSIX version.
+#if !defined(BSTC_OSAPI_POSIX) || defined(bstc_clock_monotonic)
 
 /// The duration type for the steady clock.
 /// Instead of having a time_point type, it was simpler to just have it be the same as the duration type.
@@ -112,6 +114,9 @@ static bstc_inline bstc_chrono_stdyclk_dur_t _bstc_chrono_stdyclk_now()
 # define bstc_chrono_stdyclk_now _bstc_chrono_stdyclk_now
 #endif
 /// \}
+
+
+#endif // Has Steady Clock
 
 
 #endif // BOOSTC__CHRONO__STEADY_CLOCK_H

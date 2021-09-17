@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 
     //--------------------------------------------------------------------------------------------------------
     {
-        printf("bstc_chrono_sysclk_isstdy:");
+        printf("bstc_chrono_sysclk_isstdy: %s\n", bstc_chrono_sysclk_isstdy ? "true" : "false");
         if(!bstc_chrono_sysclk_isstdy)
         {
             ++num_pass;

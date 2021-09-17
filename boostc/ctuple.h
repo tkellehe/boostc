@@ -8,7 +8,7 @@
 
 
 #include <boostc/config.h>
-#include <boostc/detail/ctuple.h>
+#include <boostc/ctuple/detail.h>
 
 
 /** Resolves the symbols in a ctuple and converts to a string. */
