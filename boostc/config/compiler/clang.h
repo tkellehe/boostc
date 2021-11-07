@@ -15,16 +15,26 @@
 /// \}
 
 
+/* Add clang's builtin detector. */
+/// \{
+#ifndef BSTC_CLANG_HAS_BUILTIN
+# if defined(__has_builtin)
+#  define BSTC_CLANG_HAS_BUILTIN(x) __has_builtin(x)
+# else
+#  define BSTC_CLANG_HAS_BUILTIN(x) 0
+# endif
+#endif
+/// \}
+
+
 /* Add branch predictors. */
 /// \{
-#if defined(__has_builtin)
-# if __has_builtin(__builtin_expect)
-#  ifndef BSTC_LIKELY
-#   define BSTC_LIKELY(x) __builtin_expect(x, 1)
-#  endif
-#  ifndef BSTC_UNLIKELY
-#   define BSTC_UNLIKELY(x) __builtin_expect(x, 0)
-#  endif
+#if BSTC_CLANG_HAS_BUILTIN(__builtin_expect)
+# ifndef BSTC_LIKELY
+#  define BSTC_LIKELY(x) __builtin_expect(x, 1)
+# endif
+# ifndef BSTC_UNLIKELY
+#  define BSTC_UNLIKELY(x) __builtin_expect(x, 0)
 # endif
 #endif
 /// \}

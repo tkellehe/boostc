@@ -46,6 +46,14 @@
 /// \}
 
 
+/* Add clang's builtin detector. */
+/// \{
+#ifndef BSTC_CLANG_HAS_BUILTIN
+# define BSTC_CLANG_HAS_BUILTIN(x) 0
+#endif
+/// \}
+
+
 /* Ensure macros are defined */
 /// \{
 #if !defined(BSTC_HAS_VARIADIC_MACROS) && !defined(BSTC_NO_VARIADIC_MACROS)

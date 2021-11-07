@@ -32,23 +32,23 @@
 #endif
 
 
-/// An enumeration type representing the different endianness that are supported.
+/* An enumeration type representing the different endianness that are supported. */
 /// \{
 #ifndef bstc_endian_order
-# ifdef BSTC_ENDIAN_ORDER_NATIVE
 enum _bstc_endian_order
 {
     _bstc_endian_order_little = BSTC_ENDIAN_ORDER_LITTLE,
     _bstc_endian_order_big = BSTC_ENDIAN_ORDER_BIG,
-    _bstc_endian_order_pdp = BSTC_ENDIAN_ORDER_PDP,
-    _bstc_endian_order_native = BSTC_ENDIAN_ORDER_NATIVE
-};
-#  define bstc_endian_order_t enum _bstc_endian_order
-#  define bstc_endian_order_little _bstc_endian_order_little
-#  define bstc_endian_order_big _bstc_endian_order_big
-#  define bstc_endian_order_pdp _bstc_endian_order_pdp
+    _bstc_endian_order_pdp = BSTC_ENDIAN_ORDER_PDP
+# ifdef BSTC_ENDIAN_ORDER_NATIVE
+    , _bstc_endian_order_native = BSTC_ENDIAN_ORDER_NATIVE
 #  define bstc_endian_order_native _bstc_endian_order_native
 # endif
+};
+# define bstc_endian_order_t enum _bstc_endian_order
+# define bstc_endian_order_little _bstc_endian_order_little
+# define bstc_endian_order_big _bstc_endian_order_big
+# define bstc_endian_order_pdp _bstc_endian_order_pdp
 #endif
 /// \}
 
