@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
 # system_clock
 
 This interface provides a `std::chrono::system_clock` like interface but in _C_.
-The `std::chrono::time_point<std::chrono::system_clock>` interface is provided because `bstc_chrono_dur` provides the same level of control.
+The `std::chrono::time_point<std::chrono::system_clock>` interface is not provided because `bstc_chrono_dur` provides the same level of control.
 
 ```c
 #include <boostc/chrono/system_clock.h>
