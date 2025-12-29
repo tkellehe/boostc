@@ -10,7 +10,7 @@
 int num_pass = 0;
 int num_fail = 0;
 
-bstc_noreturn void stop_now()
+bstc_noreturn void stop_now(void)
 {
     num_pass += 1;
     printf("-----------------------------\n");

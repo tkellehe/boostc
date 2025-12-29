@@ -111,7 +111,7 @@
 
 
 #if !defined(BSTC_INTPTR_NBITS)
-# if defined(__alpha__) || defined(__ia64__) || defined(__x86_64__) || defined(_WIN64) || defined(__ppc64__)
+# if defined(__alpha__) || defined(__ia64__) || defined(__x86_64__) || defined(_WIN64) || defined(__ppc64__) || defined(__aarch64__) || defined(__arm64__) || defined(__ARM64__) || defined(__LP64__)
 #  define BSTC_INTPTR_NBITS 64
 # elif defined(__WATCOMC__) || defined(__TURBOC__)
 #  if defined(__TINY__) || defined(__SMALL__) || defined(__MEDIUM__)

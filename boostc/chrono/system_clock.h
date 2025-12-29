@@ -85,7 +85,7 @@ static bstc_inline bstc_chrono_sysclk_dur_t _bstc_chrono_sysclk_from_time_t(bstc
 /// \return Returns a system clock duration representing the current time.
 /// \{
 #ifndef bstc_chrono_sysclk_now
-static bstc_inline bstc_chrono_sysclk_dur_t _bstc_chrono_sysclk_now()
+static bstc_inline bstc_chrono_sysclk_dur_t _bstc_chrono_sysclk_now(void)
 {
 # if defined(BSTC_OSAPI_WINDOWS) || (defined(BSTC_OSAPI_POSIX) && !defined(BSTC_PLATFORM_MACOS))
     struct bstc_timespec ts;

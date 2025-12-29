@@ -61,7 +61,7 @@
 /// \{
 #ifndef bstc_chrono_stdyclk_now
 # ifdef BSTC_OSAPI_WINDOWS
-static bstc_inline double _bstc_get_ns_per_tic()
+static bstc_inline double _bstc_get_ns_per_tic(void)
 {
     LARGE_INTEGER frequency;
     if(!QueryPerformanceFrequency(&frequency)) return 0.0L;
@@ -69,7 +69,7 @@ static bstc_inline double _bstc_get_ns_per_tic()
 }
 # endif
 
-static bstc_inline bstc_chrono_stdyclk_dur_t _bstc_chrono_stdyclk_now()
+static bstc_inline bstc_chrono_stdyclk_dur_t _bstc_chrono_stdyclk_now(void)
 {
 # ifdef BSTC_OSAPI_WINDOWS
     LARGE_INTEGER performance_counter;
@@ -101,13 +101,16 @@ static bstc_inline bstc_chrono_stdyclk_dur_t _bstc_chrono_stdyclk_now()
     //   can lead to a timespec of zero without an error; was reported
     //   to the cygwin mailing list and can be removed once fixed
     do {
-#  endif
         if(clock_gettime(bstc_clock_monotonic, &ts))
         {
-            break;
+            return 0;
         }
-#  if defined(BSTC_PLATFORM_CYGWIN)
     } while(ts.tv_sec == 0 && ts.tv_nsec == 0);
+#  else
+    if(clock_gettime(bstc_clock_monotonic, &ts))
+    {
+        return 0;
+    }
 #  endif
     return (((bstc_int_least64_t)ts.tv_sec) * 1000000000) + ((bstc_int_least64_t)(ts.tv_nsec));
 # endif
