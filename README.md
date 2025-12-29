@@ -2,23 +2,23 @@
 
 # [boostc](https://tkellehe.github.io/boostc/)
 A library like [Boost _C++_](https://github.com/boostorg), but for C.
-Provides compile time decisions similar to templating in a simple API.
+Provides compile-time decisions similar to templating in a simple API.
 Also has polyfills for C standards. Documentation can be viewed [here](https://tkellehe.github.io/boostc/docs/).
 
-### Compile Time Requirement
-Currently, the goal is to write all of the library as compile time insertions of the code.
+## Compile-time Goal
+Currently, the goal is to implement the library as compile-time code insertions.
 This allows more flexibility and makes it closer to _Boost C++_.
-Another benefit is that you do not need to build this library.
+Another benefit is that you do not need to build the library.
 
-### Insertion Code Bloat
-Since most interfaces are inlined code, this can cause binaries to be quite large.
+## Insertion Code Bloat
+Since most interfaces are inline code, this can cause binaries to be quite large.
 A simple solution is to instantiate your own function to wrap the _boostc_ functions.
-Then the compiler will treat it as a single function and potentially reducing the size of binaries.
+Then the compiler can treat it as a single function and potentially reduce binary size.
 
-# high_resolution_clock
+## high_resolution_clock
 
-This interface provides a `std::chrono::high_resolution_clock` like interface but in _C_.
-The `std::chrono::time_point<std::chrono::high_resolution_clock>` interface is not provided because `bstc_chrono_dur` provides the same level of control.
+This interface provides a `std::chrono::high_resolution_clock`-like interface in _C_.
+The `std::chrono::time_point<std::chrono::high_resolution_clock>` type is not provided because the duration type (`bstc_chrono_hiresclk_dur_t`) already serves as the time-point representation.
 
 ```c
 #include <boostc/chrono.h>
@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
     bstc_chrono_ns_t ns;
 
     start = bstc_chrono_hiresclk_now();
-    print("...\n");
+    printf("...\n");
     end = bstc_chrono_hiresclk_now();
 
     ns = bstc_chrono_dur_cast(bstc_chrono_ns, bstc_chrono_hiresclk_dur, (end - start));
@@ -48,10 +48,10 @@ int main(int argc, char *argv[])
 }
 ```
 
-# system_clock
+## system_clock
 
-This interface provides a `std::chrono::system_clock` like interface but in _C_.
-The `std::chrono::time_point<std::chrono::system_clock>` interface is not provided because `bstc_chrono_dur` provides the same level of control.
+This interface provides a `std::chrono::system_clock`-like interface in _C_.
+The `std::chrono::time_point<std::chrono::system_clock>` type is not provided because the duration type (`bstc_chrono_sysclk_dur_t`) already serves as the time-point representation.
 
 ```c
 #include <boostc/chrono/system_clock.h>
@@ -70,17 +70,17 @@ int main(int argc, char *argv[])
     tp = bstc_chrono_sysclk_now();
     tt = bstc_chrono_sysclk_to_time_t(tp);
 
-    printf("%s\n", bstc_ctime(&tt));
+    printf("%s", bstc_ctime(&tt));
 
     return bstc_exit_success;
 }
 ```
 
-# ratio
+## ratio
 
-This interface provides a compile time `std::ratio` like interface but in _C_.
+This interface provides a compile-time `std::ratio`-like interface but in _C_.
 The fractions do not naturally reduce.
-However, there are compile time GCD calls where the amount to recurse must be specified.
+However, there are compile-time GCD calls where the amount to recurse must be specified.
 Note that some compilers cannot support these calls because of the heap requirements or some compilers may take several minutes just to compile.
 
 ```c
