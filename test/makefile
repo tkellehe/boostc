@@ -31,7 +31,7 @@ clean:
 
 #-------------------------------------------------------------------------------------------------------------
 BSTC_GPP_TESTS := $(ALL_MAINC:$(TEST_DIR)/%/main.c=$(BSTC_BIN)/g++/%)
-BSTC_GPP_FLAGS ?= -O6 -Wall -Werror -pedantic -I $(PROJECT_DIR)
+BSTC_GPP_FLAGS ?= -O6 -Wall -Werror -pedantic -x c++ -I $(PROJECT_DIR)
 BSTC_GPP ?= g++
 
 g++: $(BSTC_GPP_TESTS)

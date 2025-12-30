@@ -10,15 +10,19 @@
 #include <boostc/config.h>
 
 
-#if defined(BSTC_LEAST_C11) || defined(BSTC_LEAST_CPP11)
+#if defined(BSTC_LEAST_C11)
 # include <stdnoreturn.h>
+#endif
 
+#if defined(BSTC_LEAST_CPP11)
 # ifndef bstc_noreturn
-#  ifdef __cplusplus
+#  if !defined(noreturn)
 #   define bstc_noreturn [[noreturn]]
-#  else
-#   define bstc_noreturn _Noreturn
 #  endif
+# endif
+#elif defined(BSTC_LEAST_C11)
+# ifndef bstc_noreturn
+#  define bstc_noreturn _Noreturn
 # endif
 #endif
 
