@@ -13,6 +13,11 @@ So, the interface can be checked if it could not be resolved.
 
 Standard and description overview can be found here: https://en.cppreference.com/w/c/error/assert
 
+## `bstc_static_assert`
+
+Compile-time assertion that maps to `static_assert` in C++11 or `_Static_assert` in C11.
+Falls back to a typedef-based check on older standards.
+
 ## `bstc_ndebug`
 
 Defining this will also define `NDEBUG` (and vice versa), keeping `bstc_assert` aligned with the standard assert behavior.
@@ -20,4 +25,4 @@ Defining this will also define `NDEBUG` (and vice versa), keeping `bstc_assert` 
 
 ## `bstc_assert_msg`
 
-A convenience macro that asserts `(expr && msg)` so a string literal can be included with the expression.
+Uses the common C idiom `bstc_assert((expr) && (msg))` so a string literal can appear in assertion output.
