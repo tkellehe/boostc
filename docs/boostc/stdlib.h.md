@@ -7,6 +7,8 @@
 Provides a polyfill of `stdlib.h` described below.
 Note that the interface is setup as macros.
 So, the interface can be checked if it could not be resolved.
+Each `bstc_*` macro is a direct alias to the corresponding `stdlib.h` symbol when available.
+Some macros are only defined when the language level supports them (C11/C++11 or C99/C++11).
 
 ## `bstc_aligned_alloc`
 
@@ -38,53 +40,53 @@ So, the interface can be checked if it could not be resolved.
 
 ## `bstc_strtold`
 
-## `bstc_malloc `
+## `bstc_malloc`
 
-## `bstc_calloc `
+## `bstc_calloc`
 
-## `bstc_realloc `
+## `bstc_realloc`
 
-## `bstc_free `
+## `bstc_free`
 
-## `bstc_abort `
+## `bstc_abort`
 
-## `bstc_exit `
+## `bstc_exit`
 
-## `bstc_atexit `
+## `bstc_atexit`
 
-## `bstc_exit_success `
+## `bstc_exit_success`
 
-## `bstc_exit_failure `
+## `bstc_exit_failure`
 
-## `bstc_system `
+## `bstc_system`
 
-## `bstc_getenv `
+## `bstc_getenv`
 
-## `bstc_atof `
+## `bstc_atof`
 
-## `bstc_atoi `
+## `bstc_atoi`
 
-## `bstc_atol `
+## `bstc_atol`
 
-## `bstc_strtol `
+## `bstc_strtol`
 
-## `bstc_strtoul `
+## `bstc_strtoul`
 
-## `bstc_strtod `
+## `bstc_strtod`
 
-## `bstc_mblen `
+## `bstc_mblen`
 
-## `bstc_mbtowc `
+## `bstc_mbtowc`
 
-## `bstc_wctomb `
+## `bstc_wctomb`
 
-## `bstc_mbstcowcs `
+## `bstc_mbstcowcs`
 
-## `bstc_wcstombs `
+## `bstc_wcstombs`
 
-## `bstc_mb_len_max `
+## `bstc_mb_len_max`
 
-## `bstc_wchar_t `
+## `bstc_wchar_t`
 
 ## `bstc_rand`
 

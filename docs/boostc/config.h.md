@@ -38,13 +38,13 @@ Note that the _C_ group will not be provided if _C++_ is used, and vice versa.
 
 ## Compiler Detection
 The following are macros defined depending on the compiler detected.
-The lists are organized based off of the level of support.
+The lists are organized based on the level of support.
 Some compilers have been tested hands on, some have been estimated, and others can be detected but will not work.
 
  * `BSTC_COMPILER_UNKNOWN` : Will be defined if a compiler could not be determined.
  * `BSTC_COMPILER_CONFIG` : A string of the _boostc_ compiler header to be included that is defined if a compiler could be determined.
 
-The configuration file that gets included by `BSTC_COMILER_CONFIG` being defined,
+The configuration file that gets included by `BSTC_COMPILER_CONFIG` being defined,
 provides detection for specific variables and may preset macros within the _boostc_ interface.
 For example, `boostc/config/compiler/visualc.h` sets `bstc_int64_t` if the `stdint.h` is not provided and 64-bits is supported.
 That way the `boostc/stdint.h` does not have to provide detailed detection for what is very specific to the _visual-c_ compiler.
@@ -59,7 +59,7 @@ That way the `boostc/stdint.h` does not have to provide detailed detection for w
 ### Supported?
 These have not been tested with the compiler, but there is some preliminary work done.
 
- * `BSTC_COMPILER_BORLANDC` : Present if the _Borland-C_ compiler is used.
+ * `BSTC_COMPILER_BORLAND` : Present if the _Borland-C_ compiler is used.
  * `BSTC_COMPILER_WATCOM` : Present if the _Watcom_ compiler is used.
 
 ### Detecting?
@@ -73,17 +73,16 @@ These should be detecting correctly but have nothing laid out.
 * `BSTC_COMPILER_MINGW64` : Present if the _MINGW64_ compiler is used.
 
 ## Platform Detection
-The following are macros defined depending on the compiler detected.
-The lists are organized based off of the level of support.
+The following are macros defined depending on the platform detected.
+The lists are organized based on the level of support.
 Some compilers have been tested hands on, some have been estimated, and others can be detected but will not work.
 
- * `BSTC_COMPILER_UNKNOWN` : Will be defined if a compiler could not be determined.
- * `BSTC_COMPILER_CONFIG` : A string of the _boostc_ compiler header to be included that is defined if a compiler could be determined.
+ * `BSTC_PLATFORM_UNKNOWN` : Will be defined if a platform could not be determined.
+ * `BSTC_PLATFORM_CONFIG` : A string of the _boostc_ platform header to be included that is defined if a platform could be determined.
 
-The configuration file that gets included by `BSTC_COMILER_CONFIG` being defined,
+The configuration file that gets included by `BSTC_PLATFORM_CONFIG` being defined,
 provides detection for specific variables and may preset macros within the _boostc_ interface.
-For example, `boostc/config/compiler/visualc.h` sets `bstc_int64_t` if the `stdint.h` is not provided and 64-bits is supported.
-That way the `boostc/stdint.h` does not have to provide detailed detection for what is very specific to the _visual-c_ compiler.
+For example, `boostc/config/platform/win32.h` sets `BSTC_OSAPI_WINDOWS` to select the Windows API path.
 
 ### Tested
 
@@ -121,7 +120,7 @@ These should be detecting correctly but have nothing laid out.
 These are list of macros defined for detecting features about the language/environment.
 
  * `BSTC_NO_64BIT` & `BSTC_HAS_64BIT` : Defined based off of if 64-bit integers are available.
- * `BOOST_NO_LONG_LONG` & `BOOST_HAS_LONG_LONG` : Defined based off of if `long long` is available.
+ * `BSTC_NO_LONG_LONG` & `BSTC_HAS_LONG_LONG` : Defined based off of if `long long` is available.
  * `BSTC_NO_STRING_PASTE` & `BSTC_HAS_STRING_PASTE` : Defined based off of if symbols can be pasted next to a string literal.
  * `BSTC_NO_VA_ARGS_PASTE` & `BSTC_HAS_VA_ARGS_PASTE` : Defined based off of if concatenation of the empty character and `__VA_ARGS__` is supported by the compiler.
  * `BSTC_NO_STDATOMICS` & `BSTC_HAS_STDATOMICS` : Defined based off of if the standard atomics library is provided.
@@ -131,6 +130,7 @@ These are list of macros defined for detecting features about the language/envir
  * `BSTC_UNLIKELY(expr)` : A macro for branch prediction to begin as _unlikely_ detection if available else it will insert the boolean expression.
  * `bstc_inline` : Provides _C_ style inline keyword insert if available else it will be empty.
  * `BSTC_INTPTR_NBITS` : A constant macro defined as the number of bits that `intptr_t` is.
+ * `BSTC_OSAPI_POSIX` & `BSTC_OSAPI_WINDOWS` : Defined based on the detected OS API family.
  * `bstc_nullptr` : A macro to represent `NULL` and `nullptr` depending on what is supported.
  * `bstc_unused(P)` : Marks a function parameter as being unused.
 

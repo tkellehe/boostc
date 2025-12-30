@@ -21,11 +21,31 @@ Returns the current calendar time of the system as time since epoch: https://en.
 
 Returns raw processor clock time since the program is started: https://en.cppreference.com/w/c/chrono/clock
 
+## `bstc_time_utc`
+
+Time base constant for `bstc_timespec_get` (maps to `TIME_UTC` when available).
+
 ## `bstc_timespec_get`
 
 Returns the calendar time based on a given time base: https://en.cppreference.com/w/c/chrono/timespec_get
 
  > A polyfill implementation is provided where `bstc_time_utc` is also ensured.
+
+## `bstc_clock_monotonic`
+
+POSIX clock id exposed when `CLOCK_MONOTONIC` is available.
+
+## `bstc_clock_process_cputime_id`
+
+POSIX clock id exposed when `CLOCK_PROCESS_CPUTIME_ID` is available.
+
+## `bstc_clock_realtime`
+
+POSIX clock id exposed when `CLOCK_REALTIME` is available.
+
+## `bstc_clock_thread_cputime_id`
+
+POSIX clock id exposed when `CLOCK_THREAD_CPUTIME_ID` is available.
 
 ## `bstc_asctime`
 
@@ -45,7 +65,7 @@ Converts time since epoch to calendar time expressed as Coordinated Universal Ti
 
 ## `bstc_localtime`
 
-Converts time since epoch to calendar time expressed as local time: https://en.cppreference.com/w/c/chrono/gmtime
+Converts time since epoch to calendar time expressed as local time: https://en.cppreference.com/w/c/chrono/localtime
 
 ## `bstc_mktime`
 

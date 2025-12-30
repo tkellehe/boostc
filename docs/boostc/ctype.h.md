@@ -7,7 +7,7 @@
 Provides a polyfill of `ctype.h` described below.
 Note that the interface is setup as macros.
 So, the interface can be checked if it could not be resolved.
-More on the what the standard says can be found here: https://en.cppreference.com/w/c/string/byte
+More on what the standard says can be found here: https://en.cppreference.com/w/c/string/byte
 
 
 ## `bstc_isblank`
